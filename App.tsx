@@ -6,7 +6,7 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { Loader } from '@/components/Loader';
 import { TermsModal } from '@/components/TermsModal';
 import { AppNavigator } from '@/navigation/AppNavigator';
-import { readStorage, writeStorage } from "@/utils/storate.utils";
+import { readStorage, writeStorage } from "@/utils/storage.utils";
 import { ExitAppConfirmation } from "@/components/ExitAppConfirmation";
 
 SplashScreen.preventAutoHideAsync();
@@ -21,9 +21,18 @@ export default function App(){
     async function prepare() {
       try{
         const data = await readStorage();
-        if(!data.acceptedTerms) setShowTerms(true);
-        setAppStarted(!!data.acceptedTerms);
+        if(!data.acceptedTerms) {
+          setShowTerms(true);
+        } else {
+          setAppStarted(true);
+        }
       } finally{
+        try {
+          await SplashScreen.hideAsync();
+        } catch (e) {
+          console.warn('[App] SplashScreen.hideAsync failed:', e);
+        }
+
         await new Promise((r) => setTimeout(r, 500)); // simu low-end device warm-up /asset hydration
         setIsReady(true);
       }
@@ -31,6 +40,15 @@ export default function App(){
 
     prepare()
   }, []);
+
+  useEffect(() => {
+    if (!appStarted) return;
+    const backHandler = BackHandler.addEventListener('hardwareBackPress', () => {
+      setShowExitConfirmation(true);
+      return true;
+    });
+    return () => backHandler.remove();
+  }, [appStarted]);
 
   const handleAcceptTerms = async () => {
     await writeStorage({ acceptedTerms: true });
