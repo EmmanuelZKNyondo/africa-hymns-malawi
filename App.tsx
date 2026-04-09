@@ -1,20 +1,84 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { use, useEffect, useState } from "react";
+import { StatusBar, StyleSheet, View, Text, Image } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import * as SplashScreen from 'expo-splash-screen';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { Loader } from './src/components/Loader';
+import { TermsModal } from './src/components/TermsModal';
+import { AppNavigator } from './src/navigation/AppNavigator';
+import { readStorage, writeStorage } from "./src/utils/storate.utils";
 
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+SplashScreen.preventAutoHideAsync();
+
+export default function App(){
+  const [isReady, setIsReady] = useState(false);
+  const [showTerms, setShowTerms] = useState(false);
+  const [appStarted, setAppStarted] = useState(false);
+
+  useEffect(() => {
+    async function prepare() {
+      try{
+        const data = await readStorage();
+        if(!data.acceptedTerms) setShowTerms(true);
+        setAppStarted(!!data.acceptedTerms);
+      } finally{
+        await new Promise((r) => setTimeout(r, 700)); // simu low-end device warm-up /asset hydration
+        setIsReady(true);
+      }
+    }
+
+    prepare()
+  }, []);
+
+  const handleAcceptTerms = async () => {
+    await writeStorage({ acceptedTerms: true });
+    setShowTerms(false);
+    setAppStarted(true);
+    await SplashScreen.hideAsync();
+  };
+
+  if (!isReady) return null; 
+
+  if(!appStarted && showTerms) {
+    return(
+      <SafeAreaProvider>
+        <StatusBar barStyle="dark-content" />
+
+        <View style={styles.splashContainer}>
+          <Image source={require('./assets/images/malawi-flag.png')} style={styles.flag} resizeMode="contain" />
+          <Text style={styles.title}>Africa Hymns (Malawi)</Text>
+          <Loader />
+          <TermsModal visible={showTerms} onAccept={handleAcceptTerms} />
+        </View>
+      </SafeAreaProvider>
+    );
+  }
+
+  return(
+    <SafeAreaProvider>
+      <NavigationContainer>
+        <AppNavigator />
+      </NavigationContainer>
+    </SafeAreaProvider>
   );
-}
+};
 
 const styles = StyleSheet.create({
-  container: {
+  splashContainer: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#f8f9f0',
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'center'
   },
+  flag: {
+    width: 80, 
+    height: 50,
+    marginBottom: 16
+  },
+  title: {
+    fontSize: 22,
+    fontWeight: '700',
+    color: '#1a1a1a',
+    marginBottom: 24
+  }
 });
