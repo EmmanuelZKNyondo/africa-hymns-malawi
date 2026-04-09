@@ -2,9 +2,13 @@
 
 # dependencies
 node_modules/
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
 
 # Expo
 .expo/
+.expo-shared/
 dist/
 web-build/
 expo-env.d.ts
@@ -26,12 +30,26 @@ npm-debug.*
 yarn-debug.*
 yarn-error.*
 
-# macOS
+# IDE and OS
 .DS_Store
 *.pem
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+Thumbs.db
 
 # local env files
 .env*.local
+.env
+*.jks
+*.p8
+*.p12
+*.key
+*.mobileprovision
 
 # typescript
 *.tsbuildinfo
