@@ -1,6 +1,43 @@
+// {
+//   "extends": "expo/tsconfig.base",
+//   "compilerOptions": {
+//     "strict": true,
+//     "baseUrl": ".",
+//     "ignoreDeprecations": "6.0",
+//     "paths": {
+//       "@/*": ["src/*"],
+//       "@/assets/*": ["assets/*"]
+//     }
+//   }
+// }
+
 {
   "extends": "expo/tsconfig.base",
   "compilerOptions": {
-    "strict": true
-  }
+    "strict": true,
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "jsx": "react-native",
+    
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"]
+    },
+    
+    "ignoreDeprecations": "6.0"
+  },
+  "include": [
+    "src/**/*",
+    "assets/**/*"
+  ],
+  "exclude": [
+    "node_modules",
+    "babel.config.js",
+    "metro.config.js",
+    "dist",
+    ".expo"
+  ]
 }
