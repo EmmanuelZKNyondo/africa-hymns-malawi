@@ -1,5 +1,5 @@
 import React from "react";
-import { View, StyleSheet } from "react-native";
+import { View, StyleSheet, ActivityIndicator } from "react-native";
 import Animated, {
   useAnimatedStyle,
   useSharedValue,
@@ -10,20 +10,32 @@ import Animated, {
 
 export const Loader: React.FC = () => {
   const scale = useSharedValue(1);
+  const [reanimatedReady, setReanimatedReady] = React.useState(true);
 
   React.useEffect(() => {
-    scale.value = withRepeat(
-      withSequence(withTiming(0.6, { duration: 400 }), withTiming(1, { duration: 400 })),
-      -1,
-      true
-    );
+    try{
+      scale.value = withRepeat(
+        withSequence(withTiming(0.6, { duration: 400 }), withTiming(1, { duration: 400 })),
+        -1,
+        true
+      );
+    } catch (error) {
+      console.warn('[Loader] Reanimated failed, using fallback:', error);
+      setReanimatedReady(false);
+    }
   }, []);
 
-  const animatedStyle = useAnimatedStyle(() => (
-    {
-      transform: [{ scale: scale.value }]
-    }
-  ));
+  const animatedStyle = useAnimatedStyle(() => ({
+    transform: [{ scale: scale.value }]
+  }));
+
+  if (!reanimatedReady) {
+    return (
+      <View style={styles.container}>
+        <ActivityIndicator size="large" color="#007A3D" />
+      </View>
+    );
+  }
 
   return (
     <View style={styles.container}>
