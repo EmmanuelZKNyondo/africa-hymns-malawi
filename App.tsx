@@ -3,10 +3,10 @@ import { StatusBar, StyleSheet, View, Text, Image } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import * as SplashScreen from 'expo-splash-screen';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
-import { Loader } from './src/components/Loader';
-import { TermsModal } from './src/components/TermsModal';
-import { AppNavigator } from './src/navigation/AppNavigator';
-import { readStorage, writeStorage } from "./src/utils/storate.utils";
+import { Loader } from '@/components/Loader';
+import { TermsModal } from '@/components/TermsModal';
+import { AppNavigator } from '@/navigation/AppNavigator';
+import { readStorage, writeStorage } from "@/utils/storate.utils";
 
 SplashScreen.preventAutoHideAsync();
 
@@ -45,7 +45,7 @@ export default function App(){
         <StatusBar barStyle="dark-content" />
 
         <View style={styles.splashContainer}>
-          <Image source={require('./assets/images/malawi-flag.png')} style={styles.flag} resizeMode="contain" />
+          <Image source={require('@/assets/images/malawi-flag.png')} style={styles.flag} resizeMode="contain" />
           <Text style={styles.title}>Africa Hymns (Malawi)</Text>
           <Loader />
           <TermsModal visible={showTerms} onAccept={handleAcceptTerms} />
