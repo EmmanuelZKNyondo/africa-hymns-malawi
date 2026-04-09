@@ -6,7 +6,7 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { Loader } from '@/components/Loader';
 import { TermsModal } from '@/components/TermsModal';
 import { AppNavigator } from '@/navigation/AppNavigator';
-import { readStorage, writeStorage } from "@/utils/storage.utils";
+import { readStorage, writeStorage } from "@/utils/storageUtils";
 import { ExitAppConfirmation } from "@/components/ExitAppConfirmation";
 
 SplashScreen.preventAutoHideAsync();
