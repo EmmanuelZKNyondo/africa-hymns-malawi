@@ -7,7 +7,7 @@ interface Props {
   onCancel: () => void;
 };
 
-export const ExitAppConfirm: React.FC<Props> = ({ visible, onConfirm, onCancel }) => {
+export const ExitAppConfirmation: React.FC<Props> = ({ visible, onConfirm, onCancel }) => {
   return(
     <Modal visible={visible} transparent animationType="fade" onRequestClose={onCancel}>
       <View style={styles.overlay}>
