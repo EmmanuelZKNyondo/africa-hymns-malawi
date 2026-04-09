@@ -1,7 +1,7 @@
 import { TERMS_CONTENT } from '@/data/termsAndConditions';
 import React, { useEffect, useState } from 'react';
 import { Modal, View, Text, TouchableOpacity, StyleSheet, ScrollView, BackHandler } from 'react-native';
-import { ExitAppConfirm } from './ExitAppConfirm';
+import { ExitAppConfirmation } from './ExitAppConfirmation';
 
 interface Props {
   visible: boolean; 
@@ -76,7 +76,7 @@ export const TermsModal: React.FC<Props> = ({visible, onAccept, onExit}) => {
         </view>
       </Modal>
 
-      <ExitAppConfirm
+      <ExitAppConfirmation
         visible={showExitConfirm}
         onConfirm={handleConfirmExit}
         onCancel={handleCancelExit}
