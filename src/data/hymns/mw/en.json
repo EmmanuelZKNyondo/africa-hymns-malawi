@@ -1,0 +1,4015 @@
+{
+  "country": "mw",
+  "language": "en",
+  "version": "1.0.0",
+  "hymns": [
+    {
+      "number": 1,
+      "title": "Holy, Holy, Holy",
+      "writer": "--",
+      "rating": 4.5,
+      "tags": ["worship", "hymn"],
+      "crossReference": [
+        { "countryCode": "mw", "languageCode": "ch", "hymnNumber": 1 },
+        { "countryCode": "mw", "languageCode": "tm", "hymnNumber": 1 }
+      ],
+      "content": {
+        "verses": [
+          {
+            "number": 1,
+            "lines": [
+              "Holy, Holy, Holy, Lord God Almighty!",
+              "Early in the morning our song shall rise to Thee;",
+              "Holy, Holy, Holy, Merciful and Mighty,",
+              "God in Three Persons, blessed Trinity!"
+            ]
+          },
+          {
+            "number": 2,
+            "lines": [
+              "Holy, Holy, Holy! All the saints adore Thee,",
+              "Casting down their golden crowns around the glassy sea,",
+              "Cherubim and seraphim falling down before Thee,",
+              "Which wert, and art, and ever-more shalt be."
+            ]
+          },
+          {
+            "number": 3,
+            "lines": [
+              "Holy, Holy, Holy! Though the darkness hide Thee,",
+              "Though the eye of sinful man Thy glory may not see,",
+              "Only Thou art holy; there is none beside Thee,",
+              "Perfect in pow’r, in love and purity."
+            ]
+          },
+          {
+            "number": 4,
+            "lines": [
+              "Holy, Holy, Holy, Lord God Almighty!",
+              "All Thy works shall praise Thy Name in earth, and sky, and sea,",
+              "Holy, Holy, Holy, Merciful and Mighty,",
+              "God in Three Persons, blessed Trinity!"
+            ]
+          }
+        ],
+        "chorus": null
+      }
+    },
+    {
+      "number": 2,
+      "title": "We Praise, We Worship Thee, O God",
+      "writer": "--",
+      "rating": 0,
+      "tags": ["hymn"],
+      "content": {
+        "verses": [
+          {
+            "number": 1,
+            "lines": [
+              "We praise, we worship Thee, O God;",
+              "Thy sovereign power we sound abroad;",
+              "All nations bow before Thy throne,",
+              "And Thee the great Jehovah own."
+            ]
+          },
+          {
+            "number": 2,
+            "lines": [
+              "Loud hallelujahs to Thy Name",
+              "Angels and seraphim proclaim;",
+              "By all the powers and thrones in heaven",
+              "Eternal praise to Thee is given."
+            ]
+          },
+          {
+            "number": 3,
+            "lines": [
+              "O Holy, Holy, Holy Lord,",
+              "Thou God of hosts, by all adored,",
+              "Earth and the heavens are full of Thee,",
+              "Thy light, thy power, Thy majesty."
+            ]
+          },
+          {
+            "number": 4,
+            "lines": [
+              "Apostles join the glorious throng,",
+              "And swell the loud triumphant song,",
+              "Prophets and martyrs hear the sound",
+              "And spread the hallelujah round."
+            ]
+          },
+          {
+            "number": 5,
+            "lines": [
+              "Glory to Thee, O God most high:",
+              "Father, we praise Thy majesty,",
+              "The Son, the Spirit we adore,",
+              "One Godhead, blest for evermore."
+            ]
+          }
+        ],
+        "chorus": null
+      }
+    },
+    {
+      "number": 3,
+      "title": "Father of Heaven, Whose Love Profound",
+      "writer": "--",
+      "rating": 0,
+      "tags": ["hymn"],
+      "content": {
+        "verses": [
+          {
+            "number": 1,
+            "lines": [
+              "Father of heav’n, whose love profound,",
+              "A ransom for our souls hath found,",
+              "Before thy throne we sinners bend;",
+              "To us Thy pard’ning love extend."
+            ]
+          },
+          {
+            "number": 2,
+            "lines": [
+              "Almighty Son, Incarnate Word,",
+              "Our Prophet, Priest, Redeemer, Lord,",
+              "Before Thy throne we sinners bend;",
+              "To us Thy saving grace extend."
+            ]
+          },
+          {
+            "number": 3,
+            "lines": [
+              "Eternal Spirit, by whose breath,",
+              "The soul is raised from sin and death,",
+              "Before Thy throne we sinners bend;",
+              "To us thy quick’ning power extend."
+            ]
+          },
+          {
+            "number": 4,
+            "lines": [
+              "Thrice holy Father, Spirit, Son;",
+              "Mysterious Godhead, Three in One,",
+              "Before Thy throne we sinners bend;",
+              "Grace, pardon, life to us extend."
+            ]
+          }
+        ],
+        "chorus": null
+      }
+    },
+    {
+      "number": 4,
+      "title": "Glory Be To God The Father",
+      "writer": "--",
+      "rating": 4.9,
+      "tags": ["hymn"],
+      "content": {
+        "verses": [
+          {
+            "number": 1,
+            "lines": [
+              "Glory be to God the Father,",
+              "Glory be to God the Son,",
+              "Glory be to God the Spirit,",
+              "Great Jehovah, Three in One!"
+            ]
+          },
+          {
+            "number": 2,
+            "lines": [
+              "Glory be to Him who loved us,",
+              "Washed us from each spot and stain!",
+              "Glory be to Him who bought us,",
+              "Made us kings with Him to reign!"
+            ]
+          },
+          {
+            "number": 3,
+            "lines": [
+              "Glory to the King of angels,",
+              "Glory to the Church’s King,",
+              "Glory to the King of nations!",
+              "Heaven and earth, your praises bring;"
+            ]
+          }
+        ],
+        "chorus": null
+      }
+    },
+    {
+      "number": 5,
+      "title": "We Give Immortal Praise",
+      "writer": "--",
+      "rating": 4.9,
+      "tags": ["hymn"],
+      "content": {
+        "verses": [
+          {
+            "number": 1,
+            "lines": [
+              "We give immortal praise",
+              "To God the Father’s love,",
+              "For all our comforts here,",
+              "And better hopes above.",
+              "He sent His own eternal Son,",
+              "To die for sins that man had done."
+            ]
+          },
+          {
+            "number": 2,
+            "lines": [
+              "To God the Spirit’s name",
+              "Immortal glory too,",
+              "Who bought us with His blood",
+              "From everlasting woe;",
+              "And now He lives, and now he reigns,",
+              "And sees the fruit of all His pains."
+            ]
+          },
+          {
+            "number": 3,
+            "lines": [
+              "To God the Son belongs",
+              "Immortal worship give,",
+              "Whose new-creating power",
+              "Makes the dead sinner live.",
+              "His work completes the great design",
+              "And fills the soul with joy divine."
+            ]
+          },
+          {
+            "number": 4,
+            "lines": [
+              "Almighty God, to Thee",
+              "Be endless honours done,",
+              "The undivided Three,",
+              "And the mysterious One.",
+              "Where reason fails, with all her powers,",
+              "The faith prevails and love adores."
+            ]
+          }
+        ],
+        "chorus": null
+      }
+    },
+    {
+      "number": 6,
+      "title": "Praise to the Lord, the Almighty",
+      "writer": "--",
+      "rating": 0,
+      "tags": ["hymn"],
+      "content": {
+        "verses": [
+          {
+            "number": 1,
+            "lines": [
+              "Praise to the Lord, the Almighty, the King of creation;",
+              "O my soul, praise Him, for He is thy health and salvation;",
+              "All ye who hear,",
+              "Now to His temple draw near,",
+              "Joining in glad adoration."
+            ]
+          },
+          {
+            "number": 2,
+            "lines": [
+              "Praise to the Lord, who o’er all things so wondrously reigneth,",
+              "Shieldth thee gently from harm, or when fainting sustaineth;",
+              "Hast thou not seen",
+              "How thy heart’s wishes have been granted in what He ordaineth?"
+            ]
+          },
+          {
+            "number": 3,
+            "lines": [
+              "Praise to the Lord, who doth prosper thy work and defend thee;",
+              "Surely His goodness and mercy shall daily attend thee;",
+              "Ponder anew",
+              "What the Almighty can do,",
+              "If with His love He befriend thee."
+            ]
+          },
+          {
+            "number": 4,
+            "lines": [
+              "Praise to the Lord! O let all that is in me adore Him!",
+              "All that hath life and breath, come now with praises before Him!",
+              "Let the Amen",
+              "Sound from His people again:",
+              "Gladly for aye we adore Him."
+            ]
+          }
+        ],
+        "chorus": null
+      }
+    },
+    {
+      "number": 7,
+      "title": "O worship the King",
+      "writer": "--",
+      "rating": 0,
+      "tags": ["hymn"],
+      "content": {
+        "verses": [
+          {
+            "number": 1,
+            "lines": [
+              "O worship the King, All-glorious above;",
+              "O gratefully sing His pow’r and His love:",
+              "Our Shield and Defender, The Ancient of Days,",
+              "Pavilioned in splendor, And girded with praise."
+            ]
+          },
+          {
+            "number": 2,
+            "lines": [
+              "O tell of His night, O sing of His grace,",
+              "Whose robe is the light, Whose canopy space;",
+              "His chariots of wrath The deep thunder-clouds form,",
+              "And dark is His path On the wings of the storm."
+            ]
+          },
+          {
+            "number": 3,
+            "lines": [
+              "The earth, with its store Of wonders untold,",
+              "Almighty, Thy power Hath founded of old;",
+              "Hath ‘stablished it fast By a changeless decree,",
+              "And round it hath cast, Like a mantle, the sea."
+            ]
+          },
+          {
+            "number": 4,
+            "lines": [
+              "Thy bountiful care What tongue can recite?",
+              "It breaths in the air It shines in the light;",
+              "It streams from the hills, It descends to the plain,",
+              "And sweetly distils In the dew and the rain."
+            ]
+          },
+          {
+            "number": 5,
+            "lines": [
+              "O measureless Might! Ineffable Love!",
+              "While angels delight To hymn Thee above,",
+              "The humbler creation, Though feeble their lays,",
+              "With true adoration Shall lisp to Thy praise."
+            ]
+          }
+        ],
+        "chorus": null
+      }
+    },
+    {
+      "number": 8,
+      "title": "Now thank we all our God",
+      "writer": "--",
+      "rating": 0,
+      "tags": ["hymn"],
+      "content": {
+        "verses": [
+          {
+            "number": 1,
+            "lines": [
+              "Now thank we all our God, With heart and hands and voices,",
+              "Who wondrous things hath done, In whom His world rejoices,",
+              "Who from our mother’s arms, Hath blessed us on our way",
+              "With countless gifts of love, And still is ours today."
+            ]
+          },
+          {
+            "number": 2,
+            "lines": [
+              "O may this bounteous God Through all our life be near us,",
+              "With ever-joyful hearts And blessed peace to cheer us,",
+              "And keep us in His grace, And guide us when perplexed,",
+              "And free us from all ills In this world and the next."
+            ]
+          },
+          {
+            "number": 3,
+            "lines": [
+              "All praise and thanks to God The Father now be given,",
+              "The Son, and Him who reigns With Them in the highest heaven,",
+              "The one, eternal God, Whom earth and heav’n adore;",
+              "For thus it was, is now, And shall be evermore."
+            ]
+          }
+        ],
+        "chorus": null
+      }
+    },
+    {
+      "number": 9,
+      "title": "Let us, with gladsome mind",
+      "writer": "--",
+      "rating": 0,
+      "tags": ["hymn"],
+      "content": {
+        "verses": [
+          {
+            "number": 1,
+            "lines": [
+              "Let us, with gladsome mind, Praise the Lord, for He is kind:",
+              "For His mercies shall endure, Ever faithful, ever sure."
+            ]
+          },
+          {
+            "number": 2,
+            "lines": [
+              "Let us sound His name abroad,",
+              "For of gods He is the God:"
+            ]
+          },
+          {
+            "number": 3,
+            "lines": [
+              "He, with all commanding might,",
+              "Filled the new-made world with light:"
+            ]
+          },
+          {
+            "number": 4,
+            "lines": [
+              "He His chosen race did bless,",
+              "In the wasteful wilderness:"
+            ]
+          },
+          {
+            "number": 5,
+            "lines": [
+              "He hath with a piteous eye,",
+              "Looked upon our misery:"
+            ]
+          },
+          {
+            "number": 6,
+            "lines": [
+              "All things living he doth feed;",
+              "His full hand supplies their need:"
+            ]
+          },
+          {
+            "number": 7,
+            "lines": [
+              "Let us then with gladsome mind,",
+              "Praise the Lord, for He is kind:"
+            ]
+          }
+        ],
+        "chorus": null
+      }
+    },
+    {
+      "number": 10,
+      "title": "I’ll praise my Maker while I’ve breath",
+      "writer": "--",
+      "rating": 0,
+      "tags": ["hymn"],
+      "content": {
+        "verses": [
+          {
+            "number": 1,
+            "lines": [
+              "I’ll praise my Maker while I’ve breath",
+              "And when my voice is lost in death,",
+              "Praise shall employ my nobler powers:",
+              "My days of praise shall ne’er be past,",
+              "While life, and thought, and being last,",
+              "Or immortality endures."
+            ]
+          },
+          {
+            "number": 2,
+            "lines": [
+              "Happy the man whose hopes rely",
+              "On Israel’s God! He made the sky,",
+              "And earth, and sea, with all their train:",
+              "His truth for ever stands secure;",
+              "He saves th’ oppressed, He feeds the poor,",
+              "And none shall find His promise vain."
+            ]
+          },
+          {
+            "number": 3,
+            "lines": [
+              "The Lord pours eyesight on the blind;",
+              "The Lord supports the fainting mind;",
+              "He sends the laboring conscience peace;",
+              "He helps the stranger in distress,",
+              "The widow, and the fatherless,",
+              "And grants the prisoner sweet release."
+            ]
+          },
+          {
+            "number": 4,
+            "lines": [
+              "I’ll praise Him while He lends me breath;",
+              "And when my voice is lost in death,",
+              "Praise shall employ my nobler powers:",
+              "My days of praise shall ne’er be past,",
+              "While life, and thought, and being last,",
+              "Or immortality endures."
+            ]
+          }
+        ],
+        "chorus": null
+      }
+    },
+    {
+      "number": 11,
+      "title": "Father of all! Whose pow’rful voice",
+      "writer": "--",
+      "rating": 0,
+      "tags": ["hymn"],
+      "content": {
+        "verses": [
+          {
+            "number": 1,
+            "lines": [
+              "Father of all! Whose pow’rful voice",
+              "Called forth this universal frame;",
+              "Whose mercies over all rejoice",
+              "Through endless ages still the same:"
+            ]
+          },
+          {
+            "number": 2,
+            "lines": [
+              "Thou by Thy word upholdest all;",
+              "Thy bounteous love to all is showed,",
+              "Thou hear’st Thy every creature’s call,",
+              "And fillest every mouth with good."
+            ]
+          },
+          {
+            "number": 3,
+            "lines": [
+              "Giver and Lord of life, whose power",
+              "And guardian care for all are free,",
+              "To Thee, in fierce temptation’s hour,",
+              "From sin and Satan let us flee."
+            ]
+          },
+          {
+            "number": 4,
+            "lines": [
+              "Thine, Lord, we are, and ours Thou art;",
+              "In us be all Thy goodness showed.",
+              "Renew, enlarge, and fill our heart",
+              "With peace, and joy, and heaven, and God."
+            ]
+          },
+          {
+            "number": 5,
+            "lines": [
+              "Father, ‘tis Thine each day to yield",
+              "Thy children’s wants a fresh supply;",
+              "Thou cloth’st the lilies of the field,",
+              "And hearest the young ravens cry."
+            ]
+          },
+          {
+            "number": 6,
+            "lines": [
+              "On Thee we cast our care; we live",
+              "Through Thee, who know’st our need:",
+              "O feed us with Thy grace, and give",
+              "Our souls this day the living bread."
+            ]
+          }
+        ],
+        "chorus": null
+      }
+    },
+    {
+      "number": 12,
+      "title": "Praise, my soul, the King of heaven",
+      "writer": "--",
+      "rating": 0,
+      "tags": ["hymn"],
+      "content": {
+        "verses": [
+          {
+            "number": 1,
+            "lines": [
+              "Praise, my soul, the King of heaven;",
+              "To His feet thy tribute bring;",
+              "Ransomed, healed, restored, forgiven",
+              "Evermore His praises sing:",
+              "Praise Him! Praise Him!",
+              "Praise Him! Praise Him!",
+              "Praise the everlasting King."
+            ]
+          },
+          {
+            "number": 2,
+            "lines": [
+              "Praise Him for His grace and favour",
+              "To our fathers in distress;",
+              "Praise Him, still the same for ever,",
+              "Slow to chide, and swift to bless:",
+              "Praise Him! Praise Him!",
+              "Praise Him! Praise Him!",
+              "Glorious in His faithfulness."
+            ]
+          },
+          {
+            "number": 3,
+            "lines": [
+              "Father-like, He tends and spares us;",
+              "Well our feeble frame He knows;",
+              "In His hands He gently bears us,",
+              "Rescues us from all our foes:",
+              "Praise Him! Praise Him!",
+              "Praise Him! Praise Him!",
+              "Widely yet His mercy flows."
+            ]
+          },
+          {
+            "number": 4,
+            "lines": [
+              "Angels, in the height adore Him;",
+              "Yet behold Him face to face;",
+              "Saints triumphant, bow before Him,",
+              "Gathered in from every race:",
+              "Praise Him! Praise Him!",
+              "Praise Him! Praise Him!",
+              "Praise with us the God of grace."
+            ]
+          }
+        ],
+        "chorus": null
+      }
+    },
+    {
+      "number": 13,
+      "title": "The King of love my Shepherd is",
+      "writer": "--",
+      "rating": 0,
+      "tags": ["hymn"],
+      "content": {
+        "verses": [
+          {
+            "number": 1,
+            "lines": [
+              "The King of love my Shepherd is,",
+              "Whose goodness faileth never;",
+              "I nothing lack if I am His,",
+              "And He is mine for ever."
+            ]
+          },
+          {
+            "number": 2,
+            "lines": [
+              "Where streams of living water flow",
+              "My ransomed soul He leadeth,",
+              "And, where the verdant pastures grow,",
+              "With food celestial feedeth."
+            ]
+          },
+          {
+            "number": 3,
+            "lines": [
+              "Perverse and foolish oft I strayed,",
+              "But yet in love He sought me,",
+              "And on His shoulder gently laid,",
+              "And home rejoicing brought me."
+            ]
+          },
+          {
+            "number": 4,
+            "lines": [
+              "In death's dark vale I fear no ill,",
+              "With Thee, dear Lord, beside me;",
+              "Thy rod and staff my comforts still,",
+              "Thy Cross before to guide me."
+            ]
+          },
+          {
+            "number": 5,
+            "lines": [
+              "Thou spread'st a table in my sight;",
+              "Thy unction grace bestoweth;",
+              "And O what transport of delight",
+              "From Thy pure chalice floweth!"
+            ]
+          },
+          {
+            "number": 6,
+            "lines": [
+              "And so through all the length of days",
+              "Thy goodness faileth never;",
+              "Good Shepherd, may I sing Thy praise",
+              "Within Thy house for ever!"
+            ]
+          }
+        ],
+        "chorus": null
+      }
+    },
+    {
+      "number": 14,
+      "title": "Hallelujah, praise Jahovah",
+      "writer": "--",
+      "rating": 0,
+      "tags": ["hymn"],
+      "content": {
+        "verses": [
+          {
+            "number": 1,
+            "lines": [
+              "Hallelujah, praise Jahovah, O my soul, Jehovah praise;",
+              "I will sing the glorious praises Of my God through all my days.",
+              "Put no confidence in princes, Nor for help on man depend;",
+              "He shall die, to dust returning, And his purposes shall end."
+            ]
+          },
+          {
+            "number": 2,
+            "lines": [
+              "Happy is the man that chooses Israel’s God to be his aid;",
+              "He is blest whose hope of blessing On the Lord his God is stayed.",
+              "Heav’n and earth the Lord created, Seas and all that they contain;",
+              "He delivers from oppression, Righteousness he will maintain."
+            ]
+          },
+          {
+            "number": 3,
+            "lines": [
+              "Food He daily gives the hungry, Sets the mourning prisoner free,",
+              "Raises those bowed down with anguish, Makes the sightless eyes to see.",
+              "Well Jehovah loves the righteous, And the stranger He befriends,",
+              "Helps the fatherless and widow, Judgment on the wicked sends."
+            ]
+          },
+          {
+            "number": 4,
+            "lines": [
+              "Hallelujah, praise Jehovah, O my soul, Jehovah praise;",
+              "I will sing the glorious praises Of my God through all my days.",
+              "Over all God reigns forever, Through all ages He is King;",
+              "Unto Him, thy God, O Zion, Joyful hallelujahs sing."
+            ]
+          }
+        ],
+        "chorus": null
+      }
+    },
+    {
+      "number": 15,
+      "title": "The Lord’s my Shepherd, I’ll not want",
+      "writer": "--",
+      "rating": 0,
+      "tags": ["hymn"],
+      "content": {
+        "verses": [
+          {
+            "number": 1,
+            "lines": [
+              "The Lord’s my Shepherd, I’ll not want;",
+              "He makes me down to lie",
+              "In pastures green; He leadeth me",
+              "The quiet waters by."
+            ]
+          },
+          {
+            "number": 2,
+            "lines": [
+              "My soul He doth restore again,",
+              "And me to walk doth make",
+              "Within the paths of righteousness,",
+              "E’en for His name’s sake."
+            ]
+          },
+          {
+            "number": 3,
+            "lines": [
+              "Yea, though I walk in the dark vale,",
+              "Yet will I fear no ill;",
+              "For Thou art with me, and Thy rod",
+              "And staff me comfort still."
+            ]
+          },
+          {
+            "number": 4,
+            "lines": [
+              "My table Thou hast furnished",
+              "In presence of my foes;",
+              "My head Thou dost with oil anoint,",
+              "And my cup overflows."
+            ]
+          },
+          {
+            "number": 5,
+            "lines": [
+              "Goodness and mercy all my life",
+              "Shall surely follow me,",
+              "And in God’s house for evermore",
+              "My dwelling-place shall be."
+            ]
+          }
+        ],
+        "chorus": null
+      }
+    },
+    {
+      "number": 16,
+      "title": "Though troubles assail and dangers affright",
+      "writer": "--",
+      "rating": 0,
+      "tags": ["hymn"],
+      "content": {
+        "verses": [
+          {
+            "number": 1,
+            "lines": [
+              "Though troubles assail and dangers affright,",
+              "Though friends should all fail and foes all unite,",
+              "Yet one thing secures us, whatever betide,",
+              "The Scripture assures us the Lord will provide."
+            ]
+          },
+          {
+            "number": 2,
+            "lines": [
+              "The birds without barn or storehouse are fed;",
+              "From them let us learn to trust for our bread;",
+              "His saints what is fitting shall ne’er be denied,",
+              "So long as ‘tis written, “The Lord will provide.”"
+            ]
+          },
+          {
+            "number": 3,
+            "lines": [
+              "His call we obey, like Abram of old,",
+              "Not knowing our way, but faith makes us bold;",
+              "For, though we are strangers, we have a good guide,",
+              "And trust, in all dangers, the Lord will provide."
+            ]
+          },
+          {
+            "number": 4,
+            "lines": [
+              "No strength of our own or goodness we claim;",
+              "Yet, since we have known the Saviour’s great Name,",
+              "In this our strong tower for safety we hide,",
+              "The Lord is our power, the Lord will provide."
+            ]
+          }
+        ],
+        "chorus": null
+      }
+    },
+    {
+      "number": 17,
+      "title": "Through all the changing scenes of life",
+      "writer": "--",
+      "rating": 0,
+      "tags": ["hymn"],
+      "content": {
+        "verses": [
+          {
+            "number": 1,
+            "lines": [
+              "Through all the changing scenes of life,",
+              "In troubles and in joy,",
+              "The praises of my God shall still",
+              "My heart and tongue employ."
+            ]
+          },
+          {
+            "number": 2,
+            "lines": [
+              "O magnify the Lord with me,",
+              "With me exalt His Name;",
+              "When in distress to Him I called,",
+              "He to my rescue came."
+            ]
+          },
+          {
+            "number": 3,
+            "lines": [
+              "The hosts of God encamp around",
+              "The dwellings of the just;",
+              "Deliv’rance He affords to all",
+              "Who on His succor trust."
+            ]
+          },
+          {
+            "number": 4,
+            "lines": [
+              "O make but trial of His love,",
+              "Experience will decide",
+              "How blest they are, and only they,",
+              "Who in His truth confide."
+            ]
+          },
+          {
+            "number": 5,
+            "lines": [
+              "Fear Him, ye saints; and you will then",
+              "Have nothing else to fear;",
+              "Make you His service your delight,",
+              "Your wants shall be His care."
+            ]
+          },
+          {
+            "number": 6,
+            "lines": [
+              "Glory to God the only one,",
+              "The Lord and King adore!",
+              "The Father, Son, and Holy Ghost",
+              "Be praised for evermore!"
+            ]
+          }
+        ],
+        "chorus": null
+      }
+    },
+    {
+      "number": 18,
+      "title": "Praise to the Holiest in the height",
+      "writer": "--",
+      "rating": 0,
+      "tags": ["hymn"],
+      "content": {
+        "verses": [
+          {
+            "number": 1,
+            "lines": [
+              "Praise to the Holiest in the height,",
+              "And in the depth be praise,",
+              "In all His words most wonderful,",
+              "Most sure in all His ways."
+            ]
+          },
+          {
+            "number": 2,
+            "lines": [
+              "O loving wisdom of our God!",
+              "When all was sin and shame,",
+              "A second Adam to the fight",
+              "And to the rescue came."
+            ]
+          },
+          {
+            "number": 3,
+            "lines": [
+              "O wisest love! That flesh and blood,",
+              "Which did in Adam fail,",
+              "Should strive afresh against the foe,",
+              "Should strive and should prevail."
+            ]
+          },
+          {
+            "number": 4,
+            "lines": [
+              "And that a higher gift than grace",
+              "Should flesh and blood refine,",
+              "God’s presence, and His very self",
+              "And essence all-divine."
+            ]
+          },
+          {
+            "number": 5,
+            "lines": [
+              "O generous love! That He, who smote",
+              "In Man for man the foe,",
+              "The double agony in Man",
+              "For man should undergo."
+            ]
+          },
+          {
+            "number": 6,
+            "lines": [
+              "And in the garden secretly,",
+              "And on the cross on high,",
+              "Should teach His brethren, and inspire",
+              "To suffer and to die."
+            ]
+          },
+          {
+            "number": 7,
+            "lines": [
+              "Praise to the Holiest in the height,",
+              "And in the depth be praise,",
+              "In all His words most wonderful,",
+              "Most sure in all His ways."
+            ]
+          }
+        ],
+        "chorus": null
+      }
+    },
+    {
+      "number": 19,
+      "title": "To God be the glory! Great things He hath done!",
+      "writer": "--",
+      "rating": 4.5,
+      "tags": ["hymn"],
+      "content": {
+        "verses": [
+          {
+            "number": 1,
+            "lines": [
+              "To God be the glory! Great things He hath done!",
+              "So loved He the world that He gave us His Son;",
+              "Who yielded His life an atonement for sin,",
+              "And opened the Life gate that all may go in."
+            ]
+          },
+          {
+            "number": 2,
+            "lines": [
+              "O perfect redemption, the purchase of blood!",
+              "To every believer the promise of God;",
+              "The vilest offender who truly believes,",
+              "That moment from Jesus a pardon receives."
+            ]
+          },
+          {
+            "number": 3,
+            "lines": [
+              "Great things He hath taught us, great things He hath done!",
+              "And great our rejoicing through Jesus the Son;",
+              "But purer, and higher, and greater will be",
+              "Our wonder, our rapture, when Jesus we see."
+            ]
+          }
+        ],
+        "chorus": {
+          "lines": [
+            "Praise the Lord! Praise the Lord! Let the earth hear His voice!",
+            "Praise the Lord! Praise the Lord! Let the people rejoice!",
+            "O come to the Father, through Jesus the Son:",
+            "And give Him the glory! Great things He hath done!"
+          ]
+        }
+      }
+    },
+    {
+      "number": 20,
+      "title": "God loved the world of sinners lost",
+      "writer": "--",
+      "rating": 0,
+      "tags": ["hymn"],
+      "content": {
+        "verses": [
+          {
+            "number": 1,
+            "lines": [
+              "God loved the world of sinners lost",
+              "And ruined by the fall;",
+              "Salvation full, at highest cost,",
+              "He offers free to all."
+            ]
+          },
+          {
+            "number": 2,
+            "lines": [
+              "E’en now by faith I claim Him mine,",
+              "The risen Son of God;",
+              "Redemption by His death I find,",
+              "And cleansing through the blood."
+            ]
+          },
+          {
+            "number": 3,
+            "lines": [
+              "Love brings the glorious fulness in,",
+              "And to His saints makes known",
+              "The blessed rest from inbred sin,",
+              "Through faith in Christ alone."
+            ]
+          },
+          {
+            "number": 4,
+            "lines": [
+              "Believing souls, rejoicing go;",
+              "There shall to you be giv’n",
+              "A glorious foretaste, here below,",
+              "Of endless life in heav’n."
+            ]
+          },
+          {
+            "number": 5,
+            "lines": [
+              "Of victory now o’er Satan’s power",
+              "Let all the ransomed sing",
+              "And triumph in the dying hour",
+              "Through Christ, the Lord, our King."
+            ]
+          }
+        ],
+        "chorus": {
+          "lines": [
+            "O ‘twas love, ‘twas wondrous love,",
+            "The love of God to me!",
+            "It brought my Saviour from above,",
+            "To die on Calvary."
+          ]
+        }
+      }
+    },
+    {
+      "number": 21,
+      "title": "Come, let us all unite and sing",
+      "writer": "--",
+      "rating": 0,
+      "tags": ["hymn"],
+      "content": {
+        "verses": [
+          {
+            "number": 1,
+            "lines": [
+              "Come, let us all unite and sing,",
+              "God is love! God is love!",
+              "While heav’n and earth their praises bring,",
+              "God is love! God is love!",
+              "Let every soul from sin awake,",
+              "Each in his heart sweet music make,",
+              "And sweetly sing for Jesus’s sake,",
+              "God is love! God is love!"
+            ]
+          },
+          {
+            "number": 2,
+            "lines": [
+              "O tell to earth’s remotest bound,",
+              "God is love! God is love!",
+              "In Christ is full redemption found,",
+              "God is love! God is love!",
+              "His blood can cleanse our sins away;",
+              "His Spirit turns our night to day,",
+              "And leads our soul with joy to say,",
+              "God is love! God is love!"
+            ]
+          },
+          {
+            "number": 3,
+            "lines": [
+              "How happy is our portion here,",
+              "God is love! God is love!",
+              "His promises our spirits cheer,",
+              "God is love! God is love!",
+              "He is our Sun and Shield by day,",
+              "By night He near our tents will stay",
+              "He will be with us all the way,",
+              "God is love! God is love!"
+            ]
+          },
+          {
+            "number": 4,
+            "lines": [
+              "In Zion we shall sing again,",
+              "God is love! God is love!",
+              "Yes, this shall be our highest strain,",
+              "God is love! God is love!",
+              "Whilst endless ages roll along,",
+              "In concert with the heavenly throng,",
+              "This shall be still our sweetest song,",
+              "God is love! God is love!"
+            ]
+          }
+        ],
+        "chorus": null
+      }
+    },
+    {
+      "number": 22,
+      "title": "I love the Lord, the fount of my life and grace",
+      "writer": "--",
+      "rating": 0,
+      "tags": ["hymn"],
+      "content": {
+        "verses": [
+          {
+            "number": 1,
+            "lines": [
+              "I love the Lord, the fount of my life and grace;",
+              "He hears my voice, my cry and supplication,",
+              "Inclines His ear, gives strength and consolation;",
+              "In life, in death, my heart will seek His face."
+            ]
+          },
+          {
+            "number": 2,
+            "lines": [
+              "I cried, “Deliver Thou my soul, O Lord!”",
+              "Jehovah heard; I pledge Him my devotion,",
+              "The Lord is just, His grace, wide as the ocean;",
+              "In boundless mercy He fulfils His word."
+            ]
+          },
+          {
+            "number": 3,
+            "lines": [
+              "The Lord preserves the meek most tenderly;",
+              "Brought nigh to death, in Him I found salvation.",
+              "Come, thou my soul, relieved from agitation,",
+              "Turn to thy rest; the Lord has favoured thee."
+            ]
+          },
+          {
+            "number": 4,
+            "lines": [
+              "What shall I render to Jehovah now",
+              "For all the riches of His consolation?",
+              "With joy I’ll take the cup of salvation,",
+              "And call upon His Name with thankful vow."
+            ]
+          },
+          {
+            "number": 5,
+            "lines": [
+              "Before His saints I’ll pay my vows to God;",
+              "E’en in death’s vale He keepeth me from evil;",
+              "How dear to God the dying of His people!",
+              "Praise Him, ye saints, and sound His name abroad."
+            ]
+          }
+        ],
+        "chorus": null
+      }
+    },
+    {
+      "number": 23,
+      "title": "Father, whose everlasting love",
+      "writer": "--",
+      "rating": 0,
+      "tags": ["hymn"],
+      "content": {
+        "verses": [
+          {
+            "number": 1,
+            "lines": [
+              "Father, whose everlasting love,",
+              "Thy only Son for sinners gave,",
+              "Whose race to all did freely move",
+              "And sent Him down the world to save:"
+            ]
+          },
+          {
+            "number": 2,
+            "lines": [
+              "Help us Thy mercy to extol,",
+              "Immense, unfathomed, unconfined;",
+              "To praise the Lamb who died for all,",
+              "The gen’ral Saviour of mankind."
+            ]
+          },
+          {
+            "number": 3,
+            "lines": [
+              "Thy undistinguishing regard",
+              "Was cast on Adam’s fallen race;",
+              "For all Thou hast in Christ prepared",
+              "Sufficient, sovereign, saving grace."
+            ]
+          },
+          {
+            "number": 4,
+            "lines": [
+              "The world He suffered to redeem,",
+              "For all He hath th’ atonement made,",
+              "For those that will not come to Him",
+              "The ransom of His life was paid."
+            ]
+          },
+          {
+            "number": 5,
+            "lines": [
+              "Arise, O God, maintain Thy cause!",
+              "The fullness of the Gentiles call;",
+              "Lift up the standard of Thy Cross",
+              "And all shall own Thou diedst for all."
+            ]
+          }
+        ],
+        "chorus": null
+      }
+    },
+    {
+      "number": 24,
+      "title": "O come all ye faithful",
+      "writer": "--",
+      "rating": 4,
+      "tags": ["O come let us adore", "hymn"],
+      "content": {
+        "verses": [
+          {
+            "number": 1,
+            "lines": [
+              "O come, all ye faithful,",
+              "Joyful and triumphant,",
+              "O come ye, O come ye to Bethlehem;",
+              "Come and behold Him",
+              "Born the King of angels."
+            ]
+          },
+          {
+            "number": 2,
+            "lines": [
+              "True God of true God,",
+              "Light of Light, eternal,",
+              "Lo! He abhors not the Virgin’s womb,",
+              "Son of the Father",
+              "Begotten, not created."
+            ]
+          },
+          {
+            "number": 3,
+            "lines": [
+              "Sing, choirs of angels,",
+              "Sing in exultation,",
+              "Sing, all ye citizens of heav’n above:",
+              "“Glory to God, all",
+              "Glory in the highest”."
+            ]
+          },
+          {
+            "number": 4,
+            "lines": [
+              "Yea, Lord, we greet Thee,",
+              "Born this happy morning;",
+              "Jesus, to Thee be glory given,",
+              "Word of the Father,",
+              "Now in flesh appearing."
+            ]
+          }
+        ],
+        "chorus": {
+          "lines": [
+            "O come, let us adore Him,",
+            "O come, let us adore Him,",
+            "O come, let us adore Him,",
+            "Christ the Lord."
+          ]
+        }
+      }
+    },
+    {
+      "number": 25,
+      "title": "My soul doth magnify the Lord",
+      "writer": "--",
+      "rating": 0,
+      "tags": ["hymn"],
+      "content": {
+        "verses": [
+          {
+            "number": 1,
+            "lines": [
+              "My soul doth magnify the Lord;",
+              "In Him my spirit doth rejoice,",
+              "For He beheld my low estate,",
+              "And in His love made me His choice."
+            ]
+          },
+          {
+            "number": 2,
+            "lines": [
+              "All generations from henceforth,",
+              "Shall now my blessedness proclaim,",
+              "For He has done great things to me;",
+              "Mighty and holy is His Name."
+            ]
+          },
+          {
+            "number": 3,
+            "lines": [
+              "His mercy shall abide on them",
+              "That fear the Lord from age to age;",
+              "He has revealed His mighty arm,",
+              "Routing the haughty in their rage,"
+            ]
+          },
+          {
+            "number": 4,
+            "lines": [
+              "He has abased the mighty ones,",
+              "Exalted those of low degree;",
+              "He filled the hungry souls with good,",
+              "And smote the rich with poverty."
+            ]
+          },
+          {
+            "number": 5,
+            "lines": [
+              "He helped His servant Israel,",
+              "In honour of His mercy sure;",
+              "E’en as He spake to Abraham",
+              "And to His seed forevermore."
+            ]
+          }
+        ],
+        "chorus": null
+      }
+    },
+    {
+      "number": 26,
+      "title": "Hark! the herald angels sing",
+      "writer": "--",
+      "rating": 3,
+      "tags": ["hymn"],
+      "content": {
+        "verses": [
+          {
+            "number": 1,
+            "lines": [
+              "Hark! the herald angels sing,",
+              "“Glory to the new-born King,",
+              "Peace on earth, and mercy mild,",
+              "God and sinners reconciled!”",
+              "Joyful, all ye nations, rise,",
+              "Join the triumph of the skies,",
+              "With th’ angelic host proclaim,",
+              "“Christ is born in Bethlehem.”"
+            ]
+          },
+          {
+            "number": 2,
+            "lines": [
+              "Christ, by highest heav’n adored,",
+              "Christ, the everlasting Lord,",
+              "Late in time behold Him come,",
+              "Offspring of a virgin’s womb.",
+              "Veiled in flesh the Godhead see;",
+              "Hail, th’ Incarnate Deity,",
+              "Pleased as Man with man to dwell,",
+              "Jesus, our Immanuel!"
+            ]
+          },
+          {
+            "number": 3,
+            "lines": [
+              "Hail, the heav’n-born Prince of Peace!",
+              "Hail, the Sun of Righteousness!",
+              "Light and life to all He brings,",
+              "Ris’n with healing in His wings.",
+              "Mild He lays His glory by,",
+              "Born that man no more may die,",
+              "Born to raise the sons of earth,",
+              "Born to give them second birth."
+            ]
+          }
+        ],
+        "chorus": {
+          "lines": [
+            "Hark! the herald angels sing,",
+            "“Glory to the new-born King.”"
+          ]
+        }
+      }
+    },
+    {
+      "number": 27,
+      "title": "While shepherds watched their flocks by night",
+      "writer": "--",
+      "rating": 0,
+      "tags": ["hymn"],
+      "content": {
+        "verses": [
+          {
+            "number": 1,
+            "lines": [
+              "While shepherds watched their flocks by night,",
+              "All seated on the ground.",
+              "The Angel of the Lord came down,",
+              "And glory shone around."
+            ]
+          },
+          {
+            "number": 2,
+            "lines": [
+              "“Fear not”, said he (for mighty dread",
+              "Had seized their troubled mind),",
+              "“Glad tidings of great joy, I bring",
+              "To you and all mankind."
+            ]
+          },
+          {
+            "number": 3,
+            "lines": [
+              "“To you, in David’s town, this day",
+              "Is born of David’s line",
+              "A Saviour, Who is Christ the Lord;",
+              "And this shall be the sign:"
+            ]
+          },
+          {
+            "number": 4,
+            "lines": [
+              "“The heavenly Babe you there shall find",
+              "To human view displayed,",
+              "All meanly wrapped in swathing bands",
+              "And in a manger laid”"
+            ]
+          },
+          {
+            "number": 5,
+            "lines": [
+              "Thus spake the seraph; and forthwith",
+              "Appeared a shining throng",
+              "Of angels, praising God, and thus",
+              "Addressed their joyful song:"
+            ]
+          },
+          {
+            "number": 6,
+            "lines": [
+              "“All glory be to God on high,",
+              "And to the earth be peace;",
+              "Good will henceforth from heaven to men",
+              "Begin, and never cease!”"
+            ]
+          }
+        ],
+        "chorus": null
+      }
+    },
+    {
+      "number": 28,
+      "title": "Now, Lord! According to Thy word",
+      "writer": "--",
+      "rating": 0,
+      "tags": ["hymn"],
+      "content": {
+        "verses": [
+          {
+            "number": 1,
+            "lines": [
+              "Now, Lord! According to Thy word,",
+              "Let me in peace depart;",
+              "Mine eyes have Thy salvation seen,",
+              "And gladness fills my heart."
+            ]
+          },
+          {
+            "number": 2,
+            "lines": [
+              "At length my arms embrace my Lord,",
+              "Now let their vigour cease;",
+              "At last my eyes my Saviour see,",
+              "Now let them close in peace."
+            ]
+          },
+          {
+            "number": 3,
+            "lines": [
+              "This great salvation, long prepared,",
+              "And now disclosed to view,",
+              "Hath proved Thy love was constant still,",
+              "And promises were true."
+            ]
+          },
+          {
+            "number": 4,
+            "lines": [
+              "That Sun I now behold, whose light",
+              "Shall heathen darkness chase,",
+              "And rays of brightest glory pour",
+              "Around Thy chosen race."
+            ]
+          }
+        ],
+        "chorus": null
+      }
+    },
+    {
+      "number": 29,
+      "title": "Jesus calls us; o’er the tumult",
+      "writer": "--",
+      "rating": 0,
+      "tags": ["hymn"],
+      "content": {
+        "verses": [
+          {
+            "number": 1,
+            "lines": [
+              "Jesus calls us; o’er the tumult",
+              "Of our life’s wild, restless sea,",
+              "Day by day His sweet voice soundeth,",
+              "Saying, “Christian, follow Me.”"
+            ]
+          },
+          {
+            "number": 2,
+            "lines": [
+              "As of old apostles heard it",
+              "By the Galilean lake,",
+              "Turned from home and toil and kindred,",
+              "Leaving all for His dear sake."
+            ]
+          },
+          {
+            "number": 3,
+            "lines": [
+              "Jesus calls us from the worship",
+              "Of the vain world’s golden store:",
+              "From each idol that would keep us,",
+              "Saying, “Christian, love Me more.”"
+            ]
+          },
+          {
+            "number": 4,
+            "lines": [
+              "In our joys, and in our sorrows,",
+              "Days of toil, and hours of ease,",
+              "Still He calls, in cares and pleasures,",
+              "“Christian, love Me more than these.”"
+            ]
+          },
+          {
+            "number": 5,
+            "lines": [
+              "Jesus calls us! By Thy mercies,",
+              "Saviour, may we hear Thy call;",
+              "Give our hearts to Thine obedience",
+              "Serve and love Thee best of all."
+            ]
+          }
+        ],
+        "chorus": null
+      }
+    },
+    {
+      "number": 30,
+      "title": "Lord, as to Thy dear Cross we flee",
+      "writer": "--",
+      "rating": 0,
+      "tags": ["hymn"],
+      "content": {
+        "verses": [
+          {
+            "number": 1,
+            "lines": [
+              "Lord, as to Thy dear Cross we flee,",
+              "And plead to be forgiv’n,",
+              "So let Thy life our pattern be,",
+              "And form our souls for heav’n."
+            ]
+          },
+          {
+            "number": 2,
+            "lines": [
+              "Help us, through good report and ill,",
+              "Our daily cross to bear,",
+              "Like Thee, to do our Father’s will,",
+              "Our brethren’s grief to share."
+            ]
+          },
+          {
+            "number": 3,
+            "lines": [
+              "Let grace our selfishness expel,",
+              "Our earthliness refine,",
+              "And kindness in our bosoms dwell,",
+              "As free and true as Thine."
+            ]
+          },
+          {
+            "number": 4,
+            "lines": [
+              "If joy shall at Thy bidding fly,",
+              "And grief’s dark day come on,",
+              "We, in our turn, would meekly cry:",
+              "“Father, Thy will be done.”"
+            ]
+          },
+          {
+            "number": 5,
+            "lines": [
+              "Should friends misjudge, or foes defame,",
+              "Or brethren faithless prove,",
+              "Then, like Thine own, be all our aim",
+              "To conquer them by love."
+            ]
+          },
+          {
+            "number": 6,
+            "lines": [
+              "Kept peaceful in the midst of strife,",
+              "Forgiving and forgiv’n,",
+              "O may we lead the pilgrim’s life,",
+              "And follow Thee to heav’n."
+            ]
+          }
+        ],
+        "chorus": null
+      }
+    },
+    {
+      "number": 31,
+      "title": "“Take up thy cross,” the Saviour said",
+      "writer": "--",
+      "rating": 0,
+      "tags": ["hymn"],
+      "content": {
+        "verses": [
+          {
+            "number": 1,
+            "lines": [
+              "“Take up thy cross,” the Saviour said,",
+              "“If thou wouldst My disciple be;",
+              "Take up thy cross, with willing heart,",
+              "And humbly follow after Me.”"
+            ]
+          },
+          {
+            "number": 2,
+            "lines": [
+              "Take up thy cross; let not its weight",
+              "Fill thy weak soul with vain alarm;",
+              "His strength shall bear thy spirit up,",
+              "And brace thy heart, and nerve thine arm."
+            ]
+          },
+          {
+            "number": 3,
+            "lines": [
+              "Take up thy cross, nor heed the shame,",
+              "And let thy foolish pride be still;",
+              "Thy Lord refused not e’en to die",
+              "Upon a Cross, on Calv’ry’s hill."
+            ]
+          },
+          {
+            "number": 4,
+            "lines": [
+              "Take up thy cross, then, in His strength,",
+              "And calmly every danger brave;",
+              "‘Twill guide thee to a better home,",
+              "And lead to vict’ry o’er the grave."
+            ]
+          },
+          {
+            "number": 5,
+            "lines": [
+              "“Take up thy cross, and follow Christ,",
+              "Nor think till death to lay it down;",
+              "For only he who bears the cross",
+              "May hope to wear the glorious crown."
+            ]
+          }
+        ],
+        "chorus": null
+      }
+    },
+    {
+      "number": 32,
+      "title": "“Man of Sorrows!” wondrous Name",
+      "writer": "--",
+      "rating": 0,
+      "tags": ["hymn"],
+      "content": {
+        "verses": [
+          {
+            "number": 1,
+            "lines": [
+              "“Man of Sorrows!” wondrous Name",
+              "For the Son of God, who came",
+              "Ruined sinners to reclaim!",
+              "Hallelujah! What a Saviour!"
+            ]
+          },
+          {
+            "number": 2,
+            "lines": [
+              "Bearing shame and scoffing rude,",
+              "In my place condemned He stood;",
+              "Sealed my pardon with His blood;",
+              "Hallelujah! What a Saviour!"
+            ]
+          },
+          {
+            "number": 3,
+            "lines": [
+              "Guilty, vile, and helpless we,",
+              "Spotless Lamb of God was He;",
+              "Full atonement – can it be?",
+              "Hallelujah! What a Saviour!"
+            ]
+          },
+          {
+            "number": 4,
+            "lines": [
+              "Lifted up was He to die,",
+              "“It is finished!” was His cry;",
+              "Now in heaven exalted high;",
+              "Hallelujah! What a Saviour!"
+            ]
+          },
+          {
+            "number": 5,
+            "lines": [
+              "When He comes, our glorious King,",
+              "All His ransomed home to bring,",
+              "Then anew this song we’ll sing;",
+              "“Hallelujah! What a Saviour!”"
+            ]
+          }
+        ],
+        "chorus": null
+      }
+    },
+    {
+      "number": 33,
+      "title": "Alas! And did my Saviour bleed?",
+      "writer": "--",
+      "rating": 0,
+      "tags": ["hymn"],
+      "content": {
+        "verses": [
+          {
+            "number": 1,
+            "lines": [
+              "Alas! And did my Saviour bleed?",
+              "And did my Sov’reign die?",
+              "Would He devote that sacred head,",
+              "For such a worm as I?"
+            ]
+          },
+          {
+            "number": 2,
+            "lines": [
+              "Was it for crimes that I had done",
+              "He groaned upon the tree?",
+              "Amazing pity! Grace unknown!",
+              "And love beyond degree!"
+            ]
+          },
+          {
+            "number": 3,
+            "lines": [
+              "Well might the sun in darkness hide,",
+              "And shut his glories in,",
+              "When Christ, the mighty Maker, died",
+              "For man, the creature’s sin."
+            ]
+          },
+          {
+            "number": 4,
+            "lines": [
+              "Thus might I hide my blushing face",
+              "Whilst His dear cross appears,",
+              "Dissolve my heart in thankfulness,",
+              "And melt mine eyes to tears."
+            ]
+          },
+          {
+            "number": 5,
+            "lines": [
+              "But drops of grief can ne’er repay",
+              "The debt of love I owe:",
+              "Here, Lord, I give myself away;",
+              "‘Tis all that I can do."
+            ]
+          }
+        ],
+        "chorus": {
+          "lines": [
+            "Help me, dear Saviour, Thee to own,",
+            "And ever faithful be;",
+            "And when Thou sittest on Thy throne,",
+            "O Lord, remember me."
+          ]
+        }
+      }
+    },
+    {
+      "number": 34,
+      "title": "Beyond the holy city wall",
+      "writer": "--",
+      "rating": 0,
+      "tags": ["hymn"],
+      "content": {
+        "verses": [
+          {
+            "number": 1,
+            "lines": [
+              "Beyond the holy city wall",
+              "They set the cruel cross on high,",
+              "Where the dear Lord who saved us all",
+              "Did hang in pain, and bleed, and die."
+            ]
+          },
+          {
+            "number": 2,
+            "lines": [
+              "The hands that touched the blind to sight,",
+              "That gave the sick man strength anew,",
+              "That raised the dead to life and light,",
+              "Were pierced and wounded through and through."
+            ]
+          },
+          {
+            "number": 3,
+            "lines": [
+              "The feet that walked the stormy sea,",
+              "That ever turned at sorrow’s prayer,",
+              "By sharp nails fastened to the tree,",
+              "Hung torn and hurt and bleeding there."
+            ]
+          },
+          {
+            "number": 4,
+            "lines": [
+              "O by Thy griefs that dreadful day,",
+              "Dear Lord, and by Thy precious blood,",
+              "Wash all our guilty stains away,",
+              "And make Thy sinful children good."
+            ]
+          }
+        ],
+        "chorus": null
+      }
+    },
+    {
+      "number": 35,
+      "title": "O come and mourn with me a while",
+      "writer": "--",
+      "rating": 0,
+      "tags": ["hymn"],
+      "content": {
+        "verses": [
+          {
+            "number": 1,
+            "lines": [
+              "O come and mourn with me a while;",
+              "O come ye to the Saviour’s side;",
+              "O come, together let us mourn:",
+              "Jesus, our Lord, is crucified!"
+            ]
+          },
+          {
+            "number": 2,
+            "lines": [
+              "Have we no tears to shed for Him,",
+              "While soldiers scoff and Jews deride?",
+              "Ah! Look how patiently He hangs:",
+              "Jesus, our Lord, is crucified!"
+            ]
+          },
+          {
+            "number": 3,
+            "lines": [
+              "Sev’n times He spoke, sev’n words of love;",
+              "And all three hours His silence cried",
+              "For mercy on the souls of men:",
+              "Jesus, our Lord, is crucified!"
+            ]
+          },
+          {
+            "number": 4,
+            "lines": [
+              "O break, O break, hard heart of mine!",
+              "Thy weak self-love and guilty pride",
+              "His Pilate and His Judas were:",
+              "Jesus, our Lord, is crucified!"
+            ]
+          },
+          {
+            "number": 5,
+            "lines": [
+              "O love of God! O sin of man!",
+              "In this dread act your strength is tried,",
+              "And victory remains with love:",
+              "Jesus, our Lord, is crucified!"
+            ]
+          }
+        ],
+        "chorus": null
+      }
+    },
+    {
+      "number": 36,
+      "title": "On Calvary’s brow my Saviour died",
+      "writer": "--",
+      "rating": 0,
+      "tags": ["hymn"],
+      "content": {
+        "verses": [
+          {
+            "number": 1,
+            "lines": [
+              "On Calv’ry’s brow my Saviour died,",
+              "‘Twas there my Lord was crucified:",
+              "‘Twas on the cross He bled for me",
+              "And purchased there my pardon free."
+            ]
+          },
+          {
+            "number": 2,
+            "lines": [
+              "‘Mid rending rocks and dark’ning skies",
+              "My Saviour bows His head and dies;",
+              "The op’ning vail reveals the way",
+              "To heaven’s joys and endless day."
+            ]
+          },
+          {
+            "number": 3,
+            "lines": [
+              "O Jesus, Lord, how can it be",
+              "That Thou shouldst give Thy life for me?",
+              "To bear the cross and agony",
+              "In that dread hour on Calvary!"
+            ]
+          }
+        ],
+        "chorus": {
+          "lines": [
+            "O Calvary! Dark Calvary!",
+            "Where Jesus shed His blood for me,",
+            "O Calvary! Blest Calvary!",
+            "‘Twas there my Saviour died for me."
+          ]
+        }
+      }
+    },
+    {
+      "number": 37,
+      "title": "O perfect life of love!",
+      "writer": "--",
+      "rating": 0,
+      "tags": ["hymn"],
+      "content": {
+        "verses": [
+          {
+            "number": 1,
+            "lines": [
+              "O perfect life of love!",
+              "All, all is finished now,",
+              "All that He left His throne above",
+              "To do for us below."
+            ]
+          },
+          {
+            "number": 2,
+            "lines": [
+              "No work is left undone",
+              "Of all the Father willed;",
+              "His toils and sorrows, one by one,",
+              "The Scripture have fulfilled."
+            ]
+          },
+          {
+            "number": 3,
+            "lines": [
+              "No pain that we can share",
+              "But He has felt its smart;",
+              "All forms of human grief and care",
+              "Have pierced that tender heart."
+            ]
+          },
+          {
+            "number": 4,
+            "lines": [
+              "And on His thorn-crowned head,",
+              "And on His sinless soul,",
+              "Our sins in all their guilt were laid,",
+              "That He might make us whole."
+            ]
+          },
+          {
+            "number": 5,
+            "lines": [
+              "In perfect love He dies;",
+              "For me He dies, for me!",
+              "O all-atoning Sacrifice,",
+              "I cling by faith to Thee."
+            ]
+          },
+          {
+            "number": 6,
+            "lines": [
+              "In every time of need,",
+              "Before the judgment throne,",
+              "Thy work, O Lamb of God, I’ll plead,",
+              "Thy merits, not my own."
+            ]
+          }
+        ],
+        "chorus": null
+      }
+    },
+    {
+      "number": 38,
+      "title": "O sacred Head, sore wounded",
+      "writer": "--",
+      "rating": 0,
+      "tags": ["hymn"],
+      "content": {
+        "verses": [
+          {
+            "number": 1,
+            "lines": [
+              "O sacred Head, sore wounded,",
+              "With grief and shame weighed down!",
+              "O Kingly Head, surrounded",
+              "With thorns, Thine only crown!",
+              "How pale art Thou with anguish,",
+              "With sore abuse and scorn!",
+              "How does that visage languish,",
+              "Which once was bright as morn!"
+            ]
+          },
+          {
+            "number": 2,
+            "lines": [
+              "O Lord of life and glory,",
+              "What bliss till now was Thine!",
+              "I read the wondrous story;",
+              "I joy to call Thee mine.",
+              "Thy grief and bitter passion",
+              "Were all for sinners gain;",
+              "Mine, mine was the transgression,",
+              "But Thine the deadly pain."
+            ]
+          },
+          {
+            "number": 3,
+            "lines": [
+              "What language shall I borrow",
+              "To praise Thee, heav’nly Friend,",
+              "For this Thy dying sorrow,",
+              "Thy pity without end?",
+              "O make me Thine for ever,",
+              "And, should I fainting be,",
+              "Lord, let me never, never,",
+              "Outlive my love to Thee."
+            ]
+          },
+          {
+            "number": 4,
+            "lines": [
+              "Be near me, Lord, when dying;",
+              "O show Thy Cross to me;",
+              "And, for my succor flying,",
+              "Come, Lord, to set me free;",
+              "These eyes, new faith receiving,",
+              "For he who dies believing",
+              "Dies safely through Thy love."
+            ]
+          }
+        ],
+        "chorus": null
+      }
+    },
+    {
+      "number": 39,
+      "title": "When I survey the wondrous cross",
+      "writer": "--",
+      "rating": 0,
+      "tags": ["hymn"],
+      "content": {
+        "verses": [
+          {
+            "number": 1,
+            "lines": [
+              "When I survey the wondrous cross",
+              "On which the Prince of glory died;",
+              "My richest gain I count but loss,",
+              "And pour contempt on all my pride."
+            ]
+          },
+          {
+            "number": 2,
+            "lines": [
+              "Forbid it, Lord, that I should boast,",
+              "Save in the cross of Christ my God.",
+              "All the vain things that charm me most,",
+              "I sacrifice them to His blood."
+            ]
+          },
+          {
+            "number": 3,
+            "lines": [
+              "See from His head, His hands, His feet,",
+              "Sorrows and love flow mingled down:",
+              "Did e’er such love and sorrow meet,",
+              "Or thorns compose so rich a crown?"
+            ]
+          },
+          {
+            "number": 4,
+            "lines": [
+              "Were the whole realm of nature mine,",
+              "That were an off’ring far too small;",
+              "Love so amazing, so divine,",
+              "Demands my soul, my life, my all."
+            ]
+          }
+        ],
+        "chorus": null
+      }
+    },
+    {
+      "number": 40,
+      "title": "Jesus Christ is risen to-day",
+      "writer": "--",
+      "rating": 0,
+      "tags": ["hymn"],
+      "content": {
+        "verses": [
+          {
+            "number": 1,
+            "lines": [
+              "Jesus Christ is risen to-day,",
+              "Hallelujah!",
+              "Our triumphant holy day,",
+              "Hallelujah!",
+              "Who did once, upon the cross,",
+              "Hallelujah!",
+              "Suffer to redeem our loss.",
+              "Hallelujah!"
+            ]
+          },
+          {
+            "number": 2,
+            "lines": [
+              "Hymns of praise then let us sing,",
+              "Hallelujah!",
+              "Unto Christ, our heavenly King,",
+              "Hallelujah!",
+              "Who endured the cross and grave,",
+              "Hallelujah!",
+              "Sinners to redeem and save.",
+              "Hallelujah!"
+            ]
+          },
+          {
+            "number": 3,
+            "lines": [
+              "But the pains which He endured,",
+              "Hallelujah!",
+              "Our salvation have procured;",
+              "Hallelujah!",
+              "Now above the sky He’s King,",
+              "Hallelujah!",
+              "Where the angels ever sing",
+              "“Hallelujah!”"
+            ]
+          },
+          {
+            "number": 4,
+            "lines": [
+              "Sing we to our God above",
+              "Hallelujah!",
+              "Praise eternal as His love;",
+              "Hallelujah!",
+              "Praise Him, all ye heavenly host,",
+              "Hallelujah!",
+              "Father, Son and Holy Ghost.",
+              "Hallelujah!"
+            ]
+          }
+        ],
+        "chorus": null
+      }
+    },
+    {
+      "number": 41,
+      "title": "On wings of living light",
+      "writer": "--",
+      "rating": 0,
+      "tags": ["hymn"],
+      "content": {
+        "verses": [
+          {
+            "number": 1,
+            "lines": [
+              "On wings of living light,",
+              "At earliest dawn of day,",
+              "Came down the angel bright,",
+              "And rolled the stone away."
+            ]
+          },
+          {
+            "number": 2,
+            "lines": [
+              "The keepers watching near,",
+              "At that dread sight and sound",
+              "Fell down with sudden fear,",
+              "Like dead men, to the ground."
+            ]
+          },
+          {
+            "number": 3,
+            "lines": [
+              "Then rose from death’s dark gloom,",
+              "Unseen by mortal eye,",
+              "Triumphant o’er the tomb,",
+              "The Lord of earth and sky."
+            ]
+          },
+          {
+            "number": 4,
+            "lines": [
+              "Ye children of the light,",
+              "Arise with Him, arise;",
+              "Leave in the grave beneath",
+              "The old things passed away."
+            ]
+          },
+          {
+            "number": 5,
+            "lines": [
+              "We sing Thee Lord Divine,",
+              "With all our hearts and powers;",
+              "For we are ever Thine,",
+              "And Thou art ever ours."
+            ]
+          }
+        ],
+        "chorus": {
+          "lines": [
+            "Your voices raise",
+            "With one accord,",
+            "To bless and praise",
+            "Your risen Lord"
+          ]
+        }
+      }
+    },
+    {
+      "number": 42,
+      "title": "The strife is o’er, the battle done",
+      "writer": "--",
+      "rating": 0,
+      "tags": ["hymn"],
+      "content": {
+        "verses": [
+          {
+            "number": 1,
+            "lines": [
+              "The strife is o’er, the battle done;",
+              "Now is the Victor’s triumph won;",
+              "Now be the song of praise begun,",
+              "“Hallelujah!”"
+            ]
+          },
+          {
+            "number": 2,
+            "lines": [
+              "The powers of death have done their worst,",
+              "But Christ their legions hath dispersed;",
+              "Let shouts of holy joy outburst,",
+              "“Hallelujah!”"
+            ]
+          },
+          {
+            "number": 3,
+            "lines": [
+              "The three sad days have quickly sped;",
+              "He rises glorious from the dead;",
+              "All glory to our risen Head!",
+              "Hallelujah!"
+            ]
+          },
+          {
+            "number": 4,
+            "lines": [
+              "He brake the age-bound chains of hell;",
+              "The bars from heav’n’s high portals fell;",
+              "Let hymns of praise His triumph tell.",
+              "Hallelujah!"
+            ]
+          },
+          {
+            "number": 5,
+            "lines": [
+              "Lord, by the stripes which wounded Thee,",
+              "From death’s dread sting Thy servants free,",
+              "That we may live, and sing to Thee:",
+              "“Hallelujah!”"
+            ]
+          }
+        ],
+        "chorus": null
+      }
+    },
+    {
+      "number": 43,
+      "title": "Hail the day that sees Him rise",
+      "writer": "--",
+      "rating": 0,
+      "tags": ["hymn"],
+      "content": {
+        "verses": [
+          {
+            "number": 1,
+            "lines": [
+              "Hail the day that sees Him rise,",
+              "Hallelujah!",
+              "Ravished from our wistful eyes!",
+              "Hallelujah!",
+              "Christ, awhile to mortals given,",
+              "Hallelujah!",
+              "Reascends His native heaven.",
+              "Hallelujah!"
+            ]
+          },
+          {
+            "number": 2,
+            "lines": [
+              "There the pompous triumph waits:",
+              "Hallelujah!",
+              "Lift your heads, eternal gates;",
+              "Hallelujah!",
+              "Wide unfold the radiant scene;",
+              "Hallelujah!",
+              "Take the King of Glory in!",
+              "Hallelujah!"
+            ]
+          },
+          {
+            "number": 3,
+            "lines": [
+              "Him though highest heav’n receives,",
+              "Hallelujah!",
+              "Still He loves the earth He leaves;",
+              "Hallelujah!",
+              "Though returning to His throne,",
+              "Hallelujah!",
+              "Still He calls mankind His own.",
+              "Hallelujah!"
+            ]
+          },
+          {
+            "number": 4,
+            "lines": [
+              "See! He lifts His hands above;",
+              "Hallelujah!",
+              "See! He shows the prints of love;",
+              "Hallelujah!",
+              "Hark! His gracious lips bestow",
+              "Hallelujah!",
+              "Blessings on His Church below,",
+              "Hallelujah!"
+            ]
+          }
+        ],
+        "chorus": null
+      }
+    },
+    {
+      "number": 44,
+      "title": "Crown Him with many crowns",
+      "writer": "--",
+      "rating": 0,
+      "tags": ["hymn"],
+      "content": {
+        "verses": [
+          {
+            "number": 1,
+            "lines": [
+              "Crown Him with many crowns,",
+              "The Lamb upon His throne;",
+              "Hark how the heav’nly anthem drowns",
+              "All music but its own:",
+              "Awake, my soul, and sing of Him who died for thee,",
+              "And hail Him as thy matchless King",
+              "Through all eternity."
+            ]
+          },
+          {
+            "number": 2,
+            "lines": [
+              "Crown Him the Lord of Love!",
+              "Behold His hands and side,",
+              "His wounds yet visible above,",
+              "In beauty glorified;",
+              "No angel in the sky",
+              "Can fully bear that sight,",
+              "But downward bends his burning eye",
+              "At mysteries so bright."
+            ]
+          },
+          {
+            "number": 3,
+            "lines": [
+              "Crown Him the Lord of Peace!",
+              "Whose pow’r a sceptre sways",
+              "From pole to pole, that wars may cease,",
+              "And all be prayer and praise.",
+              "His reign shall know no end,",
+              "And round His pierced feet",
+              "Fair flow’rs of Paradise extend,",
+              "Their fragrance ever sweet."
+            ]
+          },
+          {
+            "number": 4,
+            "lines": [
+              "Crown Him the Lord of years!",
+              "The Potentate of time,",
+              "Creator of the rolling spheres,",
+              "Ineffably sublime!",
+              "All hail, Redeemer, hail!",
+              "For Thou hast died for me;",
+              "Thy praise shall never, never fail",
+              "Throughout eternity."
+            ]
+          }
+        ],
+        "chorus": null
+      }
+    },
+    {
+      "number": 45,
+      "title": "One is kind above all others",
+      "writer": "--",
+      "rating": 0,
+      "tags": ["hymn"],
+      "content": {
+        "verses": [
+          {
+            "number": 1,
+            "lines": [
+              "One is kind above all others,",
+              "O how He loves!",
+              "His is love beyond a brother’s.",
+              "O how He loves!",
+              "Earthly friends may fail or leave us,",
+              "One day kind, the next grieve us,",
+              "But this Friend will ne’er deceive us;",
+              "O how He loves!"
+            ]
+          },
+          {
+            "number": 2,
+            "lines": [
+              "‘Tis eternal life to know Him,",
+              "O how He loves!",
+              "Think, O think, how much we owe Him.",
+              "O how He loves!",
+              "With His precious blood He bought us,",
+              "In the wilderness He sought us,",
+              "To His fold He safely brought us;",
+              "O how He loves!"
+            ]
+          },
+          {
+            "number": 3,
+            "lines": [
+              "Blessed Jesus! Would you know Him?",
+              "O how He loves!",
+              "Give yourselves entirely to Him,",
+              "O how He loves!",
+              "Think no longer of the morrow,",
+              "From the past new courage borrow,",
+              "Jesus carries all your sorrows;",
+              "O how He loves!"
+            ]
+          },
+          {
+            "number": 4,
+            "lines": [
+              "Love this Friend: He longs to save you,",
+              "O how He loves!",
+              "All through life He will not leave you,",
+              "O how He loves!",
+              "Best of blessings He’ll provide you,",
+              "Nought but good shall e’er betide you,",
+              "Safe to glory He will guide you;",
+              "O how He loves!"
+            ]
+          }
+        ],
+        "chorus": null
+      }
+    },
+    {
+      "number": 46,
+      "title": "Pass me not, O gentle Saviour",
+      "writer": "--",
+      "rating": 4,
+      "tags": ["hymn"],
+      "content": {
+        "verses": [
+          {
+            "number": 1,
+            "lines": [
+              "Pass me not, O gentle Saviour,",
+              "Hear my humble cry;",
+              "While on others Thou art calling,",
+              "Do not pass me by."
+            ]
+          },
+          {
+            "number": 2,
+            "lines": [
+              "Let me at a throne of mercy",
+              "Find a sweet relief;",
+              "Kneeling there in deep contrition,",
+              "Help my unbelief."
+            ]
+          },
+          {
+            "number": 3,
+            "lines": [
+              "Trusting only in Thy merit,",
+              "Would I seek Thy face;",
+              "Heal my wounded, broken spirit,",
+              "Save me by Thy grace."
+            ]
+          },
+          {
+            "number": 4,
+            "lines": [
+              "Thou the spring of all comfort,",
+              "More than life to me;",
+              "Whom have I on earth beside Thee?",
+              "Whom in heav’n but Thee?"
+            ]
+          }
+        ],
+        "chorus": {
+          "lines": [
+            "Saviour! Saviour!",
+            "Hear my humble cry;",
+            "And while others Thou art calling,",
+            "Do not pass me by."
+          ]
+        }
+      }
+    },
+    {
+      "number": 47,
+      "title": "Rest for the weary",
+      "writer": "--",
+      "rating": 0,
+      "tags": ["hymn"],
+      "content": {
+        "verses": [
+          {
+            "number": 1,
+            "lines": [
+              "Rest for the weary",
+              "Joy of the sad,",
+              "Hope of the dreary,",
+              "Light of the glad,",
+              "Home of the stranger,",
+              "Strength to the end,",
+              "Refuge from danger,",
+              "Saviour and Friend!"
+            ]
+          },
+          {
+            "number": 2,
+            "lines": [
+              "Pillow where, lying,",
+              "Love rests its head,",
+              "Peace of the dying,",
+              "Life of the dead,",
+              "Path of the lowly,",
+              "Prize at the end,",
+              "Breath of the holy,",
+              "Saviour and Friend!"
+            ]
+          },
+          {
+            "number": 3,
+            "lines": [
+              "When my feet stumble,",
+              "I to Thee cry,",
+              "Crown of the humble,",
+              "Cross of the high;",
+              "When my steps wander,",
+              "Over me bend,",
+              "Truer and fonder,",
+              "Saviour and Friend!"
+            ]
+          },
+          {
+            "number": 4,
+            "lines": [
+              "Ever confessing",
+              "Thee, I will raise",
+              "Unto Thee blessing,",
+              "Glory, and praise,",
+              "All my endeavor,",
+              "world without end,",
+              "Thine to be ever,",
+              "Saviour and Friend."
+            ]
+          }
+        ],
+        "chorus": null
+      }
+    },
+    {
+      "number": 48,
+      "title": "Saviour, lead me, lest I stay",
+      "writer": "--",
+      "rating": 0,
+      "tags": ["hymn"],
+      "content": {
+        "verses": [
+          {
+            "number": 1,
+            "lines": [
+              "Saviour, lead me, lest I stay,",
+              "Gently lead me all the way;",
+              "I am safe when by Thy side,",
+              "I would in Thy love abide."
+            ]
+          },
+          {
+            "number": 2,
+            "lines": [
+              "Thou the refuge of my soul,",
+              "When life’s stormy billows roll,",
+              "I am safe when Thou art nigh,",
+              "On Thy mercy I rely."
+            ]
+          },
+          {
+            "number": 3,
+            "lines": [
+              "Saviour, lead me, till at last,",
+              "When the storm of life is past,",
+              "I shall reach the land of day,",
+              "Where all tears are wiped away."
+            ]
+          }
+        ],
+        "chorus": {
+          "lines": [
+            "Lead me, lead me,",
+            "Saviour, lead me, lest I stray;",
+            "Gently down the stream of time,",
+            "Lead me, Saviour, all the way."
+          ]
+        }
+      }
+    },
+    {
+      "number": 49,
+      "title": "Arise my soul, arise",
+      "writer": "--",
+      "rating": 0,
+      "tags": ["hymn"],
+      "content": {
+        "verses": [
+          {
+            "number": 1,
+            "lines": [
+              "Arise my soul, arise,",
+              "Shake off thy guilty fears,",
+              "The bleeding Sacrifice",
+              "In my behalf appears:",
+              "Before the throne my Surety stands;",
+              "My name is written on His hands."
+            ]
+          },
+          {
+            "number": 2,
+            "lines": [
+              "He ever lives above,",
+              "For me to intercede,",
+              "His all redeeming love,",
+              "His precious blood, to plead;",
+              "His blood atoned for all our race",
+              "And sprinkles now the throne of grace."
+            ]
+          },
+          {
+            "number": 3,
+            "lines": [
+              "Five bleeding wounds He bears,",
+              "Received on Calvary,",
+              "They pour effectual prayers,",
+              "They strongly speak for me:",
+              "Forgive him, O forgive! They cry,",
+              "Nor let that ransomed sinner die!"
+            ]
+          },
+          {
+            "number": 4,
+            "lines": [
+              "My God is reconciled,",
+              "His pardoning voice I hear;",
+              "He owns me for His child,",
+              "I can no longer fear;",
+              "With confidence I now draw nigh,",
+              "And Father, Abba, Father! Cry."
+            ]
+          }
+        ],
+        "chorus": null
+      }
+    },
+    {
+      "number": 50,
+      "title": "Jesus, my Saviour, to Bethlehem came",
+      "writer": "--",
+      "rating": 0,
+      "tags": ["hymn"],
+      "content": {
+        "verses": [
+          {
+            "number": 1,
+            "lines": [
+              "Jesus, my Saviour, to Bethlehem came,",
+              "Born in a manger to sorrow and shame;",
+              "O it was wonderful-blest be His Name!",
+              "Seeking for me, for me!",
+              "Seeking for me! Seeking for me!",
+              "O it was wonderful-blest be His Name!",
+              "Seeking for me, for me!"
+            ]
+          },
+          {
+            "number": 2,
+            "lines": [
+              "Jesus, my Saviour, on Calvary’s tree,",
+              "Paid the great debt, and my soul He set free;",
+              "O it was wonderful-how could it be?",
+              "Dying for me, for me!",
+              "Dying for me! Dying for me!",
+              "O it was wonderful-how could it be?",
+              "Dying for me, for me!"
+            ]
+          },
+          {
+            "number": 3,
+            "lines": [
+              "Jesus, my Saviour, the same as of old,",
+              "While I was wand’ring afar from the fold,",
+              "Gently and long did He plead with my soul,",
+              "Calling for me, for me!",
+              "Calling for me! Calling for me!",
+              "Gently and long did He plead with my soul,",
+              "Calling for me, for me!"
+            ]
+          },
+          {
+            "number": 4,
+            "lines": [
+              "Jesus, my Saviour, shall come from on high—",
+              "Sweet is the promise as weary years fly;",
+              "O, I shall see Him descend from the sky!",
+              "Coming for me, for me!",
+              "Coming for me! Coming for me!",
+              "O, I shall see Him descend from the sky,",
+              "Coming for me, for me!"
+            ]
+          }
+        ],
+        "chorus": null
+      }
+    },
+    {
+      "number": 51,
+      "title": "He is coming, the “Man of Sorrows,”",
+      "writer": "--",
+      "rating": 0,
+      "tags": ["hymn"],
+      "content": {
+        "verses": [
+          {
+            "number": 1,
+            "lines": [
+              "He is coming, the “Man of Sorrows,”",
+              "Now exalted on high;",
+              "He is coming with loud hosannas,",
+              "In the clouds of the sky."
+            ]
+          },
+          {
+            "number": 2,
+            "lines": [
+              "He is coming, our loving Saviour,",
+              "Blessed Lamb that was slain!",
+              "In the glory of God the Father,",
+              "On the earth He shall reign."
+            ]
+          },
+          {
+            "number": 3,
+            "lines": [
+              "He shall gather His chosen people,",
+              "Who are called by His name;",
+              "And the ransomed of every nation",
+              "For His own He shall claim."
+            ]
+          }
+        ],
+        "chorus": {
+          "lines": [
+            "Hallelujah! Hallelujah!",
+            "He is coming again;",
+            "And with joy we will gather round Him,",
+            "At His coming to reign!"
+          ]
+        }
+      }
+    },
+    {
+      "number": 52,
+      "title": "When the trumpet of the Lord shall sound",
+      "writer": "--",
+      "rating": 0,
+      "tags": ["hymn"],
+      "content": {
+        "verses": [
+          {
+            "number": 1,
+            "lines": [
+              "When the trumpet of the Lord shall sound,",
+              "And time shall be no more,",
+              "And the morning breaks, eternal, bright, and fair;",
+              "When the saved of earth shall gather",
+              "Over on the other shore,",
+              "And the roll is called up yonder, I’ll be there."
+            ]
+          },
+          {
+            "number": 2,
+            "lines": [
+              "On that bright and cloudless morning,",
+              "When the dead in Christ shall rise,",
+              "And the glory of His resurrection share;",
+              "When His chosen ones shall gather",
+              "To their home beyond the skies,",
+              "And the roll is called up yonder, I’ll be there."
+            ]
+          },
+          {
+            "number": 3,
+            "lines": [
+              "Let me labour for the Master",
+              "From the dawn till setting sun,",
+              "Let me talk of all His wondrous love and care;",
+              "Then, when all of life is over,",
+              "And my work on earth is done,",
+              "And the roll is called up yonder, I’ll be there."
+            ]
+          }
+        ],
+        "chorus": {
+          "lines": [
+            "When the roll is called yonder,",
+            "When the roll is called yonder,",
+            "When the roll is called yonder,",
+            "When the roll is called yonder,",
+            "I’ll be there."
+          ]
+        }
+      }
+    },
+    {
+      "number": 53,
+      "title": "Christ is coming! Let creation",
+      "writer": "--",
+      "rating": 0,
+      "tags": ["hymn"],
+      "content": {
+        "verses": [
+          {
+            "number": 1,
+            "lines": [
+              "Christ is coming! Let creation",
+              "From her groans and travail cease;",
+              "Let the glorious proclamation",
+              "Hope restore, and faith increase:",
+              "Christ is coming! Christ is coming!",
+              "Come, Thou blessed Prince of Peace."
+            ]
+          },
+          {
+            "number": 2,
+            "lines": [
+              "Earth can now but tell the story,",
+              "Of Thy bitter cross and pain;",
+              "She shall yet behold Thy glory,",
+              "When Thou comest back to reign,",
+              "Christ is coming! Christ is coming!",
+              "Let each heart repeat the strain."
+            ]
+          },
+          {
+            "number": 3,
+            "lines": [
+              "Long Thine exiles have been pining,",
+              "Far from rest, and home and Thee;",
+              "Soon, in heav’nly glory shining,",
+              "They their loving Lord shall see:",
+              "Christ is coming! Christ is coming!",
+              "Haste the joyous jubilee."
+            ]
+          },
+          {
+            "number": 4,
+            "lines": [
+              "With that blessed hope before us,",
+              "Let no harp remain unstrung;",
+              "Let the mighty advent chorus",
+              "Onward roll on ev’ry tongue:",
+              "“Christ is coming! Christ is coming!",
+              "Come, Lord Jesus, quickly come!”"
+            ]
+          }
+        ],
+        "chorus": null
+      }
+    },
+    {
+      "number": 54,
+      "title": "Look, ye saints, the sight is glorious",
+      "writer": "--",
+      "rating": 0,
+      "tags": ["hymn"],
+      "content": {
+        "verses": [
+          {
+            "number": 1,
+            "lines": [
+              "Look, ye saints, the sight is glorious:",
+              "See the Man of Sorrows now;",
+              "From the fight returned victorious,",
+              "Every knee to Him shall bow:",
+              "Crown Him! Crown Him! Angels crown Him!",
+              "Crown the Saviour King of kings!",
+              "Crown Him! Crown Him! Angels crown Him!",
+              "Crown the Saviour King of kings!"
+            ]
+          },
+          {
+            "number": 2,
+            "lines": [
+              "Crown the Saviour! Angels, crown Him!",
+              "Rich the trophies Jesus brings;",
+              "In the seat of power enthrone Him,",
+              "while the vault of heaven rings."
+            ]
+          },
+          {
+            "number": 3,
+            "lines": [
+              "Sinners in derision crowned Him,",
+              "Mocking thus the Saviour’s claim;",
+              "Saints and angels crowd around Him,",
+              "Own His title, praise His Name:"
+            ]
+          },
+          {
+            "number": 4,
+            "lines": [
+              "Hark! Those bursts of acclamation;",
+              "Hark! those loud triumphant chords;",
+              "Jesus takes the highest station:",
+              "O what joy the sight affords!"
+            ]
+          }
+        ],
+        "chorus": null
+      }
+    },
+    {
+      "number": 55,
+      "title": "I will sing of my Redeemer",
+      "writer": "--",
+      "rating": 0,
+      "tags": ["hymn"],
+      "content": {
+        "verses": [
+          {
+            "number": 1,
+            "lines": [
+              "I will sing of my Redeemer",
+              "And His wondrous love to me:",
+              "On the cruel cross He suffered,",
+              "From the curse to set me free.",
+              "Sing, O sing of my Redeemer,",
+              "With His blood He purchased me.",
+              "On the cross He sealed my pardon,",
+              "Paid the debt, and made me free."
+            ]
+          },
+          {
+            "number": 2,
+            "lines": [
+              "I will tell the wondrous story,",
+              "How my lost estate to save,",
+              "In His boundless love and mercy,",
+              "He the ransom freely gave."
+            ]
+          },
+          {
+            "number": 3,
+            "lines": [
+              "I will praise my dear Redeemer,",
+              "His triumphant power I’ll tell,",
+              "How the victory He giveth",
+              "Over sin, and death, and hell."
+            ]
+          },
+          {
+            "number": 4,
+            "lines": [
+              "I will sing of my Redeemer",
+              "And His heavenly love for me;",
+              "He from death to life hath brought me",
+              "Son of God, with Him to be."
+            ]
+          }
+        ],
+        "chorus": {
+          "lines": [
+            "Sing, O sing of my Redeemer,",
+            "With His blood He purchased me.",
+            "On the cross He sealed my pardon,",
+            "Paid the debt, and made me free."
+          ]
+        }
+      }
+    },
+    {
+      "number": 56,
+      "title": "Come every joyful heart",
+      "writer": "--",
+      "rating": 0,
+      "tags": ["hymn"],
+      "content": {
+        "verses": [
+          {
+            "number": 1,
+            "lines": [
+              "Come every joyful heart,",
+              "That loves the Saviour’s name,",
+              "Your noblest powers exert",
+              "To celebrate His fame;",
+              "Tell all above and all below,",
+              "Tell all above and all below,",
+              "The debt of love to Him you owe."
+            ]
+          },
+          {
+            "number": 2,
+            "lines": [
+              "He left His starry crown",
+              "And laid His robes aside;",
+              "On wings of love came down,",
+              "And wept, and bled, and died:",
+              "What He endured no tongue can tell,",
+              "What He endured no tongue can tell,",
+              "To save our souls from death and hell."
+            ]
+          },
+          {
+            "number": 3,
+            "lines": [
+              "From the dark grave He rose—",
+              "The mansion of the dead;",
+              "And thence His mighty foes",
+              "In glorious triumph led:",
+              "Up through the sky the Conqueror rode,",
+              "Up through the sky the Conqueror rode,",
+              "And reigns on high, the Saviour God."
+            ]
+          },
+          {
+            "number": 4,
+            "lines": [
+              "From thence He’ll quickly come—",
+              "His chariot will not stay—",
+              "And bear our spirits home",
+              "To realms of endless day;",
+              "There shall we see His lovely face,",
+              "There shall we see His lovely face,",
+              "And ever be in His embrace."
+            ]
+          }
+        ],
+        "chorus": null
+      }
+    },
+    {
+      "number": 57,
+      "title": "‘Jesus!’ Name of wondrous love",
+      "writer": "--",
+      "rating": 0,
+      "tags": ["hymn"],
+      "content": {
+        "verses": [
+          {
+            "number": 1,
+            "lines": [
+              "‘Jesus!’ Name of wondrous love;",
+              "Name all other names above,",
+              "Unto which must every knee",
+              "Bow in deep humility."
+            ]
+          },
+          {
+            "number": 2,
+            "lines": [
+              "‘Jesus!’ Name of priceless worth",
+              "To the fallen sons of earth,",
+              "For the promise that it gave,—",
+              "“Jesus shall His people save.”"
+            ]
+          },
+          {
+            "number": 3,
+            "lines": [
+              "‘Jesus!’ Name of mercy mild,",
+              "Given to the Holy Child",
+              "When the cup of human woe",
+              "First He tasted here below."
+            ]
+          },
+          {
+            "number": 4,
+            "lines": [
+              "‘Jesus!’ only Name that’s given",
+              "Under all the mighty heaven",
+              "Whereby man, to sin enslaved,",
+              "Bursts his fetters, and is saved."
+            ]
+          },
+          {
+            "number": 5,
+            "lines": [
+              "‘Jesus!’ Name of wondrous love;",
+              "Human Name of God above;",
+              "Pleading only this, we flee,",
+              "Helpless, O our God, to Thee."
+            ]
+          }
+        ],
+        "chorus": null
+      }
+    },
+    {
+      "number": 58,
+      "title": "More about Jesus would I know",
+      "writer": "--",
+      "rating": 0,
+      "tags": ["hymn"],
+      "content": {
+        "verses": [
+          {
+            "number": 1,
+            "lines": [
+              "More about Jesus would I know,",
+              "More of His grace to others show;",
+              "More of His saving fullness see,",
+              "More of His love who died for me."
+            ]
+          },
+          {
+            "number": 2,
+            "lines": [
+              "More about Jesus let me learn,",
+              "More of His holy will discern;",
+              "Spirit of God my teacher be,",
+              "Showing the things of Christ to me."
+            ]
+          },
+          {
+            "number": 3,
+            "lines": [
+              "More about Jesus; in His Word,",
+              "Holding communion with my Lord;",
+              "Hearing His voice in ev’ry line,",
+              "Making each faithful saying mine."
+            ]
+          },
+          {
+            "number": 4,
+            "lines": [
+              "More about Jesus; on His throne",
+              "Riches in glory all His own;",
+              "More of His kingdom’s sure increase;",
+              "More of His coming, Prince of peace."
+            ]
+          }
+        ],
+        "chorus": {
+          "lines": [
+            "More, more about Jesus,",
+            "More, more about Jesus,",
+            "More of His saving fullness see,",
+            "More of His love who died for me."
+          ]
+        }
+      }
+    },
+    {
+      "number": 59,
+      "title": "One there is above all others",
+      "writer": "--",
+      "rating": 0,
+      "tags": ["hymn"],
+      "content": {
+        "verses": [
+          {
+            "number": 1,
+            "lines": [
+              "One there is above all others,",
+              "Well deserves the name of Friend;",
+              "His is love beyond a brother’s,",
+              "Costly, free, and knows no end:",
+              "They who once His kindness prove,",
+              "Find it everlasting love."
+            ]
+          },
+          {
+            "number": 2,
+            "lines": [
+              "Which of all our friends, to save us,",
+              "Could, or would, have shed his blood?",
+              "Christ, the Saviour, died to have us",
+              "Reconciled in Him to God:",
+              "This was boundless love indeed;",
+              "Jesus is a Friend in need."
+            ]
+          },
+          {
+            "number": 3,
+            "lines": [
+              "When He lived on earth abased,",
+              "Friend of sinners was His Name;",
+              "Now above all glory raised,",
+              "He rejoices in the same:",
+              "Still He calls them brethren, friends,",
+              "And to all their wants attends."
+            ]
+          },
+          {
+            "number": 4,
+            "lines": [
+              "Could we bear from one another",
+              "What He daily bears from us?",
+              "Yet this glorious Friend and Brother",
+              "Loves us though we treat Him thus:",
+              "Though for good we render ill,",
+              "He accounts us brethren still."
+            ]
+          },
+          {
+            "number": 5,
+            "lines": [
+              "O for grace our hearts to soften!",
+              "Teach us, Lord, at length to love;",
+              "We, alas, forget too often",
+              "What a Friend we have above;",
+              "But when our souls are brought home,",
+              "We will love Thee as we ought."
+            ]
+          }
+        ],
+        "chorus": null
+      }
+    },
+    {
+      "number": 60,
+      "title": "Come, sing, my soul and praise the Lord",
+      "writer": "--",
+      "rating": 0,
+      "tags": ["hymn"],
+      "content": {
+        "verses": [
+          {
+            "number": 1,
+            "lines": [
+              "Come, sing, my soul and praise the Lord,",
+              "Who hath redeemed thee by His blood;",
+              "Delivered thee from chains that bound,",
+              "And brought thee to redemption ground."
+            ]
+          },
+          {
+            "number": 2,
+            "lines": [
+              "Once from my God I wandered far,",
+              "And with His holy will made war;",
+              "But now my songs to God abound;",
+              "I’m standing on redemption ground."
+            ]
+          },
+          {
+            "number": 3,
+            "lines": [
+              "O joyous hour when God to me",
+              "A vision gave of Calvary:",
+              "My bonds were loosed, my soul unbound,",
+              "I sang upon redemption ground."
+            ]
+          },
+          {
+            "number": 4,
+            "lines": [
+              "No works of merit now I plead,",
+              "But Jesus take for all my need;",
+              "No righteousness in me is found,",
+              "Except upon redemption ground."
+            ]
+          },
+          {
+            "number": 5,
+            "lines": [
+              "Come, weary souls, and here find rest;",
+              "Accept redemption, and be blest;",
+              "The Christ who died, by God is crowned",
+              "To pardon on redemption ground."
+            ]
+          }
+        ],
+        "chorus": {
+          "lines": [
+            "Redemption ground, the ground of peace!",
+            "Redemption ground, O wondrous grace!",
+            "Here let our praise to God abound,",
+            "Who saves us on redemption ground!"
+          ]
+        }
+      }
+    },
+    {
+      "number": 61,
+      "title": "Take the name of Jesus with you",
+      "writer": "--",
+      "rating": 0,
+      "tags": ["hymn"],
+      "content": {
+        "verses": [
+          {
+            "number": 1,
+            "lines": [
+              "Take the name of Jesus with you,",
+              "Child of sorrow and of woe;",
+              "It will joy and comfort give you,",
+              "Take it then where’er you go."
+            ]
+          },
+          {
+            "number": 2,
+            "lines": [
+              "Take the name of Jesus ever,",
+              "As a shield from ev’ry snare;",
+              "If temptations round you gather,",
+              "Breathe that holy name in prayer."
+            ]
+          },
+          {
+            "number": 3,
+            "lines": [
+              "O the precious name of Jesus,",
+              "How it thrills our souls with joy,",
+              "When His loving arms receive us,",
+              "And His songs our tongues employ!"
+            ]
+          },
+          {
+            "number": 4,
+            "lines": [
+              "At the name of Jesus bowing,",
+              "Falling prostrate at His feet,",
+              "King of kings in heav’n we’ll crown Him,",
+              "When our journey is complete."
+            ]
+          }
+        ],
+        "chorus": {
+          "lines": [
+            "Precious name! O how sweet!",
+            "Hope of earth and joy of heaven;",
+            "Precious name! O how sweet,",
+            "Hope of earth and joy of heaven."
+          ]
+        }
+      }
+    },
+    {
+      "number": 62,
+      "title": "With harps and with vials",
+      "writer": "--",
+      "rating": 0,
+      "tags": ["hymn"],
+      "content": {
+        "verses": [
+          {
+            "number": 1,
+            "lines": [
+              "With harps and with vials",
+              "There stand a great throng,",
+              "In the presence of Jesus,",
+              "And sing this new song:",
+              "“Unto Him who hath loved us",
+              "And washed us from sin,",
+              "Unto Him be the glory",
+              "For ever, Amen.”"
+            ]
+          },
+          {
+            "number": 2,
+            "lines": [
+              "All these once were sinners,",
+              "Defiled in His sight,",
+              "Now arrayed in pure garments",
+              "In praise they unite:"
+            ]
+          },
+          {
+            "number": 3,
+            "lines": [
+              "He maketh the rebel",
+              "A priest and a king,",
+              "He hath bought us, and taught us",
+              "This new song to sing:"
+            ]
+          },
+          {
+            "number": 4,
+            "lines": [
+              "How helpless and hopeless",
+              "We sinners had been,",
+              "If never had loved us",
+              "Till cleansed from our sin!"
+            ]
+          },
+          {
+            "number": 5,
+            "lines": [
+              "Aloud in His praises",
+              "Our voices shall ring,",
+              "So that others, believing,",
+              "This new song shall sing:"
+            ]
+          }
+        ],
+        "chorus": {
+          "lines": [
+            "Unto Him who hath loved us",
+            "And washed us from sin,",
+            "Unto Him be the glory",
+            "For ever, Amen."
+          ]
+        }
+      }
+    },
+    {
+      "number": 63,
+      "title": "All hail the power of Jesu’s Name!",
+      "writer": "--",
+      "rating": 0,
+      "tags": ["hymn"],
+      "content": {
+        "verses": [
+          {
+            "number": 1,
+            "lines": [
+              "All hail the power of Jesu’s Name!",
+              "Let angels prostrate fall;",
+              "Bring forth the royal diadem,",
+              "And crown Him, crown Him, crown Him!",
+              "Crown Him Lord of all."
+            ]
+          },
+          {
+            "number": 2,
+            "lines": [
+              "Ye saints redeemed of Adam’s race",
+              "Ye ransomed from the fall,",
+              "Hail Him who saves you by His grace",
+              "And crown Him, crown Him, crown Him!",
+              "Crown Him Lord of all."
+            ]
+          },
+          {
+            "number": 3,
+            "lines": [
+              "Let every kindred, every tribe",
+              "On this terrestrial ball,",
+              "To Him all majesty ascribe,",
+              "And crown Him, crown Him, crown Him!",
+              "Crown Him Lord of all."
+            ]
+          },
+          {
+            "number": 4,
+            "lines": [
+              "O that with yonder sacred throng",
+              "We at His feet may fall,",
+              "Join in the everlasting song,",
+              "And crown Him, crown Him, crown Him!",
+              "Crown Him Lord of all."
+            ]
+          }
+        ],
+        "chorus": null
+      }
+    },
+    {
+      "number": 64,
+      "title": "Come, Holy Ghost, our souls inspire",
+      "writer": "--",
+      "rating": 0,
+      "tags": ["hymn"],
+      "content": {
+        "verses": [
+          {
+            "number": 1,
+            "lines": [
+              "Come, Holy Ghost, our souls inspire,",
+              "And lighten with celestial fire;",
+              "Thou the anointing Spirit art,",
+              "Who dost Thy sev’nfold gifts impart."
+            ]
+          },
+          {
+            "number": 2,
+            "lines": [
+              "Thy blessed unction from above",
+              "Is comfort, life, and fire of love;",
+              "Enable with perpetual light",
+              "The dullness of our blinded sight."
+            ]
+          },
+          {
+            "number": 3,
+            "lines": [
+              "Anoint and cheer our soiled face",
+              "With the abundance of Thy grace;",
+              "Keep far our foes, give peace at home;",
+              "Where Thou art guide no ill can come."
+            ]
+          },
+          {
+            "number": 4,
+            "lines": [
+              "Teach us to know the Father, Son,",
+              "And Thee, of both, to be but One;",
+              "That through the ages all along",
+              "Redeeming love may be our song.",
+              "Praise to Thine eternal merit,",
+              "Father, Son, and Holy Spirit. Amen."
+            ]
+          }
+        ],
+        "chorus": null
+      }
+    },
+    {
+      "number": 65,
+      "title": "Spirit Divine, attend our prayers",
+      "writer": "--",
+      "rating": 0,
+      "tags": ["hymn"],
+      "content": {
+        "verses": [
+          {
+            "number": 1,
+            "lines": [
+              "Spirit Divine, attend our prayers,",
+              "And make our hearts Thy home;",
+              "Descend with all Thy gracious powers,",
+              "O come, great Spirit, come!"
+            ]
+          },
+          {
+            "number": 2,
+            "lines": [
+              "Come as the light: to us reveal",
+              "Our emptiness and woe;",
+              "And lead us in those paths of life",
+              "Where all the righteous go."
+            ]
+          },
+          {
+            "number": 3,
+            "lines": [
+              "Come as the fire, and purge our hearts,",
+              "Like sacrificial flame;",
+              "Let our whole soul and off’ring be",
+              "To our Redeemer’s Name."
+            ]
+          },
+          {
+            "number": 4,
+            "lines": [
+              "Come as the dove, and spread Thy wings,",
+              "The wings of peaceful love;",
+              "And let Thy Church on earth become",
+              "Blest as the Church above."
+            ]
+          },
+          {
+            "number": 5,
+            "lines": [
+              "Come as the wind, with rushing sound",
+              "And Pentecostal grace,",
+              "That all of woman born may see",
+              "The glory of Thy face."
+            ]
+          }
+        ],
+        "chorus": null
+      }
+    },
+    {
+      "number": 66,
+      "title": "Gracious Spirit, dwell with me",
+      "writer": "--",
+      "rating": 0,
+      "tags": ["hymn"],
+      "content": {
+        "verses": [
+          {
+            "number": 1,
+            "lines": [
+              "Gracious Spirit, dwell with me!",
+              "I myself would gracious be,",
+              "And with words that help and heal",
+              "Would Thy life in mine reveal;",
+              "And with actions bold and meek",
+              "Would for Christ, my Saviour, speak."
+            ]
+          },
+          {
+            "number": 2,
+            "lines": [
+              "Truthful Spirit, dwell with me!",
+              "I myself would truthful be,",
+              "And with wisdom kind and clear",
+              "Let Thy life in mine appear;",
+              "And with actions brotherly;",
+              "Speak my Lord’s sincerity."
+            ]
+          },
+          {
+            "number": 3,
+            "lines": [
+              "Tender Spirit, dwell with me!",
+              "I myself would tender be;",
+              "Shut my heart up like a flower",
+              "In temptation’s dark shore hour;",
+              "Open it when shines the sun,",
+              "And His love by fragrance own."
+            ]
+          },
+          {
+            "number": 4,
+            "lines": [
+              "Mighty Spirit, dwell with me!",
+              "I myself would mighty be;",
+              "Mighty so as to prevail",
+              "Where unaided man must fail,",
+              "Ever by a mighty hope",
+              "Pressing on and bearing up."
+            ]
+          },
+          {
+            "number": 5,
+            "lines": [
+              "Holy Spirit, dwell with me!",
+              "I myself would holy be;",
+              "Separate from sin; I would",
+              "Choose and cherish all things good,",
+              "And whatever I can be",
+              "Give to Him who gave me Thee."
+            ]
+          }
+        ],
+        "chorus": null
+      }
+    },
+    {
+      "number": 67,
+      "title": "Breathe on me, Breath of God",
+      "writer": "--",
+      "rating": 0,
+      "tags": ["hymn"],
+      "content": {
+        "verses": [
+          {
+            "number": 1,
+            "lines": [
+              "Breathe on me, Breath of God;",
+              "Fill me with life anew,",
+              "That I may love what Thou dost love,",
+              "And do what Thou wouldst do."
+            ]
+          },
+          {
+            "number": 2,
+            "lines": [
+              "Breathe on me, Breath of God,",
+              "Until my heart is pure,",
+              "Until my will is one with Thine",
+              "To do and to endure."
+            ]
+          },
+          {
+            "number": 3,
+            "lines": [
+              "Breathe on me, Breath of God,",
+              "Till I am wholly Thine,",
+              "Until this earthly part of me",
+              "Glows with Thy fire divine."
+            ]
+          },
+          {
+            "number": 4,
+            "lines": [
+              "Breathe on me, Breath of God;",
+              "So shall I never die,",
+              "But live with Thee the perfect life",
+              "Of Thine eternity."
+            ]
+          }
+        ],
+        "chorus": null
+      }
+    },
+    {
+      "number": 68,
+      "title": "Come, Holy Spirit, come",
+      "writer": "--",
+      "rating": 0,
+      "tags": ["hymn"],
+      "content": {
+        "verses": [
+          {
+            "number": 1,
+            "lines": [
+              "Come, Holy Spirit, come;",
+              "Let Thy bright beams arise;",
+              "Dispel all sorrow from our mind,",
+              "All darkness from our eyes."
+            ]
+          },
+          {
+            "number": 2,
+            "lines": [
+              "Cheer our desponding hearts,",
+              "Thou heavenly Paraclete;",
+              "Give us to lie with humble hope",
+              "At our Redeemer’s feet."
+            ]
+          },
+          {
+            "number": 3,
+            "lines": [
+              "Revive our drooping faith;",
+              "Our doubts and fears remove;",
+              "And kindle in our breasts the flame",
+              "Of never-dying love."
+            ]
+          },
+          {
+            "number": 4,
+            "lines": [
+              "Convince us to our sin;",
+              "Then lead to Jesus’ blood,",
+              "And to our wond’ring view reveal",
+              "The secret love of God."
+            ]
+          },
+          {
+            "number": 5,
+            "lines": [
+              "‘Tis Thine to cleanse the heart,",
+              "To sanctify the soul;",
+              "To pour fresh life in every part,",
+              "And new-create the whole."
+            ]
+          },
+          {
+            "number": 6,
+            "lines": [
+              "Dwell therefore in our hearts;",
+              "Our minds from bondage free;",
+              "Then we shall know, and praise, and love",
+              "The Father, Son, and Thee."
+            ]
+          }
+        ],
+        "chorus": null
+      }
+    },
+    {
+      "number": 69,
+      "title": "Our blest Redeemer, ere He breathed",
+      "writer": "--",
+      "rating": 0,
+      "tags": ["hymn"],
+      "content": {
+        "verses": [
+          {
+            "number": 1,
+            "lines": [
+              "Our blest Redeemer, ere He breathed",
+              "His tender last farewell,",
+              "A Guide, a Comforter bequeathed,",
+              "With us to dwell."
+            ]
+          },
+          {
+            "number": 2,
+            "lines": [
+              "He came in tongue of living flame,",
+              "To teach, convince, subdue;",
+              "All-pow’rful as the wind He came,",
+              "As viewless too."
+            ]
+          },
+          {
+            "number": 3,
+            "lines": [
+              "He came sweet influence to impart,",
+              "A gracious, willing Guest,",
+              "While He can find one humble heart",
+              "Wherein to rest."
+            ]
+          },
+          {
+            "number": 4,
+            "lines": [
+              "And His that gentle voice we hear,",
+              "Soft as the breath of even,",
+              "That checks each fault, that calms each fear,",
+              "And speaks of heaven."
+            ]
+          },
+          {
+            "number": 5,
+            "lines": [
+              "And every virtue we possess,",
+              "And every victory won,",
+              "And every thought of holiness",
+              "Are His alone."
+            ]
+          },
+          {
+            "number": 6,
+            "lines": [
+              "Spirit of purity and grace,",
+              "Our weakness, pitying, see;",
+              "O make our hearts Thy dwelling place,",
+              "And worthier Thee."
+            ]
+          }
+        ],
+        "chorus": null
+      }
+    },
+    {
+      "number": 70,
+      "title": "Come, gracious Spirit, heavenly Dove",
+      "writer": "--",
+      "rating": 0,
+      "tags": ["hymn"],
+      "content": {
+        "verses": [
+          {
+            "number": 1,
+            "lines": [
+              "Come, gracious Spirit, heavenly Dove,",
+              "With light and comfort from above;",
+              "Be Thou our Guardian, Thou our Guide;",
+              "O’er every thought and step preside."
+            ]
+          },
+          {
+            "number": 2,
+            "lines": [
+              "The light of truth to us display,",
+              "And make us know and choose Thy way;",
+              "Plant holy fear in every heart,",
+              "That we from God may ne’er depart."
+            ]
+          },
+          {
+            "number": 3,
+            "lines": [
+              "Lead us to Christ, the living Way;",
+              "Nor let us from His pastures stray;",
+              "Lead us to holiness, the road",
+              "That we must take to dwell with God."
+            ]
+          },
+          {
+            "number": 4,
+            "lines": [
+              "Lead us to heav’n, that we may share",
+              "Fullness of joy for ever there;",
+              "Lead us to God, our final rest,",
+              "To be with Him for ever blest!"
+            ]
+          }
+        ],
+        "chorus": null
+      }
+    }
+  ]
+}

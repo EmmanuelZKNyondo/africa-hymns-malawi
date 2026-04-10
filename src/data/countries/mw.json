@@ -1,0 +1,24 @@
+{
+  "code": "mw",
+  "name": "Malawi",
+  "dialCode": "+265",
+  "flag": "@/assets/images/flag-icons/mw.png",
+  "languages": [
+    {
+      "code": "en",
+      "name": "English",
+      "hymnFile": "en.json",
+      "icon": "library-outline",
+      "description": "Synod Version"
+    }
+  ],
+  "prayers": {
+    "creed": "creed.json",
+    "lordsPrayer": "lords-prayer.json"
+  },
+  "metadata": {
+    "lastUpdated": "2024-04-09",
+    "version": "1.0.0",
+    "hymnCount": 367
+  }
+}

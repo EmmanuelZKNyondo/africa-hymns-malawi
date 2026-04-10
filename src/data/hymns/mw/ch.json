@@ -1,0 +1,67 @@
+{
+  "country": "mw",
+  "language": "ch",
+  "version": "1.0.0",
+  "hymns": [
+    {
+      "number": 1,
+      "title": "Oyera, Oyera, Oyera",
+      "writer": "--",
+      "rating": 4.9,
+      "tags": ["worship", "redemption", "salvation"],
+      "content": {
+        "verses": [
+          {
+            "number": 1,
+            "lines": [
+              "Oyera, Oyera, Oyera! Mulungu wa mphamvu zonse!",
+              "M'mawa tidzayimba nyimbo...;",
+              "Oyera, Oyera, Oyera! Wachifundo chosatha!",
+              "Mlungu mu utatu, Odalitsika!"
+            ]
+          },
+          {
+            "number": 2,
+            "lines": [
+              "Oyera, Oyera, Oyera! Mulungu wa mphamvu zonse!"
+            ]
+          }
+        ],
+        "chorus": null
+      }
+    },
+    {
+      "number": 2,
+      "title": "Chisomo Chodabwitsa",
+      "writer": "John Newton",
+      "rating": 4.9,
+      "tags": ["chisomo", "chipulumutso", "kupulumuka"],
+      "content": {
+        "verses": [
+          {
+            "number": 1,
+            "lines": [
+              "Chisomo Chodabwitsa! Chookoma ndithu",
+              "Napulumutsa ochimwa ngati ine!"
+            ]
+          },
+          {
+            "number": 2,
+            "lines": [
+              "Ndinali osowa, Koma ndapulumutsidwa;",
+              "wakhungu, koma ndawona."
+            ]
+          }
+        ],
+        "chorus": {
+          "lines": [
+            "Mu zoopsa zambiri, zowawa ndi zophinja,",
+            "Ndapambana;",
+            "'Chinali chisomo chandifikitsa pano,",
+            "Ndipo chisomo chinditsogoza kwathu."
+          ]
+        }
+      }
+    }
+  ]
+}

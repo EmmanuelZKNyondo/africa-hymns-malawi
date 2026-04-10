@@ -1,0 +1,34 @@
+{
+  "country": "mw",
+  "language": "ch",
+  "version": "1.0.0",
+  "hymns": [
+    {
+      "number": 1,
+      "title": "Mtuwa, Mtuwa, Mtuwa",
+      "writer": "--",
+      "rating": 4.9,
+      "tags": ["worship", "redemption", "salvation"],
+      "content": {
+        "verses": [
+          {
+            "number": 1,
+            "lines": [
+              "Mtuwa, Mtuwa, Mtuwa! Chiura wa nkhongono zonse!",
+              "Mlenji nzamuyimba sumu...;",
+              "Mtuwa, Mtuwa, Mtuwa! Wachifundo chosatha!",
+              "Mlungu mu utatu, Odalitsika!"
+            ]
+          },
+          {
+            "number": 2,
+            "lines": [
+              "Oyera, Oyera, Oyera! Mulungu wa mphamvu zonse!"
+            ]
+          }
+        ],
+        "chorus": null
+      }
+    }
+  ]
+}
