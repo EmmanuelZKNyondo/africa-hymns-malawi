@@ -1,8 +1,9 @@
 {
   "expo": {
-    "name": "Africa Hymns [Malawi]",
+    "name": "Africa Hymns",
+    "description": "A collection of African hymns for worship and singing along.",
     "slug": "africa-hymns-malawi",
-    "version": "1.0.0",
+    "version": "1.2.0",
     "orientation": "portrait",
     "icon": "./src/assets/icon.png",
     "userInterfaceStyle": "light",
@@ -29,7 +30,15 @@
       "favicon": "./src/assets/favicon.png"
     },
     "plugins": [
-      "expo-font"
+      "expo-font",
+      [
+        "expo-build-properties",
+        {
+          "android": {
+            "extraProguardRules": "-keep class com.swansion.reanimated.** {*; }"
+          }
+        }
+      ]
     ]
   }
 }
