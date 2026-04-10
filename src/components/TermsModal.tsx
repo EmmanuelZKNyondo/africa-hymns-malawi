@@ -42,7 +42,7 @@ export const TermsModal: React.FC<Props> = ({visible, onAccept, onExit}) => {
   return(
     <>
       <Modal visible={visible} transparent animationType="slide" onRequestClose={handleCancel}>
-        <view style={styles.overlay}>
+        <View style={styles.overlay}>
           <View style={styles.card}>
             <Text style={styles.title}>Terms of Use</Text>
 
@@ -73,7 +73,7 @@ export const TermsModal: React.FC<Props> = ({visible, onAccept, onExit}) => {
               </TouchableOpacity>
             </View>
           </View>
-        </view>
+        </View>
       </Modal>
 
       <ExitAppConfirmation
