@@ -26,7 +26,7 @@ export interface CountryConfig {
 }
 
 export interface Verse {
-  number: number;
+  number: number | string;
   lines: string[];
 }
 

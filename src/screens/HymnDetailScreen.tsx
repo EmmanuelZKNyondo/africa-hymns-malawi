@@ -30,7 +30,7 @@ export const HymnDetailScreen: React.FC<Props> = ({ route, navigation }) => {
   const [currentCountry, setCurrentCountry] = useState<string>(initialCountry);
   const [currentLanguage, setCurrentLanguage] = useState<string>(initialLanguage);
   const [loadingCrossRef, setLoadingCrossRef] = useState(false);
-  const [copiedVerse, setCopiedVerse] = useState<number | null>(null);
+  const [copiedVerse, setCopiedVerse] = useState<number | string | null>(null);
   const [copiedChorus, setCopiedChorus] = useState(false);
   const [toast, setToast] = useState<{ visible: boolean; message: string }>({
     visible: false,
@@ -89,7 +89,7 @@ export const HymnDetailScreen: React.FC<Props> = ({ route, navigation }) => {
     setTimeout(() => setToast({ visible: false, message: '' }), 2000);
   }, []);
 
-  const handleCopyVerse = useCallback((verseNumber: number, lines: string[]) => {
+  const handleCopyVerse = useCallback((verseNumber: number | string, lines: string[]) => {
     Clipboard.setString(lines.join('\n'));
     setCopiedVerse(verseNumber);
     showToast(`Verse ${verseNumber} copied to clipboard`);
