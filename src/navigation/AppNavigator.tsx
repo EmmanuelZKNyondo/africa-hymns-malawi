@@ -9,6 +9,8 @@ import { DrawerContent } from '@/navigation/DrawerContent';
 import { NavbarHeader } from '@/components/NavbarHeader';
 import { HymnDetailScreen } from '@/screens/HymnDetailScreen';
 import { PrayerScreen } from '@/screens/PrayerScreeen';
+import { FavoritesScreen } from '@/screens/FavoritesScreen';
+import { FamousSongsScreen } from '@/screens/FamousSongsScreen';
 
 /* ==================== PARAM LISTS ==================== */
 export type HomeStackParamList = {
@@ -24,6 +26,9 @@ export type HomeStackParamList = {
     languageCode: string;
   };
   Prayers: undefined;
+  Favorites: undefined;
+  FamousSongs: undefined;
+  Settings: undefined;
 };
 
 export type RootDrawerParamList = {
@@ -70,6 +75,21 @@ const HomeStackNavigator = () => (
       name="Prayers"
       component={PrayerScreen}
       options={{header: () => null}}
+    />
+    <HomeStack.Screen 
+      name="Favorites"
+      component={FavoritesScreen}
+      options={{header: () => null}}
+    />
+    <HomeStack.Screen 
+      name="FamousSongs"
+      component={FamousSongsScreen}
+      options={{header: () => {}}}
+    />
+    <HomeStack.Screen 
+      name="Settings"
+      component={SettingsScreen}
+      options={{header: () => {}}}
     />
   </HomeStack.Navigator>
 );
