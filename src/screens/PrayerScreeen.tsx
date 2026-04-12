@@ -1,85 +1,97 @@
 // src/screens/PrayerScreen.tsx
-import React, { useState, useCallback } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { 
-  View, Text, StyleSheet, ScrollView, TouchableOpacity, Clipboard, 
-  Alert, Platform 
+  View, Text, StyleSheet, FlatList, TouchableOpacity, Clipboard, 
+  Alert, ActivityIndicator 
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
 import { useAppStore } from '@/store/useAppStore';
 import { NavbarHeader } from '@/components/NavbarHeader';
-import { loadPrayerContent } from '@/utils/dataLoader';
+import { loadPrayerData, PRAYER_LIST, type PrayerContent } from '@/utils/prayersDataLoader';
 import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 import type { HomeStackParamList } from '@/navigation/AppNavigator';
 
 type Props = NativeStackScreenProps<HomeStackParamList, 'Prayers'>;
 
-type PrayerType = 'creed' | 'lords-prayer';
+const LANGUAGES = [
+  { code: 'en', label: 'English' },
+  { code: 'ch', label: 'Chichewa' },
+  { code: 'ny', label: 'Nyanja' },
+];
 
 export const PrayerScreen: React.FC<Props> = ({ navigation }) => {
   const { settings } = useAppStore();
-  const [selectedPrayer, setSelectedPrayer] = useState<PrayerType>('creed');
-  const [language, setLanguage] = useState<'en' | 'ch'>(settings.language);
-  const [content, setContent] = useState<Record<string, string> | null>(null);
+  const countryCode = settings.country;
+  
+  const [selectedPrayerId, setSelectedPrayerId] = useState<string>(PRAYER_LIST[0].id);
+  const [language, setLanguage] = useState<string>(settings.language || 'en');
+  const [prayerData, setPrayerData] = useState<PrayerContent | null>(null);
   const [loading, setLoading] = useState(true);
 
-  // Load prayer content on mount / change
-  React.useEffect(() => {
-    const load = async () => {
+  useEffect(() => {
+    let isMounted = true;
+    const loadData = async () => {
       setLoading(true);
       try {
-        const data = await loadPrayerContent(
-          selectedPrayer === 'creed' ? 'creed.json' : 'lords-prayer.json'
-        );
-        setContent(data);
+        const data = await loadPrayerData(countryCode, selectedPrayerId);
+        if (isMounted) setPrayerData(data);
       } catch (error) {
         console.error('[PrayerScreen] Load failed:', error);
-        setContent({ en: 'Content not available', ch: 'Zamkatimu sizipezeka' });
+        if (isMounted) setPrayerData(null);
       } finally {
-        setLoading(false);
+        if (isMounted) setLoading(false);
       }
     };
-    load();
-  }, [selectedPrayer]);
+    loadData();
+    return () => { isMounted = false; };
+  }, [countryCode, selectedPrayerId]);
 
-  // Handle copy
-  const handleCopy = useCallback(() => {
-    const text = content?.[language] || '';
-    if (text) {
-      Clipboard.setString(text);
-      Alert.alert(
-        'Copied', 
-        `${selectedPrayer === 'creed' ? 'Apostles\' Creed' : 'Lord\'s Prayer'} copied`,
-        [{ text: 'OK' }],
-        { cancelable: true }
-      );
-    }
-  }, [content, language, selectedPrayer]);
-
-  // Prayer titles
-  const prayerTitles: Record<PrayerType, string> = {
-    'creed': 'Apostles\' Creed',
-    'lords-prayer': 'Lord\'s Prayer',
+  const handleLanguageChange = (langCode: string) => {
+    setLanguage(langCode);
   };
 
-  if (loading) {
+  const handleCopy = useCallback(() => {
+    if (!prayerData) return;
+    const lines = prayerData.content[language] || [];
+    const text = lines.join('\n'); // ✅ Join array with newlines for copying
+    
+    if (text) {
+      Clipboard.setString(text);
+      Alert.alert('Copied', 'Prayer copied to clipboard', [{ text: 'OK' }]);
+    }
+  }, [prayerData, language]);
+
+  const renderPrayerItem = ({ item }: { item: typeof PRAYER_LIST[0] }) => {
+    const isSelected = selectedPrayerId === item.id;
+    const displayTitle = prayerData && selectedPrayerId === item.id 
+      ? prayerData.title[language] || item.id 
+      : item.id.replace('-', ' ').toUpperCase();
+
     return (
-      <SafeAreaView style={styles.container}>
-        <NavbarHeader
-          title="Prayers"
-          showBack={true}
-          onBack={() => navigation.goBack()}
+      <TouchableOpacity
+        style={[styles.prayerCard, isSelected && styles.prayerCardActive]}
+        onPress={() => setSelectedPrayerId(item.id)}
+        activeOpacity={0.7}
+      >
+        <Ionicons 
+          name={item.icon as any} 
+          size={24} 
+          color={isSelected ? '#fff' : '#007A3D'} 
         />
-        <View style={styles.loadingContainer}>
-          <Text style={styles.loadingText}>Loading prayer...</Text>
-        </View>
-      </SafeAreaView>
+        <Text style={[styles.prayerCardTitle, isSelected && styles.prayerCardTitleActive]}>
+          {displayTitle}
+        </Text>
+        {isSelected && <Ionicons name="checkmark-circle" size={20} color="#fff" />}
+      </TouchableOpacity>
     );
-  }
+  };
+
+  const currentTitle = prayerData?.title?.[language] || 'Prayer';
+  const currentLines = prayerData?.content?.[language] || [];
 
   return (
     <SafeAreaView style={styles.container} edges={['top']}>
-      {/* ✅ NavbarHeader */}
       <NavbarHeader
         title="Prayers"
         showBack={true}
@@ -88,210 +100,193 @@ export const PrayerScreen: React.FC<Props> = ({ navigation }) => {
         onRightPress={handleCopy}
       />
 
-      <ScrollView 
-        style={styles.scrollView}
-        contentContainerStyle={styles.content}
+      <FlatList
+        data={PRAYER_LIST}
+        renderItem={renderPrayerItem}
+        keyExtractor={(item) => item.id}
+        contentContainerStyle={styles.listContent}
         showsVerticalScrollIndicator={false}
-      >
-        {/* Prayer Selector */}
-        <View style={styles.prayerSelector}>
-          <TouchableOpacity
-            style={[
-              styles.prayerTab,
-              selectedPrayer === 'creed' && styles.prayerTabActive,
-            ]}
-            onPress={() => setSelectedPrayer('creed')}
-            activeOpacity={0.7}
-          >
-            <Text style={[
-              styles.prayerTabText,
-              selectedPrayer === 'creed' && styles.prayerTabTextActive,
-            ]}>
-              Apostles' Creed
-            </Text>
-          </TouchableOpacity>
-          
-          <TouchableOpacity
-            style={[
-              styles.prayerTab,
-              selectedPrayer === 'lords-prayer' && styles.prayerTabActive,
-            ]}
-            onPress={() => setSelectedPrayer('lords-prayer')}
-            activeOpacity={0.7}
-          >
-            <Text style={[
-              styles.prayerTabText,
-              selectedPrayer === 'lords-prayer' && styles.prayerTabTextActive,
-            ]}>
-              Lord's Prayer
-            </Text>
-          </TouchableOpacity>
-        </View>
+        ListHeaderComponent={
+          <>
+            <View style={styles.langContainer}>
+              <Text style={styles.langLabel}>Language:</Text>
+              <View style={styles.langChips}>
+                {LANGUAGES.map((lang) => (
+                  <TouchableOpacity
+                    key={lang.code}
+                    style={[
+                      styles.langChip,
+                      language === lang.code && styles.langChipActive
+                    ]}
+                    onPress={() => handleLanguageChange(lang.code)}
+                  >
+                    <Text style={[
+                      styles.langChipText,
+                      language === lang.code && styles.langChipTextActive
+                    ]}>
+                      {lang.label}
+                    </Text>
+                  </TouchableOpacity>
+                ))}
+              </View>
+            </View>
 
-        {/* Language Toggle */}
-        <View style={styles.langToggle}>
-          <Text style={styles.langLabel}>Language:</Text>
-          <TouchableOpacity
-            style={[
-              styles.langChip,
-              language === 'en' && styles.langChipActive,
-            ]}
-            onPress={() => setLanguage('en')}
-            activeOpacity={0.7}
-          >
-            <Text style={[
-              styles.langChipText,
-              language === 'en' && styles.langChipTextActive,
-            ]}>
-              English
-            </Text>
-          </TouchableOpacity>
-          
-          <TouchableOpacity
-            style={[
-              styles.langChip,
-              language === 'ch' && styles.langChipActive,
-            ]}
-            onPress={() => setLanguage('ch')}
-            activeOpacity={0.7}
-          >
-            <Text style={[
-              styles.langChipText,
-              language === 'ch' && styles.langChipTextActive,
-            ]}>
-              Chichewa
-            </Text>
-          </TouchableOpacity>
-        </View>
-
-        {/* Prayer Content */}
-        <View style={styles.prayerContent}>
-          <Text style={styles.prayerTitle}>
-            {prayerTitles[selectedPrayer]}
-          </Text>
-          <Text 
-            style={styles.prayerText}
-            selectable
-            onLongPress={handleCopy}
-          >
-            {content?.[language] || 'Content not available'}
-          </Text>
-        </View>
-
-        {/* Copy Button */}
-        <TouchableOpacity 
-          style={styles.copyButton} 
-          onPress={handleCopy}
-          activeOpacity={0.7}
-        >
-          <Ionicons name="copy-outline" size={18} color="#007A3D" />
-          <Text style={styles.copyButtonText}>Copy to Clipboard</Text>
-        </TouchableOpacity>
-
-        {/* Footer Note */}
-        <Text style={styles.footerNote}>
-          Long-press text to select • Tap copy icon to save
-        </Text>
-      </ScrollView>
+            {loading && (
+              <View style={styles.loadingBox}>
+                <ActivityIndicator size="small" color="#007A3D" />
+                <Text style={styles.loadingText}>Loading content...</Text>
+              </View>
+            )}
+          </>
+        }
+        ListFooterComponent={
+          !loading && prayerData ? (
+            <View style={styles.contentContainer}>
+              <Text style={styles.contentTitle}>{currentTitle}</Text>
+              
+              {/* ✅ Render lines individually */}
+              <View style={styles.linesContainer} collapsable={false}>
+                {currentLines.map((line, index) => (
+                  <Text 
+                    key={index} 
+                    style={[
+                      styles.lineText, 
+                      line.trim() === '' && styles.emptyLine
+                    ]}
+                    selectable
+                    onLongPress={handleCopy}
+                  >
+                    {line}
+                  </Text>
+                ))}
+              </View>
+              
+              <TouchableOpacity style={styles.copyButton} onPress={handleCopy}>
+                <Ionicons name="copy-outline" size={18} color="#007A3D" />
+                <Text style={styles.copyButtonText}>Copy Text</Text>
+              </TouchableOpacity>
+            </View>
+          ) : null
+        }
+      />
     </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: '#f8f9fa' },
-  scrollView: { flex: 1 },
-  content: { padding: 12 },
+  listContent: { padding: 16, paddingBottom: 32 },
   
-  loadingContainer: { flex: 1, alignItems: 'center', justifyContent: 'center' },
-  loadingText: { fontSize: 14, color: '#666' },
-  
-  // Prayer Selector Tabs
-  prayerSelector: {
+  prayerCard: {
     flexDirection: 'row',
-    backgroundColor: '#fff',
-    borderRadius: 8, // ✅ Reduced
-    padding: 4,
+    alignItems: 'center',
+    padding: 16,
     marginBottom: 12,
+    backgroundColor: '#fff',
+    borderRadius: 4,
+    borderWidth: 1,
+    borderColor: '#eee',
+    gap: 12,
+  },
+  prayerCardActive: {
+    backgroundColor: '#007A3D',
+    borderColor: '#007A3D',
+  },
+  prayerCardTitle: {
+    flex: 1,
+    fontSize: 16,
+    fontWeight: '600',
+    color: '#1a1a1a',
+  },
+  prayerCardTitleActive: {
+    color: '#fff',
+  },
+  
+  langContainer: {
+    marginBottom: 16,
+    backgroundColor: '#fff',
+    padding: 12,
+    borderRadius: 4,
     borderWidth: 1,
     borderColor: '#eee',
   },
-  prayerTab: {
-    flex: 1,
-    paddingVertical: 10,
-    alignItems: 'center',
-    borderRadius: 6,
-  },
-  prayerTabActive: {
-    backgroundColor: '#007A3D',
-  },
-  prayerTabText: {
-    fontSize: 14,
+  langLabel: {
+    fontSize: 12,
     color: '#666',
-    fontWeight: '500',
-  },
-  prayerTabTextActive: {
-    color: '#fff',
+    marginBottom: 8,
     fontWeight: '600',
   },
-  
-  // Language Toggle
-  langToggle: {
+  langChips: {
     flexDirection: 'row',
-    alignItems: 'center',
+    flexWrap: 'wrap',
     gap: 8,
-    padding: 10,
-    backgroundColor: '#fff',
-    borderRadius: 8,
-    marginBottom: 12,
-    borderWidth: 1,
-    borderColor: '#eee',
   },
-  langLabel: { fontSize: 13, color: '#666' },
   langChip: {
     paddingHorizontal: 12,
     paddingVertical: 6,
-    borderRadius: 6,
-    backgroundColor: '#e9ecef',
+    borderRadius: 4,
+    backgroundColor: '#f1f1f1',
   },
   langChipActive: {
     backgroundColor: '#007A3D',
   },
-  langChipText: { fontSize: 12, color: '#333' },
-  langChipTextActive: { color: '#fff', fontWeight: '600' },
-  
-  // Prayer Content
-  prayerContent: {
-    backgroundColor: '#fff',
-    padding: 14,
-    borderRadius: 8,
-    marginBottom: 12,
-    borderLeftWidth: 3,
-    borderLeftColor: '#6C63FF',
+  langChipText: {
+    fontSize: 12,
+    color: '#333',
+    fontWeight: '500',
   },
-  prayerTitle: {
-    fontSize: 16,
-    fontWeight: '700',
-    color: '#1a1a1a',
+  langChipTextActive: {
+    color: '#fff',
+  },
+  
+  loadingBox: {
+    padding: 20,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#fff',
+    borderRadius: 4,
     marginBottom: 12,
+  },
+  loadingText: {
+    marginTop: 8,
+    fontSize: 13,
+    color: '#666',
+  },
+  contentContainer: {
+    backgroundColor: '#fff',
+    padding: 20,
+    borderRadius: 4,
+    borderWidth: 1,
+    borderColor: '#eee',
+  },
+  contentTitle: {
+    fontSize: 18,
+    fontWeight: '700',
+    color: '#007A3D',
+    marginBottom: 16,
     textAlign: 'center',
   },
-  prayerText: {
-    fontSize: 15,
+  linesContainer: {
+    gap: 4, // Space between lines
+  },
+  lineText: {
+    fontSize: 16,
     lineHeight: 24,
     color: '#1a1a1a',
-    textAlign: 'justify',
+    textAlign: 'left',
   },
-  
-  // Copy Button
+  emptyLine: {
+    height: 12, // Height for empty lines (stanzas break)
+  },
   copyButton: {
+    marginTop: 20,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    gap: 6,
+    gap: 8,
     paddingVertical: 12,
-    backgroundColor: '#fff',
-    borderRadius: 8,
-    marginBottom: 12,
+    backgroundColor: '#f0fdf4',
+    borderRadius: 4,
     borderWidth: 1,
     borderColor: '#007A3D',
   },
@@ -299,14 +294,5 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: '#007A3D',
     fontWeight: '600',
-  },
-  
-  // Footer
-  footerNote: {
-    fontSize: 11,
-    color: '#999',
-    textAlign: 'center',
-    paddingVertical: 8,
-    fontStyle: 'italic',
   },
 });
