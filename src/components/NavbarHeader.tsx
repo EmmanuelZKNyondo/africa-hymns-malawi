@@ -1,6 +1,6 @@
 // src/components/NavbarHeader.tsx
 import React, { ReactNode } from 'react';
-import { View, Text, TouchableOpacity, StyleSheet, Platform } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { useAppStore } from '@/store/useAppStore';
 
@@ -9,6 +9,8 @@ export type NavbarHeaderProps = {
   subtitle?: string | ReactNode;
   showBack?: boolean;
   onBack?: () => void;
+  showMenu?: boolean;
+  onMenuPress?: () => void;
   rightIcon?: keyof typeof Ionicons.glyphMap;
   onRightPress?: () => void;
   rightLabel?: string;
@@ -20,8 +22,10 @@ export type NavbarHeaderProps = {
 export const NavbarHeader: React.FC<NavbarHeaderProps> = ({
   title,
   subtitle,
-  showBack = true,
+  showBack = false,
   onBack,
+  showMenu = false,
+  onMenuPress,
   rightIcon,
   onRightPress,
   rightLabel,
@@ -30,32 +34,32 @@ export const NavbarHeader: React.FC<NavbarHeaderProps> = ({
   subtitleStyle,
 }) => {
   const fontSize = useAppStore((state) => state.settings.fontSize);
-  
-  // Default back action: go back in navigation
-  const handleDefaultBack = () => {
-    // This will be overridden by navigation prop if passed
-  };
-
-  const handleBack = onBack || handleDefaultBack;
 
   return (
     <View style={[styles.container, containerStyle]}>
-      {/* Left: Back Button */}
       <View style={styles.left}>
-        {showBack && (
+        {showMenu && onMenuPress && (
           <TouchableOpacity 
-            onPress={handleBack} 
-            style={styles.backButton}
-            hitSlop={{ top: 12, bottom: 12, left: 12, right: 12 }}
+            onPress={onMenuPress} 
+            style={styles.iconButton}
+            hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
+            accessibilityLabel="Open menu"
+          >
+            <Ionicons name="menu" size={26} color="#007A3D" />
+          </TouchableOpacity>
+        )}
+        {showBack && !showMenu && (
+          <TouchableOpacity 
+            onPress={onBack} 
+            style={styles.iconButton}
+            hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
             accessibilityLabel="Go back"
-            accessibilityRole="button"
           >
             <Ionicons name="arrow-back" size={24} color="#007A3D" />
           </TouchableOpacity>
         )}
       </View>
 
-      {/* Center: Title + Subtitle */}
       <View style={styles.center}>
         <Text 
           style={[
@@ -64,12 +68,11 @@ export const NavbarHeader: React.FC<NavbarHeaderProps> = ({
             titleStyle
           ]}
           numberOfLines={1}
-          accessibilityRole="header"
         >
           {title}
         </Text>
         {subtitle && (
-          <View style={[styles.subtitleContainer, subtitleStyle]}>
+          <View style={styles.subtitleContainer}>
             {typeof subtitle === 'string' ? (
               <Text 
                 style={[
@@ -81,23 +84,17 @@ export const NavbarHeader: React.FC<NavbarHeaderProps> = ({
               >
                 {subtitle}
               </Text>
-            ) :(
-              subtitle
-            )}
+            ) : subtitle}
           </View>
-          
         )}
       </View>
 
-      {/* Right: Optional Icon/Action */}
       <View style={styles.right}>
         {rightIcon && onRightPress && (
           <TouchableOpacity 
             onPress={onRightPress}
-            style={styles.rightButton}
-            hitSlop={{ top: 12, bottom: 12, left: 12, right: 12 }}
-            accessibilityLabel={rightLabel || 'Action'}
-            accessibilityRole="button"
+            style={styles.iconButton}
+            hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
           >
             <Ionicons name={rightIcon} size={24} color="#007A3D" />
             {rightLabel && <Text style={styles.rightLabel}>{rightLabel}</Text>}
@@ -118,42 +115,30 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     borderBottomWidth: 1,
     borderBottomColor: '#eee',
-    // ✅ Shadow/Elevation (now allowed in regular View)
-    elevation: 3, // Android
-    shadowColor: '#000', // iOS
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 3,
+    elevation: 2,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.05,
+    shadowRadius: 2,
   },
-  left: { width: 44, alignItems: 'flex-start' },
-  backButton: { padding: 4 },
+  left: { width: 40, alignItems: 'flex-start' },
+  center: { flex: 1, alignItems: 'center', paddingHorizontal: 4 },
+  right: { width: 40, alignItems: 'flex-end' },
   
-  center: { flex: 1, alignItems: 'center', paddingHorizontal: 8 },
+  iconButton: { padding: 4 },
+  
   title: {
     fontWeight: '700',
     color: '#1a1a1a',
     textAlign: 'center',
   },
-  subtitleContainer: {
-    marginTop: 2,
-    alignItems: 'center'
-  },
-  subtitle: {
-    color: '#666',
-    marginTop: 2,
-    textAlign: 'center',
-  },
+  subtitleContainer: { marginTop: 2, alignItems: 'center' },
+  subtitle: { color: '#666', textAlign: 'center' },
   
-  right: { width: 44, alignItems: 'flex-end' },
-  rightButton: { 
-    flexDirection: 'row', 
-    alignItems: 'center', 
-    gap: 4,
-    padding: 4,
-  },
   rightLabel: {
     fontSize: 12,
     color: '#007A3D',
     fontWeight: '600',
+    marginLeft: 4,
   },
 });
