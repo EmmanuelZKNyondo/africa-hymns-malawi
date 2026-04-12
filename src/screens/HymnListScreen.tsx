@@ -21,13 +21,10 @@ export const HymnListScreen: React.FC<Props> = ({ route, navigation }) => {
   const [searchQuery, setSearchQuery] = useState('');
   
   const fontSize = useAppStore((state) => state.settings.fontSize);
-  
-  // ✅ Reactive favourite state: re-renders when favourites array changes
   const favourites = useAppStore((state) => state.favourites);
   const toggleFavourite = useAppStore((state) => state.toggleFavourite);
   const addRecentHymn = useAppStore((state) => state.addRecentHymn);
   
-  // Helper: check if hymn is favourited (triggers re-render when favourites change)
   const isFavourite = useCallback((num: number) => favourites.includes(num), [favourites]);
 
   useEffect(() => {
@@ -57,12 +54,9 @@ export const HymnListScreen: React.FC<Props> = ({ route, navigation }) => {
     navigation.navigate('HymnDetail', { hymn, countryCode, languageCode });
   }, [addRecentHymn, navigation, countryCode, languageCode]);
 
-
-  // Handle navigation to Settings (in parent drawer navigator)
   const handleGoToSettings = useCallback(() => {
     navigation.getParent()?.navigate('Settings');
   }, [navigation]);
-
 
   const handleRefresh = useCallback(async () => {
     setLoading(true);
@@ -105,12 +99,8 @@ export const HymnListScreen: React.FC<Props> = ({ route, navigation }) => {
         subtitle={`${filteredHymns.length} of ${hymns.length}`}
         showBack={true}
         onBack={() => navigation.goBack()}
-        // ✅ Remove direct refresh icon - use custom menu instead
-        rightIcon={undefined}
-        onRightPress={undefined}
       />
 
-      {/* ✅ Custom Actions Menu (3-dot) positioned in header */}
       <View style={styles.headerActions}>
         <HymnListActionsMenu
           onRefresh={handleRefresh}
@@ -122,6 +112,7 @@ export const HymnListScreen: React.FC<Props> = ({ route, navigation }) => {
         <SearchBar
           value={searchQuery}
           onChangeText={setSearchQuery}
+          onClear={() => setSearchQuery('')}
           placeholder={`Search ${languageName} hymns...`}
           resultCount={filteredHymns.length}
         />
