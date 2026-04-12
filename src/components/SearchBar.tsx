@@ -1,6 +1,6 @@
 // src/components/SearchBar.tsx
-import React, { useState, useRef, useEffect } from 'react';
-import { View, TextInput, TouchableOpacity, StyleSheet, Text, Platform } from 'react-native';
+import React, { useState, useRef } from 'react';
+import { View, TextInput, TouchableOpacity, StyleSheet, Text } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 
 type Props = {
@@ -21,18 +21,13 @@ export const SearchBar: React.FC<Props> = ({
   const [isFocused, setIsFocused] = useState(false);
   const inputRef = useRef<TextInput>(null);
 
-  // ✅ FIX: Focus after a short delay to ensure mount + handle Android quirks
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      inputRef.current?.focus();
-    }, Platform.OS === 'android' ? 150 : 50); // Android needs extra time
-    
-    return () => clearTimeout(timer);
-  }, []);
-
-  // ✅ FIX: Handle press on container to focus input (improves touch target)
   const handleContainerPress = () => {
     inputRef.current?.focus();
+  };
+
+  const handleClear = () => {
+    onChangeText('');
+    onClear?.();
   };
 
   return (
@@ -53,16 +48,13 @@ export const SearchBar: React.FC<Props> = ({
         onFocus={() => setIsFocused(true)}
         onBlur={() => setIsFocused(false)}
         returnKeyType="search"
-        clearButtonMode="while-editing"
         autoCapitalize="none"
         autoCorrect={false}
-        // ✅ FIX: Prevent touch events from bubbling and blocking focus
-        onTouchStart={(e) => e.stopPropagation()}
       />
 
       {value.length > 0 && (
         <TouchableOpacity 
-          onPress={(e) => { e.stopPropagation(); onClear?.(); }} 
+          onPress={handleClear} 
           style={styles.clearButton}
           hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
         >
@@ -82,7 +74,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     backgroundColor: '#fff',
-    borderRadius: 12,
+    borderRadius: 4,
     paddingHorizontal: 12,
     paddingVertical: 8,
     marginHorizontal: 12,
@@ -104,7 +96,6 @@ const styles = StyleSheet.create({
     fontSize: 15,
     color: '#1a1a1a',
     paddingVertical: 4,
-    // ✅ FIX: Ensure input is clickable across full height
     minHeight: 24,
   },
   clearButton: { padding: 4, marginRight: 4 },
@@ -114,7 +105,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#f1f1f1',
     paddingHorizontal: 8,
     paddingVertical: 4,
-    borderRadius: 10,
+    borderRadius: 4,
     marginLeft: 4,
   },
 });
