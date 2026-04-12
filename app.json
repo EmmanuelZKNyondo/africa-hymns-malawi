@@ -2,6 +2,7 @@
   "expo": {
     "name": "Africa Hymns",
     "description": "A collection of African hymns for worship and singing along.",
+    "author": "EZPN",
     "slug": "africa-hymns-malawi",
     "version": "1.2.0",
     "orientation": "portrait",
