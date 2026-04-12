@@ -1,0 +1,34 @@
+{
+  "id": "apostles-creed",
+  "title": {
+    "en": "Apostles' Creed",
+    "ch": "Chikhulupiriro cha Atumwi",
+    "ny": "Chikhulupiriro cha Atumwi"
+  },
+  "content": {
+    "en": [
+      "I believe in God, the Father almighty,",
+      "creator of heaven and earth.",
+      "",
+      "I believe in Jesus Christ, his only Son, our Lord,",
+      "who was conceived by the Holy Spirit,",
+      "born of the Virgin Mary,"
+    ],
+    "ch": [
+      "Ndikukhulupirira Mulungu, Atate wamphamvu zonse,",
+      "wolenga kumwamba ndi dziko lapansi.",
+      "",
+      "Ndikukhulupirira Yesu Khristu, Mwana wake yekhayo, Ambuye athu,",
+      "amene anakonzedwa ndi Mzimu Woyera,",
+      "kubadwa wa Namwali Mariya,"
+    ],
+    "ny": [
+      "Ndikukhulupirira Mulungu, Atate wamphamvu zonse,",
+      "wolenga kumwamba ndi dziko lapansi.",
+      "",
+      "Ndikukhulupirira Yesu Khristu, Mwana wake yekhayo, Ambuye athu,",
+      "amene anakonzedwa ndi Mzimu Woyera,",
+      "kubadwa wa Namwali Mariya,"
+    ]
+  }
+}
