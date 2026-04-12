@@ -17,10 +17,9 @@ type Props = {
 
 export const HomeScreen: React.FC<Props> = ({ navigation }) => {
   const countryCode = useAppStore((state) => state.settings.country);
-  const [countryConfig, setCountryConfig] = useState<CountryConfig | null>(null);
+  const [countryConfig, setCountryConfig] = useState<any>(null);
   const [loading, setLoading] = useState(true);
 
-  // Load country config when country changes
   const loadConfig = useCallback(async () => {
     setLoading(true);
     try {
@@ -37,10 +36,8 @@ export const HomeScreen: React.FC<Props> = ({ navigation }) => {
     loadConfig();
   }, [loadConfig]);
 
-  // Handle language card press
   const handleLanguageSelect = (language: LanguageConfig) => {
     useAppStore.getState().addRecentHymn(0);
-    
     navigation.navigate('HymnList', {
       countryCode,
       languageCode: language.code,
@@ -48,19 +45,19 @@ export const HomeScreen: React.FC<Props> = ({ navigation }) => {
     });
   };
 
-  // Handle settings navigation
-  const handleSettingsPress = () => {
-    // Navigate to Settings in the drawer navigator
-    navigation.getParent()?.navigate('Settings');
+  const handleMenuPress = () => {
+    const parentNav = navigation.getParent();
+    if (parentNav) {
+      (parentNav as any).openDrawer();
+    }
   };
 
-  // Loading state
   if (loading || !countryConfig) {
     return (
       <SafeAreaView style={styles.container}>
         <View style={styles.loadingContainer}>
           <ActivityIndicator size="large" color="#007A3D" />
-          <Text style={styles.loadingText}>Loading {countryCode.toUpperCase()} hymns...</Text>
+          <Text style={styles.loadingText}>Loading...</Text>
         </View>
       </SafeAreaView>
     );
@@ -68,23 +65,20 @@ export const HomeScreen: React.FC<Props> = ({ navigation }) => {
 
   return (
     <SafeAreaView style={styles.container} edges={['top']}>
-      {/* ✅ Reusable NavbarHeader */}
       <NavbarHeader
         title={`${countryConfig.name} Hymns`}
-        subtitle={`Offline • ${countryConfig.metadata.hymnCount}+ hymns • v${countryConfig.metadata.version}`}
-        showBack={false} 
+        subtitle={`Offline • ${countryConfig.metadata.hymnCount}+ hymns`}
+        showMenu={true}
+        onMenuPress={handleMenuPress}
         rightIcon="settings-outline"
-        onRightPress={handleSettingsPress}
-        rightLabel=""
+        onRightPress={() => navigation.navigate('Settings')}
       />
 
       <ScrollView contentContainerStyle={styles.content} showsVerticalScrollIndicator={false}>
-        
-        {/* Language Categories */}
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>Select Language</Text>
           <View style={styles.cardGrid}>
-            {countryConfig.languages.map((lang) => (
+            {countryConfig.languages.map((lang: LanguageConfig) => (
               <TouchableOpacity 
                 key={lang.code} 
                 style={styles.languageCard} 
@@ -99,32 +93,46 @@ export const HomeScreen: React.FC<Props> = ({ navigation }) => {
           </View>
         </View>
 
-        {/* Quick Actions */}
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>Quick Access</Text>
           <View style={styles.actionGrid}>
-            <TouchableOpacity style={styles.actionCard} activeOpacity={0.7}>
-              <Ionicons name="star" size={32} color="#FFB800" />
+            <TouchableOpacity 
+              style={styles.actionCard} 
+              activeOpacity={0.7}
+              onPress={() => navigation.navigate('Favorites')}
+            >
+              <Ionicons name="star" size={28} color="#FFB800" />
               <Text style={styles.actionLabel}>Favorites</Text>
             </TouchableOpacity>
             
-            <TouchableOpacity style={styles.actionCard} activeOpacity={0.7}>
-              <Ionicons name="search" size={32} color="#007A3D" />
-              <Text style={styles.actionLabel}>Search</Text>
+            <TouchableOpacity 
+              style={styles.actionCard} 
+              activeOpacity={0.7}
+              onPress={() => navigation.navigate('FamousSongs')}
+            >
+              <Ionicons name="musical-notes" size={28} color="#007A3D" />
+              <Text style={styles.actionLabel}>Famous</Text>
             </TouchableOpacity>
             
-            <TouchableOpacity style={styles.actionCard} activeOpacity={0.7}>
-              <Ionicons name="heart-outline" size={32} color="#6C63FF" />
+            <TouchableOpacity 
+              style={styles.actionCard} 
+              activeOpacity={0.7}
+              onPress={() => navigation.navigate('Prayers')}
+            >
+              <Ionicons name="heart-outline" size={28} color="#6C63FF" />
               <Text style={styles.actionLabel}>Prayers</Text>
             </TouchableOpacity>
             
-            <TouchableOpacity style={styles.actionCard} activeOpacity={0.7}>
-              <Ionicons name="settings-outline" size={32} color="#555" />
+            <TouchableOpacity 
+              style={styles.actionCard} 
+              activeOpacity={0.7}
+              onPress={() => navigation.navigate('Settings')}
+            >
+              <Ionicons name="settings-outline" size={28} color="#555" />
               <Text style={styles.actionLabel}>Settings</Text>
             </TouchableOpacity>
           </View>
         </View>
-
       </ScrollView>
     </SafeAreaView>
   );
@@ -132,22 +140,17 @@ export const HomeScreen: React.FC<Props> = ({ navigation }) => {
 
 const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: '#f8f9fa' },
-  
-  // ✅ Content padding adjusted since NavbarHeader handles top spacing
   content: { padding: 16, paddingTop: 8 },
-  
   loadingContainer: { flex: 1, alignItems: 'center', justifyContent: 'center', gap: 12 },
   loadingText: { fontSize: 14, color: '#666' },
-  
   section: { marginBottom: 24 },
   sectionTitle: { fontSize: 16, fontWeight: '600', color: '#1a1a1a', marginBottom: 12, paddingHorizontal: 4 },
-  
   cardGrid: { flexDirection: 'row', flexWrap: 'wrap', gap: 12 },
   languageCard: {
     width: '48%',
     backgroundColor: '#fff',
     padding: 16,
-    borderRadius: 12,
+    borderRadius: 4,
     alignItems: 'center',
     justifyContent: 'center',
     shadowColor: '#000',
@@ -159,13 +162,12 @@ const styles = StyleSheet.create({
   },
   cardLabel: { fontSize: 14, fontWeight: '600', color: '#1a1a1a', marginTop: 10, textAlign: 'center' },
   cardCount: { fontSize: 11, color: '#666', marginTop: 2, textAlign: 'center' },
-  
   actionGrid: { flexDirection: 'row', flexWrap: 'wrap', gap: 12 },
   actionCard: {
     width: '48%',
     backgroundColor: '#fff',
-    padding: 16,
-    borderRadius: 12,
+    padding: 12,
+    borderRadius: 4,
     alignItems: 'center',
     justifyContent: 'center',
     shadowColor: '#000',
@@ -173,10 +175,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.03,
     shadowRadius: 1,
     elevation: 1,
-    minHeight: 110,
+    minHeight: 90,
   },
-  actionLabel: { fontSize: 13, color: '#333', fontWeight: '500', textAlign: 'center', marginTop: 10 },
+  actionLabel: { fontSize: 13, color: '#333', fontWeight: '500', textAlign: 'center', marginTop: 8 },
 });
-
-// Import types at bottom to avoid circular deps
-import type { CountryConfig } from '@/utils/dataLoader';
