@@ -6,7 +6,6 @@ import { useAppStore } from '@/store/useAppStore';
 import * as Linking from 'expo-linking';
 import { Platform } from 'react-native';
 
-// Type for the config structure
 type VersionInfo = {
   version: string;
   releaseDate: string;
@@ -24,11 +23,11 @@ const config = updateConfig as UpdateConfigType;
 export const useUpdateCheck = () => {
   const [hasUpdate, setHasUpdate] = useState(false);
   const [isUpdateRequired, setIsUpdateRequired] = useState(false);
+  
+  // Use lastSeenVersion instead of dismissed for "What's New" logic
   const { lastUpdateDismissedVersion, setLastUpdateDismissedVersion } = useAppStore();
   
   const currentVersion = Constants.expoConfig?.version || '1.0.0';
-  
-  // Get the latest version from the top of the array
   const latestVersionInfo = config.versions[0];
   const latestVersion = latestVersionInfo?.version || '1.0.0';
 
@@ -43,17 +42,23 @@ export const useUpdateCheck = () => {
       return 0;
     };
 
-    const comparison = compareVersions(currentVersion, latestVersion);
-    const isNewer = comparison < 0; // Current < Latest
+    // Check if the app version is OLDER than the config version (Remote Update Available)
+    const isOlder = compareVersions(currentVersion, latestVersion) < 0;
+    
+    // Check if the user has NOT seen the notes for the CURRENT version (What's New)
+    const isNewInstallOrUpdate = lastUpdateDismissedVersion !== currentVersion;
 
-    if (isNewer && latestVersionInfo) {
+    if (isOlder) {
       setHasUpdate(true);
-      setIsUpdateRequired(latestVersionInfo.required);
+      setIsUpdateRequired(latestVersionInfo?.required || false);
     } else {
       setHasUpdate(false);
       setIsUpdateRequired(false);
     }
-  }, [currentVersion, latestVersion, latestVersionInfo]);
+    
+    // We can expose a separate flag for "Show What's New"
+    // But for now, we'll stick to the update logic
+  }, [currentVersion, latestVersion, latestVersionInfo, lastUpdateDismissedVersion]);
 
   const handleUpdate = () => {
     const url = Platform.OS === 'ios' 
@@ -63,10 +68,11 @@ export const useUpdateCheck = () => {
   };
 
   const handleDismiss = () => {
-    setLastUpdateDismissedVersion(latestVersion);
+    // Mark the CURRENT version as seen
+    setLastUpdateDismissedVersion(currentVersion);
   };
 
-  // Only show toast/auto-modal if user hasn't dismissed THIS specific version
+  // Show toast if there is a newer version available AND user hasn't dismissed it
   const shouldShowToast = hasUpdate && lastUpdateDismissedVersion !== latestVersion;
 
   return {
@@ -74,8 +80,8 @@ export const useUpdateCheck = () => {
     isUpdateRequired,
     shouldShowToast,
     latestVersion,
-    latestVersionInfo, // Return full info for modal
-    allVersions: config.versions, // Return all for About screen
+    latestVersionInfo,
+    allVersions: config.versions,
     handleUpdate,
     handleDismiss,
   };
