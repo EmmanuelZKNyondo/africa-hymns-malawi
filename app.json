@@ -3,7 +3,7 @@
     "name": "Africa Hymns",
     "description": "A collection of African hymns for worship and singing along.",
     "slug": "africa-hymns-malawi",
-    "version": "1.2.0",
+    "version": "1.2.1",
     "orientation": "portrait",
     "icon": "./src/assets/icon.png",
     "userInterfaceStyle": "light",
