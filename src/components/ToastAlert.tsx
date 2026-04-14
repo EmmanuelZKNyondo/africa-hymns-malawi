@@ -257,8 +257,7 @@ const styles = StyleSheet.create({
     zIndex: 9999,
     flexDirection: 'row',
     alignItems: 'center',
-    // ✅ backgroundColor now set dynamically via inline style
-    borderRadius: 8,  // ✅ Slightly larger radius for modern look
+    borderRadius: 4, 
     overflow: 'hidden',
     minHeight: 48,
     ...Platform.select({
