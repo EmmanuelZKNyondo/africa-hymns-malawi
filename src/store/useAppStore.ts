@@ -29,6 +29,10 @@ interface AppState extends AppStorageData {
   // Reset utility
   reset: () => Promise<void>;
   
+  // Update Notification State
+  lastUpdateDismissedVersion: string | null;
+  setLastUpdateDismissedVersion: (version: string | null) => void;
+  
   // Computed selectors (derived state)
   getActiveCountryName: () => string;
   getFontSizeStyle: () => { fontSize: number };
@@ -49,6 +53,7 @@ export const useAppStore = create<AppState>((set, get) => ({
   recentHymns: [],
   lastSync: null,
   hymnCacheVersion: null,
+  lastUpdateDismissedVersion: null, // ✅ Initialize new field
 
   // Load persisted data from AsyncStorage
   loadFromStorage: async () => {
@@ -103,6 +108,11 @@ export const useAppStore = create<AppState>((set, get) => ({
     await clearStorage();
     const defaults = await readStorage();
     set(defaults);
+  },
+
+  // ✅ Action to set dismissed version
+  setLastUpdateDismissedVersion: (version) => {
+    set({ lastUpdateDismissedVersion: version });
   },
 
   // Computed: Get human-readable country name
