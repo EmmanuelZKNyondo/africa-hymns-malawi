@@ -6,6 +6,8 @@ import { Ionicons } from '@expo/vector-icons';
 import { useAppStore } from '@/store/useAppStore';
 import { loadCountryConfig, type LanguageConfig } from '@/utils/dataLoader';
 import { NavbarHeader } from '@/components/NavbarHeader';
+import { UpdateModal } from '@/components/UpdateModal';
+import { useUpdateCheck } from '@/hooks/useUpdateCheck';
 import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import type { HomeStackParamList } from '@/navigation/AppNavigator';
 
@@ -19,6 +21,16 @@ export const HomeScreen: React.FC<Props> = ({ navigation }) => {
   const countryCode = useAppStore((state) => state.settings.country);
   const [countryConfig, setCountryConfig] = useState<any>(null);
   const [loading, setLoading] = useState(true);
+  const [showUpdateModal, setShowUpdateModal] = useState(false);
+
+  // ✅ Update Check Hook
+  const { 
+    hasUpdate, 
+    shouldShowToast, 
+    latestVersionInfo, 
+    handleUpdate, 
+    handleDismiss 
+  } = useUpdateCheck();
 
   const loadConfig = useCallback(async () => {
     setLoading(true);
@@ -35,6 +47,13 @@ export const HomeScreen: React.FC<Props> = ({ navigation }) => {
   useEffect(() => {
     loadConfig();
   }, [loadConfig]);
+
+  // Auto-show modal if it's a new update notification
+  useEffect(() => {
+    if (shouldShowToast) {
+      setShowUpdateModal(true);
+    }
+  }, [shouldShowToast]);
 
   const handleLanguageSelect = (language: LanguageConfig) => {
     useAppStore.getState().addRecentHymn(0);
@@ -72,6 +91,8 @@ export const HomeScreen: React.FC<Props> = ({ navigation }) => {
         onMenuPress={handleMenuPress}
         rightIcon="settings-outline"
         onRightPress={() => navigation.navigate('Settings')}
+        showUpdateIndicator={hasUpdate}
+        onUpdatePress={() => setShowUpdateModal(true)}
       />
 
       <ScrollView contentContainerStyle={styles.content} showsVerticalScrollIndicator={false}>
@@ -134,6 +155,17 @@ export const HomeScreen: React.FC<Props> = ({ navigation }) => {
           </View>
         </View>
       </ScrollView>
+
+      {/* ✅ Update Modal */}
+      <UpdateModal 
+        visible={showUpdateModal} 
+        versionInfo={latestVersionInfo}
+        onUpdate={handleUpdate}
+        onLater={() => {
+          setShowUpdateModal(false);
+          handleDismiss();
+        }}
+      />
     </SafeAreaView>
   );
 };
