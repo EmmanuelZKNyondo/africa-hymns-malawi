@@ -1,10 +1,12 @@
+import { formatDate } from "@/utils/dateUtils";
+
 export const TERMS_CONTENT = `
 AFRICA HYMNS - TERMS & CONDITIONS
 
-Last Updated: ${new Date().toLocaleDateString('en-GB')}
+Last Updated: ${formatDate(new Date(), "dd-MMM-yyyy")}
 
-1. PURPOSE OF THIS APP
-This application provides access to African  hymns, (especially Malawi the origins of this application), the Apostles' Creed, and the Lord's Prayer in English, Chichewa and other predefined various languages. 
+1. PURPOSE OF THIS APPLICATION
+This application provides access to African hymns, (especially Malawi the origins of this application), the Apostles' Creed, and the Lord's Prayer in English, Chichewa and other predefined various languages. 
 It is designed for personal worship, study, and congregational use. This application is free to use by any one. The developers of the application are not liable for any negative or ill use of the application.
 
 2. WHAT YOU MAY DO 
@@ -35,7 +37,7 @@ Example: You may print Hymn #42 for your choir rehearsal. You may not upload all
 6. UPDATES & AVAILABILITY
 • We strive to keep hymn content updated, but cannot guarantee perpetual availability.
 • Updates download only with your consent. You may disable auto-sync in Settings.
-• The app requires initial internet access to download the hymn library (~2–10 MB).
+• The app requires initial internet access to download the hymn library (~2–50 MB).
 
 7. LIMITATION OF LIABILITY
 This app is provided "as-is" for worship and edification. We are not liable for:
