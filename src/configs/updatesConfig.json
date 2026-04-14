@@ -1,0 +1,27 @@
+{
+  "storeLinks": {
+    "ios": "https://apps.apple.com/app/id123456789",
+    "android": "https://play.google.com/store/apps/details?id=com.africanhymns.mw"
+  },
+  "versions": [
+    {
+      "version": "1.2.1",
+      "releaseDate": "2026-04-13",
+      "required": false,
+      "notes": [
+        "Fixed search bar auto-focus issue",
+        "Added update notifications"
+      ]
+    },
+    {
+      "version": "1.2.0",
+      "releaseDate": "2026-04-01",
+      "required": false,
+      "notes": [
+        "Initial release of Africa Hymns",
+        "Support for Malawi and Zambia hymns",
+        "Offline mode enabled"
+      ]
+    }
+  ]
+}
