@@ -3,6 +3,7 @@ import React, { useEffect, useState, useCallback } from "react";
 import { StatusBar, StyleSheet, View, Text, Image, BackHandler, Alert, Platform } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import * as SplashScreen from 'expo-splash-screen';
+import Constants from 'expo-constants';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { useAppStore } from './src/store/useAppStore';
 import { Loader } from './src/components/Loader';
@@ -23,6 +24,10 @@ export default function App(){
   // ✅ Use store state for initialization and terms
   const acceptedTerms = useAppStore((state) => state.acceptedTerms);
   const isInitializing = useAppStore((state) => state.isInitializing);
+
+  // ✅ Get App Metadata
+  const appName = Constants.expoConfig?.name || 'Africa Hymns';
+  const appVersion = Constants.expoConfig?.version || '1.0.0';
 
   const prepare = useCallback(async () => {
     try {
@@ -71,6 +76,7 @@ export default function App(){
   };
 
   const handleExitApp = () => {
+    // ✅ Dismiss modal first
     setShowExitConfirmation(false);
     
     // ✅ Wait a few milliseconds for UI to update before exiting
@@ -81,7 +87,7 @@ export default function App(){
         // iOS doesn't allow programmatic exit, just show alert
         Alert.alert('App Closed', 'You may now close this window.');
       }
-    }, 100);
+    }, 300);
   };
 
   const handleCancelExit = () => {
@@ -93,7 +99,16 @@ export default function App(){
     return (
       <SafeAreaProvider>
         <StatusBar barStyle="dark-content" />
-        <GlobalLoader />
+        <View style={styles.splashContainer}>
+          <Image 
+            source={require('./src/assets/images/flags/malawi-flag.png')} 
+            style={styles.flag} 
+            resizeMode="contain" 
+          />
+          <Text style={styles.title}>{appName}</Text>
+          <Text style={styles.version}>v{appVersion}</Text>
+          <Loader />
+        </View>
       </SafeAreaProvider>
     );
   }
@@ -109,7 +124,7 @@ export default function App(){
             style={styles.flag} 
             resizeMode="contain" 
           />
-          <Text style={styles.title}>Africa Hymns (Malawi)</Text>
+          <Text style={styles.title}>{appName}</Text>
           <Loader />
           <TermsModal 
             visible={showTerms} 
@@ -153,6 +168,13 @@ const styles = StyleSheet.create({
     fontSize: 22,
     fontWeight: '700',
     color: '#1a1a1a',
+    marginBottom: 4,
+    textAlign: 'center'
+  },
+  version: {
+    fontSize: 14,
+    fontWeight: '500',
+    color: '#666',
     marginBottom: 24,
     textAlign: 'center'
   }
