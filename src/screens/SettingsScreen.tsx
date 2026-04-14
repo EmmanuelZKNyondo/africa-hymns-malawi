@@ -1,5 +1,5 @@
 // src/screens/SettingsScreen.tsx
-import React, { useCallback, useMemo } from 'react';
+import React, { useCallback, useMemo, useState } from 'react';
 import {
   View,
   Text,
@@ -10,16 +10,16 @@ import {
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
+import Constants from 'expo-constants';
 import { useAppStore } from '@/store/useAppStore';
 import { NavbarHeader } from '@/components/NavbarHeader';
+import { UpdateModal } from '@/components/UpdateModal';
+import { useUpdateCheck } from '@/hooks/useUpdateCheck';
 import { useToast } from '@/components/ToastAlert';
 import { getAvailableCountries } from '@/utils/dataLoader';
 import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 import type { RootDrawerParamList } from '@/navigation/AppNavigator';
 import type { CountryCode } from '@/utils/storageUtils';
-
-// Pull metadata straight from app.json at build time via Expo's Constants
-import Constants from 'expo-constants';
 
 type Props = NativeStackScreenProps<RootDrawerParamList, 'Settings'>;
 
@@ -36,8 +36,6 @@ const COUNTRY_LABELS: Record<CountryCode, { flag: string; name: string }> = {
   zm: { flag: '🇿🇲', name: 'Zambia' },
 };
 
-// ─── Icon colours ─────────────────────────────────────────────────────────────
-
 const IC = {
   green:  '#007A3D',
   purple: '#7c3aed',
@@ -46,8 +44,6 @@ const IC = {
   teal:   '#00796b',
   red:    '#c62828',
 } as const;
-
-// ─── Sub-components ───────────────────────────────────────────────────────────
 
 interface SectionProps {
   iconName: keyof typeof Ionicons.glyphMap;
@@ -98,19 +94,25 @@ const ActionRow: React.FC<ActionRowProps> = ({
   </>
 );
 
-// ─── Main screen ──────────────────────────────────────────────────────────────
 export const SettingsScreen: React.FC<Props> = ({ navigation }) => {
   const { settings, updateSettings, reset } = useAppStore();
   const availableCountries = useMemo(() => getAvailableCountries(), []);
   const { toast, ToastProvider } = useToast();
+  
+  // ✅ Update Check Hook
+  const { 
+    hasUpdate, 
+    latestVersionInfo, 
+    allVersions, 
+    handleUpdate, 
+    handleDismiss 
+  } = useUpdateCheck();
+  
+  const [showUpdateModal, setShowUpdateModal] = useState(false);
 
-  // App metadata from app.json
   const appName    = Constants.expoConfig?.name        ?? 'Africa Hymns';
   const appVersion = Constants.expoConfig?.version     ?? '1.0.0';
-  const appDesc    = (Constants.expoConfig?.extra as { description?: string })?.description
-                     ?? 'Offline Presbyterian hymnal for African worship';
 
-  // ── Handlers ────────────────────────────────────────────────────────────────
   const handleReset = useCallback(() => {
     toast.warning('Reset all settings?', {
       duration: 6000,
@@ -143,11 +145,8 @@ export const SettingsScreen: React.FC<Props> = ({ navigation }) => {
     [updateSettings, toast],
   );
 
-  // ── Render ──────────────────────────────────────────────────────────────────
-
   return (
     <SafeAreaView style={styles.container} edges={['top']}>
-      {/* Toast sits above everything */}
       <ToastProvider />
 
       <NavbarHeader
@@ -157,6 +156,8 @@ export const SettingsScreen: React.FC<Props> = ({ navigation }) => {
         rightIcon="refresh-outline"
         rightLabel="Reset"
         onRightPress={handleReset}
+        showUpdateIndicator={hasUpdate}
+        onUpdatePress={() => setShowUpdateModal(true)}
       />
 
       <ScrollView
@@ -309,36 +310,59 @@ export const SettingsScreen: React.FC<Props> = ({ navigation }) => {
           />
         </Section>
 
-        {/* ── About ── */}
+        {/* ── About & Updates ── */}
         <Section
           iconName="information-circle-outline"
           iconColor={IC.green}
           iconBg="#e8f5e9"
           title="About"
         >
-          <View style={styles.aboutCard}>
-            <View style={styles.aboutRow}>
-              <Text style={styles.aboutLabel}>App name</Text>
-              <Text style={styles.aboutValue}>{appName}</Text>
-            </View>
-            <View style={styles.aboutDivider} />
-            <View style={styles.aboutRow}>
-              <Text style={styles.aboutLabel}>Version</Text>
+          <View style={styles.aboutContainer}>
+            <View style={styles.appInfoRow}>
+              <Text style={styles.appName}>{appName}</Text>
               <View style={styles.versionBadge}>
                 <Text style={styles.versionText}>v{appVersion}</Text>
               </View>
             </View>
-            <View style={styles.aboutDivider} />
-            <Text style={styles.aboutDesc}>{appDesc}</Text>
+            
+            {/* ✅ Update Alert in About Section */}
+            {hasUpdate && (
+              <TouchableOpacity 
+                style={styles.updateAlertRow} 
+                onPress={() => setShowUpdateModal(true)}
+              >
+                <Ionicons name="information-circle" size={20} color="#FF3B30" />
+                <Text style={styles.updateAlertText}>Update Available (v{latestVersionInfo?.version})</Text>
+                <Ionicons name="chevron-forward" size={16} color="#999" />
+              </TouchableOpacity>
+            )}
+
+            <Text style={styles.historyTitle}>Update History</Text>
+            {allVersions.map((v) => (
+              <View key={v.version} style={styles.historyItem}>
+                <View style={styles.historyHeader}>
+                  <Text style={styles.historyVersion}>v{v.version}</Text>
+                  <Text style={styles.historyDate}>{v.releaseDate}</Text>
+                </View>
+                {v.notes.map((note, i) => (
+                  <Text key={i} style={styles.historyNote}>• {note}</Text>
+                ))}
+              </View>
+            ))}
           </View>
         </Section>
-
       </ScrollView>
+
+      {/* ✅ Update Modal */}
+      <UpdateModal 
+        visible={showUpdateModal} 
+        versionInfo={latestVersionInfo}
+        onUpdate={handleUpdate}
+        onLater={() => setShowUpdateModal(false)}
+      />
     </SafeAreaView>
   );
 };
-
-// ─── Styles ───────────────────────────────────────────────────────────────────
 
 const SECTION_RADIUS = 4;
 const CHIP_RADIUS    = 3;
@@ -348,7 +372,6 @@ const styles = StyleSheet.create({
   scrollView: { flex: 1 },
   content:    { padding: 12, paddingBottom: 32, gap: 8 },
 
-  // Section wrapper
   section: {
     backgroundColor: '#fff',
     borderRadius: SECTION_RADIUS,
@@ -379,7 +402,6 @@ const styles = StyleSheet.create({
     letterSpacing: 0.7,
   },
 
-  // Country
   countryGrid: {
     flexDirection: 'row',
     flexWrap: 'wrap',
@@ -407,7 +429,6 @@ const styles = StyleSheet.create({
   countryName: { fontSize: 13, color: '#444' },
   countryNameActive: { color: '#007A3D', fontWeight: '600' },
 
-  // Chips (theme / font)
   chipRow: {
     flexDirection: 'row',
     flexWrap: 'wrap',
@@ -432,7 +453,6 @@ const styles = StyleSheet.create({
   chipText:       { fontSize: 13, color: '#444' },
   chipTextActive: { color: '#fff', fontWeight: '600' },
 
-  // Language toggle
   toggleRow: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -443,7 +463,6 @@ const styles = StyleSheet.create({
   toggleLabel:       { fontSize: 13, color: '#aaa' },
   toggleLabelActive: { color: '#007A3D', fontWeight: '600' },
 
-  // Action rows
   divider: { height: 0.5, backgroundColor: '#f0f0f0', marginHorizontal: 14 },
   actionRow: {
     flexDirection: 'row',
@@ -461,27 +480,22 @@ const styles = StyleSheet.create({
   },
   actionLabel: { flex: 1, fontSize: 14, color: '#222' },
 
-  // About card
-  aboutCard: {
-    marginHorizontal: 14,
-    marginBottom: 14,
-    borderWidth: 0.5,
-    borderColor: '#eee',
-    borderRadius: SECTION_RADIUS,
-    overflow: 'hidden',
-    borderLeftWidth: 3,
-    borderLeftColor: '#007A3D',
+  // About Styles
+  aboutContainer: {
+    paddingHorizontal: 14,
+    paddingBottom: 14,
   },
-  aboutRow: {
+  appInfoRow: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    paddingHorizontal: 12,
-    paddingVertical: 9,
+    marginBottom: 12,
   },
-  aboutDivider: { height: 0.5, backgroundColor: '#f0f0f0' },
-  aboutLabel:   { fontSize: 13, color: '#888' },
-  aboutValue:   { fontSize: 13, color: '#111', fontWeight: '500' },
+  appName: {
+    fontSize: 16,
+    fontWeight: '700',
+    color: '#1a1a1a',
+  },
   versionBadge: {
     backgroundColor: '#e8f5e9',
     paddingHorizontal: 8,
@@ -489,10 +503,57 @@ const styles = StyleSheet.create({
     borderRadius: 3,
   },
   versionText: { fontSize: 12, color: '#007A3D', fontWeight: '600' },
-  aboutDesc: {
+  
+  updateAlertRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: '#fff5f5',
+    padding: 12,
+    borderRadius: 4,
+    borderWidth: 1,
+    borderColor: '#ffcdd2',
+    marginBottom: 16,
+    gap: 10,
+  },
+  updateAlertText: {
+    flex: 1,
+    fontSize: 13,
+    color: '#c62828',
+    fontWeight: '600',
+  },
+
+  historyTitle: {
+    fontSize: 13,
+    fontWeight: '600',
+    color: '#333',
+    marginBottom: 10,
+    marginTop: 4,
+  },
+  historyItem: {
+    marginBottom: 16,
+    borderBottomWidth: 0.5,
+    borderBottomColor: '#eee',
+    paddingBottom: 12,
+  },
+  historyHeader: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginBottom: 6,
+  },
+  historyVersion: {
+    fontSize: 13,
+    fontWeight: '700',
+    color: '#007A3D',
+  },
+  historyDate: {
     fontSize: 12,
-    color: '#aaa',
-    paddingHorizontal: 12,
-    paddingVertical: 9,
+    color: '#999',
+  },
+  historyNote: {
+    fontSize: 12,
+    color: '#555',
+    marginLeft: 8,
+    marginBottom: 4,
+    lineHeight: 16,
   },
 });
