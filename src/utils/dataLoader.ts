@@ -1,4 +1,5 @@
 // src/utils/dataLoader.ts
+
 /* ==================== TYPES ==================== */
 export interface LanguageConfig {
   code: string;
@@ -45,15 +46,6 @@ export interface Hymn {
   writer: string;
   rating: number;
   tags: string[];
-  content: HymnContent;
-}
-
-export interface Hymn {
-  number: number;
-  title: string;
-  writer: string;
-  rating: number;
-  tags: string[];
   crossReference?: CrossReference[];
   content: HymnContent;
 }
@@ -71,30 +63,22 @@ export interface CrossReference {
   hymnNumber: number;
 }
 
-/* ==================== STATIC REGISTRY (Metro-Compatible: RELATIVE PATHS) ==================== */
+/* ==================== STATIC REGISTRY ==================== */
 const COUNTRY_REGISTRY: Record<string, CountryConfig> = {
   mw: require('../data/countries/mw.json'),
 };
 
-// ✅ Hymn data registry: relative paths from src/utils/ to src/data/hymns/
 const HYMN_REGISTRY: Record<string, Record<string, HymnData>> = {
   mw: {
     en: require('../data/hymns/mw/en.json'),
     ch: require('../data/hymns/mw/ch.json'),
   },
-  // ➕ Add new country hymns:
-};
-
-// ✅ Prayer files registry: relative paths
-const PRAYER_REGISTRY: Record<string, Record<string, string>> = {
-  creed: require('../data/prayers/creed.json'),
-  'lords-prayer': require('../data/prayers/lords-prayer.json'),
 };
 
 /* ==================== CACHE LAYER ==================== */
 const cache = new Map<string, any>();
 
-function getCacheKey(type: 'country' | 'hymns' | 'prayer', code: string, lang?: string): string {
+function getCacheKey(type: 'country' | 'hymns', code: string, lang?: string): string {
   return lang ? `${type}:${code}:${lang}` : `${type}:${code}`;
 }
 
@@ -114,7 +98,7 @@ export function clearCache(key?: string): void {
   }
 }
 
-/* ==================== ASYNC LOADERS (Registry-Based) ==================== */
+/* ==================== ASYNC LOADERS ==================== */
 
 /**
  * Load country config from static registry with caching
@@ -161,25 +145,6 @@ export async function loadHymnData(countryCode: string, languageCode: string): P
   return data;
 }
 
-/**
- * Load prayer content from static registry
- */
-export async function loadPrayerContent(prayerFile: string): Promise<Record<string, string>> {
-  const cacheKey = `prayer:${prayerFile}`;
-  const cached = getCache<Record<string, string>>(cacheKey);
-  if (cached) return cached;
-
-  const content = PRAYER_REGISTRY[prayerFile];
-  
-  if (!content) {
-    console.warn(`[DataLoader] Prayer "${prayerFile}" not found in registry`);
-    return {};
-  }
-
-  setCache(cacheKey, content);
-  return content;
-}
-
 /* ==================== UTILITIES ==================== */
 
 /**
@@ -195,7 +160,6 @@ export function searchHymns(hymns: Hymn[], query: string): Hymn[] {
       hymn.title,
       hymn.writer,
       ...hymn.tags,
-      // Optional: search crossReference targets
       ...(hymn.crossReference?.map((cr) => 
         `${cr.countryCode}-${cr.languageCode}-${cr.hymnNumber}`
       ) || []),
@@ -228,20 +192,13 @@ export function getHymnByNumber(hymns: Hymn[], number: number): Hymn | undefined
   return hymns.find((h) => h.number === number);
 }
 
-/* ==================== REGISTRY HELPERS (For Dynamic Addition) ==================== */
+/* ==================== REGISTRY HELPERS ==================== */
 
-/**
- * Register a new country config at runtime (for testing/OTA updates)
- * ⚠️ Use with caution: static imports are still required for initial bundle
- */
 export function registerCountryConfig(code: string, config: CountryConfig): void {
   COUNTRY_REGISTRY[code] = config;
   clearCache(getCacheKey('country', code));
 }
 
-/**
- * Register new hymn data at runtime
- */
 export function registerHymnData(countryCode: string, languageCode: string, data: HymnData): void {
   if (!HYMN_REGISTRY[countryCode]) {
     HYMN_REGISTRY[countryCode] = {};
@@ -250,16 +207,10 @@ export function registerHymnData(countryCode: string, languageCode: string, data
   clearCache(getCacheKey('hymns', countryCode, languageCode));
 }
 
-/**
- * Get list of available country codes (for UI generation)
- */
 export function getAvailableCountries(): string[] {
   return Object.keys(COUNTRY_REGISTRY);
 }
 
-/**
- * Get available languages for a country
- */
 export function getAvailableLanguages(countryCode: string): string[] {
   return Object.keys(HYMN_REGISTRY[countryCode] || {});
 }
