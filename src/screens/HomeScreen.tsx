@@ -4,7 +4,7 @@ import { View, Text, StyleSheet, ScrollView, TouchableOpacity, ActivityIndicator
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
 import { useAppStore } from '@/store/useAppStore';
-import { loadCountryConfig, type LanguageConfig } from '@/utils/dataLoader';
+import { loadCountryConfig, type HymnLangConfig } from '@/utils/dataLoader'; // ✅ Updated import
 import { NavbarHeader } from '@/components/NavbarHeader';
 import { UpdateModal } from '@/components/UpdateModal';
 import { useUpdateCheck } from '@/hooks/useUpdateCheck';
@@ -55,7 +55,7 @@ export const HomeScreen: React.FC<Props> = ({ navigation }) => {
     }
   }, [shouldShowToast]);
 
-  const handleLanguageSelect = (language: LanguageConfig) => {
+  const handleLanguageSelect = (language: HymnLangConfig) => {
     useAppStore.getState().addRecentHymn(0);
     navigation.navigate('HymnList', {
       countryCode,
@@ -82,11 +82,15 @@ export const HomeScreen: React.FC<Props> = ({ navigation }) => {
     );
   }
 
+  // ✅ Calculate total hymns from all languages or pick the first one's metadata
+  const firstLang = countryConfig.hymn_langs[0];
+  const totalHymns = firstLang?.metadata?.hymnCount || 0;
+
   return (
     <SafeAreaView style={styles.container} edges={['top']}>
       <NavbarHeader
         title={`${countryConfig.name} Hymns`}
-        subtitle={`Offline • ${countryConfig.metadata.hymnCount}+ hymns`}
+        subtitle={`Offline • ${totalHymns}+ hymns`}
         showMenu={true}
         onMenuPress={handleMenuPress}
         rightIcon="settings-outline"
@@ -99,7 +103,8 @@ export const HomeScreen: React.FC<Props> = ({ navigation }) => {
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>Select Language</Text>
           <View style={styles.cardGrid}>
-            {countryConfig.languages.map((lang: LanguageConfig) => (
+            {/* ✅ Map over hymn_langs instead of languages */}
+            {countryConfig.hymn_langs.map((lang: HymnLangConfig) => (
               <TouchableOpacity 
                 key={lang.code} 
                 style={styles.languageCard} 

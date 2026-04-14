@@ -3,22 +3,56 @@
   "name": "Malawi",
   "dialCode": "+265",
   "flag": "@/assets/images/flag-icons/mw.png",
-  "languages": [
+  "hymn_langs": [
     {
       "code": "en",
       "name": "English",
-      "hymnFile": "en.json",
+      "path": "hymns/mw/en.json",
       "icon": "library-outline",
-      "description": "Synod Version",
-      "prayers": {
-        "creed": "en.json",
-        "lordsPrayer": "en.json"
+      "description": "Malawi Hymns English Version",
+      "metadata": {
+        "lastUpdated": "2024-04-13",
+        "version": "1.0.0",
+        "hymnCount": 370
+      }
+    },
+    {
+      "code": "ch",
+      "name": "Chichewa",
+      "path": "hymns/mw/ch.json",
+      "icon": "chatbubble-outline",
+      "description": "Malawi Hymns Chichewa Version",
+      "metadata": {
+        "lastUpdated": "2024-04-13",
+        "version": "1.0.0",
+        "hymnCount": 370
       }
     }
   ],
-  "metadata": {
-    "lastUpdated": "2024-04-13",
-    "version": "1.0.0",
-    "hymnCount": 370
+  "prayer_langs": {
+    "apostles-creed": {
+      "id": "apostles-creed",
+      "path": "prayers/apostles-creed/mw",
+      "metadata": {
+        "lastUpdated": "2024-04-13",
+        "version": "1.0.0"
+      },
+      "languages": [
+        { "code": "en", "file": "en.json" },
+        { "code": "ch", "file": "ch.json" }
+      ]
+    },
+    "lords-prayer": {
+      "id": "lords-prayer",
+      "path": "prayers/lords-prayer/mw",
+      "metadata": {
+        "lastUpdated": "2024-04-13",
+        "version": "1.0.0"
+      },
+      "languages": [
+        { "code": "en", "file": "en.json" },
+        { "code": "ch", "file": "ch.json" }
+      ]
+    }
   }
 }

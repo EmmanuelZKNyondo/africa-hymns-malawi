@@ -1,15 +1,16 @@
 // src/screens/PrayerDetailScreen.tsx
 import React, { useState, useEffect, useCallback } from 'react';
 import { 
-  View, Text, StyleSheet, ScrollView, TouchableOpacity, Clipboard, 
-  Alert, ActivityIndicator 
+  View, Text, StyleSheet, ScrollView, TouchableOpacity, Clipboard,
+  ActivityIndicator
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
 import { useAppStore } from '@/store/useAppStore';
 import { NavbarHeader } from '@/components/NavbarHeader';
-import { loadPrayerData, type PrayerData } from '@/utils/prayersDataLoader'; // ✅ New import
+import { loadPrayerData, type PrayerData } from '@/utils/prayersDataLoader';
 import { loadCountryConfig } from '@/utils/dataLoader';
+import { useToast } from '@/components/ToastAlert';
 import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 import type { HomeStackParamList } from '@/navigation/AppNavigator';
 
@@ -20,19 +21,31 @@ export const PrayerDetailScreen: React.FC<Props> = ({ route, navigation }) => {
   const { settings } = useAppStore();
   const countryCode = settings.country;
   
+  // ✅ Initialize Toast Hook
+  const { toast, ToastProvider } = useToast();
+
   const [language, setLanguage] = useState<string>(settings.language || 'en');
   const [prayerData, setPrayerData] = useState<PrayerData | null>(null);
   const [availableLanguages, setAvailableLanguages] = useState<string[]>(['en']);
   const [loading, setLoading] = useState(true);
 
+  // Load available languages for this specific prayer from Country Config
   useEffect(() => {
     let isMounted = true;
     const loadConfig = async () => {
       try {
         const config = await loadCountryConfig(countryCode);
-        if (isMounted) {
-          const langs = config.languages.map(l => l.code);
-          setAvailableLanguages(langs.length > 0 ? langs : ['en']);
+        
+        // Access prayer_langs instead of languages
+        const prayerConfig = config.prayer_langs?.[prayerId];
+        
+        if (prayerConfig && prayerConfig.languages) {
+          const langs = prayerConfig.languages.map(l => l.code);
+          if (isMounted) setAvailableLanguages(langs.length > 0 ? langs : ['en']);
+        } else {
+          // Fallback to hymn languages if prayer config is missing languages
+          const hymnLangs = config.hymn_langs?.map(l => l.code) || ['en'];
+          if (isMounted) setAvailableLanguages(hymnLangs);
         }
       } catch (error) {
         console.error('[PrayerDetail] Config load failed:', error);
@@ -40,8 +53,9 @@ export const PrayerDetailScreen: React.FC<Props> = ({ route, navigation }) => {
     };
     loadConfig();
     return () => { isMounted = false; };
-  }, [countryCode]);
+  }, [countryCode, prayerId]);
 
+  // Load Prayer Content
   useEffect(() => {
     let isMounted = true;
     const loadData = async () => {
@@ -60,15 +74,16 @@ export const PrayerDetailScreen: React.FC<Props> = ({ route, navigation }) => {
     return () => { isMounted = false; };
   }, [prayerId, countryCode, language]);
 
+  // ✅ Updated Copy Function using Toast
   const handleCopy = useCallback(() => {
     if (!prayerData) return;
     const text = prayerData.content.join('\n');
     
     if (text) {
       Clipboard.setString(text);
-      Alert.alert('Copied', 'Prayer copied to clipboard', [{ text: 'OK' }]);
+      toast.success('Prayer copied to clipboard');
     }
-  }, [prayerData]);
+  }, [prayerData, toast]);
 
   if (loading) {
     return (
@@ -81,10 +96,14 @@ export const PrayerDetailScreen: React.FC<Props> = ({ route, navigation }) => {
     );
   }
 
-  const currentTitle = prayerData?.title || prayerId.replace('-', ' ').toUpperCase();
+  // ✅ Use title from the loaded JSON data
+  const currentTitle = prayerData?.title || 'Prayer';
 
   return (
     <SafeAreaView style={styles.container} edges={['top']}>
+      {/* ✅ Render Toast Provider */}
+      <ToastProvider />
+
       <NavbarHeader
         title={currentTitle}
         showBack={true}

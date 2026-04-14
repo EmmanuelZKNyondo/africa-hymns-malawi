@@ -1,4 +1,5 @@
 // src/utils/prayersDataLoader.ts
+import { loadCountryConfig } from './dataLoader';
 
 /* ==================== TYPES ==================== */
 export interface PrayerData {
@@ -7,23 +8,24 @@ export interface PrayerData {
   content: string[];
 }
 
-/* ==================== STATIC REGISTRY ==================== */
-// Structure: PrayerID -> CountryCode -> LanguageCode -> Data
-const PRAYER_REGISTRY: Record<string, Record<string, Record<string, PrayerData>>> = {
-  'apostles-creed': {
-    mw: {
-      en: require('../data/prayers/apostles_creed/mw/en.json'),
-      ch: require('../data/prayers/apostles_creed/mw/ch.json'),
-    },
-    //Add other countries'
-  },
-  'lords-prayer': {
-    mw: {
-      en: require('../data/prayers/lords_prayer/mw/en.json'),
-      ch: require('../data/prayers/lords_prayer/mw/ch.json'),
-    },
-    //Add other countries'
-  },
+export interface PrayerMeta {
+  id: string;
+  title: string;
+}
+
+
+/* ==================== STATIC PRAYER MAP ==================== */
+// Metro requires explicit paths. Map the relative path strings to requires.
+const PRAYER_PATH_MAP: Record<string, PrayerData> = {
+  // Apostles Creed
+  'prayers/apostles-creed/mw/en.json': require('@/data/prayers/apostles-creed/mw/en.json'),
+  'prayers/apostles-creed/mw/ch.json': require('@/data/prayers/apostles-creed/mw/ch.json'),
+  
+  // Lords Prayer
+  'prayers/lords-prayer/mw/en.json': require('@/data/prayers/lords-prayer/mw/en.json'),
+  'prayers/lords-prayer/mw/ch.json': require('@/data/prayers/lords-prayer/mw/ch.json'),
+  
+  // Add new prayers/countries here
 };
 
 /* ==================== CACHE LAYER ==================== */
@@ -33,7 +35,7 @@ function getCacheKey(prayerId: string, countryCode: string, languageCode: string
   return `prayer:${prayerId}:${countryCode}:${languageCode}`;
 }
 
-function setCache(key: string, data: PrayerData): void {
+function setCache(key: string,  data: PrayerData): void {
   cache.set(key, data);
 }
 
@@ -52,12 +54,7 @@ export function clearPrayerCache(key?: string): void {
 /* ==================== ASYNC LOADER ==================== */
 
 /**
- * Load prayer content based on Prayer ID, Country, and Language.
- * Includes fallback logic:
- * 1. Try exact match (Country + Language)
- * 2. Try Country + English (en)
- * 3. Try Malawi (mw) + Language
- * 4. Try Malawi (mw) + English (en)
+ * Load prayer content using static map lookup
  */
 export async function loadPrayerData(
   prayerId: string, 
@@ -68,57 +65,89 @@ export async function loadPrayerData(
   const cached = getCache(cacheKey);
   if (cached) return cached;
 
-  // Helper to find data with fallbacks
-  const findData = (): PrayerData | null => {
-    const prayerEntry = PRAYER_REGISTRY[prayerId];
-    if (!prayerEntry) return null;
+  try {
+    // 1. Load Country Config to get paths
+    const countryConfig = await loadCountryConfig(countryCode);
+    const prayerConfig = countryConfig.prayer_langs[prayerId];
 
-    // 1. Exact Match
-    if (prayerEntry[countryCode]?.[languageCode]) {
-      return prayerEntry[countryCode][languageCode];
+    if (!prayerConfig) {
+      // Fallback to MW if config missing for country
+      if (countryCode !== 'mw') {
+        return loadPrayerData(prayerId, 'mw', languageCode);
+      }
+      throw new Error(`Prayer "${prayerId}" not configured for country "${countryCode}"`);
     }
 
-    // 2. Same Country, Fallback to English
-    if (prayerEntry[countryCode]?.['en']) {
-      console.warn(`[PrayerLoader] Language "${languageCode}" not found for "${prayerId}" in "${countryCode}", falling back to EN`);
-      return prayerEntry[countryCode]['en'];
+    // 2. Find the file for the requested language
+    const langFileObj = prayerConfig.languages.find(l => l.code === languageCode);
+    
+    let finalFile = langFileObj?.file;
+    
+    // Fallback to English if language not found
+    if (!finalFile) {
+      console.warn(`[PrayerLoader] Language "${languageCode}" not found for "${prayerId}", falling back to EN`);
+      const enFile = prayerConfig.languages.find(l => l.code === 'en');
+      if (enFile) {
+        finalFile = enFile.file;
+      } else {
+        throw new Error(`No English fallback found for prayer "${prayerId}"`);
+      }
     }
 
-    // 3. Fallback to Malawi (mw), Requested Language
-    if (prayerEntry['mw']?.[languageCode]) {
-      console.warn(`[PrayerLoader] Country "${countryCode}" not found for "${prayerId}", falling back to MW (${languageCode})`);
-      return prayerEntry['mw'][languageCode];
+    // 3. Construct Path Key: e.g., "prayers/apostles-creed/mw/en.json"
+    const pathKey = `${prayerConfig.path}/${finalFile}`;
+    
+    // 4. Lookup in Static Map
+    const data = PRAYER_PATH_MAP[pathKey];
+
+    if (!data) {
+      console.error(`[PrayerLoader] Path "${pathKey}" not found in PRAYER_PATH_MAP`);
+      // Final fallback to MW/EN if everything else fails
+      if (countryCode !== 'mw' || languageCode !== 'en') {
+         return loadPrayerData(prayerId, 'mw', 'en');
+      }
+      throw new Error(`Could not load prayer "${prayerId}" at path ${pathKey}`);
     }
+    
+    setCache(cacheKey, data);
+    return data;
 
-    // 4. Fallback to Malawi (mw), English
-    if (prayerEntry['mw']?.['en']) {
-      console.warn(`[PrayerLoader] Falling back to MW/EN for "${prayerId}"`);
-      return prayerEntry['mw']['en'];
-    }
-
-    return null;
-  };
-
-  const data = findData();
-
-  if (!data) {
-    throw new Error(`Prayer "${prayerId}" not found for country "${countryCode}" and language "${languageCode}"`);
+  } catch (error) {
+    console.error(`[PrayerLoader] Failed to load ${prayerId} for ${countryCode}/${languageCode}`, error);
+    throw error;
   }
-
-  setCache(cacheKey, data);
-  return data;
 }
 
-/**
- * Get list of available prayer IDs
- */
-export function getAvailablePrayers(): string[] {
-  return Object.keys(PRAYER_REGISTRY);
-}
 
 /**
- * Check if a prayer exists for a specific country/language
+ * NEW: Load Titles for all prayers in a country
+ * Loads the default language (EN) for each prayer just to get the Title.
  */
-export function hasPrayer(prayerId: string, countryCode: string, languageCode: string): boolean {
-  return !!PRAYER_REGISTRY[prayerId]?.[countryCode]?.[languageCode];
+export async function loadPrayerTitles(countryCode: string): Promise<PrayerMeta[]> {
+  const config = await loadCountryConfig(countryCode);
+  const prayerIds = Object.keys(config.prayer_langs);
+  
+  const titles = await Promise.all(
+    prayerIds.map(async (id) => {
+      try {
+        // Try to load English first for the title
+        const data = await loadPrayerData(id, countryCode, 'en');
+        return { id: data.id, title: data.title };
+      } catch (e) {
+        // Fallback: use ID as title if load fails
+        return { id, title: id.replace(/-/g, ' ').toUpperCase() };
+      }
+    })
+  );
+
+  return titles;
+}
+
+
+/**
+ * Get list of available prayer IDs for a country
+ */
+export async function getAvailablePrayersForCountry(countryCode: string): Promise<string[]> {
+  const config = await loadCountryConfig(countryCode);
+  return Object.keys(config.prayer_langs);
 }

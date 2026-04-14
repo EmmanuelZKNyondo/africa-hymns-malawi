@@ -5,7 +5,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
 import { useAppStore } from '@/store/useAppStore';
 import { NavbarHeader } from '@/components/NavbarHeader';
-import { loadCountryConfig, type CountryConfig } from '@/utils/dataLoader'; // Keep this for country config
+import { loadPrayerTitles, type PrayerMeta } from '@/utils/prayersDataLoader';
 import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 import type { HomeStackParamList } from '@/navigation/AppNavigator';
 
@@ -18,7 +18,7 @@ const PRAYER_ICONS: Record<string, keyof typeof Ionicons.glyphMap> = {
 
 export const PrayersScreen: React.FC<Props> = ({ navigation }) => {
   const countryCode = useAppStore((state) => state.settings.country);
-  const [countryConfig, setCountryConfig] = useState<CountryConfig | null>(null);
+  const [prayers, setPrayers] = useState<PrayerMeta[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -26,8 +26,9 @@ export const PrayersScreen: React.FC<Props> = ({ navigation }) => {
     const load = async () => {
       setLoading(true);
       try {
-        const config = await loadCountryConfig(countryCode);
-        if (isMounted) setCountryConfig(config);
+        // ✅ Load titles from JSON files (defaults to EN for list view)
+        const data = await loadPrayerTitles(countryCode);
+        if (isMounted) setPrayers(data);
       } catch (error) {
         console.error('[PrayersScreen] Load failed:', error);
       } finally {
@@ -38,9 +39,8 @@ export const PrayersScreen: React.FC<Props> = ({ navigation }) => {
     return () => { isMounted = false; };
   }, [countryCode]);
 
-  const renderPrayerItem = ({ item }: { item: { id: string; titleKey: string } }) => {
+  const renderPrayerItem = ({ item }: { item: PrayerMeta }) => {
     const icon = PRAYER_ICONS[item.id] || 'document-text-outline';
-    const displayTitle = item.id.replace('-', ' ').toUpperCase();
 
     return (
       <TouchableOpacity
@@ -52,7 +52,8 @@ export const PrayersScreen: React.FC<Props> = ({ navigation }) => {
           <Ionicons name={icon} size={24} color="#007A3D" />
         </View>
         <View style={styles.textContainer}>
-          <Text style={styles.prayerTitle}>{displayTitle}</Text>
+          {/* ✅ Use title from JSON */}
+          <Text style={styles.prayerTitle}>{item.title}</Text>
           <Text style={styles.prayerSubtitle}>Tap to read</Text>
         </View>
         <Ionicons name="chevron-forward" size={20} color="#ccc" />
@@ -60,7 +61,7 @@ export const PrayersScreen: React.FC<Props> = ({ navigation }) => {
     );
   };
 
-  if (loading || !countryConfig) {
+  if (loading) {
     return (
       <SafeAreaView style={styles.container} edges={['top']}>
         <NavbarHeader title="Prayers" showBack onBack={() => navigation.goBack()} />
@@ -71,12 +72,6 @@ export const PrayersScreen: React.FC<Props> = ({ navigation }) => {
     );
   }
 
-  // Use the prayer IDs defined in the country config
-  const prayersList = Object.values(countryConfig.prayers).map((id) => ({
-    id,
-    titleKey: id,
-  }));
-
   return (
     <SafeAreaView style={styles.container} edges={['top']}>
       <NavbarHeader
@@ -86,11 +81,16 @@ export const PrayersScreen: React.FC<Props> = ({ navigation }) => {
       />
 
       <FlatList
-        data={prayersList}
+        data={prayers}
         renderItem={renderPrayerItem}
         keyExtractor={(item) => item.id}
         contentContainerStyle={styles.listContent}
         showsVerticalScrollIndicator={false}
+        ListEmptyComponent={
+          <View style={styles.emptyContainer}>
+            <Text style={styles.emptyText}>No prayers available.</Text>
+          </View>
+        }
       />
     </SafeAreaView>
   );
@@ -100,6 +100,8 @@ const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: '#f8f9fa' },
   listContent: { padding: 16 },
   loadingContainer: { flex: 1, alignItems: 'center', justifyContent: 'center' },
+  emptyContainer: { padding: 20, alignItems: 'center' },
+  emptyText: { color: '#666', fontSize: 14 },
   prayerCard: {
     flexDirection: 'row',
     alignItems: 'center',

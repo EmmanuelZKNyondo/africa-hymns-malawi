@@ -31,8 +31,8 @@ export const FavoritesScreen: React.FC<Props> = ({ navigation }) => {
       try {
         const { loadCountryConfig } = await import('@/utils/dataLoader');
         const config = await loadCountryConfig(countryCode);
-        if (config.languages.length > 0) {
-          const data = await loadHymnData(countryCode, config.languages[0].code);
+        if (config.hymn_langs.length > 0) {
+          const data = await loadHymnData(countryCode, config.hymn_langs[0].code);
           if (isMounted) setAllHymns(data.hymns);
         }
       } catch (error) {
