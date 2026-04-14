@@ -1,3 +1,4 @@
+// src/App.tsx
 import React, { useEffect, useState, useCallback } from "react";
 import { StatusBar, StyleSheet, View, Text, Image, BackHandler, Alert, Platform } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
@@ -9,24 +10,26 @@ import { TermsModal } from './src/components/TermsModal';
 import { AppNavigator } from './src/navigation/AppNavigator';
 import { writeStorage } from "./src/utils/storageUtils";
 import { ExitAppConfirmation } from "./src/components/ExitAppConfirmation";
+import { GlobalLoader } from "./src/components/GlobalLoader";
 
 // Prevent auto-hide once at module level
 SplashScreen.preventAutoHideAsync();
 
 export default function App(){
-  const [isReady, setIsReady] = useState(false);
   const [showTerms, setShowTerms] = useState(false);
   const [appStarted, setAppStarted] = useState(false);
   const [showExitConfirmation, setShowExitConfirmation] = useState(false);
   
-  const acceptedTerms = useAppStore((state: any) => state.acceptedTerms);
+  // ✅ Use store state for initialization and terms
+  const acceptedTerms = useAppStore((state) => state.acceptedTerms);
+  const isInitializing = useAppStore((state) => state.isInitializing);
 
   const prepare = useCallback(async () => {
     try {
-      // Load persisted state INTO Zustand store (single source of truth)
+      // Load persisted state INTO Zustand store
       await useAppStore.getState().loadFromStorage();
       
-      // Re-read acceptedTerms AFTER load to ensure fresh value
+      // Re-read acceptedTerms AFTER load
       const { acceptedTerms: storedAccepted } = useAppStore.getState();
       
       if (!storedAccepted) {
@@ -36,7 +39,6 @@ export default function App(){
       }
     } catch (error) {
       console.warn('[App] Initialization failed:', error);
-      // Fallback: show terms on error to ensure legal compliance
       setShowTerms(true);
     } finally {
       try {
@@ -44,12 +46,8 @@ export default function App(){
       } catch (e) {
         console.warn('[App] SplashScreen.hideAsync failed:', e);
       }
-      // Simulate low-end device warm-up
-      await new Promise((r) => setTimeout(r, 300));
-      setIsReady(true);
     }
   }, []);
-
 
   useEffect(() => {
     prepare();
@@ -65,7 +63,6 @@ export default function App(){
   }, [appStarted]);
 
   const handleAcceptTerms = async () => {
-    // ✅ Write to storage AND update store for immediate UI sync
     await writeStorage({ acceptedTerms: true });
     useAppStore.setState({ acceptedTerms: true }); 
     
@@ -74,19 +71,32 @@ export default function App(){
   };
 
   const handleExitApp = () => {
-    if (Platform.OS === 'android') {
-      setShowExitConfirmation(false);
-      BackHandler.exitApp();
-    } else {
-      Alert.alert('App Closed', 'You may now close this window.');
-    }
+    setShowExitConfirmation(false);
+    
+    // ✅ Wait a few milliseconds for UI to update before exiting
+    setTimeout(() => {
+      if (Platform.OS === 'android') {
+        BackHandler.exitApp();
+      } else {
+        // iOS doesn't allow programmatic exit, just show alert
+        Alert.alert('App Closed', 'You may now close this window.');
+      }
+    }, 100);
   };
 
   const handleCancelExit = () => {
     setShowExitConfirmation(false);
   };
 
-  if (!isReady) return null; 
+  // ✅ Show Global Loader if initializing
+  if (isInitializing) {
+    return (
+      <SafeAreaProvider>
+        <StatusBar barStyle="dark-content" />
+        <GlobalLoader />
+      </SafeAreaProvider>
+    );
+  }
 
   // Terms flow (first-time users)
   if (!appStarted) {

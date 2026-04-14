@@ -11,7 +11,6 @@ import { HymnDetailScreen } from '@/screens/HymnDetailScreen';
 import { PrayersScreen } from '@/screens/PrayersScreen';
 import { PrayerDetailScreen } from '@/screens/PrayerDetailScreen';
 import { FavoritesScreen } from '@/screens/FavoritesScreen';
-import { FamousSongsScreen } from '@/screens/FamousSongsScreen';
 
 /* ==================== PARAM LISTS ==================== */
 export type HomeStackParamList = {
@@ -86,11 +85,6 @@ const HomeStackNavigator = () => (
       options={{header: () => null}}
     />
     <HomeStack.Screen 
-      name="FamousSongs"
-      component={FamousSongsScreen}
-      options={{header: () => {}}}
-    />
-    <HomeStack.Screen 
       name="Settings"
       component={SettingsScreen}
       options={{header: () => {}}}
@@ -112,7 +106,6 @@ export const AppNavigator: React.FC = () => {
         drawerPosition: 'left',
         drawerStyle: { width: 280, backgroundColor: '#fff' },
         headerShown: true,
-        // ✅ Drawer header also uses NavbarHeader
         header: (props) => (
           <NavbarHeader
             title="Africa Hymns"

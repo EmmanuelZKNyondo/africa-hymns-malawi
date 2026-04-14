@@ -13,6 +13,7 @@ import {
 
 /* ==================== STORE INTERFACE ==================== */
 interface AppState extends AppStorageData {
+  acceptedTerms: any;
   // Async initialization
   loadFromStorage: () => Promise<void>;
   
@@ -33,6 +34,10 @@ interface AppState extends AppStorageData {
   lastUpdateDismissedVersion: string | null;
   setLastUpdateDismissedVersion: (version: string | null) => void;
   
+  // ✅ Global Loading State
+  isInitializing: boolean;
+  setIsInitializing: (status: boolean) => void;
+  
   // Computed selectors (derived state)
   getActiveCountryName: () => string;
   getFontSizeStyle: () => { fontSize: number };
@@ -46,22 +51,26 @@ const COUNTRY_LABELS: Record<CountryCode, string> = {
 
 /* ==================== STORE CREATION ==================== */
 export const useAppStore = create<AppState>((set, get) => ({
-  // Initial state (will be overwritten by loadFromStorage)
+  // Initial state
   acceptedTerms: false,
   settings: { ...DEFAULT_DATA.settings },
   favourites: [],
   recentHymns: [],
   lastSync: null,
   hymnCacheVersion: null,
-  lastUpdateDismissedVersion: null, // ✅ Initialize new field
+  lastUpdateDismissedVersion: null,
+  isInitializing: true,
 
   // Load persisted data from AsyncStorage
   loadFromStorage: async () => {
+    set({ isInitializing: true }); 
     try {
       const data = await readStorage();
       set(data);
     } catch (error) {
       console.warn('[Store] Failed to load from storage:', error);
+    } finally {
+      set({ isInitializing: false }); 
     }
   },
 
@@ -75,7 +84,7 @@ export const useAppStore = create<AppState>((set, get) => ({
     }
   },
 
-  // Toggle favourite: add if missing, remove if exists
+  // Toggle favourite
   toggleFavourite: async (hymnNumber: number) => {
     const current = get();
     const exists = current.favourites.includes(hymnNumber);
@@ -88,12 +97,12 @@ export const useAppStore = create<AppState>((set, get) => ({
     set({ favourites: nextFavourites });
   },
 
-  // Check if hymn is favourited (useful for UI toggles)
+  // Check if hymn is favourited
   isFavourite: (hymnNumber: number) => {
     return get().favourites.includes(hymnNumber);
   },
 
-  // Add hymn to recent list (max 10, most recent first)
+  // Add hymn to recent list
   addRecentHymn: async (hymnNumber: number) => {
     const current = get();
     const filtered = current.recentHymns.filter((n) => n !== hymnNumber);
@@ -103,16 +112,21 @@ export const useAppStore = create<AppState>((set, get) => ({
     set({ recentHymns: nextRecent });
   },
 
-  // Reset to defaults (useful for testing or user request)
+  // Reset to defaults
   reset: async () => {
     await clearStorage();
     const defaults = await readStorage();
     set(defaults);
   },
 
-  // ✅ Action to set dismissed version
+  // Action to set dismissed version
   setLastUpdateDismissedVersion: (version) => {
     set({ lastUpdateDismissedVersion: version });
+  },
+
+  // ✅ Action to set initializing state
+  setIsInitializing: (status) => {
+    set({ isInitializing: status });
   },
 
   // Computed: Get human-readable country name
@@ -121,7 +135,7 @@ export const useAppStore = create<AppState>((set, get) => ({
     return COUNTRY_LABELS[country] || 'Malawi';
   },
 
-  // Computed: Get font size style object for consistent application
+  // Computed: Get font size style object
   getFontSizeStyle: () => {
     const { fontSize } = get().settings;
     return { fontSize };

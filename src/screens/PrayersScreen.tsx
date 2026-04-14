@@ -6,7 +6,6 @@ import { Ionicons } from '@expo/vector-icons';
 import { useAppStore } from '@/store/useAppStore';
 import { NavbarHeader } from '@/components/NavbarHeader';
 import { loadCountryConfig, type CountryConfig } from '@/utils/dataLoader'; // Keep this for country config
-import { getAvailablePrayers } from '@/utils/prayersDataLoader'; // ✅ New import
 import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 import type { HomeStackParamList } from '@/navigation/AppNavigator';
 

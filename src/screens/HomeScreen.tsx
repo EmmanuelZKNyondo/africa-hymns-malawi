@@ -131,7 +131,7 @@ export const HomeScreen: React.FC<Props> = ({ navigation }) => {
               activeOpacity={0.7}
               onPress={() => navigation.navigate('Prayers')}
             >
-              <Ionicons name="home" size={28} color="#6C63FF" />
+              <Ionicons name="book-outline" size={28} color="#352bf3" />
               <Text style={styles.actionLabel}>Prayers</Text>
             </TouchableOpacity>
             
@@ -140,7 +140,7 @@ export const HomeScreen: React.FC<Props> = ({ navigation }) => {
               activeOpacity={0.7}
               onPress={() => navigation.navigate('Settings')}
             >
-              <Ionicons name="settings-outline" size={28} color="#555" />
+              <Ionicons name="settings-outline" size={28} color="#1e2a33" />
               <Text style={styles.actionLabel}>Settings</Text>
             </TouchableOpacity>
           </View>
