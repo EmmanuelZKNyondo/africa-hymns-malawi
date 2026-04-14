@@ -9,16 +9,16 @@
       "name": "English",
       "hymnFile": "en.json",
       "icon": "library-outline",
-      "description": "Synod Version"
+      "description": "Synod Version",
+      "prayers": {
+        "creed": "en.json",
+        "lordsPrayer": "en.json"
+      }
     }
   ],
-  "prayers": {
-    "creed": "creed.json",
-    "lordsPrayer": "lords-prayer.json"
-  },
   "metadata": {
-    "lastUpdated": "2024-04-09",
+    "lastUpdated": "2024-04-13",
     "version": "1.0.0",
-    "hymnCount": 367
+    "hymnCount": 370
   }
 }
