@@ -338,8 +338,9 @@ export const SettingsScreen: React.FC<Props> = ({ navigation }) => {
             )}
 
             <Text style={styles.historyTitle}>Update History</Text>
-            {allVersions.map((v) => (
-              <View key={v.version} style={styles.historyItem}>
+            {/* ✅ Fix: Use index + version as key to prevent duplicates */}
+            {allVersions.map((v, index) => (
+              <View key={`${v.version}-${index}`} style={styles.historyItem}>
                 <View style={styles.historyHeader}>
                   <Text style={styles.historyVersion}>v{v.version}</Text>
                   <Text style={styles.historyDate}>{v.releaseDate}</Text>
