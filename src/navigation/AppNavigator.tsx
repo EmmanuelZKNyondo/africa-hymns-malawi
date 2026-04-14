@@ -8,7 +8,8 @@ import { HymnListScreen } from '@/screens/HymnListScreen';
 import { DrawerContent } from '@/navigation/DrawerContent';
 import { NavbarHeader } from '@/components/NavbarHeader';
 import { HymnDetailScreen } from '@/screens/HymnDetailScreen';
-import { PrayerScreen } from '@/screens/PrayerScreeen';
+import { PrayersScreen } from '@/screens/PrayersScreen';
+import { PrayerDetailScreen } from '@/screens/PrayerDetailScreen';
 import { FavoritesScreen } from '@/screens/FavoritesScreen';
 import { FamousSongsScreen } from '@/screens/FamousSongsScreen';
 
@@ -26,6 +27,9 @@ export type HomeStackParamList = {
     languageCode: string;
   };
   Prayers: undefined;
+  PrayerDetail: {
+    prayerId: string;
+  };
   Favorites: undefined;
   FamousSongs: undefined;
   Settings: undefined;
@@ -64,7 +68,7 @@ const HomeStackNavigator = () => (
     <HomeStack.Screen 
       name="HymnList" 
       component={HymnListScreen}
-      options={{ header: () => null }} // HymnListScreen will use NavbarHeader internally
+      options={{ header: () => null }} 
     />
     <HomeStack.Screen 
       name="HymnDetail"
@@ -73,7 +77,7 @@ const HomeStackNavigator = () => (
     />
     <HomeStack.Screen 
       name="Prayers"
-      component={PrayerScreen}
+      component={PrayersScreen}
       options={{header: () => null}}
     />
     <HomeStack.Screen 
@@ -89,6 +93,11 @@ const HomeStackNavigator = () => (
     <HomeStack.Screen 
       name="Settings"
       component={SettingsScreen}
+      options={{header: () => {}}}
+    />
+    <HomeStack.Screen 
+      name="PrayerDetail"
+      component={PrayerDetailScreen}
       options={{header: () => {}}}
     />
   </HomeStack.Navigator>

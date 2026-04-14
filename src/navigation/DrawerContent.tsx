@@ -65,11 +65,6 @@ export const DrawerContent: React.FC<any> = (props) => {
           onPress={() => handleNavigate('Prayers')} 
         />
         <MenuItem 
-          icon="musical-notes-outline" 
-          label="Famous Songs" 
-          onPress={() => handleNavigate('FamousSongs')} 
-        />
-        <MenuItem 
           icon="star-outline" 
           label="Favourites" 
           onPress={() => handleNavigate('Favorites')} 

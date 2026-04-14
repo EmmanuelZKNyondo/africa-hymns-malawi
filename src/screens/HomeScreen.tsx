@@ -122,17 +122,8 @@ export const HomeScreen: React.FC<Props> = ({ navigation }) => {
               activeOpacity={0.7}
               onPress={() => navigation.navigate('Favorites')}
             >
-              <Ionicons name="star" size={28} color="#FFB800" />
-              <Text style={styles.actionLabel}>Favorites</Text>
-            </TouchableOpacity>
-            
-            <TouchableOpacity 
-              style={styles.actionCard} 
-              activeOpacity={0.7}
-              onPress={() => navigation.navigate('FamousSongs')}
-            >
-              <Ionicons name="musical-notes" size={28} color="#007A3D" />
-              <Text style={styles.actionLabel}>Famous</Text>
+              <Ionicons name="heart" size={28} color="#eb0e0e" />
+              <Text style={styles.actionLabel}>Favorite Hymns</Text>
             </TouchableOpacity>
             
             <TouchableOpacity 
@@ -140,7 +131,7 @@ export const HomeScreen: React.FC<Props> = ({ navigation }) => {
               activeOpacity={0.7}
               onPress={() => navigation.navigate('Prayers')}
             >
-              <Ionicons name="heart-outline" size={28} color="#6C63FF" />
+              <Ionicons name="home" size={28} color="#6C63FF" />
               <Text style={styles.actionLabel}>Prayers</Text>
             </TouchableOpacity>
             
