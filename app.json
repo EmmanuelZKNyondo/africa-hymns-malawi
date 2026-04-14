@@ -2,13 +2,13 @@
   "expo": {
     "name": "Africa Hymns",
     "description": "A collection of African hymns for worship and singing along.",
-    "author": "EZPN",
     "slug": "africa-hymns-malawi",
     "version": "1.2.0",
     "orientation": "portrait",
     "icon": "./src/assets/icon.png",
     "userInterfaceStyle": "light",
     "newArchEnabled": true,
+    "enableMinifyInReleaseBuilds": true,
     "splash": {
       "image": "./src/assets/splash-icon.png",
       "resizeMode": "contain",
@@ -25,7 +25,8 @@
       },
       "softwareKeyboardLayoutMode": "pan",
       "edgeToEdgeEnabled": true,
-      "predictiveBackGestureEnabled": false
+      "predictiveBackGestureEnabled": false,
+      "package": "com.anonymous.africahymnsmalawi"
     },
     "web": {
       "favicon": "./src/assets/favicon.png"
@@ -36,10 +37,18 @@
         "expo-build-properties",
         {
           "android": {
-            "extraProguardRules": "-keep class com.swansion.reanimated.** {*; }"
+            "extraProguardRules": "-keep class com.swansion.reanimated.** {*; }",
+            "enableProguardInReleaseBuilds": true,
+            "enableShrinkResourcesInReleaseBuilds": true,
+            "useLegacyPackaging": true
           }
         }
       ]
-    ]
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "3b23b7e4-289a-463c-924f-c27090311e3a"
+      }
+    }
   }
 }

@@ -14,7 +14,7 @@ const COUNTRIES = [
 // ✅ Extract config once
 const appName = Constants.expoConfig?.name || 'Africa Hymns';
 const appVersion = Constants.expoConfig?.version || '1.0.0';
-const author = Constants.expoGoConfig?.author || '--';
+const author = 'EZPN';
 
 export const DrawerContent: React.FC<any> = (props) => {
   const { navigation } = props;
