@@ -85,9 +85,9 @@ export const HymnCard = React.memo(({
             hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
           >
             <Ionicons 
-              name={isFavourite ? 'star' : 'star-outline'} 
+              name={isFavourite ? 'heart' : 'heart-outline'} 
               size={20} 
-              color={isFavourite ? '#FFB800' : '#ccc'} 
+              color={isFavourite ? '#eb0e0e' : '#ccc'} 
             />
           </TouchableOpacity>
         )}

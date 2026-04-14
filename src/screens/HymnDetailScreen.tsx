@@ -197,7 +197,7 @@ export const HymnDetailScreen: React.FC<Props> = ({ route, navigation }) => {
 
         <View style={styles.hymnHeader}>
           <TouchableOpacity onPress={() => toggleFavourite(currentHymn.number)} style={styles.hymnFavButtonAbsolute} hitSlop={{ top: 12, bottom: 12, left: 12, right: 12 }} accessibilityLabel={isFav ? 'Remove from favourites' : 'Add to favourites'}>
-            <Ionicons name={isFav ? 'star' : 'star-outline'} size={20} color={isFav ? '#FFB800' : '#ddd'} />
+            <Ionicons name={isFav ? 'heart' : 'heart-outline'} size={20} color={isFav ? '#eb0e0e' : '#ddd'} />
           </TouchableOpacity>
 
           <View style={styles.hymnCenteredContent}>
