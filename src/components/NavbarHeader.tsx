@@ -1,6 +1,6 @@
 // src/components/NavbarHeader.tsx
 import React, { ReactNode } from 'react';
-import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet, Animated } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { useAppStore } from '@/store/useAppStore';
 
@@ -17,6 +17,10 @@ export type NavbarHeaderProps = {
   containerStyle?: any;
   titleStyle?: any;
   subtitleStyle?: any;
+  
+  // ✅ Update Notification Props
+  showUpdateIndicator?: boolean;
+  onUpdatePress?: () => void;
 };
 
 export const NavbarHeader: React.FC<NavbarHeaderProps> = ({
@@ -32,6 +36,8 @@ export const NavbarHeader: React.FC<NavbarHeaderProps> = ({
   containerStyle,
   titleStyle,
   subtitleStyle,
+  showUpdateIndicator = false,
+  onUpdatePress,
 }) => {
   const fontSize = useAppStore((state) => state.settings.fontSize);
 
@@ -90,7 +96,21 @@ export const NavbarHeader: React.FC<NavbarHeaderProps> = ({
       </View>
 
       <View style={styles.right}>
-        {rightIcon && onRightPress && (
+        {/* ✅ Update Indicator */}
+        {showUpdateIndicator && onUpdatePress && (
+          <TouchableOpacity 
+            onPress={onUpdatePress}
+            style={styles.updateBadgeContainer}
+            hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
+            accessibilityLabel="Update Available"
+          >
+            <Ionicons name="information-circle" size={24} color="#FF3B30" />
+            <View style={styles.redDot} />
+          </TouchableOpacity>
+        )}
+
+        {/* ✅ Right Icon (Settings, etc.) */}
+        {!showUpdateIndicator && rightIcon && onRightPress && (
           <TouchableOpacity 
             onPress={onRightPress}
             style={styles.iconButton}
@@ -100,6 +120,10 @@ export const NavbarHeader: React.FC<NavbarHeaderProps> = ({
             {rightLabel && <Text style={styles.rightLabel}>{rightLabel}</Text>}
           </TouchableOpacity>
         )}
+        
+        {/* If both update and rightIcon are present, you might want to show both or prioritize. 
+            Currently, update indicator replaces rightIcon if both are true. 
+            To show both, remove the !showUpdateIndicator condition above. */}
       </View>
     </View>
   );
@@ -140,5 +164,30 @@ const styles = StyleSheet.create({
     color: '#007A3D',
     fontWeight: '600',
     marginLeft: 4,
+  },
+
+  // ✅ Update Badge Styles
+  updateBadgeContainer: {
+    position: 'relative',
+    padding: 4,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  redDot: {
+    position: 'absolute',
+    top: 2,
+    right: 2,
+    width: 8,
+    height: 8,
+    borderRadius: 4,
+    backgroundColor: '#FF3B30',
+    borderWidth: 1,
+    borderColor: '#fff',
+    // Simple pulse effect via shadow
+    shadowColor: '#FF3B30',
+    shadowOffset: { width: 0, height: 0 },
+    shadowOpacity: 0.8,
+    shadowRadius: 4,
+    elevation: 4,
   },
 });
