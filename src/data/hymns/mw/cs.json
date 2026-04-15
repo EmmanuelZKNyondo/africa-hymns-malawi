@@ -1,0 +1,55 @@
+{
+  "country": "mw",
+  "language": "cs",
+  "version": "1.0.0",
+  "hymns": [
+    {
+      "number": 1,
+      "title": "Tidzayimba Osana",
+      "writer": "--",
+      "rating": 0,
+      "tags": ["Chitsitsimutso"],
+      "content": {
+        "verses": [
+          {
+            "number": 1,
+            "lines": [
+              "Tidzayimba Osana,",
+              "Aleluya",
+              "Tidzayimba Osana;",
+              "Tikuzungulira mpando wachifumu",
+              "Tidzayimba Osana."
+            ]
+          },
+          {
+            "number": 2,
+            "lines": [
+              "Tidzakondwa ndi Angelo,",
+              "Aleluya!",
+              "Tidzakondwa ndi Angelo;",
+              "Tikuzungulira pa mpando wachifumu",
+              "Tidzakondwa ndi Angelo."
+            ]
+          }
+        ],
+        "chorus": null
+      }
+    },
+    {
+      "number": 2,
+      "title": "Title",
+      "writer": "--",
+      "rating": 0,
+      "tags": ["Chitsitsimutso"],
+      "content": {
+        "verses": [
+          {
+            "number": 1,
+            "lines": []
+          }
+        ],
+        "chorus": null
+      }
+    }
+  ]
+}

@@ -202,7 +202,13 @@ export const HymnDetailScreen: React.FC<Props> = ({ route, navigation }) => {
 
           <View style={styles.hymnCenteredContent}>
             <Text style={[styles.hymnTitle, { fontSize: fontSize }]} numberOfLines={2}>{currentHymn.title}</Text>
+              {currentHymn.previous_version_number && (
+                <View>
+                  <Text>(Yakale #{currentHymn.previous_version_number})</Text>
+                </View>
+              )}
             <View style={styles.rating}>
+
               {renderStarRating(currentHymn.rating, 12)}
               <Text style={[styles.ratingText, { fontSize: fontSize - 6 }]}>{currentHymn.rating.toFixed(1)}</Text>
             </View>

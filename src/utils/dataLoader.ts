@@ -49,6 +49,7 @@ export interface HymnContent {
 
 export interface Hymn {
   number: number;
+  previous_version_number: number | null;
   title: string;
   writer: string;
   rating: number;
@@ -80,6 +81,7 @@ const COUNTRY_REGISTRY: Record<string, CountryConfig> = {
 const HYMN_PATH_MAP: Record<string, HymnData> = {
   'hymns/mw/en.json': require('../data/hymns/mw/en.json'),
   'hymns/mw/ch.json': require('../data/hymns/mw/ch.json'),
+  'hymns/mw/cs.json': require('../data/hymns/mw/cs.json'),
   // Add new countries/languages here as you add them to JSON
   // 'hymns/zm/en.json': require('../data/hymns/zm/en.json'),
 };

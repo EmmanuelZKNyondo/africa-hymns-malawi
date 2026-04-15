@@ -5,10 +5,11 @@
   "hymns": [
     {
       "number": 1,
+      "previous_version_number": null,
       "title": "Oyera, Oyera, Oyera",
       "writer": "--",
       "rating": 4.9,
-      "tags": ["worship", "redemption", "salvation"],
+      "tags": ["hymn"],
       "content": {
         "verses": [
           {
@@ -32,33 +33,504 @@
     },
     {
       "number": 2,
-      "title": "Chisomo Chodabwitsa",
-      "writer": "John Newton",
+      "previous_version_number": null,
+      "title": "Nyimbo 2",
+      "writer": "",
       "rating": 4.9,
-      "tags": ["chisomo", "chipulumutso", "kupulumuka"],
+      "tags": ["nyimbo"],
+      "content": {
+        "verses": [
+          {
+            "number": 1,
+            "lines": []
+          }
+        ],
+        "chorus": null
+      }
+    },
+    {
+      "number": 3,
+      "previous_version_number": null,
+      "title": "Nyimbo 3",
+      "writer": "",
+      "rating": 0,
+      "tags": ["nyimbo"],
+      "content": {
+        "verses": [
+          {
+            "number": 1,
+            "lines": []
+          }
+        ],
+        "chorus": null
+      }
+    },
+    {
+      "number": 4,
+      "previous_version_number": 2,
+      "title": "Lemekeza Mulungu Tate",
+      "writer": "",
+      "rating": 0,
+      "tags": ["nyimbo"],
       "content": {
         "verses": [
           {
             "number": 1,
             "lines": [
-              "Chisomo Chodabwitsa! Chookoma ndithu",
-              "Napulumutsa ochimwa ngati ine!"
+              "INU Mulungi, tikuyamikani;",
+              "Tivomereza ndinu Ambuyathu;",
+              "Ponse, Atate, akugwadirani;",
+              "Ndinu wamuyaya!"
             ]
           },
           {
             "number": 2,
             "lines": [
-              "Ndinali osowa, Koma ndapulumutsidwa;",
-              "wakhungu, koma ndawona."
+              "Inu akukuzani amithenga;",
+              "nanu zam'mwamba ndi zamphamvu zake;",
+              "Nanu angelo amitundu yonse;",
+              "Akuimbirani."
+            ]
+          },
+          {
+            "number": 3,
+            "lines": [
+              "\"Mbuye Woyera! E, Woyera nokha!",
+              "Mbuye Woyera! Mbuye wa makamu!",
+              "Ponse ulemu wanu ndi wodzadza;",
+              "Pansi ndi Kumwamba\""
+            ]
+          },
+          {
+            "number": 4,
+            "lines": [
+              "Inu atumwi akumveka aja,",
+              "Ndi aneneri iyanjana omwe;",
+              "Ndi aunyinji anakuferani;",
+              "Akuyamikani"
+            ]
+          },
+          {
+            "number": 5,
+            "lines": [
+              "Mpingo Woyera! wa kwa anthu onse;",
+              "Ukumverani, Mfumu ndi Atate;",
+              "Mwana woona waulemu wonse,",
+              "Mzimu, Nkhoswe yemwe."
+            ]
+          },
+          {
+            "number": 6,
+            "lines": [
+              "Khristu Mfumu ya ulemelero!",
+              "Mwana wosatha wa Atate Ndinu!",
+              "Simunanyoze mimba ya namwali;",
+              "Potipulumutsa."
+            ]
+          },
+          {
+            "number": 7,
+            "lines": [
+              "Imfa mutagonjetsa ndi zowawa;",
+              "Njira munatsekula tikalowe;",
+              "Momwe mukhala Inu ndi Atate;",
+              "Mu ulemelero."
+            ]
+          },
+          {
+            "number": 8,
+            "lines": [
+              "Kumva milandu yathu mudzabwera;",
+              "Mutithandize atumiki anu;",
+              "Mwatiwombola nao mwazi wanu;",
+              "Mutipulumutse."
+            ]
+          },
+          {
+            "number": 9,
+            "lines": [
+              "M'tiwerengere M'mwamba ndi oyera;",
+              "Mutidalitse ndi'fe anthu anu;",
+              "Moyo wosatha mutipatse tonse;",
+              "Mutilamulire."
+            ]
+          },
+          {
+            "number": 10,
+            "lines": [
+              "Tsiku ndi tsiku timalemekeza;",
+              "Inu tikukuzani osaleka;",
+              "Mbuye, m'tisunge tisachimwe lero;",
+              "M'tichitire nsinsi."
+            ]
+          },
+          {
+            "number": 11,
+            "lines": [
+              "Mbuye chifundo chanu chitigwere;",
+              "Monga tikhulupi'ra Inu nokha;",
+              "Tikhulupi'ra zedi mwa 'Nu, Mbuye;",
+              "Tisagome konse!"
+            ]
+          }
+        ],
+        "chorus": null
+      }
+    },
+    {
+      "number": 5,
+      "previous_version_number": 3,
+      "title": "ATATE wa Kumwambako",
+      "writer": "",
+      "rating": 0,
+      "tags": ["nyimbo"],
+      "content": {
+        "verses": [
+          {
+            "number": 1,
+            "lines": [
+              "ATATE wa Kumwambako,",
+              "Munawombola ife, ndi ", 
+              "Chikondi chanu chijacho",
+              "Tiyamikira Inutu."
+            ]
+          },
+          {
+            "number": 2,
+            "lines": [
+              "Ambuye Yesu Inutu",
+              "Munabadwira anthu'fe",
+              "Munatifera tonse'fe",
+              "Tiyamikira Inutu"
+            ]
+          },
+          {
+            "number": 3,
+            "lines": [
+              "Mzimu Woyera m'mtimamo,",
+              "Tiyeretsedwe ndi Inutu",
+              "Munatisunga bwinoli,",
+              "Tiyamikira Inutu."
+            ]
+          },
+          {
+            "number": 4,
+            "lines": [
+              "Atate, Mwana, Mzimunso,",
+              "Ndinu atatu, Mmodzitu",
+              "Ochimwa tikupemphani",
+              "Mutikululukire'fe."
+            ]
+          }
+        ],
+        "chorus": null
+      }
+    },
+    {
+      "number": 6,
+      "previous_version_number": 4,
+      "title": "Lemekeza Mlungu `Tate",
+      "writer": "",
+      "rating": 0,
+      "tags": ["nyimbo"],
+      "content": {
+        "verses": [
+          {
+            "number": 1,
+            "lines": [
+              "LEMEKEZA Mlungu `Tate,",
+              "Lemekeza Mlungu Mwana;",
+              "Lemekeza Mlungu Mzimu,",
+              "Mlungu Mmodzi ndi Wamkulu,",
+              "Lemekeza, lemekeza,",
+              "Mlungu wathu yemweyo."
+            ]
+          },
+          {
+            "number": 2,
+            "lines": [
+              "M'lemekeze, anakonda,",
+              "Natitsuka m'mtima mwathu;",
+              "Anatiwombola ife",
+              "Tikakhale ndi chifumu.",
+              "Lemekeza, lemekeza,",
+              "Yesu Mbuye Nsembeyo."
+            ]
+          },
+          {
+            "number": 3,
+            "lines": [
+              "Lemekeza Mfumu yathu,",
+              "Mfumu ya mipingo yonse;",
+              "Ipambana anthu onse",
+              "Akumwamba ndi apansi",
+              "Lemekeza, lemekeza,",
+              "Mfumu ya mafumuyo."
+            ]
+          }
+        ],
+        "chorus": null
+      }
+    },
+    {
+      "number": 7,
+      "previous_version_number": 5,
+      "title": "NDI Aleluya imbirani",
+      "writer": "",
+      "rating": 0,
+      "tags": ["nyimbo"],
+      "content": {
+        "verses": [
+          {
+            "number": 1,
+            "lines": [
+              "NDI Aleluya imbirani,",
+              "'Tate wathu Wakumwamba",
+              "Analenga zonse;",
+              "Chifundo chake  chachikulu,",
+              "Nzeru, mphamvu ndi ufumu.",
+              "Tiyamike tonse."
+            ]
+          },
+          {
+            "number": 2,
+            "lines": [
+              "Ndi Aleluya imbirani",
+              "Yesu Khristu Mpulumutsi",
+              "Anachoka kwawo;",
+              "...."
+            ]
+          }
+        ],
+        "chorus": null
+      }
+    },
+    {
+      "number": 8,
+      "previous_version_number": null,
+      "title": "--",
+      "writer": "",
+      "rating": 0,
+      "tags": ["nyimbo"],
+      "content": {
+        "verses": [
+          
+        ],
+        "chorus": null
+      }
+    },
+    {
+      "number": 9,
+      "previous_version_number": null,
+      "title": "--",
+      "writer": "",
+      "rating": 0,
+      "tags": ["nyimbo"],
+      "content": {
+        "verses": [
+          
+        ],
+        "chorus": null
+      }
+    },
+    {
+      "number": 10,
+      "previous_version_number": null,
+      "title": "--",
+      "writer": "",
+      "rating": 0,
+      "tags": ["nyimbo"],
+      "content": {
+        "verses": [
+          
+        ],
+        "chorus": null
+      }
+    },
+    {
+      "number": 11,
+      "previous_version_number": 9,
+      "title": "E, Chifundo chake",
+      "writer": "",
+      "rating": 0,
+      "tags": ["nyimbo"],
+      "content": {
+        "verses": [
+          {
+            "number": 1,
+            "lines": [
+              "NDI mitima yokondwera,",
+              "Mbuye wathu tiyamika."
+            ]
+          },
+          {
+            "number": 2,
+            "lines": [
+              "Dzina lake tibukitsa,",
+              "Mlungu ndiye yekhayekha."
+            ]
+          },
+          {
+            "number": 3,
+            "lines": [
+              "Mphamvu yake inalenga,",
+              "Dziko lonse ndi Kumwamba."
+            ]
+          },
+          {
+            "number": 4,
+            "lines": [
+              "Anatsogolera kale,",
+              "M'chipululu anthu ake."
+            ]
+          },
+          {
+            "number": 5,
+            "lines": [
+              "Ndi chifundo atipenya,",
+              "Ife anthu osauka."
+            ]
+          },
+          {
+            "number": 6,
+            "lines": [
+              "Amaweta nyama zonse,",
+              "Zingasowe kanthu konse."
+            ]
+          },
+          {
+            "number": 7,
+            "lines": [
+              "Tiimbire Mlungu wathu",
+              "Waulemu ndi Wamkulu."
+            ]
+          },
+          {
+            "number": 8,
+            "lines": [
+              "Tithawire kwa Mulungu",
+              "Ndiko tikapeze moyo."
             ]
           }
         ],
         "chorus": {
           "lines": [
-            "Mu zoopsa zambiri, zowawa ndi zophinja,",
-            "Ndapambana;",
-            "'Chinali chisomo chandifikitsa pano,",
-            "Ndipo chisomo chinditsogoza kwathu."
+            "E, chifundo chake chonse,",
+            "Ndichosatha nthawi zonse."
+          ]
+        }
+      }
+    },
+    {
+      "number": 12,
+      "previous_version_number": null,
+      "title": "Nditamatu Ambuyanga",
+      "writer": "",
+      "rating": 0,
+      "tags": ["nyimbo", "Masalimo 146:2"],
+      "content": {
+        "verses": [
+          {
+            "number": 1,
+            "lines": [
+              "NDITAMATU Ambuyangayu,",
+              "Moyo wanga wonse ndidzam'tamatu;",
+              "Ndiponso m'dziko la Kumwambako.",
+              "Masiku anga onse ndidzam'lemekeza Iye,",
+              "Sindidzaleka konsekonse mmene ndiri moyotu;",
+              "Pa dziko pano pena M'mwambamo."
+            ]
+          },
+          {
+            "number": 2,
+            "lines": [
+              "Ndiye wokondwa, E,", "munthuyo,",
+              "Wokhulupilira Mlungu yekhadi;",
+              "Wolenga dziko, nyanja, zonsezi.",
+              "Choona chake chonse chingokhalatu chosatha,",
+              "Apulumutsa onse namadyetsa anthu akewo;",
+              "Wokonda ndiye Mlungu wathuyo."
+            ]
+          },
+          {
+            "number": 3,
+            "lines": [
+              "Mlungu kuona athiratu,",
+              "Inde m'maso awo osapenyawo;",
+              "Natuma akumvera mpumulo.",
+              "Amathandiza inde a ulendo ofokatu,",
+              "Akazi amasiye, maka ndi ana'wo onsewo;",
+              "Olira otonthoza mtimadi."
+            ]
+          },
+          {
+            "number": 4,
+            "lines": [
+              "Nditamatu Ambuyangayu,",
+              "Moyo wanga wonse ndidzam'tamatu;",
+              "Ndiponso m'dziko la Kumwambako.",
+              "Masiku anga onse ndidzam'lemekeza Iye,",
+              "Sindidzaleka konsekonse mmene ndiri moyotu;",
+              "Pa dziko pano pena M'mwambamo."
+            ]
+          }
+        ],
+        "chorus": null
+      }
+    },
+    {
+      "number": 13,
+      "previous_version_number": 11,
+      "title": "Mulungu alinane",
+      "writer": "",
+      "rating": 0,
+      "tags": ["nyimbo", "Masalimo 139"],
+      "content": {
+        "verses": [
+          {
+            "number": 1,
+            "lines": [
+              "PAPHIRI ndi padambo, Ponsepo pali Mlungu;",
+              "Pyenda ife m'njira, Mpoima pali Mlungu.",
+              "Kokwra maganizo, Komweko kuli Mlungu;",
+              "Kumwamba ndi pansipo, Ponsepo pali Mlungu."
+            ]
+          },
+          {
+            "number": 2, 
+            "lines": [
+              "Ndi maso Ambuyathu, Apenyetsetsa ife;",
+              "Amadalitsa onse, Okhulupi'ra Iye.",
+              "Amamva timbalame, Naveka dziko lonse;",
+              "Sataya tizirombo, Asunga zina zonse."
+            ]
+          },
+          {
+            "number": 3,
+            "lines": [
+              "Okwawa pansi inu, Oyenda m'madzi inu;",
+              "Oyesa dziko n'kwanu, A m'mlengalenga inu.",
+              "Nonsenu ntchito zake, Muona tsiku n'tsiku;",
+              "Saleka kusamala, Ndi kudalitsa inu."
+            ]
+          },
+          {
+            "number": 4,
+            "lines": [
+              "Nditama mphamvu yake, Ya Mlungu yondizinga;",
+              "N'kafoka andilimbitsa, N'kadwala andichiza.",
+              "Pakundisiya bwenzi, Mulungu ali paja;",
+              "N'kalowa imfa ine, Alipo Mlungu wanga."
+            ]
+          }
+        ],
+        "chorus": {
+          "lines": [
+            "(Mulungu ali nane!)",
+            "",
+            "(Ali nane, ali nane",
+            "ali nane, ali nane, Aa!",
+            "Mulungu ali nane!)"
           ]
         }
       }

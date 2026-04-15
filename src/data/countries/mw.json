@@ -18,14 +18,26 @@
     },
     {
       "code": "ch",
-      "name": "Chichewa",
+      "name": "Nyimbo za Mulungu",
       "path": "hymns/mw/ch.json",
-      "icon": "chatbubble-outline",
-      "description": "Malawi Hymns Chichewa Version",
+      "icon": "library-outline",
+      "description": "Revised Edition (2005)",
       "metadata": {
         "lastUpdated": "2024-04-13",
         "version": "1.0.0",
-        "hymnCount": 370
+        "hymnCount": 200
+      }
+    },
+    {
+      "code": "cs",
+      "name": "Chitsitsimutso",
+      "path": "hymns/mw/cs.json",
+      "icon": "library-outline",
+      "description": "Nyimbo za Chitsitsimutso",
+      "metadata": {
+        "lastUpdated": "2024-04-13",
+        "version": "1.0.0",
+        "hymnCount": 100
       }
     }
   ],
