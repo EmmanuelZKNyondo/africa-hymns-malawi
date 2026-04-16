@@ -1,4 +1,3 @@
-// src/screens/SettingsScreen.tsx
 import React, { useCallback, useMemo, useState } from 'react';
 import {
   View,
@@ -15,7 +14,7 @@ import { useAppStore } from '@/store/useAppStore';
 import { NavbarHeader } from '@/components/NavbarHeader';
 import { UpdateModal } from '@/components/UpdateModal';
 import { useUpdateCheck } from '@/hooks/useUpdateCheck';
-import { useToast } from '@/components/ToastAlert';
+import { useToast } from '@/contexts/ToastContext';
 import { getAvailableCountries } from '@/utils/dataLoader';
 import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 import type { RootDrawerParamList } from '@/navigation/AppNavigator';
@@ -23,11 +22,11 @@ import type { CountryCode } from '@/utils/storageUtils';
 
 type Props = NativeStackScreenProps<RootDrawerParamList, 'Settings'>;
 
-const FONT_SIZES = [ 11, 12, 14, 16, 18, 20, 22] as const;
+const FONT_SIZES = [11, 12, 14, 16, 18, 20, 22] as const;
 
 const THEMES = [
-  { key: 'light',  label: 'Light',  icon: 'sunny-outline'    as const },
-  { key: 'dark',   label: 'Dark',   icon: 'moon-outline'     as const },
+  { key: 'light', label: 'Light', icon: 'sunny-outline' as const },
+  { key: 'dark', label: 'Dark', icon: 'moon-outline' as const },
   { key: 'system', label: 'System', icon: 'phone-portrait-outline' as const },
 ] as const;
 
@@ -37,12 +36,12 @@ const COUNTRY_LABELS: Record<CountryCode, { flag: string; name: string }> = {
 };
 
 const IC = {
-  green:  '#007A3D',
+  green: '#007A3D',
   purple: '#7c3aed',
-  blue:   '#1565c0',
-  amber:  '#b45309',
-  teal:   '#00796b',
-  red:    '#c62828',
+  blue: '#1565c0',
+  amber: '#b45309',
+  teal: '#00796b',
+  red: '#c62828',
 } as const;
 
 interface SectionProps {
@@ -97,9 +96,8 @@ const ActionRow: React.FC<ActionRowProps> = ({
 export const SettingsScreen: React.FC<Props> = ({ navigation }) => {
   const { settings, updateSettings, reset } = useAppStore();
   const availableCountries = useMemo(() => getAvailableCountries(), []);
-  const { toast, ToastProvider } = useToast();
+  const { toast } = useToast();
   
-  // ✅ Update Check Hook
   const { 
     hasUpdate, 
     latestVersionInfo, 
@@ -114,7 +112,7 @@ export const SettingsScreen: React.FC<Props> = ({ navigation }) => {
   const appVersion = Constants.expoConfig?.version     ?? '1.0.0';
 
   const handleReset = useCallback(() => {
-    toast.warning('Reset all settings?', {
+    toast.warning('Reset all settings to defaults?', {
       duration: 6000,
       action: {
         label: 'Reset',
@@ -131,7 +129,9 @@ export const SettingsScreen: React.FC<Props> = ({ navigation }) => {
       duration: 6000,
       action: {
         label: 'Clear',
-        onPress: () => toast.success('Cache cleared'),
+        onPress: () => {
+          toast.success('Cache cleared');
+        },
       },
     });
   }, [toast]);
@@ -145,10 +145,10 @@ export const SettingsScreen: React.FC<Props> = ({ navigation }) => {
     [updateSettings, toast],
   );
 
+  const recentVersions = useMemo(() => allVersions.slice(0, 2), [allVersions]);
+
   return (
     <SafeAreaView style={styles.container} edges={['top']}>
-      <ToastProvider />
-
       <NavbarHeader
         title="Settings"
         showBack
@@ -260,31 +260,6 @@ export const SettingsScreen: React.FC<Props> = ({ navigation }) => {
           </View>
         </Section>
 
-        {/* ── Language ── */}
-        <Section
-          iconName="chatbubble-ellipses-outline"
-          iconColor={IC.purple}
-          iconBg="#ede7f6"
-          title="Default language"
-        >
-          <View style={styles.toggleRow}>
-            <Ionicons name="language-outline" size={15} color="#888" style={{ marginRight: 4 }} />
-            <Text style={[styles.toggleLabel, settings.language === 'en' && styles.toggleLabelActive]}>
-              English
-            </Text>
-            <Switch
-              value={settings.language === 'ch'}
-              onValueChange={(val) => updateSettings({ language: val ? 'ch' : 'en' })}
-              trackColor={{ false: '#e0e0e0', true: IC.green }}
-              thumbColor="#fff"
-              ios_backgroundColor="#e0e0e0"
-            />
-            <Text style={[styles.toggleLabel, settings.language === 'ch' && styles.toggleLabelActive]}>
-              Chichewa
-            </Text>
-          </View>
-        </Section>
-
         {/* ── Data ── */}
         <Section
           iconName="server-outline"
@@ -325,7 +300,6 @@ export const SettingsScreen: React.FC<Props> = ({ navigation }) => {
               </View>
             </View>
             
-            {/* ✅ Update Alert in About Section */}
             {hasUpdate && (
               <TouchableOpacity 
                 style={styles.updateAlertRow} 
@@ -338,8 +312,7 @@ export const SettingsScreen: React.FC<Props> = ({ navigation }) => {
             )}
 
             <Text style={styles.historyTitle}>Update History</Text>
-            {/* ✅ Fix: Use index + version as key to prevent duplicates */}
-            {allVersions.map((v, index) => (
+            {recentVersions.map((v, index) => (
               <View key={`${v.version}-${index}`} style={styles.historyItem}>
                 <View style={styles.historyHeader}>
                   <Text style={styles.historyVersion}>v{v.version}</Text>
@@ -350,11 +323,13 @@ export const SettingsScreen: React.FC<Props> = ({ navigation }) => {
                 ))}
               </View>
             ))}
+            {allVersions.length > 2 && (
+              <Text style={styles.historyMore}>+ {allVersions.length - 2} more versions</Text>
+            )}
           </View>
         </Section>
       </ScrollView>
 
-      {/* ✅ Update Modal */}
       <UpdateModal 
         visible={showUpdateModal} 
         versionInfo={latestVersionInfo}
@@ -481,7 +456,6 @@ const styles = StyleSheet.create({
   },
   actionLabel: { flex: 1, fontSize: 14, color: '#222' },
 
-  // About Styles
   aboutContainer: {
     paddingHorizontal: 14,
     paddingBottom: 14,
@@ -556,5 +530,12 @@ const styles = StyleSheet.create({
     marginLeft: 8,
     marginBottom: 4,
     lineHeight: 16,
+  },
+  historyMore: {
+    fontSize: 12,
+    color: '#999',
+    fontStyle: 'italic',
+    textAlign: 'center',
+    marginTop: 4,
   },
 });

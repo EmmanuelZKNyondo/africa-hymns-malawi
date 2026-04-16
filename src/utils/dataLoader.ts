@@ -71,6 +71,15 @@ export interface CrossReference {
   hymnNumber: number;
 }
 
+
+export interface FavouriteEntry {
+  hymnNumber: number;
+  countryCode: string;
+  languageCode: string;
+  addedAt?: string;
+}
+
+
 /* ==================== STATIC REGISTRY ==================== */
 const COUNTRY_REGISTRY: Record<string, CountryConfig> = {
   mw: require('../data/countries/mw.json'),

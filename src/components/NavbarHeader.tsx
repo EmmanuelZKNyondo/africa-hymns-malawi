@@ -18,7 +18,6 @@ export type NavbarHeaderProps = {
   titleStyle?: any;
   subtitleStyle?: any;
   
-  // ✅ Update Notification Props
   showUpdateIndicator?: boolean;
   onUpdatePress?: () => void;
 };
@@ -96,7 +95,7 @@ export const NavbarHeader: React.FC<NavbarHeaderProps> = ({
       </View>
 
       <View style={styles.right}>
-        {/* ✅ Update Indicator */}
+        {/* Update Indicator */}
         {showUpdateIndicator && onUpdatePress && (
           <TouchableOpacity 
             onPress={onUpdatePress}
@@ -109,7 +108,7 @@ export const NavbarHeader: React.FC<NavbarHeaderProps> = ({
           </TouchableOpacity>
         )}
 
-        {/* ✅ Right Icon (Settings, etc.) */}
+        {/* Right Icon (Settings, etc.) */}
         {!showUpdateIndicator && rightIcon && onRightPress && (
           <TouchableOpacity 
             onPress={onRightPress}
@@ -166,7 +165,7 @@ const styles = StyleSheet.create({
     marginLeft: 4,
   },
 
-  // ✅ Update Badge Styles
+  //  Update Badge Styles
   updateBadgeContainer: {
     position: 'relative',
     padding: 4,

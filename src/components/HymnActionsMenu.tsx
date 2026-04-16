@@ -1,12 +1,8 @@
-// src/components/HymnActionsMenu.tsx
 import React, { useState } from 'react';
-import { 
-  View, Text, TouchableOpacity, Modal, StyleSheet, Clipboard, 
-  Alert, Platform 
-} from 'react-native';
+import { View, Text, TouchableOpacity, Modal, StyleSheet, Clipboard } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import type { Hymn } from '@/utils/dataLoader';
-import { useToast } from './ToastAlert';
+import { useToast } from '@/contexts/ToastContext';
 
 type Props = {
   hymn: Hymn;
@@ -24,9 +20,8 @@ export const HymnActionsMenu: React.FC<Props> = ({
   onSettings
 }) => {
   const [visible, setVisible] = useState(false);
-   const { toast, ToastProvider } = useToast();
+  const { toast } = useToast();
 
-  // Handle copy entire hymn
   const handleCopyHymn = () => {
     const versesText = hymn.content.verses
       .map((v, i) => `${i + 1}. ${v.lines.join('\n')}`)
@@ -44,7 +39,6 @@ export const HymnActionsMenu: React.FC<Props> = ({
 
   return (
     <>
-      {/* ✅ 3-Dot Icon Button for Actions Menu */}
       <TouchableOpacity 
         style={styles.toggleButton}
         onPress={() => setVisible(true)}
@@ -54,10 +48,6 @@ export const HymnActionsMenu: React.FC<Props> = ({
         <Ionicons name="ellipsis-vertical" size={20} color="#007A3D" />
       </TouchableOpacity>
 
-      {/*Tost Provider*/}
-      <ToastProvider />
-
-      {/* Modal Menu for Actions */}
       <Modal
         visible={visible}
         transparent
@@ -78,13 +68,9 @@ export const HymnActionsMenu: React.FC<Props> = ({
             </View>
 
             <View style={styles.optionsList}>
-              {/* Share Action */}
               <TouchableOpacity
                 style={styles.actionItem}
-                onPress={() => {
-                  onShare();
-                  setVisible(false);
-                }}
+                onPress={() => { onShare(); setVisible(false); }}
                 activeOpacity={0.7}
               >
                 <Ionicons name="share-outline" size={20} color="#007A3D" />
@@ -92,10 +78,8 @@ export const HymnActionsMenu: React.FC<Props> = ({
                   <Text style={styles.actionTitle}>Share Hymn</Text>
                   <Text style={styles.actionSubtitle}>Send via WhatsApp, SMS, etc.</Text>
                 </View>
-                {/* <Ionicons name="chevron-forward" size={18} color="#999" /> */}
               </TouchableOpacity>
 
-              {/* Copy Entire Hymn */}
               <TouchableOpacity
                 style={styles.actionItem}
                 onPress={handleCopyHymn}
@@ -106,16 +90,11 @@ export const HymnActionsMenu: React.FC<Props> = ({
                   <Text style={styles.actionTitle}>Copy Full Hymn</Text>
                   <Text style={styles.actionSubtitle}>Copy all verses and chorus</Text>
                 </View>
-                {/* <Ionicons name="chevron-forward" size={18} color="#999" /> */}
               </TouchableOpacity>
 
-              {/* Favourite Toggle */}
               <TouchableOpacity
                 style={styles.actionItem}
-                onPress={() => {
-                  onToggleFavourite();
-                  setVisible(false);
-                }}
+                onPress={() => { onToggleFavourite(); setVisible(false); }}
                 activeOpacity={0.7}
               >
                 <Ionicons 
@@ -131,16 +110,11 @@ export const HymnActionsMenu: React.FC<Props> = ({
                     {isFavourite ? 'Remove from saved hymns' : 'Save for quick access'}
                   </Text>
                 </View>
-                {/* <Ionicons name="chevron-forward" size={18} color="#999" /> */}
               </TouchableOpacity>
 
-              {/* Settings Action */}
               <TouchableOpacity
                 style={styles.actionItem}
-                onPress={() => {
-                  onSettings();
-                  setVisible(false);
-                }}
+                onPress={() => { onSettings(); setVisible(false); }}
                 activeOpacity={0.7}
               >
                 <Ionicons name="settings-outline" size={20} color="#007A3D" />
@@ -162,72 +136,15 @@ export const HymnActionsMenu: React.FC<Props> = ({
 };
 
 const styles = StyleSheet.create({
-  toggleButton: {
-    padding: 6,
-    borderRadius: 20,
-    backgroundColor: '#e8f5e9',
-    marginLeft: 6,
-  },
-  
-  modalOverlay: {
-    flex: 1,
-    backgroundColor: 'rgba(0,0,0,0.4)',
-    justifyContent: 'center',
-    alignItems: 'center',
-    padding: 20,
-  },
-  modalContent: {
-    backgroundColor: '#fff',
-    borderRadius: 16,
-    width: '100%',
-    maxWidth: 340,
-    maxHeight: '70%',
-    overflow: 'hidden',
-  },
-  modalHeader: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    padding: 16,
-    borderBottomWidth: 1,
-    borderBottomColor: '#eee',
-  },
-  modalTitle: {
-    fontSize: 16,
-    fontWeight: '700',
-    color: '#1a1a1a',
-  },
-  
-  optionsList: {
-    padding: 8,
-  },
-  actionItem: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    padding: 14,
-    borderRadius: 10,
-    marginBottom: 4,
-    backgroundColor: '#f8f9fa',
-  },
+  toggleButton: { padding: 6, borderRadius: 20, backgroundColor: '#e8f5e9', marginLeft: 6 },
+  modalOverlay: { flex: 1, backgroundColor: 'rgba(0,0,0,0.4)', justifyContent: 'center', alignItems: 'center', padding: 20 },
+  modalContent: { backgroundColor: '#fff', borderRadius: 16, width: '100%', maxWidth: 340, maxHeight: '70%', overflow: 'hidden' },
+  modalHeader: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', padding: 16, borderBottomWidth: 1, borderBottomColor: '#eee' },
+  modalTitle: { fontSize: 16, fontWeight: '700', color: '#1a1a1a' },
+  optionsList: { padding: 8 },
+  actionItem: { flexDirection: 'row', alignItems: 'center', padding: 14, borderRadius: 10, marginBottom: 4, backgroundColor: '#f8f9fa' },
   actionTextContainer: { flex: 1, marginLeft: 12 },
-  actionTitle: {
-    fontSize: 14,
-    fontWeight: '600',
-    color: '#1a1a1a',
-  },
-  actionSubtitle: {
-    fontSize: 12,
-    color: '#666',
-    marginTop: 2,
-  },
-  
-  modalFooter: {
-    fontSize: 11,
-    color: '#999',
-    textAlign: 'center',
-    padding: 12,
-    borderTopWidth: 1,
-    borderTopColor: '#eee',
-    fontStyle: 'italic',
-  },
+  actionTitle: { fontSize: 14, fontWeight: '600', color: '#1a1a1a' },
+  actionSubtitle: { fontSize: 12, color: '#666', marginTop: 2 },
+  modalFooter: { fontSize: 11, color: '#999', textAlign: 'center', padding: 12, borderTopWidth: 1, borderTopColor: '#eee', fontStyle: 'italic' },
 });

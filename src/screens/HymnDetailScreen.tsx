@@ -1,5 +1,4 @@
-// src/screens/HymnDetailScreen.tsx
-import React, { useState, useCallback, useMemo } from 'react';
+import React, { useState, useCallback, useMemo, useEffect } from 'react';
 import { 
   View, Text, StyleSheet, ScrollView, TouchableOpacity, Share, Clipboard, 
   Alert, Platform, ActivityIndicator 
@@ -11,9 +10,11 @@ import { NavbarHeader } from '@/components/NavbarHeader';
 import { HymnLanguageToggleMenu } from '@/components/HymnLanguageToggleMenu';
 import { HymnActionsMenu } from '@/components/HymnActionsMenu';
 import { loadHymnData } from '@/utils/dataLoader';
+import { useToast } from '@/contexts/ToastContext';
 import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 import type { HomeStackParamList } from '@/navigation/AppNavigator';
-import type { Hymn, Verse, Chorus, CrossReference } from '@/utils/dataLoader';
+import type { Hymn, Verse, Chorus, CrossReference, FavouriteEntry } from '@/utils/dataLoader';
+import type { FavouriteEntry as FavouriteEntryType } from '@/utils/storageUtils';
 
 type Props = NativeStackScreenProps<HomeStackParamList, 'HymnDetail'>;
 
@@ -24,7 +25,8 @@ export const HymnDetailScreen: React.FC<Props> = ({ route, navigation }) => {
     languageCode: initialLanguage = 'en' 
   } = route.params;
   
-  const { settings, toggleFavourite, isFavourite } = useAppStore();
+  const { settings, toggleFavourite, isFavourite: isFavouriteStore, favourites } = useAppStore();
+  const { toast } = useToast();
   
   const [currentHymn, setCurrentHymn] = useState<Hymn>(initialHymn);
   const [currentCountry, setCurrentCountry] = useState<string>(initialCountry);
@@ -32,13 +34,29 @@ export const HymnDetailScreen: React.FC<Props> = ({ route, navigation }) => {
   const [loadingCrossRef, setLoadingCrossRef] = useState(false);
   const [copiedVerse, setCopiedVerse] = useState<number | string | null>(null);
   const [copiedChorus, setCopiedChorus] = useState(false);
-  const [toast, setToast] = useState<{ visible: boolean; message: string }>({
-    visible: false,
-    message: '',
-  });
 
   const fontSize = settings.fontSize;
-  const isFav = isFavourite(currentHymn.number, currentCountry, currentLanguage);
+  const isFav = favourites.some((f: FavouriteEntryType) => 
+    f.hymnNumber === currentHymn.number && 
+    f.countryCode === currentCountry && 
+    f.languageCode === currentLanguage
+  );
+
+  const handleToggleFavourite = useCallback(() => {
+    const wasFav = favourites.some((f: FavouriteEntryType) => 
+      f.hymnNumber === currentHymn.number && 
+      f.countryCode === currentCountry && 
+      f.languageCode === currentLanguage
+    );
+    
+    toggleFavourite(currentHymn.number, currentCountry, currentLanguage);
+    
+    if (!wasFav) {
+      toast.success(`"${currentHymn.title}" added to favourites`);
+    } else {
+      toast.info(`"${currentHymn.title}" removed from favourites`, { duration: 2000 });
+    }
+  }, [favourites, currentHymn, currentCountry, currentLanguage, toggleFavourite, toast]);
 
   const handleCrossReferenceSelect = useCallback(async (ref: CrossReference) => {
     if (ref.countryCode === currentCountry && 
@@ -84,26 +102,21 @@ export const HymnDetailScreen: React.FC<Props> = ({ route, navigation }) => {
     }
   }, [currentHymn]);
 
-  const showToast = useCallback((message: string) => {
-    setToast({ visible: true, message });
-    setTimeout(() => setToast({ visible: false, message: '' }), 2000);
-  }, []);
-
   const handleCopyVerse = useCallback((verseNumber: number | string, lines: string[]) => {
     Clipboard.setString(lines.join('\n'));
     setCopiedVerse(verseNumber);
-    showToast(`Verse ${verseNumber} copied to clipboard`);
-    setTimeout(() => setCopiedVerse(null), 7500);
-  }, [showToast]);
+    toast.success(`Verse ${verseNumber} copied`);
+    setTimeout(() => setCopiedVerse(null), 2000);
+  }, [toast]);
 
   const handleCopyChorus = useCallback(() => {
     if (currentHymn.content.chorus) {
       Clipboard.setString(currentHymn.content.chorus.lines.join('\n'));
       setCopiedChorus(true);
-      showToast('Chorus copied to clipboard');
-      setTimeout(() => setCopiedChorus(false), 7500);
+      toast.success('Chorus copied');
+      setTimeout(() => setCopiedChorus(false), 2000);
     }
-  }, [currentHymn, showToast]);
+  }, [currentHymn, toast]);
 
   const renderStarRating = useCallback((rating: number, iconSize: number = 16) => {
     const fullStars = Math.floor(rating);
@@ -145,7 +158,7 @@ export const HymnDetailScreen: React.FC<Props> = ({ route, navigation }) => {
             styles.verseLine, 
             { fontSize, lineHeight: fontSize * 1.6 },
             idx === 0 && styles.verseFirstLine,
-            idx > 0 && styles.verseLineIndent  // ✅ Indent lines after first
+            idx > 0 && styles.verseLineIndent
           ]} 
           selectable
         >
@@ -165,7 +178,7 @@ export const HymnDetailScreen: React.FC<Props> = ({ route, navigation }) => {
   const renderChorus = useCallback((chorus: Chorus) => (
     <View style={styles.chorusSection}>
       <View style={styles.chorusHeader}>
-        <Text style={[styles.chorusLabel, { fontSize: fontSize - 2 }]}></Text>
+        <Text style={[styles.chorusLabel, { fontSize: fontSize - 2 }]}>""</Text>
         <TouchableOpacity onPress={handleCopyChorus} style={styles.copyButton} hitSlop={{ top: 8, bottom: 8, left: 8, right: 8 }}>
           <Ionicons name={copiedChorus ? 'checkmark-circle' : 'copy-outline'} size={18} color={copiedChorus ? '#007A3D' : '#999'} />
         </TouchableOpacity>
@@ -184,7 +197,13 @@ export const HymnDetailScreen: React.FC<Props> = ({ route, navigation }) => {
 
       <View style={styles.headerActions}>
         <HymnLanguageToggleMenu currentCountry={currentCountry} currentLanguage={currentLanguage} currentHymnNumber={currentHymn.number} crossReferences={currentHymn.crossReference} onSelect={handleCrossReferenceSelect} />
-        <HymnActionsMenu hymn={currentHymn} isFavourite={isFav} onToggleFavourite={() => toggleFavourite(currentHymn.number, currentCountry, currentLanguage)} onShare={handleShare} onSettings={handleSettingsRedirect} />
+        <HymnActionsMenu 
+          hymn={currentHymn} 
+          isFavourite={isFav} 
+          onToggleFavourite={handleToggleFavourite} 
+          onShare={handleShare} 
+          onSettings={handleSettingsRedirect} 
+        />
       </View>
 
       <ScrollView style={styles.scrollView} contentContainerStyle={styles.content} showsVerticalScrollIndicator={false}>
@@ -196,7 +215,7 @@ export const HymnDetailScreen: React.FC<Props> = ({ route, navigation }) => {
         )}
 
         <View style={styles.hymnHeader}>
-          <TouchableOpacity onPress={() => toggleFavourite(currentHymn.number, currentCountry, currentLanguage)} style={styles.hymnFavButtonAbsolute} hitSlop={{ top: 12, bottom: 12, left: 12, right: 12 }} accessibilityLabel={isFav ? 'Remove from favourites' : 'Add to favourites'}>
+          <TouchableOpacity onPress={handleToggleFavourite} style={styles.hymnFavButtonAbsolute} hitSlop={{ top: 12, bottom: 12, left: 12, right: 12 }} accessibilityLabel={isFav ? 'Remove from favourites' : 'Add to favourites'}>
             <Ionicons name={isFav ? 'heart' : 'heart-outline'} size={20} color={isFav ? '#eb0e0e' : '#ddd'} />
           </TouchableOpacity>
 
@@ -208,7 +227,6 @@ export const HymnDetailScreen: React.FC<Props> = ({ route, navigation }) => {
                 </View>
               )}
             <View style={styles.rating}>
-
               {renderStarRating(currentHymn.rating, 12)}
               <Text style={[styles.ratingText, { fontSize: fontSize - 6 }]}>{currentHymn.rating.toFixed(1)}</Text>
             </View>
@@ -228,15 +246,6 @@ export const HymnDetailScreen: React.FC<Props> = ({ route, navigation }) => {
           Tap verse/chorus to copy • Long-press to select text • Tap ⋮ for options
         </Text>
       </ScrollView>
-
-      {toast.visible && (
-        <View style={styles.toastContainer}>
-          <View style={styles.toastContent}>
-            <Ionicons name="checkmark-circle" size={16} color="#22c55e" />
-            <Text style={styles.toastText}>{toast.message}</Text>
-          </View>
-        </View>
-      )}
     </SafeAreaView>
   );
 };
@@ -318,9 +327,7 @@ const styles = StyleSheet.create({
   copyButton: { padding: 4 },
   verseFirstLine: { marginTop: 4 },
   verseLine: { color: '#1a1a1a', textAlign: 'justify', marginBottom: 4, marginLeft: 8 },
-  verseLineIndent: {
-    paddingLeft: 16
-  },
+  verseLineIndent: { paddingLeft: 16 },
   chorusSection: {
     backgroundColor: '#d0fade',
     padding: 12,
@@ -364,29 +371,4 @@ const styles = StyleSheet.create({
     fontStyle: 'italic',
     marginTop: 12,
   },
-
-  toastContainer: {
-    position: 'absolute',
-    top: 50, 
-    left: 0,
-    right: 0,
-    alignItems: 'center',
-    zIndex: 100,
-    paddingHorizontal: 20,
-  },
-  toastContent: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 8,
-    backgroundColor: '#dcfce7',
-    paddingHorizontal: 16,
-    paddingVertical: 10,
-    borderRadius: 20,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
-    elevation: 3,
-  },
-  toastText: { color: '#22c55e', fontSize: 13, fontWeight: '500' },
 });

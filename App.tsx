@@ -11,7 +11,7 @@ import { TermsModal } from './src/components/TermsModal';
 import { AppNavigator } from './src/navigation/AppNavigator';
 import { writeStorage } from "./src/utils/storageUtils";
 import { ExitAppConfirmation } from "./src/components/ExitAppConfirmation";
-import { GlobalLoader } from "./src/components/GlobalLoader";
+import { GlobalToastProvider } from "./src/contexts/ToastContext";
 
 // Prevent auto-hide once at module level
 SplashScreen.preventAutoHideAsync();
@@ -139,14 +139,16 @@ export default function App(){
   // Main app (returning users)
   return (
     <SafeAreaProvider>
-      <NavigationContainer>
-        <AppNavigator />
-        <ExitAppConfirmation
-          visible={showExitConfirmation}
-          onConfirm={handleExitApp}
-          onCancel={handleCancelExit}
-        />
-      </NavigationContainer>
+      <GlobalToastProvider>
+        <NavigationContainer>
+          <AppNavigator />
+          <ExitAppConfirmation
+            visible={showExitConfirmation}
+            onConfirm={handleExitApp}
+            onCancel={handleCancelExit}
+          />
+        </NavigationContainer>
+      </GlobalToastProvider>
     </SafeAreaProvider>
   );
 };

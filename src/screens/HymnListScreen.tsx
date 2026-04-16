@@ -11,6 +11,7 @@ import type { HomeStackParamList } from '@/navigation/AppNavigator';
 import { Ionicons } from '@expo/vector-icons';
 import { HymnListActionsMenu } from '@/components/HymnListActionsMenu';
 import type { FavouriteEntry } from '@/utils/storageUtils';
+import { useToast } from '@/contexts/ToastContext';
 
 type Props = NativeStackScreenProps<HomeStackParamList, 'HymnList'>;
 
@@ -22,8 +23,9 @@ export const HymnListScreen: React.FC<Props> = ({ route, navigation }) => {
   
   const fontSize = useAppStore((state) => state.settings.fontSize);
   const toggleFavourite = useAppStore((state) => state.toggleFavourite);
-  const favourites = useAppStore((state) => state.favourites); // ✅ Subscribe to array
+  const favourites = useAppStore((state) => state.favourites);
   const addRecentHymn = useAppStore((state) => state.addRecentHymn);
+  const { toast } = useToast();
 
   useEffect(() => {
     let isMounted = true;
@@ -68,8 +70,23 @@ export const HymnListScreen: React.FC<Props> = ({ route, navigation }) => {
     }
   }, [countryCode, languageCode]);
 
+  const handleToggleFavourite = useCallback((hymn: Hymn) => {
+    const wasFav = favourites.some((f: FavouriteEntry) => 
+      f.hymnNumber === hymn.number && 
+      f.countryCode === countryCode && 
+      f.languageCode === languageCode
+    );
+    
+    toggleFavourite(hymn.number, countryCode, languageCode);
+    
+    if (!wasFav) {
+      toast.success(`"${hymn.title}" added to favourites`);
+    } else {
+      toast.info(`"${hymn.title}" removed from favourites`, { duration: 2000 });
+    }
+  }, [favourites, countryCode, languageCode, toggleFavourite, toast]);
+
   const renderItem = useCallback(({ item }: { item: Hymn }) => {
-    // ✅ Compute favourite status inline with current favourites array
     const isFav = favourites.some((f: FavouriteEntry) => 
       f.hymnNumber === item.number && 
       f.countryCode === countryCode && 
@@ -82,11 +99,11 @@ export const HymnListScreen: React.FC<Props> = ({ route, navigation }) => {
         fontSize={fontSize}
         onPress={() => handleHymnPress(item)}
         isFavourite={isFav}
-        onToggleFavourite={() => toggleFavourite(item.number, countryCode, languageCode)}
+        onToggleFavourite={() => handleToggleFavourite(item)}
         highlightQuery={searchQuery}
       />
     );
-  }, [fontSize, handleHymnPress, toggleFavourite, countryCode, languageCode, searchQuery, favourites]); // ✅ Include favourites in deps
+  }, [fontSize, handleHymnPress, handleToggleFavourite, countryCode, languageCode, searchQuery, favourites]);
 
   if (loading) {
     return (
