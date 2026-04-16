@@ -1,4 +1,3 @@
-// src/screens/HymnListScreen.tsx
 import React, { useEffect, useState, useMemo, useCallback } from 'react';
 import { View, Text, StyleSheet, FlatList, ActivityIndicator } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -11,6 +10,7 @@ import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 import type { HomeStackParamList } from '@/navigation/AppNavigator';
 import { Ionicons } from '@expo/vector-icons';
 import { HymnListActionsMenu } from '@/components/HymnListActionsMenu';
+import type { FavouriteEntry } from '@/utils/storageUtils';
 
 type Props = NativeStackScreenProps<HomeStackParamList, 'HymnList'>;
 
@@ -21,11 +21,9 @@ export const HymnListScreen: React.FC<Props> = ({ route, navigation }) => {
   const [searchQuery, setSearchQuery] = useState('');
   
   const fontSize = useAppStore((state) => state.settings.fontSize);
-  const favourites = useAppStore((state) => state.favourites);
   const toggleFavourite = useAppStore((state) => state.toggleFavourite);
+  const favourites = useAppStore((state) => state.favourites); // ✅ Subscribe to array
   const addRecentHymn = useAppStore((state) => state.addRecentHymn);
-  
-  const isFavourite = useCallback((num: number) => favourites.includes(num), [favourites]);
 
   useEffect(() => {
     let isMounted = true;
@@ -70,16 +68,25 @@ export const HymnListScreen: React.FC<Props> = ({ route, navigation }) => {
     }
   }, [countryCode, languageCode]);
 
-  const renderItem = useCallback(({ item }: { item: Hymn }) => (
-    <HymnCard
-      hymn={item}
-      fontSize={fontSize}
-      onPress={() => handleHymnPress(item)}
-      isFavourite={isFavourite(item.number)}
-      onToggleFavourite={() => toggleFavourite(item.number)}
-      highlightQuery={searchQuery}
-    />
-  ), [fontSize, handleHymnPress, isFavourite, toggleFavourite, searchQuery]);
+  const renderItem = useCallback(({ item }: { item: Hymn }) => {
+    // ✅ Compute favourite status inline with current favourites array
+    const isFav = favourites.some((f: FavouriteEntry) => 
+      f.hymnNumber === item.number && 
+      f.countryCode === countryCode && 
+      f.languageCode === languageCode
+    );
+    
+    return (
+      <HymnCard
+        hymn={item}
+        fontSize={fontSize}
+        onPress={() => handleHymnPress(item)}
+        isFavourite={isFav}
+        onToggleFavourite={() => toggleFavourite(item.number, countryCode, languageCode)}
+        highlightQuery={searchQuery}
+      />
+    );
+  }, [fontSize, handleHymnPress, toggleFavourite, countryCode, languageCode, searchQuery, favourites]); // ✅ Include favourites in deps
 
   if (loading) {
     return (
@@ -149,15 +156,8 @@ export const HymnListScreen: React.FC<Props> = ({ route, navigation }) => {
 
 const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: '#f8f9fa' },
-  headerActions: {
-    position: 'absolute',
-    top: 40,
-    right: 12,
-    zIndex: 20,
-  },
-  searchBarArea: {
-    marginTop: 4
-  },
+  headerActions: { position: 'absolute', top: 40, right: 12, zIndex: 20 },
+  searchBarArea: { marginTop: 4 },
   loadingContainer: { flex: 1, alignItems: 'center', justifyContent: 'center', gap: 12 },
   loadingText: { fontSize: 14, color: '#666' },
   listContent: { padding: 12 },

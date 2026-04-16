@@ -11,6 +11,7 @@ import { HymnDetailScreen } from '@/screens/HymnDetailScreen';
 import { PrayersScreen } from '@/screens/PrayersScreen';
 import { PrayerDetailScreen } from '@/screens/PrayerDetailScreen';
 import { FavoritesScreen } from '@/screens/FavoritesScreen';
+import { FavoritesListScreen } from '@/screens/FavoritesListScreen';
 
 /* ==================== PARAM LISTS ==================== */
 export type HomeStackParamList = {
@@ -30,6 +31,11 @@ export type HomeStackParamList = {
     prayerId: string;
   };
   Favorites: undefined;
+  FavoritesList: {
+    countryCode: string;
+    languageCode: string;
+    languageName: string;
+  };
   FamousSongs: undefined;
   Settings: undefined;
 };
@@ -72,27 +78,32 @@ const HomeStackNavigator = () => (
     <HomeStack.Screen 
       name="HymnDetail"
       component={HymnDetailScreen}
-      options={{header: () => null}}
+      options={{ header: () => null }}
     />
     <HomeStack.Screen 
       name="Prayers"
       component={PrayersScreen}
-      options={{header: () => null}}
+      options={{ header: () => null }}
     />
     <HomeStack.Screen 
       name="Favorites"
       component={FavoritesScreen}
-      options={{header: () => null}}
+      options={{ header: () => null }}
+    />
+    <HomeStack.Screen 
+      name="FavoritesList"
+      component={FavoritesListScreen}
+      options={{ header: () => null }}
     />
     <HomeStack.Screen 
       name="Settings"
       component={SettingsScreen}
-      options={{header: () => {}}}
+      options={{ header: () => {} }}
     />
     <HomeStack.Screen 
       name="PrayerDetail"
       component={PrayerDetailScreen}
-      options={{header: () => {}}}
+      options={{ header: () => {} }}
     />
   </HomeStack.Navigator>
 );
@@ -110,7 +121,7 @@ export const AppNavigator: React.FC = () => {
           <NavbarHeader
             title="Africa Hymns"
             subtitle="Worship • Study • Unity"
-            showBack={false} // Drawer screens usually don't need back button
+            showBack={false} 
             rightIcon="menu"
             onRightPress={() => props.navigation.openDrawer()}
           />

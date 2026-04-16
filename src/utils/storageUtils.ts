@@ -1,10 +1,15 @@
-// src/utils/storageUtils.ts
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-/* ==================== TYPES ==================== */
 export type ThemeMode = 'light' | 'dark' | 'system';
 export type AppLanguage = 'en' | 'ch';
 export type CountryCode = 'mw' | 'zm';
+
+export interface FavouriteEntry {
+  hymnNumber: number;
+  countryCode: string;
+  languageCode: string;
+  addedAt?: string;
+}
 
 export interface AppSettings {
   theme: ThemeMode;
@@ -17,13 +22,12 @@ export interface AppSettings {
 export interface AppStorageData {
   acceptedTerms: boolean;
   settings: AppSettings;
-  favourites: number[];        // ✅ Fixed: was [] → number[]
-  recentHymns: number[];       // ✅ Fixed: was [] → number[]
+  favourites: FavouriteEntry[];
+  recentHymns: number[];
   lastSync: string | null;
   hymnCacheVersion: string | null;
 }
 
-/* ==================== CONSTANTS ==================== */
 const STORAGE_KEY = "africa-hymns-malawi";
 
 export const DEFAULT_DATA: AppStorageData = {
@@ -31,7 +35,7 @@ export const DEFAULT_DATA: AppStorageData = {
   settings: {
     theme: 'system',
     fontSize: 16,
-    accentColor: '#007A3D', // Malawi green
+    accentColor: '#007A3D',
     language: 'en',
     country: 'mw',
   },
@@ -41,12 +45,6 @@ export const DEFAULT_DATA: AppStorageData = {
   hymnCacheVersion: null,
 };
 
-/* ==================== STORAGE FUNCTIONS ==================== */
-
-/**
- * Reads the single storage object. Merges missing keys with defaults.
- * Safe against corrupted JSON or missing files.
- */
 export async function readStorage(): Promise<AppStorageData> {
   try {
     const raw = await AsyncStorage.getItem(STORAGE_KEY);
@@ -54,7 +52,18 @@ export async function readStorage(): Promise<AppStorageData> {
 
     const parsed = JSON.parse(raw) as Partial<AppStorageData>;
     
-    // Deep-safe merge to prevent accidental nullification
+    // Migration: Convert old number[] favorites to FavouriteEntry[]
+    if (Array.isArray(parsed.favourites) && parsed.favourites.length > 0 && typeof parsed.favourites[0] === 'number') {
+      const defaultCountry = parsed.settings?.country || 'mw';
+      const defaultLanguage = parsed.settings?.language || 'en';
+      parsed.favourites = (parsed.favourites as any[]).map(num => ({
+        hymnNumber: num,
+        countryCode: defaultCountry,
+        languageCode: defaultLanguage,
+        addedAt: new Date().toISOString()
+      }));
+    }
+
     return {
       ...DEFAULT_DATA,
       ...parsed,
@@ -68,10 +77,6 @@ export async function readStorage(): Promise<AppStorageData> {
   }
 }
 
-/**
- * Updates the single storage object. Only touches provided keys.
- * Returns the full updated object for immediate state sync.
- */
 export async function writeStorage(updates: Partial<AppStorageData>): Promise<AppStorageData> {
   try {
     const current = await readStorage();
@@ -79,17 +84,9 @@ export async function writeStorage(updates: Partial<AppStorageData>): Promise<Ap
     const next: AppStorageData = {
       ...current,
       ...updates,
-      // Safely merge nested settings if provided
-      settings: updates.settings
-        ? { ...current.settings, ...updates.settings }
-        : current.settings,
-      // Ensure arrays are properly merged
-      favourites: updates.favourites !== undefined 
-        ? updates.favourites 
-        : current.favourites,
-      recentHymns: updates.recentHymns !== undefined 
-        ? updates.recentHymns 
-        : current.recentHymns,
+      settings: updates.settings ? { ...current.settings, ...updates.settings } : current.settings,
+      favourites: updates.favourites !== undefined ? updates.favourites : current.favourites,
+      recentHymns: updates.recentHymns !== undefined ? updates.recentHymns : current.recentHymns,
     };
 
     await AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(next));
@@ -100,21 +97,13 @@ export async function writeStorage(updates: Partial<AppStorageData>): Promise<Ap
   }
 }
 
-/**
- * Update only settings (partial update, type-safe)
- */
-export async function updateSettings(
-  partial: Partial<AppSettings>
-): Promise<AppSettings> {
+export async function updateSettings(partial: Partial<AppSettings>): Promise<AppSettings> {
   const current = await readStorage();
   const nextSettings = { ...current.settings, ...partial };
   await writeStorage({ settings: nextSettings });
   return nextSettings;
 }
 
-/**
- * Clears entire app storage (for testing/reset flows)
- */
 export async function clearStorage(): Promise<void> {
   try {
     await AsyncStorage.removeItem(STORAGE_KEY);

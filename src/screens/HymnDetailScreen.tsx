@@ -38,7 +38,7 @@ export const HymnDetailScreen: React.FC<Props> = ({ route, navigation }) => {
   });
 
   const fontSize = settings.fontSize;
-  const isFav = isFavourite(currentHymn.number);
+  const isFav = isFavourite(currentHymn.number, currentCountry, currentLanguage);
 
   const handleCrossReferenceSelect = useCallback(async (ref: CrossReference) => {
     if (ref.countryCode === currentCountry && 
@@ -165,7 +165,7 @@ export const HymnDetailScreen: React.FC<Props> = ({ route, navigation }) => {
   const renderChorus = useCallback((chorus: Chorus) => (
     <View style={styles.chorusSection}>
       <View style={styles.chorusHeader}>
-        <Text style={[styles.chorusLabel, { fontSize: fontSize - 2 }]}>Chorus</Text>
+        <Text style={[styles.chorusLabel, { fontSize: fontSize - 2 }]}></Text>
         <TouchableOpacity onPress={handleCopyChorus} style={styles.copyButton} hitSlop={{ top: 8, bottom: 8, left: 8, right: 8 }}>
           <Ionicons name={copiedChorus ? 'checkmark-circle' : 'copy-outline'} size={18} color={copiedChorus ? '#007A3D' : '#999'} />
         </TouchableOpacity>
@@ -184,7 +184,7 @@ export const HymnDetailScreen: React.FC<Props> = ({ route, navigation }) => {
 
       <View style={styles.headerActions}>
         <HymnLanguageToggleMenu currentCountry={currentCountry} currentLanguage={currentLanguage} currentHymnNumber={currentHymn.number} crossReferences={currentHymn.crossReference} onSelect={handleCrossReferenceSelect} />
-        <HymnActionsMenu hymn={currentHymn} isFavourite={isFav} onToggleFavourite={() => toggleFavourite(currentHymn.number)} onShare={handleShare} onSettings={handleSettingsRedirect} />
+        <HymnActionsMenu hymn={currentHymn} isFavourite={isFav} onToggleFavourite={() => toggleFavourite(currentHymn.number, currentCountry, currentLanguage)} onShare={handleShare} onSettings={handleSettingsRedirect} />
       </View>
 
       <ScrollView style={styles.scrollView} contentContainerStyle={styles.content} showsVerticalScrollIndicator={false}>
@@ -196,7 +196,7 @@ export const HymnDetailScreen: React.FC<Props> = ({ route, navigation }) => {
         )}
 
         <View style={styles.hymnHeader}>
-          <TouchableOpacity onPress={() => toggleFavourite(currentHymn.number)} style={styles.hymnFavButtonAbsolute} hitSlop={{ top: 12, bottom: 12, left: 12, right: 12 }} accessibilityLabel={isFav ? 'Remove from favourites' : 'Add to favourites'}>
+          <TouchableOpacity onPress={() => toggleFavourite(currentHymn.number, currentCountry, currentLanguage)} style={styles.hymnFavButtonAbsolute} hitSlop={{ top: 12, bottom: 12, left: 12, right: 12 }} accessibilityLabel={isFav ? 'Remove from favourites' : 'Add to favourites'}>
             <Ionicons name={isFav ? 'heart' : 'heart-outline'} size={20} color={isFav ? '#eb0e0e' : '#ddd'} />
           </TouchableOpacity>
 
@@ -322,11 +322,15 @@ const styles = StyleSheet.create({
     paddingLeft: 16
   },
   chorusSection: {
-    backgroundColor: '#f5f5f5',
+    backgroundColor: '#d0fade',
     padding: 12,
     borderRadius: 8,
     marginBottom: 8,
     marginHorizontal: 4,
+    borderRightWidth: 2, 
+    borderRightColor: '#66f390',
+    borderLeftWidth: 2,
+    borderLeftColor: '#66f390'
   },
   chorusHeader: {
     flexDirection: 'row',

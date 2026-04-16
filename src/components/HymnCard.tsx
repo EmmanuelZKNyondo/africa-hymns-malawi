@@ -1,4 +1,3 @@
-// src/components/HymnCard.tsx
 import React, { useMemo } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
@@ -11,19 +10,14 @@ type Props = {
   isFavourite?: boolean;
   onToggleFavourite?: () => void;
   highlightQuery?: string;
+  contextLabel?: string;
 };
 
-// ✅ Safe highlighting without mutating regex state
 const highlightText = (text: string, query: string, highlightStyle: any) => {
   if (!query.trim()) return text;
-  
-  // Escape special regex characters
   const escaped = query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-  // Create NEW regex for each call (no state mutation)
   const regex = new RegExp(`(${escaped})`, 'gi');
-  
   const parts = text.split(regex);
-  
   return parts.map((part, i) => 
     regex.test(part) ? (
       <Text key={i} style={highlightStyle}>{part}</Text>
@@ -33,25 +27,21 @@ const highlightText = (text: string, query: string, highlightStyle: any) => {
   );
 };
 
-// ✅ Memoized component to prevent unnecessary re-renders
 export const HymnCard = React.memo(({ 
-  hymn, fontSize, onPress, isFavourite = false, onToggleFavourite, highlightQuery = '' 
+  hymn, fontSize, onPress, isFavourite = false, onToggleFavourite, highlightQuery = '', contextLabel 
 }: Props) => {
   const baseFontSize = fontSize;
   
-  // Memoize highlighted title
   const highlightedTitle = useMemo(() => {
     if (!highlightQuery.trim()) return hymn.title;
     return highlightText(hymn.title, highlightQuery, styles.highlight);
   }, [hymn.title, highlightQuery]);
 
-  // ✅ Extract first verse first line for preview (new JSON: verses[].lines[])
   const firstVersePreview = useMemo(() => {
     const firstVerse: Verse | undefined = hymn.content.verses[0];
     return firstVerse?.lines[0] || '';
   }, [hymn.content.verses]);
 
-  // ✅ Extract chorus first line for preview (new JSON: chorus?.lines[])
   const chorusFirstLine = useMemo(() => {
     const chorus: Chorus | null = hymn.content.chorus;
     return chorus?.lines[0] || null;
@@ -64,20 +54,22 @@ export const HymnCard = React.memo(({
       activeOpacity={0.7}
     >
       <View style={styles.header}>
-        {/* Hymn Number with Period */}
         <Text style={[styles.number, { fontSize: baseFontSize }]}>
           {hymn.number}.
         </Text>
         
-        {/* Title with Memoized Highlighting */}
-        <Text 
-          style={[styles.title, { fontSize: baseFontSize }]} 
-          numberOfLines={2}
-        >
-          {highlightedTitle}
-        </Text>
+        <View style={styles.titleContainer}>
+          <Text 
+            style={[styles.title, { fontSize: baseFontSize }]} 
+            numberOfLines={2}
+          >
+            {highlightedTitle}
+          </Text>
+          {contextLabel && (
+            <Text style={styles.contextLabel}>{contextLabel}</Text>
+          )}
+        </View>
         
-        {/* Favourite Toggle */}
         {onToggleFavourite && (
           <TouchableOpacity 
             onPress={(e) => { e.stopPropagation(); onToggleFavourite(); }}
@@ -93,7 +85,6 @@ export const HymnCard = React.memo(({
         )}
       </View>
       
-      {/* ✅ First Verse Preview (new structure: verses[].lines[]) */}
       {firstVersePreview ? (
         <Text 
           style={[styles.versePreview, { fontSize: Math.max(10, baseFontSize - 4) }]} 
@@ -103,7 +94,6 @@ export const HymnCard = React.memo(({
         </Text>
       ) : null}
       
-      {/* ✅ Chorus Preview (new structure: chorus?.lines[]) */}
       {chorusFirstLine && (
         <Text 
           style={[styles.chorusPreview, { fontSize: Math.max(10, baseFontSize - 4) }]} 
@@ -137,11 +127,17 @@ const styles = StyleSheet.create({
     marginRight: 6,
     minWidth: 24,
   },
+  titleContainer: { flex: 1 },
   title: { 
-    flex: 1, 
     fontWeight: '600', 
     color: '#1a1a1a',
     lineHeight: 22,
+  },
+  contextLabel: {
+    fontSize: 11,
+    color: '#666',
+    marginTop: 2,
+    fontStyle: 'italic',
   },
   highlight: {
     backgroundColor: '#fff3cd',

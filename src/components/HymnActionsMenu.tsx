@@ -6,6 +6,7 @@ import {
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import type { Hymn } from '@/utils/dataLoader';
+import { useToast } from './ToastAlert';
 
 type Props = {
   hymn: Hymn;
@@ -23,6 +24,7 @@ export const HymnActionsMenu: React.FC<Props> = ({
   onSettings
 }) => {
   const [visible, setVisible] = useState(false);
+   const { toast, ToastProvider } = useToast();
 
   // Handle copy entire hymn
   const handleCopyHymn = () => {
@@ -36,7 +38,7 @@ export const HymnActionsMenu: React.FC<Props> = ({
     const fullText = `${hymn.number}. ${hymn.title}\nBy ${hymn.writer}\n\n${versesText}${chorusText}`;
     
     Clipboard.setString(fullText);
-    Alert.alert('Copied', 'Hymn copied to clipboard', [{ text: 'OK' }], { cancelable: true });
+    toast.success('Hymn copied to clipboard');
     setVisible(false);
   };
 
@@ -51,6 +53,9 @@ export const HymnActionsMenu: React.FC<Props> = ({
       >
         <Ionicons name="ellipsis-vertical" size={20} color="#007A3D" />
       </TouchableOpacity>
+
+      {/*Tost Provider*/}
+      <ToastProvider />
 
       {/* Modal Menu for Actions */}
       <Modal
@@ -114,9 +119,9 @@ export const HymnActionsMenu: React.FC<Props> = ({
                 activeOpacity={0.7}
               >
                 <Ionicons 
-                  name={isFavourite ? 'star' : 'star-outline'} 
+                  name={isFavourite ? 'heart' : 'heart-outline'} 
                   size={20} 
-                  color={isFavourite ? '#FFB800' : '#007A3D'} 
+                  color={isFavourite ? '#f31111' : '#007A3D'} 
                 />
                 <View style={styles.actionTextContainer}>
                   <Text style={styles.actionTitle}>

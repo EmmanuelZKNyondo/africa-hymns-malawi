@@ -1,4 +1,3 @@
-// src/store/useAppStore.ts
 import { create } from 'zustand';
 import { 
   AppStorageData, 
@@ -8,50 +7,39 @@ import {
   clearStorage,
   updateSettings as updateSettingsUtil,
   type CountryCode,
-  DEFAULT_DATA
+  DEFAULT_DATA,
+  type FavouriteEntry
 } from '@/utils/storageUtils';
 
-/* ==================== STORE INTERFACE ==================== */
 interface AppState extends AppStorageData {
   acceptedTerms: any;
-  // Async initialization
   loadFromStorage: () => Promise<void>;
-  
-  // Settings updates (type-safe partial)
   updateSettings: (partial: Partial<AppSettings>) => Promise<void>;
   
-  // Favorites management
-  toggleFavourite: (hymnNumber: number) => Promise<void>;
-  isFavourite: (hymnNumber: number) => boolean;
+  toggleFavourite: (hymnNumber: number, countryCode: string, languageCode: string) => Promise<void>;
+  isFavourite: (hymnNumber: number, countryCode: string, languageCode: string) => boolean;
+  removeFavourite: (hymnNumber: number, countryCode: string, languageCode: string) => Promise<void>;
   
-  // Recent hymns tracking
   addRecentHymn: (hymnNumber: number) => Promise<void>;
-  
-  // Reset utility
   reset: () => Promise<void>;
   
-  // Update Notification State
   lastUpdateDismissedVersion: string | null;
   setLastUpdateDismissedVersion: (version: string | null) => void;
   
-  // ✅ Global Loading State
   isInitializing: boolean;
   setIsInitializing: (status: boolean) => void;
   
-  // Computed selectors (derived state)
   getActiveCountryName: () => string;
   getFontSizeStyle: () => { fontSize: number };
+  getGroupedFavourites: () => Record<string, FavouriteEntry[]>;
 }
 
-/* ==================== COUNTRY LABELS ==================== */
 const COUNTRY_LABELS: Record<CountryCode, string> = {
   mw: 'Malawi',
   zm: 'Zambia'
 };
 
-/* ==================== STORE CREATION ==================== */
 export const useAppStore = create<AppState>((set, get) => ({
-  // Initial state
   acceptedTerms: false,
   settings: { ...DEFAULT_DATA.settings },
   favourites: [],
@@ -61,7 +49,6 @@ export const useAppStore = create<AppState>((set, get) => ({
   lastUpdateDismissedVersion: null,
   isInitializing: true,
 
-  // Load persisted data from AsyncStorage
   loadFromStorage: async () => {
     set({ isInitializing: true }); 
     try {
@@ -74,7 +61,6 @@ export const useAppStore = create<AppState>((set, get) => ({
     }
   },
 
-  // Update settings with partial, type-safe object
   updateSettings: async (partial: Partial<AppSettings>) => {
     try {
       const nextSettings = await updateSettingsUtil(partial);
@@ -84,60 +70,95 @@ export const useAppStore = create<AppState>((set, get) => ({
     }
   },
 
-  // Toggle favourite
-  toggleFavourite: async (hymnNumber: number) => {
+  toggleFavourite: async (hymnNumber, countryCode, languageCode) => {
     const current = get();
-    const exists = current.favourites.includes(hymnNumber);
+    const exists = current.favourites.some(
+      f => f.hymnNumber === hymnNumber && 
+           f.countryCode === countryCode && 
+           f.languageCode === languageCode
+    );
     
     const nextFavourites = exists
-      ? current.favourites.filter((n) => n !== hymnNumber)
-      : [...current.favourites, hymnNumber];
+      ? current.favourites.filter(f => !(
+          f.hymnNumber === hymnNumber && 
+          f.countryCode === countryCode && 
+          f.languageCode === languageCode
+        ))
+      : [...current.favourites, { hymnNumber, countryCode, languageCode, addedAt: new Date().toISOString() }];
     
-    await writeStorage({ favourites: nextFavourites });
+    // ✅ Optimistic update: UI re-renders instantly
     set({ favourites: nextFavourites });
+    
+    // ✅ Persist in background (errors logged but don't block UI)
+    writeStorage({ favourites: nextFavourites }).catch(err => {
+      console.error('[Store] Failed to persist favourites:', err);
+    });
   },
 
-  // Check if hymn is favourited
-  isFavourite: (hymnNumber: number) => {
-    return get().favourites.includes(hymnNumber);
+  isFavourite: (hymnNumber, countryCode, languageCode) => {
+    return get().favourites.some(
+      f => f.hymnNumber === hymnNumber && 
+           f.countryCode === countryCode && 
+           f.languageCode === languageCode
+    );
   },
 
-  // Add hymn to recent list
+  removeFavourite: async (hymnNumber, countryCode, languageCode) => {
+    const current = get();
+    const nextFavourites = current.favourites.filter(f => !(
+      f.hymnNumber === hymnNumber && 
+      f.countryCode === countryCode && 
+      f.languageCode === languageCode
+    ));
+    
+    // ✅ Optimistic update
+    set({ favourites: nextFavourites });
+    
+    // ✅ Persist in background
+    writeStorage({ favourites: nextFavourites }).catch(err => {
+      console.error('[Store] Failed to persist favourites:', err);
+    });
+  },
+
   addRecentHymn: async (hymnNumber: number) => {
     const current = get();
     const filtered = current.recentHymns.filter((n) => n !== hymnNumber);
     const nextRecent = [hymnNumber, ...filtered].slice(0, 10);
     
-    await writeStorage({ recentHymns: nextRecent });
+    // ✅ Optimistic update for recent hymns too
     set({ recentHymns: nextRecent });
+    
+    writeStorage({ recentHymns: nextRecent }).catch(err => {
+      console.error('[Store] Failed to persist recent hymns:', err);
+    });
   },
 
-  // Reset to defaults
   reset: async () => {
     await clearStorage();
     const defaults = await readStorage();
     set(defaults);
   },
 
-  // Action to set dismissed version
-  setLastUpdateDismissedVersion: (version) => {
-    set({ lastUpdateDismissedVersion: version });
-  },
+  setLastUpdateDismissedVersion: (version) => set({ lastUpdateDismissedVersion: version }),
+  setIsInitializing: (status) => set({ isInitializing: status }),
 
-  // ✅ Action to set initializing state
-  setIsInitializing: (status) => {
-    set({ isInitializing: status });
-  },
-
-  // Computed: Get human-readable country name
   getActiveCountryName: () => {
     const { country } = get().settings;
     return COUNTRY_LABELS[country] || 'Malawi';
   },
 
-  // Computed: Get font size style object
   getFontSizeStyle: () => {
     const { fontSize } = get().settings;
     return { fontSize };
+  },
+
+  getGroupedFavourites: () => {
+    const { favourites } = get();
+    return favourites.reduce((groups, entry) => {
+      const key = `${entry.countryCode}-${entry.languageCode}`;
+      if (!groups[key]) groups[key] = [];
+      groups[key].push(entry);
+      return groups;
+    }, {} as Record<string, typeof favourites>);
   },
 }));
