@@ -1032,6 +1032,58 @@
       }
     },
     {
+      "number": 23,
+      "previous_version_number": 21,
+      "title": "TIIMBE nyimboo zotamanda",
+      "writer": "--",
+      "rating": 0,
+      "tags": ["nyimbo", "Yohane 3:16"],
+      "crossReference": [],
+      "content": {
+        "verses": [
+          {
+            "number": 1,
+            "lines": [
+              "TIIMBE nyimbo zotamanda,",
+              "Mulungu wathu wabwino;",
+              "Pakuti akondana nao,",
+              "Anthu okhala pa dziko",
+              "Wakukondedwa kalero;",
+              "Kutiphunzitsa ife tonse,",
+              "Za chikondano chakecho."
+            ]
+          },
+          {
+            "number": 2,
+            "lines": [
+              "Mulungu ndiye wa chifundo,",
+              "Adzalandira onsewo;",
+              "Akuulula mphulupulu,",
+              "Ndi kukondana ndi Yesu.",
+              "Tilondelonde njira yake,",
+              "Yopapatiza yaing'ono;",
+              "Adzatilondolera ndi 'Ye",
+              "Kutifikitsa M'mwambamo."
+            ]
+          },
+          {
+            "number": 3,
+            "lines": [
+              "Pakuoloka mtsinje wa imfa,",
+              "Dzanja Mbuyathu agwira;",
+              "Tikadagwira ntchito zake,",
+              "Atipatsatu kolona.",
+              "Komwe kulibe masautso,",
+              "Pena misonzi maliro;",
+              "Mulungu tidzam'tamandira,",
+              "inde kosalekezanso."
+            ]
+          }
+        ],
+        "chorus": null
+      }
+    },
+    {
       
     }
   ]
