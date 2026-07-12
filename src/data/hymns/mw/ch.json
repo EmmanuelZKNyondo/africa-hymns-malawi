@@ -905,6 +905,83 @@
           ]
         }
       }
+    },
+    {
+      "number": 21,
+      "title": "KUZANI Mlungu",
+      "previous_version_number": 18,
+      "writer": "--",
+      "tags": ["nyimbo", "1 Akorinto 15:47"],
+      "crossReference": [],
+      "rating": 0,
+      "content": {
+        "verses": [
+          {
+            "number": 1,
+            "lines": [
+              "KUZANI Mlungi M'mwambamo,",
+              "M'tambande m'kuyanso.",
+              "Nzozizwa nkhani zakezo,",
+              "Nk=jolimba ntchitoyo."
+            ]
+          },
+          {
+            "number": 2,
+            "lines": [
+              "Pochimwa anthu onsewo,",
+              "Nja Mlungu nzeruyi;",
+              "Adamu wachiwiriyo,",
+              "Wathetsa tchimoli."
+            ]
+          },
+          {
+            "number": 3,
+            "lines": [
+              "Thupi la mwazi wathu 'li,",
+              "Lochimwa kalelo;",
+              "Labweranso kunkhondoyi,",
+              "Laposa monsemo."
+            ]
+          },
+          {
+            "number": 4,
+            "lines": [
+              "Choposa nalo thupilo,",
+              "Chikhale momwemu;",
+              "Chiyeretsetsa m'katimo,",
+              "Ndi Mlungu Iyeyu."
+            ]
+          },
+          {
+            "number": 5,
+            "lines": [
+              "Anatikondakonda 'Ye,",
+              "Ndi Mlungu Iyeyo;",
+              "Anatifera anthu'fe,",
+              "Ndi munthu Iyenso."
+            ]
+          },
+          {
+            "number": 6,
+            "lines": [
+              "Ndi m'munda muja chete, phee!",
+              "Pamtanda pati njo!",
+              "Anaphunzitsa 'bale'fe,",
+              "Titero ifenso."
+            ]
+          },
+          {
+            "number": 7,
+            "lines": [
+              "Kuzani Mlungu M'mwambamo,",
+              "M'tamande m'kuyanso;",
+              "Nzozizwa nkhani zakezo,",
+              "Njolimba ntchitoyo."
+            ]
+          }
+        ],
+        "chorus": null
+      }
     }
   ]
 }
