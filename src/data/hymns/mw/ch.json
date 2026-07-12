@@ -534,6 +534,141 @@
           ]
         }
       }
+    },
+    {
+      "number": 14,
+      "previous_version_number": 12,
+      "title": "Ife tonse tiyamike Mlunguyo",
+      "writer": "",
+      "rating": 0,
+      "tags": ["nyimbo"],
+      "content": {
+        "verses": [
+          {
+            "number": 1,
+            "lines": [
+              "MTIMA wanga uyamike,",
+              "Mfumu ya Kumwambako,",
+              "Anandiwombola ine;",
+              "Nanditsuka m'mtimamo."
+            ]
+          },
+          {
+            "number": 2,
+            "lines": [
+              "Tiyamike Mlungu wathu,",
+              "Kaamba ka chifundocho;",
+              "Nthawi zonse sasinthika,",
+              "Mlungi wathu yemweyo."
+            ]
+          },
+          {
+            "number": 3,
+            "lines": [
+              "Nthawi zonse monga 'Tate",
+              "Atisamaliratu;",
+              "Atisunga m'manja mwake",
+              "Atipulumutsatu."
+            ]
+          },
+          {
+            "number": 4,
+            "lines": [
+              "Anthu a mitundu yonse,",
+              "Ndiponso a Kumwamba;",
+              "Yamikani Mlungu wathu",
+              "Ndiye wakukomatu."
+            ]
+          },
+          {
+            "number": "last_chorus",
+            "lines": [
+              "Anthu onse, anthu onse,",
+              "Yamikani Mlunguyo."
+            ]
+          }
+        ],
+        "chorus": {
+          "lines": [
+            "Ife tonse, ife tonse",
+            "Tiyamike Mlunguyo,"
+          ]
+        }
+      }
+    },
+    {
+      "number": 15,
+      "previous_version_number": 13,
+      "title": "Yehova ndiye M'busa wanga",
+      "writer": "",
+      "rating": 0,
+      "tags": ["nyimbo", "Masalimo 23"],
+      "content": {
+        "verses": [
+          {
+            "number": 1,
+            "lines": [
+              "YEHOVA ndiye M'busa wanga,",
+              "Sin'ngasowe konse;",
+              "Andigonetsa pali busa",
+              "La misipu yonse."
+            ]
+          },
+          {
+            "number": 2,
+            "lines": [
+              "Kumadzi kuli njiratu,",
+              "Andiyendetsa bwino;",
+              "Nalimbikitsa moyo wanga,",
+              "Ndi chifundo chake."
+            ]
+          },
+          {
+            "number": 3,
+            "lines": [
+              "Pabande lolunjika,",
+              "Andilondolera njira;",
+              "Chifukwacho cha dzina lake,",
+              "Anandisungira."
+            ]
+          },
+          {
+            "number": 4,
+            "lines": [
+              "Chigwa choopsacho cha imfa,",
+              "Ndikachilowera;",
+              "Ndilibe mantha, muli ndi'ne",
+              "Ndodo ndiigwira."
+            ]
+          },
+          {
+            "number": 5,
+            "lines": [
+              "Pamaso pa adaniwo,",
+              "Mwayala gome langa;",
+              "E, mutu mwaudzoza,",
+              "Chisefuka chikho changa."
+            ]
+          },
+          {
+            "number": 6,
+            "lines": [
+              "Zabwino ndi zokoma,",
+              "Zinditsata chitsatire;",
+              "E, m'nyumba ya Yehova,",
+              "Ndidzakhala chikalire."
+            ]
+          }
+        ],
+        "chorus": {
+          "lines": [
+            "(Ndiye M'busa wanga,",
+            "Ndiye M'busa wanga!,",
+            "Yehova ndiye M'busa wanga.",
+            "Sin'ngasowe konse)"
+          ]
+        }
+      }
     }
   ]
 }
