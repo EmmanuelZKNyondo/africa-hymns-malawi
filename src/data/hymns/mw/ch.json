@@ -976,12 +976,63 @@
               "Kuzani Mlungu M'mwambamo,",
               "M'tamande m'kuyanso;",
               "Nzozizwa nkhani zakezo,",
-              "Njolimba ntchitoyo."
+              "Njolimba ntchitoyo"
             ]
           }
         ],
         "chorus": null
       }
+    },
+    {
+      "number": 22,
+      "title": "MUZONSE abale yamikani",
+      "previous_version_number": null,
+      "writer": "--",
+      "rating": 0,
+      "tags": ["nyimbo", "1 Atesalonika 5:18"],
+      "crossReference": [],
+      "content": {
+        "verses": [
+          {
+            "number": 1,
+            "lines": [
+              "MUZONSE abale yamikani,",
+              "Mulungu ndi wamkulu,",
+              "Adziwa kupatsa anthu ake,",
+              "Zomwe iwo akuzisowa."
+            ]
+          },
+          {
+            "number": 2,
+            "lines": [
+              "Muzonse abale yamikani,",
+              "Mulungu ndi wamkulu,",
+              "Adziwa kuveka anthu ake,",
+              "Ngakhale nyama zakuthengo."
+            ]
+          },
+          {
+            "number": 3,
+            "lines": [
+              "Muzonse abale yamikani,",
+              "Mulungu ndi wamkulu,",
+              "Adziwa kupatsa mphatso zake,",
+              "Ngakhalenso kwa tiwanato."
+            ]
+          }
+        ],
+        "chorus": {
+          "lines": [
+            "Akhristu pamavuto tiyeni timulemekeze,",
+            "pamtendere tiyeni timulemekeze.",
+            "Maso ake ali pa anthu,",
+            "Okhala m'dziko lapansi."
+          ]
+        }
+      }
+    },
+    {
+      
     }
   ]
 }
