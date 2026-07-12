@@ -1191,6 +1191,101 @@
           ]
         }
       }
+    },
+    {
+      "number": 26,
+      "previous_version_number": 25,
+      "title": "NDILIKULEMEKEZA",
+      "writer": "--",
+      "rating": 0,
+      "tags": ["nyimbo", "Luka 1:46-56"], 
+      "crossReference": [],
+      "content": {
+        "verses": [
+          {
+            "number": 1,
+            "lines": [
+              "NDIKULEMEKEZA,",
+              "Ambuye Mpulumutsi wanga;",
+              "Moyo ndi mtima wanga, ndili",
+              "kukondwa mwa Mulungu."
+            ]
+          },
+          {
+            "number": 2,
+            "lines": [
+              "Ndiye anayang'ana,",
+              "Umphawi wamdzakazi wake;",
+              "Onse adzandiyesa,",
+              "Ine wodwala nsiku zonse."
+            ]
+          },
+          {
+            "number": 3,
+            "lines": [
+              "Ndiye wamphamvu zonse,",
+              "andichitira zazikulu;",
+              "Dzina la Ambuyanga,",
+              "liri loyera kopambana."
+            ]
+          },
+          {
+            "number": 4,
+            "lines": [
+              "Ndiye amachitira,",
+              "chifundo anthu a mibadwo;",
+              "E! a mibadwo yonse,",
+              "yakumuopa ndi kumvera."
+            ]
+          },
+          {
+            "number": 5,
+            "lines": [
+              "Iye amazichita,",
+              "zamphamvu nawo mkono wake;",
+              "Iye abalalitsa,",
+              "onyada ndi odzitamawo."
+            ]
+          },
+          {
+            "number": 6,
+            "lines": [
+              "Iye atsitsa kunsi,",
+              "mafumu kumipando yawo;",
+              "Ndipo akweza onse,",
+              "akufatsa ndi osauka."
+            ]
+          },
+          {
+            "number": 7,
+            "lines": [
+              "Iye amakhutitsa,",
+              "anjala ndi zabwino zake;",
+              "Ndi olemera onse,",
+              "nawaingitsa opanda kanthu."
+            ]
+          },
+          {
+            "number": 8,
+            "lines": [
+              "Monga anapangana,",
+              "ponena kwa makolo athu;",
+              "Ali kuthandizadi,",
+              "lero ana 'ke a Yakobo."
+            ]
+          },
+          {
+            "number": 9,
+            "lines": [
+              "Poti akumbukira,",
+              "atate wathu Abrahamu;",
+              "inde chifundo chokha,",
+              "akuchitira ana ake."
+            ]
+          }
+        ],
+        "chorus": null
+      }
     }
   ]
 }
