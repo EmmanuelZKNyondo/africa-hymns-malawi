@@ -1148,6 +1148,49 @@
           ]
         }
       }
+    },
+    {
+      "number": 25,
+      "title": "ANGELO amayimba",
+      "previous_version_number": null,
+      "writer": "--",
+      "rating": 0,
+      "crossReference": [],
+      "tags": ["nyimbo"],
+      "content": {
+        "verses": [
+          {
+            "number": 1,
+            "lines": [
+              "ANGELO amayimba",
+              "Nyimbo zawo, M'mwambamo,",
+              "Kulemekeza Mlungu,",
+              "Waulemelero."
+            ]
+          },
+          {
+            "number": 2,
+            "lines": [
+              "ifenso timayimba,",
+              "Nyimbo zathu, pansipa;",
+              "Kulemekeza Mlungu,",
+              "Waulemelero."
+            ]
+          }
+        ],
+        "chorus": {
+          "lines": [
+            "(B) Poyimba atero,",
+            "(O) Aleluya,",
+            "(B) Mulungu wathu,",
+            "(O) Aleluya,",
+            "(B) Wopambanayo,",
+            "(O) Aleluya Aleluya,",
+            "Kwa Mulungu",
+            "Wa M'mwamba."
+          ]
+        }
+      }
     }
   ]
 }
