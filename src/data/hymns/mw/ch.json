@@ -1084,7 +1084,70 @@
       }
     },
     {
-      
+      "number": 24,
+      "previous_version_number": 23,
+      "title": "Timuyimbire nyimbo",
+      "writer": "--",
+      "crossReference": [],
+      "tags": ["nyimbo"],
+      "rating": 0,
+      "content": {
+        "verses": [
+          {
+            "number": 1,
+            "lines": [
+              "TITAME Mlungu wakumwamba,",
+              "Timuyimbire nyimbo;",
+              "Kukoma kwake kwatipatsa,",
+              "Zonse tili nazo"
+            ]
+          },
+          {
+            "number": 2,
+            "lines": [
+              "Poyamba paja analenga,",
+              "Zonse m'dziko muno;",
+              "Tsopano lomwe azisunga,",
+              "Zonse zili moyo."
+            ]
+          },
+          {
+            "number": 3,
+            "lines": [
+              "Tinasokera ngati nkhosa,",
+              "Moyo tinataya;",
+              "Tinakondwera ndi zoipa,",
+              "Zonse tinatsata."
+            ]
+          },
+          {
+            "number": 4,
+            "lines": [
+              "Komweko titasaukira,",
+              "Titafuna kufa;",
+              "Atate anatilondola",
+              "Naitana ife."
+            ]
+          },
+          {
+            "number": 5,
+            "lines": [
+              "Tiyeni tizipita kwathu,",
+              "Tisasokerenso;",
+              "Tilape m'mtima kuti tikakhale",
+              "Ndi Mulungu."
+            ]
+          }
+        ],
+        "chorus": {
+          "lines": [
+            "(Timuyimbire nyimbo,",
+            "Timuyimbire nyimbo!",
+            "Kukoma kwake kwatipatsa",
+            "zonse tili nazo.)"
+          ]
+        }
+      }
     }
   ]
 }
