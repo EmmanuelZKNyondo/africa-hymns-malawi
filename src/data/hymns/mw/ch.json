@@ -1286,6 +1286,59 @@
         ],
         "chorus": null
       }
+    },
+    {
+      "number": 27,
+      "title": "LEMEKEZANI Yehova",
+      "writer": "--",
+      "rating": 0,
+      "previous_version_number": null,
+      "tags": ["nyimbo"],
+      "crossReference": [],
+      "content": {
+        "verses": [
+          {
+            "number": 1,
+            "lines": [
+              "LEMEKEZANI Yehova,",
+              "Antchito akenu;",
+              "M'mabwalo a nyumba yake,",
+              "Muyimiliramo."
+            ]
+          },
+          {
+            "number": 2,
+            "lines": [
+              "Lemekezani Yehova,",
+              "Pakuti ngwabwino;",
+              "Muyimbire zom'tamanda,",
+              "Mokondweretsa 'Ye."
+            ]
+          },
+          {
+            "number": 3,
+            "lines": [
+              "Lemekezani Yehova,",
+              "Osankhidwa ake;",
+              "Musapembedze mafano,",
+              "Koma Mlungu yekha."
+            ]
+          },
+          {
+            "number": 4,
+            "lines": [
+              "Lemekezani Yehova,",
+              "Mpatseni ulemu.",
+              "Mumuyimbire Yehova,",
+              "Kunthawi zonsezo."
+            ]
+          }
+        ],
+        "chorus": null
+      }
+    },
+    {
+      "number": 28
     }
   ]
 }
