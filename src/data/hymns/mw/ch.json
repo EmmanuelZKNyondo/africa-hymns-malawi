@@ -1486,7 +1486,7 @@
       "previous_version_number": 311,
       "writer": "--",
       "rating": 4.5,
-      "tags": ["nyimbo", "Masalimo 23"],
+      "tags": ["nyimbo", "Masalimo 23", "Yehova", "M'busa", "Ndilibe kusowa"],
       "crossReference": [],
       "content": {
         "verses": [
@@ -1555,6 +1555,538 @@
           }
         ],
         "chorus": null
+      }
+    },
+    {
+      "number": 31,
+      "title": "MULUNGU Wamkulu",
+      "writer": "--",
+      "previous_version_number": null,
+      "rating": 0,
+      "tags": ["nyimbo"],
+      "crossReference": [],
+      "content": {
+        "verses": [
+          {
+            "number": 1,
+            "lines": [
+              "MULUNGU Wamkulu,",
+              "Ndi waulemudi;",
+              "Ndipo zanu zonse,",
+              "Ndi zaulemunso."
+            ]
+          },
+          {
+            "number": 2,
+            "lines": [
+              "Ife tasonkhana,",
+              "M'nyumba muno lero;",
+              "Kupembedza Inu,",
+              "Mwaulemudi."
+            ]
+          },
+          {
+            "number": 3,
+            "lines": [
+              "Tipempha kwa Inu,",
+              "Mulungu Wamkulu;",
+              "Kuti mutsekule,",
+              "Mitima yathuyi."
+            ]
+          },
+          {
+            "number": 4,
+            "lines": [
+              "Mutiunikire,",
+              "Pomva mawu anu;",
+              "Kuti akhalitse,",
+              "M'mitima yathuyi."
+            ]
+          },
+          {
+            "number": 5,
+            "lines": [
+              "Tikudzipereka,",
+              "Modzichepetsadi;",
+              "Mutidalitsetu,",
+              "Ku nthawi zonsezo."
+            ]
+          }
+        ],
+        "chorus": {
+          "lines": [
+            "Mulungu Wamkulu;",
+            "Tikugwadirani.",
+            "Mkati mwa nyubayi,",
+            "Mlemekezedwedi."
+          ]
+        }
+      }
+    },
+    {
+      "number": 32,
+      "title": "YENDANI, Mfumu ya mtendere",
+      "writer": "--",
+      "previous_version_number": 350,
+      "rating": 0,
+      "tags": ["nyimbo"],
+      "crossReference": [],
+      "content": {
+        "verses": [
+          {
+            "number": 1,
+            "lines": [
+              "YENDANI, Mfumu ya mtendere,",
+              "Anthu akuyimbirani;",
+              "Afuuletu Osana!",
+              "Agonjeranso anthuwo."
+            ]
+          },
+          {
+            "number": 2,
+            "lines": [
+              "Yendani, Munthu wachisoni,",
+              "M'mudzi wa Yerusalemu;",
+              "Angelo amapenya 'nu",
+              "M'mene mwafera anthuwo."
+            ]
+          },
+          {
+            "number": 3,
+            "lines": [
+              "Yendanitu Wansembe wathu,",
+              "Mtanda wanu mwanyamula;",
+              "Watisandukira dalo,",
+              "Watitengera moyowo."
+            ]
+          },
+          {
+            "number": 4,
+            "lines": [
+              "Yenani mwaulemerero,",
+              "Akulandirani mphoto",
+              "Moyo wanu wosatha,",
+              "Watilonjezera moyo."
+            ]
+          }
+        ],
+        "chorus": {
+          "lines": [
+            "Yendanitu m'ulemudi,",
+            "Pulumutsani anthuwo."
+          ]
+        }
+      }
+    },
+    {
+      "number": 33,
+      "title": "Tiyeni tim'gwadire",
+      "previous_version_number": 24,
+      "writer": "--",
+      "rating": 0,
+      "tags": ["nyimbo", "Luka 2:15"],
+      "crossReference": [],
+      "content": {
+        "verses": [
+          {
+            "number": 1,
+            "lines": [
+              "OONADI mtima,",
+              "Dzani mokondwera,",
+              "Tiyeni, tiyenitu ku Betlehemu;",
+              "Modyera ng'ombe,",
+              "Muli Mfumu yathu."
+            ]
+          },
+          {
+            "number": 2,
+            "lines": [
+              "Mulungu wamkulu,",
+              "Wakuyerayera,",
+              "Kubadwa mwa mkazi sanakane 'yi",
+              "Mwana wa 'Tate",
+              "sanalungedwadi."
+            ]
+          },
+          {
+            "number": 3,
+            "lines": [
+              "Angelo kwezani,",
+              "Nyimbo zanu zonse,",
+              "M'mwambamo mumveke zoyamikazo;",
+              "Lemekezani,",
+              "Mlungu wa Kumwamba."
+            ]
+          },
+          {
+            "number": 4, 
+            "lines": [
+              "M'dzikomo Ambuye,",
+              "M'nabadwira ife,",
+              "Ulemu wosatha Muyeneradi;",
+              "Mawu a 'Tate",
+              "Munalowa m'thupi."
+            ]
+          }
+        ],
+        "chorus": {
+          "lines": [
+            "Tiyeni tim'gwadire,",
+            "Tiyeni tim'gwadire,",
+            "Tiyeni tim'gwadire,",
+            "Khristuyo."
+          ]
+        }
+      }
+    },
+    {
+      "number": 34,
+      "title": "AMITHENGA a Mulungu",
+      "writer": "--",
+      "rating": 0,
+      "previous_version_number": 26,
+      "tags": ["nyimbo"],
+      "crossReference": [],
+      "content": {
+        "verses": [
+          {
+            "number": 1,
+            "lines": [
+              "AMITHENGA a Mulungu,",
+              "Anaimba nyimbo yawo;",
+              "Posonkhana m'mlengalenga,",
+              "natitu usiku womwe;",
+              "\"Onse azilemekeza,",
+              "Mlungu wa Kumwambamwamba;",
+              "Akhalebe ndi mtendere,",
+              "anthu ali ponseponse.\"",
+              "__Amithenga anaimba,__", "__Ndi usiku m'mlengalenga.__"
+            ]
+          },
+          {
+            "number": 2,
+            "lines": [
+              "Anamva abusa omwe,",
+              "Anaweta nkhosa zao;",
+              "Mthenga nati: \"Musaope,",
+              "Mumve ndikufotokoza;",
+              "Wabadwa usiku uno,",
+              "Yesu Khristu Ambuyathu,",
+              "Anabadwa m'Betlehemu.\"",
+              "__Amithenga anaimba,__", "__Ndi usiku m'mlengalenga.__"
+            ]
+          },
+          {
+            "number": 3,
+            "lines": [
+              "Yesu ndinu Mbuye wathu,",
+              "Muasiya za Kumwamba;",
+              "Munakhala mwana kuno,",
+              "M'natifera mwaufulu;",
+              "Inu nonse a mithenga",
+              "Inu mum'tamande Iye;",
+              "Anthu onse ali pansi,",
+              "Adze akondane naye.",
+              "__Amithenga anaimba,__", "__Ndi usiku m'mlengalenga.__"
+            ]
+          }
+        ],
+        "chorus": null
+      }
+    },
+    {
+      "number": 35,
+      "title": "Mtendere pa dziko lonse",
+      "writer": "--",
+      "rating": 0,
+      "previous_version_number": null,
+      "tags": ["nyimbo", "mateyu 2:1-2"],
+      "crossReference": [],
+      "content": {
+        "verses": [
+          {
+            "number": 1,
+            "lines": [
+              "KODI mwaona chiyani,",
+              "Anzeru a kum'mawa?",
+              "Nyenyezi'yo yaoneka,",
+              "Isonyeza njirayo."
+            ]
+          },
+          {
+            "number": 2,
+            "lines": [
+              "Nyenyeziyo pooneka,",
+              "Isonyeza chikondi;",
+              "Kuti Yesu wabadwadi,",
+              "Mu kholalo la ng'ombe."
+            ]
+          },
+          {
+            "number": 3,
+            "lines": [
+              "Ndipo iye olandira,",
+              "Ambuye wathu Yesu;",
+              "Akhalanso nao zedi,",
+              "Moyowo wochuluka."
+            ]
+          }
+        ],
+        "chorus": {
+          "lines": [
+            "Mtendere pa dziko lonse,",
+            "Mtendere pa dziko lonse;",
+            "Kwa anthu onse amene,",
+            "Alandira Yesuyo."
+          ]
+        }
+      }
+    },
+    {
+      "number": 36,
+      "title": "AMBUYE, tsopano lino monga mwa mawu anu aja",
+      "writer": "--",
+      "rating": 0,
+      "previous_version_number": 28,
+      "crossReference": [],
+      "tags": ["nyimbo", "Luka 2:25-32"],
+      "content": {
+        "verses": [
+          {
+            "number": 1,
+            "lines": [
+              "AMBUYE, tsopano lino,", 
+              " monga mwa mawu anu aja;",
+              "Lolani kapolo wanu,", 
+              " ndikachoketu mumtendere."
+            ]
+          },
+          {
+            "number": 2,
+            "lines": [
+              "Chifukwa chipulumutso,",
+              " chanu mwandionetsa zedi;",
+              "Chimene munachikonza,",
+              " akachione anthu onse."
+            ]
+          },
+          {
+            "number": 3,
+            "lines": [
+              "Ndi nyali yakuwalitsa,",
+              " omwe sadziwa mawu anu;",
+              "Ndiwo ulemelero,",
+              " wa Israyeli mpingo wanu."
+            ]
+          }
+        ],
+        "chorus": null
+      }
+    },
+    {
+      "number": 37,
+      "title": "Kubadwa kwa Yesu",
+      "writer": "--",
+      "rating": 0,
+      "previous_version_number": 325,
+      "crossReference": [],
+      "tags": ["nyimbo", "Luka 2:8-20"],
+      "content": {
+        "verses": [
+          {
+            "number": 1,
+            "lines": [
+              "YESU anali khanda,",
+              "M'Betlehemumo;",
+              "Mgelo anasimba za,",
+              "Kubadwa kwake."
+            ]
+          },
+          {
+            "number": 2,
+            "lines": [
+              "Mgelo anatumidwa,",
+              "Kuwasimbira;",
+              "Abusa a nkhosa za,",
+              "Kubadwa kwake."
+            ]
+          },
+          {
+            "number": 3,
+            "lines": [
+              "Anapita nasiya",
+              "Nkhosa zawozo;",
+              "Anapita kumudzi,",
+              "Kukam'lambira."
+            ]
+          },
+          {
+            "number": 4,
+            "lines": [
+              "\"Tadodoma abusa ife,", 
+              "Kwachitikanji?", 
+              "Mwazisiyira yani,", 
+              "Nkhosa zanuzo?\""
+            ]
+          },
+          {
+            "number": 5,
+            "lines": [
+              "\"Posunga nkhosa ife,",
+              "Kubusa kwathu;", 
+              "Mngelo anasimba za,",
+              "Kubadwa kwake.\""
+            ]
+          }
+        ],
+        "chorus": {
+          "lines": [
+            "Kubadwa kwa Yesu,",
+            " M'Betlehemumo;",
+            "Khandalo lidagona,",
+            " M'khola la ng'ombe."
+          ]
+        }
+      }
+    },
+    {
+      "number": 38,
+      "title": "A M'mwamba ayimbe",
+      "writer": "--",
+      "rating": 0,
+      "previous_version_number": null,
+      "tags": ["nyimbo", "Luka 2:8-20"],
+      "crossReference": [],
+      "content": {
+        "verses": [
+          {
+            "number": 1,
+            "lines": [
+              "ANGELO aimba,",
+              "Akuimba m'mwamba;",
+              "Ifenso tiimbe,",
+              "Mongatu angelo;",
+              "Tiyeni tiimbe,",
+              "Mongatu angelo;",
+              "Ali kuimba;",
+              "Za Mpulumutsi."
+            ]
+          },
+          {
+            "number": 2,
+            "lines": [
+              "Abusa anama=va,",
+              "Uthenga wabwino;",
+              "Wakubadwa kwake,",
+              "Kwa yesu Mbuyeyo;",
+              "\"Mukampeza Iye,",
+              "Ku Betlehemuko;",
+              "Atagonatu,",
+              "Modyera ng'ombe.\""
+            ]
+          },
+          {
+            "number": 3,
+            "lines": [
+              "Ife tidzapita,",
+              "Kwa Ambuye wathu;",
+              "Komwe tidzaimba,",
+              "Mongatu angelo;",
+              "Tiyeni tiimbe,",
+              "Mongatu angelo;",
+              "Ali kuimba,",
+              "Za Mpulumutsi."
+            ]
+          }
+        ],
+        "chorus": {
+          "lines": [
+            "A M'mwamba ayimbe,",
+            "Ifenso tiimbe;",
+            "A Yesu akondwe,",
+            "Mulungu anene, \"Amen.\""
+          ]
+        }
+      }
+    },
+    {
+      "number": 39,
+      "title": "Mbuye Yesu lowani 'mtima",
+      "writer": "--",
+      "rating": 0,
+      "previous_version_number": 336,
+      "tags": ["nyimbo", "Luka 2:6"],
+      "crossReference": [],
+      "content": {
+        "verses": [
+          {
+            "number": 1,
+            "lines": [
+              "MUNASIYATU dziko lanulo,",
+              "E, chifukwa cha ine;",
+              "Ndi ku Betlehemuko,",
+              "Pakubadwa Inu,",
+              "M'nyumba zao nakukanani."
+            ]
+          },
+          {
+            "number": 2,
+            "lines": [
+              "Akumwambako naimbitsatu,",
+              "Kukulemekezani;",
+              "Koma monga mwana,",
+              "M'dziko munabadwa,",
+              "Munadzichepetsadi."
+            ]
+          },
+          {
+            "number": 3,
+            "lines": [
+              "Nyama za mthengo ndi mbalamezo,",
+              "Zirinamo mogonamo;",
+              "Koma Mwana Mlungu,",
+              "Analibe nyumba,",
+              "M'mapululu nagonatu."
+            ]
+          },
+          {
+            "number": 4,
+            "lines": [
+              "Munadzera ndi mawu a moyo,",
+              "Akupulumutsani anthu;",
+              "Anakaniza,",
+              "Anasautsa,",
+              "Anapachika Inu."
+            ]
+          },
+          {
+            "number": 5,
+            "lines": [
+              "Mmene mubwera kutiweruza,",
+              "Ndi angelo oimbira;",
+              "Mundiitane,",
+              "Muti, \"Idza 'we,",
+              "Khala nane Kumwamba.\""
+            ]
+          },
+          {
+            "number": "last_chorus",
+            "lines": [
+              "Mtima wanga udzakondwera,",
+              "Mmene mundilandiranso;",
+              "Mtima wanga udzakondwera,",
+              "Mmene mundilandiranso."
+            ]
+          }
+        ],
+        "chorus": {
+          "lines": [
+            "Mbuye Yesu, lowani 'mtima,",
+            "Nyumba yanu ndi mtima'nga",
+            "Mbuye Yesu, lowani 'mtima,",
+            "Nyumba yanu ndi mtima'nga"
+          ]
+        }
       }
     }
   ]
