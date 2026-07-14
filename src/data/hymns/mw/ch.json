@@ -1479,6 +1479,83 @@
           ]
         }
       }
+    },
+    {
+      "number": 30,
+      "title": "YEHOVA M'busa wangadi",
+      "previous_version_number": 311,
+      "writer": "--",
+      "rating": 4.5,
+      "tags": ["nyimbo", "Masalimo 23"],
+      "crossReference": [],
+      "content": {
+        "verses": [
+          {
+            "number": 1,
+            "lines": [
+              "YEHOVA M'busa wangadi,",
+              "Ndilibe kusowa;",
+              "Andigonetsa bwinoli,",
+              "Mumsipu wokoma.", "(Mumsipu wokoma)"
+            ]
+          },
+          {
+            "number": 2,
+            "lines": [
+              "Kumadzi ake odikha,",
+              "Anditsogolera;",
+              "Ndi moyo wanga wofoka,",
+              "Awulimbikitsa.", "(Awulimbikitsa)"
+            ]
+          },
+          {
+            "number": 3,
+            "lines": [
+              "Anditsogolera m'njira,",
+              "Zakulungamazo;",
+              "Chifukwa changa 'yi koma,",
+              "Cha dzina lakelo.", "(Cha dzina lakelo)"
+            ]
+          },
+          {
+            "number": 4,
+            "lines": [
+              "Ndipyola kodi chikhwawa,",
+              "Cha mthunzi wa imfa?",
+              "Ndiribe mantha ngati 'nu",
+              "Mundiperekeza.", "(Mundiperekeza)"
+            ]
+          },
+          {
+            "number": 5, 
+            "lines": [
+              "Chakudya changa chabwino,",
+              "Mwandikonzera pha!",
+              "Pamaso pa adaniwo,",
+              "Mudyetsa mtimanga.", "(Mudyetsa mtimanga)"
+            ]
+          },
+          {
+            "number": 6,
+            "lines": [
+              "Mwadzodza mutu wanga ndi,",
+              "Mafuta abwino;",
+              "Mwadzadza chikho changadi,",
+              "Inde chisefuka.", "(Inde chisefuka)"
+            ]
+          },
+          {
+            "number": 7,
+            "lines": [
+              "Zokoma ndi zakuyanja,",
+              "Zidzanditsatako;",
+              "Ndikhala m'nyumba ya Mlungu,",
+              "Ku nthawi zonsezo.", "(Ku nthawi zonsezo.)"
+            ]
+          }
+        ],
+        "chorus": null
+      }
     }
   ]
 }
