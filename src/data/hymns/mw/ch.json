@@ -2088,6 +2088,247 @@
           ]
         }
       }
+    },
+    {
+      "number": 40,
+      "title": "KAMWANA Yesu 'nabadwa",
+      "previous_version_number": 351,
+      "writer": "--",
+      "rating": 0,
+      "tags": ["nyimbo"],
+      "crossReference": [],
+      "content": {
+        "verses": [
+          {
+            "number": 1,
+            "lines": [
+              "KAMWANA Yesu 'nabadwa,",
+              "Ndi Iye Mlungu wamphamvu;",
+              "Angelo anapembedza,",
+              "Mwana wakhanda Iyeyu."
+            ]
+          },
+          {
+            "number": 2,
+            "lines": [
+              "Kamwana kaja 'nayamba,",
+              "Kuonetsera Atate;",
+              "Lero anena Kumwamba;",
+              "\"Tiwana tidze kwa Ine\""
+            ]
+          },
+          {
+            "number": 3,
+            "lines": [
+              "Tibwera ndi tiwanato,",
+              "Kukabatiza 'menewa;",
+              "Muwachitire chifundo,",
+              "M'wapatse Mzimu Woyera."
+            ]
+          },
+          {
+            "number": 4,
+            "lines": [
+              "Angelo anu asunga,",
+              "Tiwana tathu tofoka;",
+              "Pa njira yanu tiyenda,",
+              "Mulembe m'Mwamba maina."
+            ]
+          },
+          {
+            "number": 5,
+            "lines": [
+              "Mukonda nyimbo za wana,",
+              "Mokoma amaimbatu;",
+              "Ndi wana athu atama,",
+              "Atate, Mwana ndi Mzimu."
+            ]
+          }
+        ],
+        "chorus": null
+      }
+    },
+    {
+      "number": 41,
+      "title": "MKATI mwa zovuta zathu",
+      "writer": "--",
+      "rating": 0,
+      "previous_version_number": 29,
+      "tags": ["nyimbo", "Mateyu 4:19"],
+      "crossReference": [],
+      "content": {
+        "verses": [
+          {
+            "number": 1,
+            "lines": [
+              "MKATI mwa zovuta zathu,",
+              "Yesu aitana ife,",
+              "Tsiku lonse amanena;",
+              "\"Tsata Ine mkhristu iwe.\""
+            ]
+          },
+          {
+            "number": 2,
+            "lines": [
+              "Kale ophunzira ake,",
+              "Namvanso kunyanja kwawo,",
+              "Zinthu zonse anasiya,",
+              "Kutsatira Mbuye wawo."
+            ]
+          },
+          {
+            "number": 3,
+            "lines": [
+              "Yesu atiuza ife,",
+              "Tikakonda chuma chokha,",
+              "Ati Yesu: \"Mwana wanga.",
+              "Undikondetu koposa.\""
+            ]
+          },
+          {
+            "number": 4,
+            "lines": [
+              "Mwachimwemwe, mwachisoni,",
+              "Pogwiritsa ntchito zonse;",
+              "Aitana Mpulumutsi,",
+              "Kuti tidzim'konda tonse."
+            ]
+          },
+          {
+            "number": 5,
+            "lines": [
+              "Yesu aitana ife,",
+              "Mbuye, mutimvere ndithu;",
+              "Tipereke mtima wathu,",
+              "Tikondane lero ndithu."
+            ]
+          }
+        ],
+        "chorus": null
+      }
+    },
+    {
+      "number": 42,
+      "title": "SENZANI mtanda wanuwu",
+      "writer": "--",
+      "previous_version_number": 31,
+      "rating": 0,
+      "tags": ["nyimbo"],
+      "crossReference": [],
+      "content": {
+        "verses": [
+          {
+            "number": 1,
+            "lines": [
+              "SENZANI mtanda wanuwu,",
+              "Atero Yesu Mbuyathu;",
+              "\"Mukanditsata Inetu,",
+              "Mudzikanize nokhanu\""
+            ]
+          },
+          {
+            "number": 2,
+            "lines": [
+              "\"Senzani mtanda wanuwu\"",
+              "Musawopsedwe nawotu;",
+              "Mphamvu za Yesu nzanunso;",
+              "Limbani mtima wanuwo."
+            ] 
+          },
+          {
+            "number": 3,
+            "lines": [
+              "\"Senzani mtanda wanuwu,\"",
+              "Bwanji manyazi mumva'nu;",
+              "Yesu anapiliratu,",
+              "Kuti mupuumukedi."
+            ]
+          },
+          {
+            "number": 4,
+            "lines": [
+              "\"Senzani mtanda wanuwu,\"",
+              "Nawo muyende chetetu;",
+              "Mutsogoledwe nawonso,",
+              "Kwanu Kumwamba komweko"
+            ]
+          },
+          {
+            "number": 5,
+            "lines": [
+              "\"Senzani mtanda wanuwu,\"",
+              "Tsatani Yesu m'njiramu;",
+              "Iye wakusalemayo,",
+              "Ndiye alandiridwadi."
+            ]
+          }
+        ],
+        "chorus": null
+      }
+    },
+    {
+      "number": 43,
+      "title": "Bwerera iwe wokondedwa",
+      "writer": "--",
+      "rating": 0,
+      "tags": ["nyimbo"],
+      "previous_version_number": null,
+      "crossReference": [],
+      "content": {
+        "verses": [
+          {
+            "number": 1,
+            "lines": [
+              "GETSEMANI, Getsemani,",
+              "Ambuye Yesu,",
+              "Zedi napemphera;",
+              "Kuti chikhocho chim'pitilire,",
+              "Chili pafupi naye."
+            ]
+          },
+          {
+            "number": 2,
+            "lines": [
+              "Pamtandapo, pamtandapo,",
+              "Ambuye Yesu,",
+              "Zedi napemphera;",
+              "Kupempherera anthu ochimwa,",
+              "Ndikuwapulumutsa."
+            ]
+          },
+          {
+            "number": 3,
+            "lines": [
+              "Mbuye Yesu, Mbuye Yesu,",
+              "Afuna ife;",
+              "Ndithu tilapedi,",
+              "Zoipa zathu zomwe tichita,",
+              "Kuti tifike M'mwamba"
+            ]
+          }
+        ],
+        "chorus": {
+          "lines": [
+            "Bwerera iwe wokondedwa,",
+            "Golo la imfa, lamasulidwa;",
+            "Yesu afuna utembenuke,",
+            "Nutsate njira yake."
+          ]
+        }
+      }
+    },
+    {
+      "number": 44,
+      "title": "NTHAWIYO anam'gwira Yesu",
+      "writer": "--",
+      "rating": 0,
+      "previous_version_number": null,
+      "tags": ["nyimbo", "Marko 14:43-52"],
+      "crossReference": [],
+      "content": {
+        "verses": [],
+        "chorus": null
+      }
     }
   ]
 }
