@@ -1431,6 +1431,54 @@
         ],
         "chorus": null
       }
+    },
+    {
+      "number": 29,
+      "title": "Chipulumutsocho Chidzera kwa Yesu",
+      "previous_version_number": null,
+      "writer": "--",
+      "rating": 0,
+      "tags": ["nyimbo"],
+      "crossReference": [],
+      "content": {
+        "verses": [
+          {
+            "number": 1,
+            "lines": [
+              "CHIKONDI cha Mulungu wathu,",
+              "N;chodabwitsatu;",
+              "Potuma Mpulumutsi Yesu,",
+              "Kudzatifera."
+            ]
+          },
+          {
+            "number": 2,
+            "lines": [
+              "Angelo a Kumwamba omwe,",
+              "Akuimbira;",
+              "Pamodzi ndi oyera mtima,",
+              "Mokondweradi."
+            ]
+          },
+          {
+            "number": 3,
+            "lines": [
+              "Bwerani m'dzayimbire nyimbo,",
+              "Mokondweradi;",
+              "Timtamande Ambuye wathu,",
+              "Pomuimbira."
+            ]
+          }
+        ],
+        "chorus":{
+          "lines": [
+            "Chipulumutsocho,",
+            "Chidzera kwa Yesu;",
+            "Tiyeni tonsefe,",
+            "Timuimbiretu."
+          ]
+        }
+      }
     }
   ]
 }
