@@ -1338,7 +1338,99 @@
       }
     },
     {
-      "number": 28
+      "number": 28,
+      "title": "MBUYE Ngodalitsika",
+      "writer": "--",
+      "rating": 0,
+      "previous_version_number": 27,
+      "tags": ["nyimbo", "Luka 1:67-79"],
+      "crossReference": [],
+      "content": {
+        "verses": [
+          {
+            "number": 1,
+            "lines": [
+              "MBUYE ngodalitsika,",
+              "Mulungu wa Israyeli ndi'ye",
+              "Poti anayang'ana,",
+              "Nawawombola anthu ake."
+            ]
+          },
+          {
+            "number": 2,
+            "lines": [
+              "napulumutsa tonse,",
+              "Mwa fuko la Davide mwana wake;",
+              "Monga analankhula,",
+              "Mwa aneneri ake."
+            ]
+          },
+          {
+            "number": 3,
+            "lines": [
+              "Adzatipulumutsa,",
+              "Kudzanja la onse akutida;",
+              "Ndipo adzachitira,",
+              "Akulu chifundo ndi chisoni."
+            ]
+          },
+          {
+            "number": 4,
+            "lines": [
+              "Ndiye akumbukira,",
+              "Pangano loyera lake lija;",
+              "Ndi chilumbiro chake,",
+              "Cha kwa Atate, Abrahamu."
+            ]
+          },
+          {
+            "number": 5,
+            "lines": [
+              "Choti tim'tumikire,",
+              "Osaopa 'dani athu;",
+              "Ndi kuyeranso mtima,",
+              "Mwa chilungamo nsiku konse."
+            ]
+          },
+          {
+            "number": 6,
+            "lines": [
+              "Mwana adzakuyesa,",
+              "Mneneritu wa Wamkulukulu;",
+              "Ndi'we udzakonzera,",
+              "Nkira ya Mbuye wa Kumwamba."
+            ]
+          },
+          {
+            "number": 7,
+            "lines": [
+              "udzadziwitsa anthu,",
+              "Za Mpulumutsi wawo yemwe;",
+              "Awakhulupilira,",
+              "Nafafaniza tchimo lawo."
+            ]
+          },
+          {
+            "number": 8,
+            "lines": [
+              "poti Mulungu wathu,",
+              "Ali ndi mtima wa chifundo;",
+              "Ndiye wa Kumwamba komwe,",
+              "Ationetsa m'bandakucha."
+            ]
+          },
+          {
+            "number": 9,
+            "lines": [
+              "powalitsira mwe,",
+              "Ali mu mdima ndi mu imfa;",
+              "Ndi potilunjikitsa,",
+              "Tonse mu njira ya mtendere."
+            ]
+          }
+        ],
+        "chorus": null
+      }
     }
   ]
 }
