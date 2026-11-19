@@ -3206,6 +3206,54 @@
           ]
         }
       }
+    },
+    {
+      "number": 59,
+      "title": "IMVANI uthenga",
+      "writer": "--",
+      "rating": 0,
+      "previous_version_number": null,
+      "tags": ["nyimbo"],
+      "crossReference": [],
+      "content": {
+        "verses": [
+          {
+            "number": 1,
+            "lines": [
+              "IMVANI uthenga,",
+              "Wa imfa ya Yesu;",
+              "Waonadi mavuto,",
+              "Mwana wa Mulunguyo."
+            ]
+          },
+          {
+            "number": 2,
+            "lines": [
+              "Pamtanda Yesuyo,",
+              "Anapachikidwa;",
+              "Wachotsatu tchimolo,",
+              "Kuwombola tonsefe."
+            ]
+          },
+          {
+            "number": 3,
+            "lines": [
+              "M'bale 'we utani,",
+              "Za imfa ya Yesu;",
+              "Kodi sumva chisoni,",
+              "Tembenuka msangatu."
+            ]
+          }
+        ],
+        "chorus": {
+          "lines": [
+            "Tiyeni tipite,",
+            "Tikaone Ambuye;",
+            "Yesu Mwana wa Mulungu,",
+            "Waonadi mavuto."
+          ]
+        }
+      }
     }
   ]
 }
