@@ -2874,6 +2874,47 @@
           ]
         }
       }
+    },
+    {
+      "number": 53,
+      "title": "AMBUYE Yesu anamva chisoni",
+      "writer": "--",
+      "rating": 0,
+      "previous_version_number": null,
+      "tags": ["nyimbo", "Mateyu 26:38"],
+      "crossReference": [],
+      "content": {
+        "verses": [
+          {
+            "number": 1,
+            "lines": [
+              "AMBUYE Yesu anamva chisoni,",
+              "Chifukwa imfa inam'zungulira;",
+              "Anatenga ophunzira atatu,",
+              "Kukam'pempherera."
+            ]
+          },
+          {
+            "number": 2,
+            "lines": [
+              "Yudasi yekha ndiye anazemba,",
+              "Kukaitanatu ankhondo ake;",
+              "Anabweratu ndi mikondo yao,",
+              "Kukam'gwira Yesu."
+            ]
+          },
+          {
+            "number": 3,
+            "lines": [
+              "Lero linonso oipa tonsefe,",
+              "Tikum'pereka Yesu Ambuyeyo;",
+              "Tiyeni tilape machimo athu,",
+              "Atikhululukire."
+            ]
+          }
+        ],
+        "chorus": null
+      }
     }
   ]
 }
