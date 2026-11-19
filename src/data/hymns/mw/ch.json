@@ -2915,6 +2915,65 @@
         ],
         "chorus": null
       }
+    },
+    {
+      "number": 54,
+      "title": "MUNTHU wazisoniyo",
+      "writer": "--",
+      "rating": 0,
+      "previous_version_number": 32,
+      "tags": ["nyimbo", "Yesaya 53:3"],
+      "crossReference": [],
+      "content": {
+        "verses": [
+          {
+            "number": 1,
+            "lines": [
+              "MUNTHU wazisoniyo,",
+              "Tim'tcha dzina lakelo;",
+              "Mpulumutsi linanso,",
+              "Aleluya ndiye Yesu."
+            ]
+          },
+          {
+            "number": 2,
+            "lines": [
+              "Anapeputsidwako,",
+              "Nandifera pa mtanda;",
+              "Anandiwombolayo,",
+              "Aleluya ndiye Yesu."
+            ]
+          },
+          {
+            "number": 3,
+            "lines": [
+              "Ife tinachimwadi,",
+              "Iye sanachimwe'yi;",
+              "Anachotsa tchimoli,",
+              "Aleluya ndiye Yesu."
+            ]
+          },
+          {
+            "number": 4,
+            "lines": [
+              "Anapachikidwatu",
+              "Natha ntchito yakeyo;",
+              "Anakwera M'mwambamo!",
+              "Aleluya ndiye Yesu."
+            ]
+          },
+          {
+            "number": 5,
+            "lines": [
+              "Adzabwera Iyenso,",
+              "Kudzatenga akewo;",
+              "Nyimbo tidzaimbanso,",
+              "Aleluya ndiye Yesu."
+            ]
+          }
+        ],
+        "chorus": null
+      }
     }
   ]
 }
