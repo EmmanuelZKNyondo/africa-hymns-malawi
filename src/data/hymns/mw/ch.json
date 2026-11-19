@@ -2326,7 +2326,48 @@
       "tags": ["nyimbo", "Marko 14:43-52"],
       "crossReference": [],
       "content": {
-        "verses": [],
+        "verses": [
+          {
+            "number": 1,
+            "lines": [
+              "NTHAWIYO anam'gwira Yesu,",
+              "Nthawiyo anam'gwira Yesu,",
+              "Anamudula khutu;",
+              "Malikoyo, Malikoyo,",
+              "Malikoyo, kapolo wa 'nsembe."
+            ]
+          },
+          {
+            "number": 2,
+            "lines": [
+              "Yesuyo anatola khutu,",
+              "Yesuyo anatola khutu;",
+              "Iye namamatiza,",
+              "M'malo mwake, m'malo mwake,",
+              ".M'malo mwake, ayi musatero."
+            ]
+          },
+          {
+            "number": 3,
+            "lines": [
+              "Yesuyo ananena mawu,",
+              "Mawuwo oyankhula Yesu;",
+              "Anati: \"nkhondo yai, \"",
+              "Ophunzira, ophunzira,",
+              "Ophunzira, ai musatero."
+            ]
+          }, 
+          {
+            "number": 4,
+            "lines": [
+              "Nthawiyi ndi yabwino zedi,",
+              "Yolapa machimo athuwa,",
+              "Kutitu tikalowe;",
+              "Kumwambako; kumwambako,",
+              "Kumwambako, inu kwa Atate."
+            ]
+          }
+        ],
         "chorus": null
       }
     }
