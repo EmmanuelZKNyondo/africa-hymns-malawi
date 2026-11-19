@@ -2370,6 +2370,72 @@
         ],
         "chorus": null
       }
+    },
+    {
+      "number": 45,
+      "title": "IFE timakufunani (Yesu tidalira inu)",
+      "writer": "--",
+      "rating": 3,
+      "previous_version_number": null,
+      "tags": ["nyimbo", "Mateyu 26:47-56"],
+      "crossReference": [],
+      "content": {
+        "verses":[
+          {
+            "number": 1, 
+            "lines": [
+              "IFE timakukondani",
+              "Inu wotonthoza mtima;",
+              "Yesu, nyimbo zathu zonse,",
+              "Ziyamika inu nokha.",
+              "Munasiya zonse M'mwamba,",
+              "Kudzakhala pansi pano;",
+              "Kuwombola akapolo,",
+              "Kumasula anthu anu."
+            ]
+          },
+          {
+            "number": 2,
+            "lines": [
+              "Yesu, ndi chifundo chanu,",
+              "Chachikulu munadzera;",
+              "Ife anthu osauka,",
+              "Tsoka lanthu m'nachotsera.",
+              "Mwazi ndi misonzi yanu,",
+              "Munakhetsa m'munda muja;",
+              "Kukonzera ife njira,",
+              "Yonkako Kumwamba kuja."
+            ]
+          },
+          {
+            "number": 3,
+            "lines": [
+              "Yesu, munalaswa mtima,",
+              "Ndi zonyoza, munafoka;",
+              "M'nasenzera anthu mkwiyo,",
+              "Wa Atate, Inu nokha.",
+              "Chikho chija ndi choopsa,",
+              "Munamwacho m'phiri lija;",
+              "Mmene munalola mtanda,",
+              "E! Chifundo chanu chija."
+            ]
+          },
+          {
+            "number": 4, 
+            "lines": [
+              "Yesu, ndi 'Nu moyo wathu,",
+              "Chuma chathu choposetsa;",
+              "E! Tikondwerera mtanda,",
+              "Apo moyo munapatsa.",
+              "Mbuye, tikondana nanu,",
+              "Yesu Mbuye Mwini zonse;",
+              "Ndi mitima ndi milomo,",
+              "Tikuyamikani tonse."
+            ]
+          }
+        ],
+        "chorus": null
+      }
     }
   ]
 }
