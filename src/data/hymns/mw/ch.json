@@ -3254,6 +3254,74 @@
           ]
         }
       }
+    },
+    {
+      "number": 60,
+      "title": "ZATHEDWA zonsetu",
+      "writer": "--",
+      "rating": 0,
+      "previous_version_number": 37,
+      "tags": ["nyimbo", "Aheberi 9:14"],
+      "crossReference": [],
+      "content": {
+        "verses": [
+          {
+            "number": 1,
+            "lines": [
+              "ZATHEDWA zonsetu,",
+              "Za moyo wakewo;",
+              "Ambuye anatsikayo,",
+              "Nafika pansipa."
+            ]
+          },
+          {
+            "number": 2,
+            "lines": [
+              "Ntchitotu zakezi,",
+              "Zofuna 'Tatewo;",
+              "Anatsiriza zonsezo,",
+              "Sanazisiye 'yi."
+            ]
+          },
+          {
+            "number": 3,
+            "lines": [
+              "Iye pamtandapo,",
+              "Chisoni m'mtimamo;",
+              "Mpweteko wonse wathuwo,",
+              "Wa dziko lonseli."
+            ]
+          },
+          {
+            "number": 4,
+            "lines": [
+              "Pamutu mingayo,",
+              "Pa moyo wakewo;",
+              "Zoipa zathu zonsezo,",
+              "Zinaikidwapo."
+            ]
+          },
+          {
+            "number": 5,
+            "lines": [
+              "Anandifera 'Ye,",
+              "Afera inedi;",
+              "Athetsa nsembe zonsezi,",
+              "Ambuye Nsembeyo."
+            ]
+          },
+          {
+            "number": 6,
+            "lines": [
+              "Pakugomedwapo,",
+              "Pa mlandu wangawo;",
+              "Ndidzaitana Mbuyeyo,",
+              "Andilanditsepo."
+            ]
+          }
+        ],
+        "chorus": null
+      }
     }
   ]
 }
