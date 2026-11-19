@@ -3090,6 +3090,65 @@
         ],
         "chorus": null
       }
+    },
+    {
+      "number": 57,
+      "title": "TIYENI, dzalireni nane",
+      "writer": "--",
+      "rating": 0,
+      "previous_version_number": 35,
+      "tags": ["nyimbo"],
+      "crossReference": [],
+      "content": {
+        "verses": [
+          {
+            "number": 1,
+            "lines": [
+              "TIYENI, dzalireni nane,",
+              "Tidze kumtanda wa Ambuye;",
+              "Tonse tiliretu maliro,",
+              "Wapachikidwa Ambuyathu."
+            ]
+          },
+          {
+            "number": 2,
+            "lines": [
+              "Kodi misozi itisowa,",
+              "Poona anthu akunyoza?",
+              "Onani umo apilira,",
+              "Wapachikidwa Ambuyathu."
+            ]
+          },
+          {
+            "number": 3,
+            "lines": [
+              "Anena mawu m'mtanda momwe,",
+              "Mawu ochepa a chifundo;",
+              "Apempherera 'dani ake,",
+              "Wapachikidwatu Ambuyathu."
+            ]
+          },
+          {
+            "number": 4,
+            "lines": [
+              "Mtima wanga'we uyenera,",
+              "Kusweka ndi manyazi lero;",
+              "Zam'lasa ndi zoipa zako,",
+              "Wapachikidwa Ambuyathu."
+            ]
+          },
+          {
+            "number": 5,
+            "lines": [
+              "Ona chikondi cha Mulungu,",
+              "Ona zoipazo za anthu;",
+              "Koma chakula ndi chikondi,",
+              "Wapachikidwa Ambuyathu."
+            ]
+          }
+        ],
+        "chorus": null
+      }
     }
   ]
 }
