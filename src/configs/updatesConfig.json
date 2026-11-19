@@ -6,7 +6,7 @@
   },
   "versions": [
     {
-      "version": "1.2.1",
+      "version": "1.2.2",
       "releaseDate": "2026-04-13",
       "required": false,
       "notes": [
@@ -22,6 +22,16 @@
         "Initial release of Africa Hymns",
         "Support for Malawi and Zambia hymns",
         "Offline mode enabled"
+      ]
+    },
+    {
+      "version": "1.2.2",
+      "releaseDate": "2026-07-12",
+      "required": true,
+      "notes": [
+        "Update version notes to 1.2.2",
+        "Update support for only Malawi Presbyterian Chichewa",
+        "Add hymn numbers: 14, 15, 16, 17, 18, 19, 20"
       ]
     }
   ]
