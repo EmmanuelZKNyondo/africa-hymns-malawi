@@ -3040,6 +3040,56 @@
           ]
         }
       }
+    },
+    {
+      "number": 56,
+      "title": "KU Mzinda wakuyerawo",
+      "writer": "--",
+      "rating": 0,
+      "previous_version_number": 34,
+      "tags": ["nyimbo"],
+      "crossReference": [],
+      "content": {
+        "verses": [
+          {
+            "number": 1,
+            "lines": [
+              "KU Mzinda wakuyerawo,",
+              "Wapachikidwa Mbuyeyo;",
+              "Nasautsidwa Iyeyo,",
+              "Akatipulumutse'fe."
+            ]
+          },
+          {
+            "number": 2,
+            "lines": [
+              "Pa dzanja la chifundolo,",
+              "Linapenyetsa 'khunguwo;",
+              "Lachiza nalo nthendazo,",
+              "Papyolatu msomaliwo."
+            ]
+          },
+          {
+            "number": 3,
+            "lines": [
+              "Mapazi ake namvatu,",
+              "Zowawa zopambanazo;",
+              "Napachikidwa kaamba ka,",
+              "Zoipa zathu zonsezi."
+            ]
+          },
+          {
+            "number": 4,
+            "lines": [
+              "Ambuye tikondweratu,",
+              "Kupulumutsa kwanuko;",
+              "Satana tisam'mvere'yi,",
+              "Komatu Mpulumutsiyo."
+            ]
+          }
+        ],
+        "chorus": null
+      }
     }
   ]
 }
