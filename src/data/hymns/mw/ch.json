@@ -2744,6 +2744,63 @@
           ]
         }
       }
+    },
+    {
+      "number": 51,
+      "title": "PANTHAWI yakufa Ambuye",
+      "writer": "--",
+      "rating": 0,
+      "previous_version_number": null,
+      "tags": ["nyimbo", "Marko 15:33-34"],
+      "crossReference": [],
+      "content": {
+        "verses": [
+          {
+            "number": 1,
+            "lines": [
+              "PANTHAWI yakufa Ambuye,",
+              "Anthu ananena;",
+              "\"Dzipulumutsetu pamtandapo.\""
+            ]
+          },
+          {
+            "number": 2,
+            "lines": [
+              "Imfa ya Bwenzi lathu Yesu,",
+              "Yomvetsa chisoni;",
+              "Ophunzira onse anathawa."
+            ]
+          },
+          {
+            "number": 3,
+            "lines": [
+              "Pamene anakhomedwatu,",
+              "Pamtanda Yesuyo;",
+              "Zoipa zathu zinam'psinja 'Ye."
+            ]
+          },
+          {
+            "number": 4,
+            "lines": [
+              "Imfa yake ndi yopambana,",
+              "Yotipulumutsa;",
+              "Yotitengera ife mtendere."
+            ]
+          }
+        ],
+        "chorus": {
+          "lines": [
+            "(M) Yesu ndi mawu aakulu,",
+            "(O) Anafuula;",
+            "(M) Yesu ndi mawu aakulu,",
+            "(O) Anafuula;",
+            "   \"Eloyi, Eloyi",
+            "    Mulungu wanga,",
+            "    Mwandisiiranji,",
+            "    Mwandisiiranji?\""
+          ]
+        }
+      }
     }
   ]
 }
