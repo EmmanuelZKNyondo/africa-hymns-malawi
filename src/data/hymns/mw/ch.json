@@ -2436,6 +2436,74 @@
         ],
         "chorus": null
       }
+    },
+    {
+       "number": 46,
+      "title": "INALIPO nthawi",
+      "writer": "--",
+      "rating": 0,
+      "previous_version_number": null,
+      "tags": ["nyimbo", "Marko 14:32-42"],
+      "crossReference": [],
+      "content": {
+        "verses":[
+          {
+            "number": 1,
+            "lines": [
+              "INALIPO nthawi,",
+              "Nthawi yamavuto;",
+              "Mmene Mbuye Yesu,",
+              "Anali m'Getsemani;",
+              "Analira Yesu,",
+              "Kuitana ine,",
+              "Analira m'Getsemani."
+            ]
+          },
+          {
+            "number": 2,
+            "lines": [
+              "Inalipo nthawi,",
+              "Nthawi yoyesedwa;",
+              "Mmene Mbuye Yesu,",
+              "Anapemphera zedi;",
+              "Nati: \"Chikho ichi, Chindipitilire,\"",
+              "Analira m'Getsemani."
+            ]
+          },
+          {
+            "number": 3,
+            "lines": [
+              "Inalipo nthawi,",
+              "Nthawi yoyesedwa;",
+              "Mmene Mbuye Yesu,",
+              "Sanalekedi, ai;",
+              "Kuitana Tate,",
+              "Kuitana Tate,",
+              "Analira m'Getsemani."
+            ]
+          },
+          {
+            "number": 4,
+            "lines": [
+              "Inotu ndi nthawi,",
+              "Nthawi yabwinodi;",
+              "Yosiya zoipa,",
+              "Zimene tichitazi;",
+              "Popeza Ambuye,",
+              "'Natsiriza zonse,",
+              "Pamtanda pa Gologota."
+            ]
+          }
+        ],
+        "chorus": {
+          "lines": [
+            "Analira Yesu kuitana ine,",
+            "Analira Yesu khomo latsekeka;",
+            "Analira Yesu kuitana inu,",
+            "Analira m'Getsemani."
+          ]
+        }
+      }
     }
   ]
 }
