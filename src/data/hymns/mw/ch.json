@@ -3149,6 +3149,63 @@
         ],
         "chorus": null
       }
+    },
+    {
+      "number": 58,
+      "title": "PAMTANDAPO Mbuyangayo",
+      "writer": "--",
+      "rating": 0,
+      "previous_version_number": 36,
+      "tags": ["nyimbo"],
+      "crossReference": [],
+      "content": {
+        "verses": [
+          {
+            "number": 1,
+            "lines": [
+              "PAMTANDAPO Mbuyangayo,",
+              "Anandifera inetu;",
+              "Nakhetsa mwazi wakewo,",
+              "Kundiwombola inetu."
+            ]
+          },
+          {
+            "number": 2,
+            "lines": [
+              "Kwa munthu wosokerayo,",
+              "Ku dziko la kutaliko;",
+              "Atero Yesu: \"Bweratu",
+              "Ukhale nao moyowo.\""
+            ]
+          },
+          {
+            "number": 3,
+            "lines": [
+              "E! Yesu Mbuye wangadi,",
+              "Ndipatsa Inu Mtimau;",
+              "Mundithandize inetu,",
+              "Ndisalekane nanu 'yi."
+            ]
+          },
+          {
+            "number": 4,
+            "lines": [
+              "Zochimwa zanga zonsezo,",
+              "Wandichotsera mwaziwo;",
+              "Mumtima mwanga muli mbee!",
+              "Mwayeretsedwa indetu."
+            ]
+          }
+        ],
+        "chorus": {
+          "lines": [
+            "Pamtandapo, pamtandapo,",
+            "Ambuye wanga 'nafatu;",
+            "Pamtandapo, pamtandapo,",
+            "Anandiwombolerapo."
+          ]
+        }
+      }
     }
   ]
 }
