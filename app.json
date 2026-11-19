@@ -3,12 +3,11 @@
     "name": "Africa Hymns",
     "description": "A collection of African hymns for worship and singing along.",
     "slug": "africa-hymns-malawi",
-    "version": "1.2.1",
+    "version": "1.2.2",
     "orientation": "portrait",
     "icon": "./src/assets/icon.png",
     "userInterfaceStyle": "light",
     "newArchEnabled": true,
-    "enableMinifyInReleaseBuilds": true,
     "splash": {
       "image": "./src/assets/splash-icon.png",
       "resizeMode": "contain",
@@ -26,7 +25,7 @@
       "softwareKeyboardLayoutMode": "pan",
       "edgeToEdgeEnabled": true,
       "predictiveBackGestureEnabled": false,
-      "package": "com.anonymous.africahymnsmalawi"
+      "package": "com.africahymns.malawi"
     },
     "web": {
       "favicon": "./src/assets/favicon.png"
@@ -37,10 +36,17 @@
         "expo-build-properties",
         {
           "android": {
-            "extraProguardRules": "-keep class com.swansion.reanimated.** {*; }",
+            "extraProguardRules": "-keep class com.swansion.reanimated.** {*; }\n-keep class com.facebook.react.** {*; }",
             "enableProguardInReleaseBuilds": true,
             "enableShrinkResourcesInReleaseBuilds": true,
-            "useLegacyPackaging": true
+            "useLegacyPackaging": true,
+            "extraGradleProperties": {
+              "android.enableR8.fullMode": "true",
+              "android.enableResourceOptimizations": "true"
+            }
+          },
+          "ios": {
+            "deploymentTarget": "15.1"
           }
         }
       ]

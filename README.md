@@ -1,5 +1,10 @@
 # Africa Hymns [Malawi]
 
+*******************************************************************************************************
+## Developer Pre-Requisites 
+ - Node v22
+ - expo cli 
+
 ## Update version 
 1. app.json update version to new version 
 
@@ -10,7 +15,9 @@
 
 2. run app in cli: `npx expo start --clear --lan`
 
-## Building Local APK
+*******************************************************************************************************
+
+## Building APK (to online expo)
 1. Update eas.json on the following 
     `{
       "build": {
@@ -25,4 +32,19 @@
 
 2. `eas build --platform android` or `eas build --platform all`
 
-3. `eas build --platform android --profile preview` if you have expo account and logged in on the cli or `eas build --platform android --profile preview --local`
+3. `eas build --platform android --profile preview` if you have expo account and logged in on the cli 
+  or `eas build --platform android --profile preview --local`
+
+*******************************************************************************************************
+
+## Building APK (local)
+ NOTE: Have JAVA_HOME set and perform this in WSL or linux platform 
+ and the produced APK is un-signed APK by default. 
+ 
+ 1. `npx expo prebuild`
+
+ 2. `cd android`
+
+ 3. `./gradlew assembleRelease`
+
+ 4. Locate your apk in `android/app/build/outputs/apk/release/app-release.apk`
