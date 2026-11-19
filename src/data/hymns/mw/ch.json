@@ -2615,6 +2615,135 @@
           ]
         }
       }
+    },
+    {
+      "number": 49,
+      "title": "ONA Mwana wankhosayo",
+      "writer": "--",
+      "rating": 0,
+      "previous_version_number": null,
+      "tags": ["nyimbo", "Yohane 1:29"],
+      "crossReference": [],
+      "content": {
+        "verses": [
+          {
+            "number": 1,
+            "lines": [
+              "ONA Mwana wankhosayo,",
+              "Wakusenza zakipa zathu zonse."
+            ]
+          },
+          {
+            "number": 2,
+            "lines": [
+              "Anasenza m'thupi mwake,",
+              "Pakukhomedwa pamtanda anali duu."
+            ]
+          },
+          {
+            "number": 3,
+            "lines": [
+              "Ona pamtanda Yesuyo,",
+              "Anavutika chifukwa cha anthu'fe."
+            ]
+          },
+          {
+            "number": 4,
+            "lines": [
+              "Imva kulira kwa Yesu,",
+              "Pamene anasiidwa mu imfamo."
+            ]
+          },
+          {
+            "number": 5,
+            "lines": [
+              "M'mwazi wake tisambano,",
+              "Zichotsedwa zakuipa, zathu zonse."
+            ]
+          },
+          {
+            "number": "last_chorus",
+            "lines": [
+              "(Ona Mwana wa nkhosayo,",
+              "Wakusenza zakuipa, zathu zonse.)"
+            ]
+          }
+        ],
+        "chorus": {
+          "lines": [
+            "Mwana wankhosa,",
+            "Watisenzera;",
+            "Zakuipa zathu zonse."
+          ]
+        }
+      }
+    },
+    {
+      "number": 50,
+      "title": "PAUSIKU uja",
+      "writer": "--",
+      "rating": 0,
+      "previous_version_number": null,
+      "tags": ["nyimbo", "Mateyu 26:36-46"],
+      "crossReference": [],
+      "content": {
+        "verses": [
+          {
+            "number": 1,
+            "lines": [
+              "PAUSIKU uja,",
+              "Yesu anayenda,",
+              "M'njira yonka ku Getsemani;",
+              "Kunali mdima bii,",
+              "Iye anagwada;",
+              "Pansi pamtengo wazitona."
+            ]
+          },
+          {
+            "number": 2,
+            "lines": [
+              "Machimo a m'dziko,",
+              "Adam'lemera 'Ye.",
+              "Potuluka mu Getsemani;",
+              "Anapsinjidwadi,",
+              "Ndi zoipa zathu;",
+              "Zomwe zidam'tengera imfa."
+            ]
+          },
+          {
+            "number": 3,
+            "lines": [
+              "M'tithandize Mbuye,",
+              "Tisaiwaletu,",
+              "Zachikondi chanu pa ife;",
+              "Mudapempherera,",
+              "Zoipa zathuzo;",
+              "M'munda uja wa Getsemani."
+            ]
+          },
+          {
+            "number": 4,
+            "lines": [
+              "Zochimwa zathuzo",
+              "Yesu anasenza,",
+              "Zinathera pamtanda wake;",
+              "Lero lino ife,",
+              "Tapulumutsidwa;",
+              "Ndi mwazi wake wa Yesuyo."
+            ]
+          }
+        ],
+        "chorus": {
+          "lines": [
+            "Anapempheradi,",
+            "Anapempheradi,",
+            "Atagwada yekhayekha;",
+            "Napempha chikhochi,",
+            "Chindipitilire;",
+            "Kufuna kwanu kuchitike."
+          ]
+        }
+      }
     }
   ]
 }

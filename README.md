@@ -15,6 +15,59 @@
 
 2. run app in cli: `npx expo start --clear --lan`
 
+## Hymn update
+
+### Hymn JSON format 
+  <code>
+    {
+        "number": 1,
+        "title": "song title",
+        "writer": "--",
+        "rating": 0,
+        "previous_version_number": null,
+        "tags": ["tag 1", "tage 2", "..."],
+        "crossReference": [
+          {
+            "countryCode": "mw",
+            "languageCode": "ch",
+            "hymnNumber": 1
+          }
+        ],
+        "content": {
+          "verses": [
+            {
+              "number": 1,
+              "lines": [
+                "Line 1",
+                "..."
+              ]
+            },
+            {
+              "number": 2,
+              "lines": [
+                "Line 1",
+                "..."
+              ]
+            },
+            {
+              "number": "last_chorus",
+              "lines": [
+                "Line 1",
+                "..."
+              ]
+            }
+          ],
+          "chorus": {
+            "lines": [
+              "Line one",
+              "Line 2",
+              "..."
+            ]
+          }
+        }
+      }
+    </code>
+
 *******************************************************************************************************
 
 ## Building APK (to online expo)
