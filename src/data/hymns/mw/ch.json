@@ -2801,6 +2801,79 @@
           ]
         }
       }
+    },
+    {
+      "number": 52,
+      "title": "POTULUKA m'mudzimo",
+      "writer": "--",
+      "rating": 0,
+      "previous_version_number": 330,
+      "tags": ["nyimbo", "Yohane 19:17-22"],
+      "crossReference": [],
+      "content": {
+        "verses": [
+          {
+            "number": 1,
+            "lines": [
+              "POTULUKA m'mudzimo,",
+              "Yesu anasenza mtanda;",
+              "Pokwera ku Gologota,",
+              "Kukam'pachikatu Mbuye.",
+              "Pilatoyo, mfumu yao,",
+              "Inam'pereka kwa 'Yuda;",
+              "Kuti am'pachiketu,",
+              "Kufera zoipa zathu."
+            ]
+          },
+          {
+            "number": 2,
+            "lines": [
+              "Zoopsa zopambana,",
+              "Zinachitika pamtanda;",
+              "Kuti mdima unadza,",
+              "Dzuwa linabisikanso,",
+              "Chinsalucho cha m'kachisi,",
+              "Chinang'ambika pakati;",
+              "Miyala inaswekanso,",
+              "Dziko linagwedezeka."
+            ]
+          },
+          {
+            "number": 3,
+            "lines": [
+              "Pomwalira Mbuyeyo,",
+              "Anafuula kokweza;",
+              "Naitana Atate,",
+              "Kupereka Mzimu wake,",
+              "\"Mlungu wanga, Mlungu wanga,",
+              "Mwandisiy'ranji Ine;",
+              "Mundikweze M'mwambamo,",
+              "Landirani mzimu wanga.\""
+            ]
+          },
+          {
+            "number": 4,
+            "lines": [
+              "Ankhondowo poona,",
+              "Zinachitika pamtanda;",
+              "Anam'baya m'nthitimo.",
+              "Munatuluka magazi.",
+              "Paphirilo la Gologota.",
+              "Anaferapo Mbuyeyo;",
+              "Nasauka koopsa.",
+              "Ndi zoipa zathun izi."
+            ]
+          }
+        ],
+        "chorus": {
+          "lines": [
+            "(Atate'nu, amayi'nu",
+            "Onani Yesu wasenza mtanda;",
+            "Atate'nu, amayi'nu nonsenu,",
+            "Onani Yesu wasenza mtanda.)"
+          ]
+        }
+      }
     }
   ]
 }
