@@ -2566,6 +2566,55 @@
           ]
         }
       }
+    },
+    {
+      "number": 48,
+      "title": "IMFA ya Mwana wa Mulungu",
+      "writer": "--",
+      "rating": 0,
+      "previous_version_number": null,
+      "tags": ["nyimbo", "Yohane 14:1-6"],
+      "crossReference": [],
+      "content": {
+        "verses": [
+          {
+            "number": 1,
+            "lines": [
+              "IMFA ya mwana wa Mulungu,",
+              "Inali yomvetsa chisoni;",
+              "Anatifera pa mtandapo,",
+              "Kutiwombora kumachimo."
+            ]
+          },
+          {
+            "number": 2,
+            "lines": [
+              "Mbuye Yesu ponka kumwamba,",
+              "Nanena, \"ndikupita kwa 'Tate;",
+              "Kukakukonzerani malo,",
+              "Ndipo Mzimu ndidzabweranso.\""
+            ]
+          },
+          {
+            "number": 3,
+            "lines": [
+              "\"Koma mudzalandira mphamvu,",
+              "Mzimu Woyera 'tadza pa Inu\";",
+              "Ndipo tonsefe ndife mboni,",
+              "Kutitu Mzimu ndi Nkhosweyo."
+            ]
+          }
+        ],
+        "chorus": {
+          "lines": [
+            "Chinsalu cha m'kachitsi",
+            "Chinang'ambika pakati",
+            "Ndi mphepo la",
+            "Mdzina la! 'Tate,",
+            "Ndi Mwana ndi Mzimunso."
+          ]
+        }
+      }
     }
   ]
 }
