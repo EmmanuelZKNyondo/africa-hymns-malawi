@@ -2446,7 +2446,7 @@
       "tags": ["nyimbo", "Marko 14:32-42"],
       "crossReference": [],
       "content": {
-        "verses":[
+        "verses": [
           {
             "number": 1,
             "lines": [
@@ -2501,6 +2501,68 @@
             "Analira Yesu khomo latsekeka;",
             "Analira Yesu kuitana inu,",
             "Analira m'Getsemani."
+          ]
+        }
+      }
+    },
+    {
+      "number": 47,
+      "title": "YESU panjirayo",
+      "writer": "--",
+      "rating": 0,
+      "previous_version_number": null,
+      "tags": ["nyimbo"],
+      "crossReference": [],
+      "content": {
+        "verses": [
+          {
+            "number": 1,
+            "lines": [
+              "YESU panjirayo,",
+              "Ya Gologitayo;",
+              "Ananena ndi amayi,",
+              "Mukuliranjiko?",
+              "M'salilire Ine,",
+              "Mdzililire nokha,",
+              "Analilira ochimwa,",
+              "M'Getsemani."
+            ]
+          },
+          {
+            "number": 2,
+            "lines": [
+              "Yesu pamtandapo,",
+              "Pa Gologotapo;",
+              "Anasenza machimo,",
+              "A iwe ndi ine,",
+              "Samba m'mwazi wake,",
+              "Upulumuketu,",
+              "Analilira ochimwa,",
+              "M'Getsemani."
+            ]
+          },
+          {
+            "number": 3,
+            "lines": [
+              "Yesu lero lino,",
+              "Aitana ife;",
+              "Akunena, tibwerere,",
+              "Kuleka machimo;",
+              "Afuna tonse'fe",
+              ""
+            ]
+          }
+        ],
+        "chorus": {
+          "lines": [
+            "Bwera iwe m'bale,",
+            "Yesu aitana iwe;",
+            "Bwera iwe m'bale,",
+            "Khomo asanatseke,",
+            "Bwera iwe m'bale,",
+            "Yesu aitana iwe,",
+            "Analilira ochimwa;",
+            "M'Getsemani."
           ]
         }
       }
