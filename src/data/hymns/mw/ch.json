@@ -2974,6 +2974,72 @@
         ],
         "chorus": null
       }
+    },
+    {
+      "number": 55,
+      "title": "UNAKHETSEDWA mwazi do!",
+      "writer": "--",
+      "rating": 0,
+      "previous_version_number": 33,
+      "tags": ["nyimbo", "Luka 23:42"],
+      "crossReference": [],
+      "content": {
+        "verses": [
+          {
+            "number": 1,
+            "lines": [
+              "UNAKHETSEDWA mwazi do!",
+              "Wa Yesu Mfumuyo;",
+              "Poweramira mutuwo,",
+              "Pamtanda pakepo."
+            ]
+          },
+          {
+            "number": 2,
+            "lines": [
+              "Zochimwa zanga zonsezo,",
+              "Anaziferadi;",
+              "Chikondi chake chonsecho,",
+              "Sindingadziwe'yi."
+            ]
+          },
+          {
+            "number": 3,
+            "lines": [
+              "Linadetsedwa dzuwa bii,",
+              "Pakufa Iyeyo;",
+              "Pakumwalira indedi,",
+              "Wakundilengayo."
+            ]
+          },
+          {
+            "number": 4,
+            "lines": [
+              "Pokumbukira mtandawo,",
+              "Wa Mpulumutsiyu;",
+              "Ndiphimba nkhope yangayi,",
+              "Ndi nsoni n'chitatu."
+            ]
+          },
+          {
+            "number": 5,
+            "lines": [
+              "Zofuna zanga zonsezo,",
+              "Za mtima wangau;",
+              "Ndidzipereka kwa Inu,",
+              "Mundiweruzetu."
+            ]
+          }
+        ],
+        "chorus": {
+          "lines": [
+            "Mbuye m'thandize inetu,",
+            "Kukonda Inudi;",
+            "Ndi kuli mpando wanuwo,",
+            "Ndifuna kudzako."
+          ]
+        }
+      }
     }
   ]
 }
