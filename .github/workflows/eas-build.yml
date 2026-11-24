@@ -34,4 +34,4 @@ jobs:
       - name: Build on EAS
         # --clear ensures old, bloated caches are destroyed
         # --no-wait lets GitHub finish quickly; EAS builds in the background
-        run: eas build --platform android --profile production --non-interactive --clear --no-wait
+        run: eas build --platform android --profile production --non-interactive --no-wait
