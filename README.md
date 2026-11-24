@@ -9,6 +9,7 @@
 1. app.json update version to new version 
 
 2. update version with metadata and notes in config/updatesConfig.json to match the new update. 
+ 
 
 ## Run app with expo and emulator (windows OS)
 1. Have emulator set onm your windows machine
@@ -73,15 +74,34 @@
 ## Building APK (to online expo)
 1. Update eas.json on the following 
     `{
-      "build": {
-        "preview": {
-          "android": {
-            "buildType": "apk"
+        "cli": {
+          "version": ">= 18.6.0",
+          "appVersionSource": "remote"
+        },
+        "build": {
+          "development": {
+            "developmentClient": false,
+            "distribution": "internal"
           },
-          "developmentClient": false
+          "preview": {
+            "distribution": "internal",
+            "android": {
+              "buildType": "apk"
+            }
+          },
+          "production": {
+            "autoIncrement": true,
+            "android": {
+              "buildType": "apk"
+            }
+          }
+        },
+        "submit": {
+          "production": {}
         }
-      }
-    }`
+      }`
+
+      NOTE: you can change the production > android > buildType to aab or remove it to let production build aab for playstore uploads
 
 2. `eas build --platform android` or `eas build --platform all`
 
