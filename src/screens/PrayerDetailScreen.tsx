@@ -10,7 +10,8 @@ import { useAppStore } from '@/store/useAppStore';
 import { NavbarHeader } from '@/components/NavbarHeader';
 import { loadPrayerData, type PrayerData } from '@/utils/prayersDataLoader';
 import { loadCountryConfig } from '@/utils/dataLoader';
-import { useToast } from '@/components/ToastAlert';
+import { useToast } from '@/contexts/ToastContext';
+import { useTheme } from '@/utils/theme';
 import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 import type { HomeStackParamList } from '@/navigation/AppNavigator';
 
@@ -21,29 +22,25 @@ export const PrayerDetailScreen: React.FC<Props> = ({ route, navigation }) => {
   const { settings } = useAppStore();
   const countryCode = settings.country;
   
-  // ✅ Initialize Toast Hook
-  const { toast, ToastProvider } = useToast();
+  const { toast } = useToast();
+  const colors = useTheme();
 
   const [language, setLanguage] = useState<string>(settings.language || 'en');
   const [prayerData, setPrayerData] = useState<PrayerData | null>(null);
   const [availableLanguages, setAvailableLanguages] = useState<string[]>(['en']);
   const [loading, setLoading] = useState(true);
 
-  // Load available languages for this specific prayer from Country Config
   useEffect(() => {
     let isMounted = true;
     const loadConfig = async () => {
       try {
         const config = await loadCountryConfig(countryCode);
-        
-        // Access prayer_langs instead of languages
         const prayerConfig = config.prayer_langs?.[prayerId];
         
         if (prayerConfig && prayerConfig.languages) {
           const langs = prayerConfig.languages.map(l => l.code);
           if (isMounted) setAvailableLanguages(langs.length > 0 ? langs : ['en']);
         } else {
-          // Fallback to hymn languages if prayer config is missing languages
           const hymnLangs = config.hymn_langs?.map(l => l.code) || ['en'];
           if (isMounted) setAvailableLanguages(hymnLangs);
         }
@@ -55,7 +52,6 @@ export const PrayerDetailScreen: React.FC<Props> = ({ route, navigation }) => {
     return () => { isMounted = false; };
   }, [countryCode, prayerId]);
 
-  // Load Prayer Content
   useEffect(() => {
     let isMounted = true;
     const loadData = async () => {
@@ -74,11 +70,9 @@ export const PrayerDetailScreen: React.FC<Props> = ({ route, navigation }) => {
     return () => { isMounted = false; };
   }, [prayerId, countryCode, language]);
 
-  // ✅ Updated Copy Function using Toast
   const handleCopy = useCallback(() => {
     if (!prayerData) return;
     const text = prayerData.content.join('\n');
-    
     if (text) {
       Clipboard.setString(text);
       toast.success('Prayer copied to clipboard');
@@ -87,23 +81,19 @@ export const PrayerDetailScreen: React.FC<Props> = ({ route, navigation }) => {
 
   if (loading) {
     return (
-      <SafeAreaView style={styles.container} edges={['top']}>
+      <SafeAreaView style={[styles.container, { backgroundColor: colors.background }]} edges={['top']}>
         <NavbarHeader title="Prayer" showBack onBack={() => navigation.goBack()} />
         <View style={styles.loadingContainer}>
-          <ActivityIndicator size="large" color="#007A3D" />
+          <ActivityIndicator size="large" color={colors.primary} />
         </View>
       </SafeAreaView>
     );
   }
 
-  // ✅ Use title from the loaded JSON data
   const currentTitle = prayerData?.title || 'Prayer';
 
   return (
-    <SafeAreaView style={styles.container} edges={['top']}>
-      {/* ✅ Render Toast Provider */}
-      <ToastProvider />
-
+    <SafeAreaView style={[styles.container, { backgroundColor: colors.background }]} edges={['top']}>
       <NavbarHeader
         title={currentTitle}
         showBack={true}
@@ -113,36 +103,40 @@ export const PrayerDetailScreen: React.FC<Props> = ({ route, navigation }) => {
       />
 
       <ScrollView contentContainerStyle={styles.scrollContent}>
-        <View style={styles.langContainer}>
-          <Text style={styles.langLabel}>Language:</Text>
+        <View style={[styles.langContainer, { backgroundColor: colors.surface, borderColor: colors.border }]}>
+          <Text style={[styles.langLabel, { color: colors.textTertiary }]}>Language:</Text>
           <View style={styles.langChips}>
-            {availableLanguages.map((langCode) => (
-              <TouchableOpacity
-                key={langCode}
-                style={[
-                  styles.langChip,
-                  language === langCode && styles.langChipActive
-                ]}
-                onPress={() => setLanguage(langCode)}
-              >
-                <Text style={[
-                  styles.langChipText,
-                  language === langCode && styles.langChipTextActive
-                ]}>
-                  {langCode.toUpperCase()}
-                </Text>
-              </TouchableOpacity>
-            ))}
+            {availableLanguages.map((langCode) => {
+              const isActive = language === langCode;
+              return (
+                <TouchableOpacity
+                  key={langCode}
+                  style={[
+                    styles.langChip,
+                    { backgroundColor: isActive ? colors.primary : colors.chipBg, borderColor: colors.border },
+                  ]}
+                  onPress={() => setLanguage(langCode)}
+                >
+                  <Text style={[
+                    styles.langChipText,
+                    { color: isActive ? colors.chipTextActive : colors.chipText }
+                  ]}>
+                    {langCode.toUpperCase()}
+                  </Text>
+                </TouchableOpacity>
+              );
+            })}
           </View>
         </View>
 
-        <View style={styles.contentContainer}>
+        <View style={[styles.contentContainer, { backgroundColor: colors.surface, borderColor: colors.border }]}>
           <View style={styles.linesContainer}>
             {prayerData?.content.map((line, index) => (
               <Text 
                 key={index} 
                 style={[
                   styles.lineText, 
+                  { color: colors.text },
                   line.trim() === '' && styles.emptyLine
                 ]}
                 selectable
@@ -153,9 +147,12 @@ export const PrayerDetailScreen: React.FC<Props> = ({ route, navigation }) => {
             ))}
           </View>
           
-          <TouchableOpacity style={styles.copyButton} onPress={handleCopy}>
-            <Ionicons name="copy-outline" size={18} color="#007A3D" />
-            <Text style={styles.copyButtonText}>Copy Text</Text>
+          <TouchableOpacity 
+            style={[styles.copyButton, { backgroundColor: colors.primaryLight, borderColor: colors.primary }]} 
+            onPress={handleCopy}
+          >
+            <Ionicons name="copy-outline" size={18} color={colors.primary} />
+            <Text style={[styles.copyButtonText, { color: colors.primary }]}>Copy Text</Text>
           </TouchableOpacity>
         </View>
       </ScrollView>
@@ -164,21 +161,18 @@ export const PrayerDetailScreen: React.FC<Props> = ({ route, navigation }) => {
 };
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: '#f8f9fa' },
+  container: { flex: 1 },
   scrollContent: { padding: 16, paddingBottom: 32 },
   loadingContainer: { flex: 1, alignItems: 'center', justifyContent: 'center' },
   
   langContainer: {
     marginBottom: 16,
-    backgroundColor: '#fff',
     padding: 12,
     borderRadius: 4,
     borderWidth: 1,
-    borderColor: '#eee',
   },
   langLabel: {
     fontSize: 12,
-    color: '#666',
     marginBottom: 8,
     fontWeight: '600',
   },
@@ -191,35 +185,25 @@ const styles = StyleSheet.create({
     paddingHorizontal: 12,
     paddingVertical: 6,
     borderRadius: 4,
-    backgroundColor: '#f1f1f1',
-  },
-  langChipActive: {
-    backgroundColor: '#007A3D',
+    borderWidth: 1,
   },
   langChipText: {
     fontSize: 12,
-    color: '#333',
     fontWeight: '500',
-  },
-  langChipTextActive: {
-    color: '#fff',
   },
   
   contentContainer: {
-    backgroundColor: '#fff',
     padding: 20,
     borderRadius: 4,
     borderWidth: 1,
-    borderColor: '#eee',
   },
   linesContainer: { gap: 4 },
   lineText: {
     fontSize: 16,
-    lineHeight: 24,
-    color: '#1a1a1a',
-    textAlign: 'left',
+    lineHeight: 26,
+    textAlign: 'center', 
   },
-  emptyLine: { height: 12 },
+  emptyLine: { height: 16 },
   copyButton: {
     marginTop: 24,
     flexDirection: 'row',
@@ -227,14 +211,11 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     gap: 8,
     paddingVertical: 12,
-    backgroundColor: '#f0fdf4',
     borderRadius: 4,
     borderWidth: 1,
-    borderColor: '#007A3D',
   },
   copyButtonText: {
     fontSize: 14,
-    color: '#007A3D',
     fontWeight: '600',
   },
 });
