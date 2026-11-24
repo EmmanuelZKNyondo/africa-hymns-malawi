@@ -1,0 +1,37 @@
+name: EAS Production Build
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch: # Allows manual triggering from the GitHub Actions tab
+
+jobs:
+  build:
+    name: Build Production APK
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm' # Change to 'yarn' or 'pnpm' if you use them
+
+      - name: Setup EAS
+        uses: expo/expo-github-action@v8
+        with:
+          eas-version: latest
+          token: ${{ secrets.EXPO_TOKEN }}
+
+      - name: Install dependencies
+        # ⚠️ This step automatically triggers 'eas-build-post-install' 
+        # which minifies your JSON files on EAS servers
+        run: npm ci 
+
+      - name: Build on EAS
+        # --clear ensures old, bloated caches are destroyed
+        # --no-wait lets GitHub finish quickly; EAS builds in the background
+        run: eas build --platform android --profile production --non-interactive --clear --no-wait

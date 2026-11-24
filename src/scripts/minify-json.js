@@ -13,8 +13,7 @@ function minifyFile(filePath) {
     const parsed = JSON.parse(raw);
     const minified = JSON.stringify(parsed);
     
-    // Only write if actually smaller (avoid unnecessary disk writes)
-    if (minified.length < raw.length) {
+  if (minified.length < raw.length) {
       fs.writeFileSync(filePath, minified, 'utf8');
       const saved = ((raw.length - minified.length) / 1024).toFixed(2);
       console.log(`✅ Minified: ${filePath} (saved ${saved} KB)`);
@@ -26,10 +25,7 @@ function minifyFile(filePath) {
 }
 
 function walkDir(dir) {
-  if (!fs.existsSync(dir)) {
-    console.warn(`⚠️  Directory not found, skipping: ${dir}`);
-    return;
-  }
+  if (!fs.existsSync(dir)) return;
   fs.readdirSync(dir).forEach(file => {
     const fullPath = path.join(dir, file);
     const stat = fs.statSync(fullPath);
