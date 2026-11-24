@@ -12,6 +12,7 @@ import { PrayersScreen } from '@/screens/PrayersScreen';
 import { PrayerDetailScreen } from '@/screens/PrayerDetailScreen';
 import { FavoritesScreen } from '@/screens/FavoritesScreen';
 import { FavoritesListScreen } from '@/screens/FavoritesListScreen';
+import { BackButtonHandler } from '@/components/BackButtonHandler';
 
 /* ==================== PARAM LISTS ==================== */
 export type HomeStackParamList = {
@@ -50,62 +51,66 @@ const HomeStack = createNativeStackNavigator<HomeStackParamList>();
 
 /* ==================== HOME STACK ==================== */
 const HomeStackNavigator = () => (
-  <HomeStack.Navigator
-    screenOptions={{
-      headerShown: true,
-      // ✅ Use custom header component as default
-      header: (props) => (
-        <NavbarHeader
-          title={props.route.name === 'HomeRoot' ? 'Africa Hymns' : 'Hymns'}
-          showBack={props.navigation.canGoBack()}
-          onBack={props.navigation.goBack}
-        />
-      ),
-    }}
-  >
-    <HomeStack.Screen 
-      name="HomeRoot" 
-      component={HomeScreen} 
-      options={{ 
-        header: () => null // HomeScreen handles its own header via NavbarHeader if needed
-      }} 
-    />
-    <HomeStack.Screen 
-      name="HymnList" 
-      component={HymnListScreen}
-      options={{ header: () => null }} 
-    />
-    <HomeStack.Screen 
-      name="HymnDetail"
-      component={HymnDetailScreen}
-      options={{ header: () => null }}
-    />
-    <HomeStack.Screen 
-      name="Prayers"
-      component={PrayersScreen}
-      options={{ header: () => null }}
-    />
-    <HomeStack.Screen 
-      name="Favorites"
-      component={FavoritesScreen}
-      options={{ header: () => null }}
-    />
-    <HomeStack.Screen 
-      name="FavoritesList"
-      component={FavoritesListScreen}
-      options={{ header: () => null }}
-    />
-    <HomeStack.Screen 
-      name="Settings"
-      component={SettingsScreen}
-      options={{ header: () => {} }}
-    />
-    <HomeStack.Screen 
-      name="PrayerDetail"
-      component={PrayerDetailScreen}
-      options={{ header: () => {} }}
-    />
-  </HomeStack.Navigator>
+  <>
+    <BackButtonHandler />
+    
+    <HomeStack.Navigator
+      screenOptions={{
+        headerShown: true,
+        // ✅ Use custom header component as default
+        header: (props) => (
+          <NavbarHeader
+            title={props.route.name === 'HomeRoot' ? 'Africa Hymns' : 'Hymns'}
+            showBack={props.navigation.canGoBack()}
+            onBack={props.navigation.goBack}
+          />
+        ),
+      }}
+    >    
+      <HomeStack.Screen 
+        name="HomeRoot" 
+        component={HomeScreen} 
+        options={{ 
+          header: () => null // HomeScreen handles its own header via NavbarHeader if needed
+        }} 
+      />
+      <HomeStack.Screen 
+        name="HymnList" 
+        component={HymnListScreen}
+        options={{ header: () => null }} 
+      />
+      <HomeStack.Screen 
+        name="HymnDetail"
+        component={HymnDetailScreen}
+        options={{ header: () => null }}
+      />
+      <HomeStack.Screen 
+        name="Prayers"
+        component={PrayersScreen}
+        options={{ header: () => null }}
+      />
+      <HomeStack.Screen 
+        name="Favorites"
+        component={FavoritesScreen}
+        options={{ header: () => null }}
+      />
+      <HomeStack.Screen 
+        name="FavoritesList"
+        component={FavoritesListScreen}
+        options={{ header: () => null }}
+      />
+      <HomeStack.Screen 
+        name="Settings"
+        component={SettingsScreen}
+        options={{ header: () => {} }}
+      />
+      <HomeStack.Screen 
+        name="PrayerDetail"
+        component={PrayerDetailScreen}
+        options={{ header: () => {} }}
+      />
+    </HomeStack.Navigator>
+  </>
 );
 
 /* ==================== MAIN DRAWER ==================== */
