@@ -6,6 +6,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { useAppStore } from '@/store/useAppStore';
 import { NavbarHeader } from '@/components/NavbarHeader';
 import { loadPrayerTitles, type PrayerMeta } from '@/utils/prayersDataLoader';
+import { useTheme } from '@/utils/theme';
 import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 import type { HomeStackParamList } from '@/navigation/AppNavigator';
 
@@ -18,6 +19,7 @@ const PRAYER_ICONS: Record<string, keyof typeof Ionicons.glyphMap> = {
 
 export const PrayersScreen: React.FC<Props> = ({ navigation }) => {
   const countryCode = useAppStore((state) => state.settings.country);
+  const colors = useTheme();
   const [prayers, setPrayers] = useState<PrayerMeta[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -26,7 +28,6 @@ export const PrayersScreen: React.FC<Props> = ({ navigation }) => {
     const load = async () => {
       setLoading(true);
       try {
-        // ✅ Load titles from JSON files (defaults to EN for list view)
         const data = await loadPrayerTitles(countryCode);
         if (isMounted) setPrayers(data);
       } catch (error) {
@@ -44,36 +45,35 @@ export const PrayersScreen: React.FC<Props> = ({ navigation }) => {
 
     return (
       <TouchableOpacity
-        style={styles.prayerCard}
+        style={[styles.prayerCard, {backgroundColor: colors.surface, borderColor: colors.border}]}
         onPress={() => navigation.navigate('PrayerDetail', { prayerId: item.id })}
         activeOpacity={0.7}
       >
-        <View style={styles.iconContainer}>
-          <Ionicons name={icon} size={24} color="#007A3D" />
+        <View style={[styles.iconContainer, {backgroundColor: colors.primaryLight}]}>
+          <Ionicons name={icon} size={24} color={colors.primary} />
         </View>
         <View style={styles.textContainer}>
-          {/* ✅ Use title from JSON */}
-          <Text style={styles.prayerTitle}>{item.title}</Text>
-          <Text style={styles.prayerSubtitle}>Tap to read</Text>
+          <Text style={[styles.prayerTitle, { color: colors.text }]}>{item.title}</Text>
+          <Text style={[styles.prayerSubtitle, {color: colors.textSecondary }]}>Tap to read</Text>
         </View>
-        <Ionicons name="chevron-forward" size={20} color="#ccc" />
+        <Ionicons name="chevron-forward" size={20} color={colors.textTertiary} />
       </TouchableOpacity>
     );
   };
 
   if (loading) {
     return (
-      <SafeAreaView style={styles.container} edges={['top']}>
+      <SafeAreaView style={[styles.container, { backgroundColor: colors.background }]} edges={['top']}>
         <NavbarHeader title="Prayers" showBack onBack={() => navigation.goBack()} />
         <View style={styles.loadingContainer}>
-          <ActivityIndicator size="large" color="#007A3D" />
+          <ActivityIndicator size="large" color={colors.primary} />
         </View>
       </SafeAreaView>
     );
   }
 
   return (
-    <SafeAreaView style={styles.container} edges={['top']}>
+    <SafeAreaView style={[styles.container, {backgroundColor: colors.background}]} edges={['top']}>
       <NavbarHeader
         title="Prayers"
         showBack={true}
@@ -88,7 +88,7 @@ export const PrayersScreen: React.FC<Props> = ({ navigation }) => {
         showsVerticalScrollIndicator={false}
         ListEmptyComponent={
           <View style={styles.emptyContainer}>
-            <Text style={styles.emptyText}>No prayers available.</Text>
+            <Text style={[styles.emptyText, {color: colors.textSecondary}]}>No prayers available.</Text>
           </View>
         }
       />
@@ -97,7 +97,7 @@ export const PrayersScreen: React.FC<Props> = ({ navigation }) => {
 };
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: '#f8f9fa' },
+  container: { flex: 1 },
   listContent: { padding: 16 },
   loadingContainer: { flex: 1, alignItems: 'center', justifyContent: 'center' },
   emptyContainer: { padding: 20, alignItems: 'center' },
@@ -109,19 +109,17 @@ const styles = StyleSheet.create({
     marginBottom: 12,
     backgroundColor: '#fff',
     borderRadius: 4,
-    borderWidth: 1,
-    borderColor: '#eee',
+    borderWidth: 1
   },
   iconContainer: {
     width: 40,
     height: 40,
     borderRadius: 20,
-    backgroundColor: '#e8f5e9',
     alignItems: 'center',
     justifyContent: 'center',
     marginRight: 12,
   },
   textContainer: { flex: 1 },
-  prayerTitle: { fontSize: 16, fontWeight: '600', color: '#1a1a1a' },
-  prayerSubtitle: { fontSize: 12, color: '#666', marginTop: 2 },
+  prayerTitle: { fontSize: 16, fontWeight: '600' },
+  prayerSubtitle: { fontSize: 12, marginTop: 2 },
 });
