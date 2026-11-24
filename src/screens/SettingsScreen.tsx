@@ -1,3 +1,4 @@
+// src/screens/SettingsScreen.tsx
 import React, { useCallback, useMemo, useState } from 'react';
 import {
   View,
@@ -5,7 +6,7 @@ import {
   StyleSheet,
   ScrollView,
   TouchableOpacity,
-  Switch,
+  Alert,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
@@ -15,6 +16,7 @@ import { NavbarHeader } from '@/components/NavbarHeader';
 import { UpdateModal } from '@/components/UpdateModal';
 import { useUpdateCheck } from '@/hooks/useUpdateCheck';
 import { useToast } from '@/contexts/ToastContext';
+import { useTheme, type ThemeColors } from '@/utils/theme';
 import { getAvailableCountries } from '@/utils/dataLoader';
 import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 import type { RootDrawerParamList } from '@/navigation/AppNavigator';
@@ -35,32 +37,24 @@ const COUNTRY_LABELS: Record<CountryCode, { flag: string; name: string }> = {
   zm: { flag: '🇿🇲', name: 'Zambia' },
 };
 
-const IC = {
-  green: '#007A3D',
-  purple: '#7c3aed',
-  blue: '#1565c0',
-  amber: '#b45309',
-  teal: '#00796b',
-  red: '#c62828',
-} as const;
-
 interface SectionProps {
   iconName: keyof typeof Ionicons.glyphMap;
   iconColor: string;
   iconBg: string;
   title: string;
+  colors: ThemeColors;
   children: React.ReactNode;
 }
 
 const Section: React.FC<SectionProps> = ({
-  iconName, iconColor, iconBg, title, children,
+  iconName, iconColor, iconBg, title, colors, children,
 }) => (
-  <View style={styles.section}>
+  <View style={[styles.section, { backgroundColor: colors.surface, borderColor: colors.border }]}>
     <View style={styles.sectionHeader}>
       <View style={[styles.sectionIconWrap, { backgroundColor: iconBg }]}>
         <Ionicons name={iconName} size={15} color={iconColor} />
       </View>
-      <Text style={styles.sectionTitle}>{title}</Text>
+      <Text style={[styles.sectionTitle, { color: colors.textTertiary }]}>{title}</Text>
     </View>
     {children}
   </View>
@@ -72,29 +66,31 @@ interface ActionRowProps {
   iconBg: string;
   label: string;
   labelColor?: string;
+  colors: ThemeColors;
   onPress: () => void;
   showDivider?: boolean;
 }
 
 const ActionRow: React.FC<ActionRowProps> = ({
-  iconName, iconColor, iconBg, label, labelColor, onPress, showDivider,
+  iconName, iconColor, iconBg, label, labelColor, colors, onPress, showDivider,
 }) => (
   <>
-    {showDivider && <View style={styles.divider} />}
+    {showDivider && <View style={[styles.divider, { backgroundColor: colors.borderLight }]} />}
     <TouchableOpacity style={styles.actionRow} onPress={onPress} activeOpacity={0.65}>
       <View style={[styles.actionIconWrap, { backgroundColor: iconBg }]}>
         <Ionicons name={iconName} size={14} color={iconColor} />
       </View>
-      <Text style={[styles.actionLabel, labelColor ? { color: labelColor } : null]}>
+      <Text style={[styles.actionLabel, { color: labelColor ?? colors.text }]}>
         {label}
       </Text>
-      <Ionicons name="chevron-forward" size={14} color="#c0c0c0" />
+      <Ionicons name="chevron-forward" size={14} color={colors.textTertiary} />
     </TouchableOpacity>
   </>
 );
 
 export const SettingsScreen: React.FC<Props> = ({ navigation }) => {
   const { settings, updateSettings, reset } = useAppStore();
+  const colors = useTheme();
   const availableCountries = useMemo(() => getAvailableCountries(), []);
   const { toast } = useToast();
   
@@ -103,37 +99,42 @@ export const SettingsScreen: React.FC<Props> = ({ navigation }) => {
     latestVersionInfo, 
     allVersions, 
     handleUpdate, 
-    handleDismiss 
   } = useUpdateCheck();
   
   const [showUpdateModal, setShowUpdateModal] = useState(false);
 
-  const appName    = Constants.expoConfig?.name        ?? 'Africa Hymns';
-  const appVersion = Constants.expoConfig?.version     ?? '1.0.0';
+  const appName    = Constants.expoConfig?.name    ?? 'Africa Hymns';
+  const appVersion = Constants.expoConfig?.version ?? '1.0.0';
 
   const handleReset = useCallback(() => {
-    toast.warning('Reset all settings to defaults?', {
-      duration: 6000,
-      action: {
-        label: 'Reset',
-        onPress: async () => {
-          await reset();
-          toast.success('Settings restored to defaults');
-        },
-      },
-    });
+    Alert.alert(
+      'Reset All Settings',
+      'This will restore all settings to their default values. Are you sure?', 
+      [
+        { text: 'Cancel', style: 'cancel' },
+        { text: 'Reset', style: 'destructive', 
+          onPress: async () => {
+            await reset();
+            toast.success('Settings restored to defaults successfully.');
+          }
+        }
+      ]
+    );
   }, [reset, toast]);
 
   const handleClearCache = useCallback(() => {
-    toast.info('Clear cached hymn data?', {
-      duration: 6000,
-      action: {
-        label: 'Clear',
-        onPress: () => {
-          toast.success('Cache cleared');
-        },
-      },
-    });
+    Alert.alert(
+      'Clear Cache', 
+      'This will clear all cached hymn data. Are you sure?',
+      [
+        { text: 'Cancel', style: 'cancel' },
+        { text: 'Clear', style: 'destructive',
+          onPress: () => {
+            toast.success('Cache cleared');
+          }
+        }
+      ]
+    );
   }, [toast]);
 
   const handleCountrySelect = useCallback(
@@ -145,10 +146,20 @@ export const SettingsScreen: React.FC<Props> = ({ navigation }) => {
     [updateSettings, toast],
   );
 
+  const handleThemeSelect = useCallback((theme: 'light' | 'dark' | 'system') => {
+    updateSettings({ theme });
+    toast.success(`Theme set to ${theme.charAt(0).toUpperCase() + theme.slice(1)}`);
+  }, [updateSettings, toast]);
+
+  const handleFontSizeSelect = useCallback((size: number) => {
+    updateSettings({ fontSize: size as 11 | 12 | 14 | 16 | 18 | 20 | 22 });
+    toast.success(`Font size set to ${size}`);
+  }, [updateSettings, toast]);
+
   const recentVersions = useMemo(() => allVersions.slice(0, 2), [allVersions]);
 
   return (
-    <SafeAreaView style={styles.container} edges={['top']}>
+    <SafeAreaView style={[styles.container, { backgroundColor: colors.background }]} edges={['top']}>
       <NavbarHeader
         title="Settings"
         showBack
@@ -166,12 +177,13 @@ export const SettingsScreen: React.FC<Props> = ({ navigation }) => {
         showsVerticalScrollIndicator={false}
         keyboardShouldPersistTaps="handled"
       >
-        {/* ── Country ── */}
+        {/* Country */}
         <Section
           iconName="globe-outline"
-          iconColor={IC.green}
-          iconBg="#e8f5e9"
+          iconColor={colors.primary}
+          iconBg={colors.primaryLight}
           title="Country"
+          colors={colors}
         >
           <View style={styles.countryGrid}>
             {availableCountries.map((code) => {
@@ -180,21 +192,20 @@ export const SettingsScreen: React.FC<Props> = ({ navigation }) => {
               return (
                 <TouchableOpacity
                   key={code}
-                  style={[styles.countryCard, active && styles.countryCardActive]}
+                  style={[
+                    styles.countryCard, 
+                    { backgroundColor: colors.chipBg, borderColor: colors.border },
+                    active && { backgroundColor: colors.primaryLight, borderColor: colors.primary }
+                  ]}
                   onPress={() => handleCountrySelect(code as CountryCode)}
                   activeOpacity={0.7}
                 >
                   <Text style={styles.countryFlag}>{info?.flag ?? '🏳️'}</Text>
-                  <Text style={[styles.countryName, active && styles.countryNameActive]}>
+                  <Text style={[styles.countryName, { color: colors.textSecondary }, active && { color: colors.primary, fontWeight: '600' }]}>
                     {info?.name ?? code.toUpperCase()}
                   </Text>
                   {active && (
-                    <Ionicons
-                      name="checkmark-circle"
-                      size={14}
-                      color={IC.green}
-                      style={{ marginLeft: 4 }}
-                    />
+                    <Ionicons name="checkmark-circle" size={14} color={colors.primary} style={{ marginLeft: 4 }} />
                   )}
                 </TouchableOpacity>
               );
@@ -202,12 +213,13 @@ export const SettingsScreen: React.FC<Props> = ({ navigation }) => {
           </View>
         </Section>
 
-        {/* ── Theme ── */}
+        {/* Theme */}
         <Section
           iconName="sunny-outline"
-          iconColor={IC.amber}
+          iconColor="#b45309"
           iconBg="#fff8e1"
           title="Theme"
+          colors={colors}
         >
           <View style={styles.chipRow}>
             {THEMES.map((t) => {
@@ -215,17 +227,21 @@ export const SettingsScreen: React.FC<Props> = ({ navigation }) => {
               return (
                 <TouchableOpacity
                   key={t.key}
-                  style={[styles.chip, active && styles.chipActive]}
-                  onPress={() => updateSettings({ theme: t.key })}
+                  style={[
+                    styles.chip,
+                    { backgroundColor: colors.chipBg, borderColor: colors.border },
+                    active && { backgroundColor: colors.primary, borderColor: colors.primary }
+                  ]}
+                  onPress={() => handleThemeSelect(t.key)}
                   activeOpacity={0.7}
                 >
                   <Ionicons
                     name={t.icon}
                     size={13}
-                    color={active ? '#fff' : '#555'}
+                    color={active ? '#fff' : colors.textSecondary}
                     style={{ marginRight: 5 }}
                   />
-                  <Text style={[styles.chipText, active && styles.chipTextActive]}>
+                  <Text style={[styles.chipText, { color: colors.chipText }, active && { color: colors.chipTextActive }]}>
                     {t.label}
                   </Text>
                 </TouchableOpacity>
@@ -234,12 +250,13 @@ export const SettingsScreen: React.FC<Props> = ({ navigation }) => {
           </View>
         </Section>
 
-        {/* ── Font Size ── */}
+        {/* Font Size */}
         <Section
           iconName="text-outline"
-          iconColor={IC.blue}
+          iconColor="#1565c0"
           iconBg="#e3f2fd"
           title="Font size"
+          colors={colors}
         >
           <View style={styles.chipRow}>
             {FONT_SIZES.map((size) => {
@@ -247,11 +264,15 @@ export const SettingsScreen: React.FC<Props> = ({ navigation }) => {
               return (
                 <TouchableOpacity
                   key={size}
-                  style={[styles.chip, active && styles.chipActive]}
-                  onPress={() => updateSettings({ fontSize: size })}
+                  style={[
+                    styles.chip,
+                    { backgroundColor: colors.chipBg, borderColor: colors.border },
+                    active && { backgroundColor: colors.primary, borderColor: colors.primary }
+                  ]}
+                  onPress={() => handleFontSizeSelect(size)}
                   activeOpacity={0.7}
                 >
-                  <Text style={[styles.chipText, active && styles.chipTextActive]}>
+                  <Text style={[styles.chipText, { color: colors.chipText }, active && { color: colors.chipTextActive }]}>
                     {size}
                   </Text>
                 </TouchableOpacity>
@@ -260,71 +281,79 @@ export const SettingsScreen: React.FC<Props> = ({ navigation }) => {
           </View>
         </Section>
 
-        {/* ── Data ── */}
+        {/* Data */}
         <Section
           iconName="server-outline"
-          iconColor={IC.teal}
+          iconColor="#00796b"
           iconBg="#e0f2f1"
           title="Data"
+          colors={colors}
         >
           <ActionRow
             iconName="trash-outline"
-            iconColor={IC.teal}
+            iconColor="#00796b"
             iconBg="#e0f2f1"
             label="Clear cache"
+            colors={colors}
             onPress={handleClearCache}
           />
           <ActionRow
             iconName="refresh-outline"
-            iconColor={IC.red}
-            iconBg="#fce4e4"
+            iconColor={colors.error}
+            iconBg={colors.error + '20'}
             label="Reset all settings"
-            labelColor={IC.red}
+            labelColor={colors.error}
+            colors={colors}
             onPress={handleReset}
             showDivider
           />
         </Section>
 
-        {/* ── About & Updates ── */}
+        {/* About */}
         <Section
           iconName="information-circle-outline"
-          iconColor={IC.green}
-          iconBg="#e8f5e9"
+          iconColor={colors.primary}
+          iconBg={colors.primaryLight}
           title="About"
+          colors={colors}
         >
           <View style={styles.aboutContainer}>
             <View style={styles.appInfoRow}>
-              <Text style={styles.appName}>{appName}</Text>
-              <View style={styles.versionBadge}>
-                <Text style={styles.versionText}>v{appVersion}</Text>
+              <Text style={[styles.appName, { color: colors.text }]}>{appName}</Text>
+              <View style={[styles.versionBadge, { backgroundColor: colors.primaryLight }]}>
+                <Text style={[styles.versionText, { color: colors.primary }]}>v{appVersion}</Text>
               </View>
             </View>
             
             {hasUpdate && (
               <TouchableOpacity 
-                style={styles.updateAlertRow} 
+                style={[styles.updateAlertRow, { backgroundColor: colors.error + '15', borderColor: colors.error + '40' }]} 
                 onPress={() => setShowUpdateModal(true)}
               >
-                <Ionicons name="information-circle" size={20} color="#FF3B30" />
-                <Text style={styles.updateAlertText}>Update Available (v{latestVersionInfo?.version})</Text>
-                <Ionicons name="chevron-forward" size={16} color="#999" />
+                <Ionicons name="information-circle" size={20} color={colors.error} />
+                <Text style={[styles.updateAlertText, { color: colors.error }]}>
+                  Update Available (v{latestVersionInfo?.version})
+                </Text>
+                <Ionicons name="chevron-forward" size={16} color={colors.textTertiary} />
               </TouchableOpacity>
             )}
 
-            <Text style={styles.historyTitle}>Update History</Text>
+            <Text style={[styles.historyTitle, { color: colors.textSecondary }]}>Update History</Text>
             {recentVersions.map((v, index) => (
-              <View key={`${v.version}-${index}`} style={styles.historyItem}>
+              <View key={`${v.version}-${index}`} style={[styles.historyItem, { borderBottomColor: colors.borderLight }]}>
                 <View style={styles.historyHeader}>
-                  <Text style={styles.historyVersion}>v{v.version}</Text>
-                  <Text style={styles.historyDate}>{v.releaseDate}</Text>
+                  <Text style={[styles.historyVersion, { color: colors.primary }]}>v{v.version}</Text>
+                  <Text style={[styles.historyDate, { color: colors.textTertiary }]}>{v.releaseDate}</Text>
                 </View>
                 {v.notes.map((note, i) => (
-                  <Text key={i} style={styles.historyNote}>• {note}</Text>
+                  <Text key={i} style={[styles.historyNote, { color: colors.textSecondary }]}>• {note}</Text>
                 ))}
               </View>
             ))}
             {allVersions.length > 2 && (
-              <Text style={styles.historyMore}>+ {allVersions.length - 2} more versions</Text>
+              <Text style={[styles.historyMore, { color: colors.textTertiary }]}>
+                + {allVersions.length - 2} more versions
+              </Text>
             )}
           </View>
         </Section>
@@ -341,18 +370,16 @@ export const SettingsScreen: React.FC<Props> = ({ navigation }) => {
 };
 
 const SECTION_RADIUS = 4;
-const CHIP_RADIUS    = 3;
+const CHIP_RADIUS = 3;
 
 const styles = StyleSheet.create({
-  container:  { flex: 1, backgroundColor: '#f0f2f5' },
+  container: { flex: 1 },
   scrollView: { flex: 1 },
-  content:    { padding: 12, paddingBottom: 32, gap: 8 },
+  content: { padding: 12, paddingBottom: 32, gap: 8 },
 
   section: {
-    backgroundColor: '#fff',
     borderRadius: SECTION_RADIUS,
     borderWidth: 0.5,
-    borderColor: '#e0e0e0',
     overflow: 'hidden',
   },
   sectionHeader: {
@@ -373,7 +400,6 @@ const styles = StyleSheet.create({
   sectionTitle: {
     fontSize: 12,
     fontWeight: '600',
-    color: '#666',
     textTransform: 'uppercase',
     letterSpacing: 0.7,
   },
@@ -391,19 +417,11 @@ const styles = StyleSheet.create({
     paddingHorizontal: 12,
     paddingVertical: 8,
     borderWidth: 0.5,
-    borderColor: '#ddd',
     borderRadius: SECTION_RADIUS,
-    backgroundColor: '#fafafa',
     gap: 6,
   },
-  countryCardActive: {
-    borderWidth: 1.5,
-    borderColor: '#007A3D',
-    backgroundColor: '#e8f5e9',
-  },
   countryFlag: { fontSize: 18 },
-  countryName: { fontSize: 13, color: '#444' },
-  countryNameActive: { color: '#007A3D', fontWeight: '600' },
+  countryName: { fontSize: 13 },
 
   chipRow: {
     flexDirection: 'row',
@@ -419,27 +437,10 @@ const styles = StyleSheet.create({
     paddingVertical: 7,
     borderRadius: CHIP_RADIUS,
     borderWidth: 0.5,
-    borderColor: '#ddd',
-    backgroundColor: '#fafafa',
   },
-  chipActive: {
-    backgroundColor: '#007A3D',
-    borderColor: '#006633',
-  },
-  chipText:       { fontSize: 13, color: '#444' },
-  chipTextActive: { color: '#fff', fontWeight: '600' },
+  chipText: { fontSize: 13 },
 
-  toggleRow: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 10,
-    paddingHorizontal: 14,
-    paddingBottom: 14,
-  },
-  toggleLabel:       { fontSize: 13, color: '#aaa' },
-  toggleLabelActive: { color: '#007A3D', fontWeight: '600' },
-
-  divider: { height: 0.5, backgroundColor: '#f0f0f0', marginHorizontal: 14 },
+  divider: { height: 0.5, marginHorizontal: 14 },
   actionRow: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -454,7 +455,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  actionLabel: { flex: 1, fontSize: 14, color: '#222' },
+  actionLabel: { flex: 1, fontSize: 14 },
 
   aboutContainer: {
     paddingHorizontal: 14,
@@ -469,45 +470,38 @@ const styles = StyleSheet.create({
   appName: {
     fontSize: 16,
     fontWeight: '700',
-    color: '#1a1a1a',
   },
   versionBadge: {
-    backgroundColor: '#e8f5e9',
     paddingHorizontal: 8,
     paddingVertical: 2,
     borderRadius: 3,
   },
-  versionText: { fontSize: 12, color: '#007A3D', fontWeight: '600' },
+  versionText: { fontSize: 12, fontWeight: '600' },
   
   updateAlertRow: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#fff5f5',
     padding: 12,
     borderRadius: 4,
     borderWidth: 1,
-    borderColor: '#ffcdd2',
     marginBottom: 16,
     gap: 10,
   },
   updateAlertText: {
     flex: 1,
     fontSize: 13,
-    color: '#c62828',
     fontWeight: '600',
   },
 
   historyTitle: {
     fontSize: 13,
     fontWeight: '600',
-    color: '#333',
     marginBottom: 10,
     marginTop: 4,
   },
   historyItem: {
     marginBottom: 16,
     borderBottomWidth: 0.5,
-    borderBottomColor: '#eee',
     paddingBottom: 12,
   },
   historyHeader: {
@@ -518,22 +512,18 @@ const styles = StyleSheet.create({
   historyVersion: {
     fontSize: 13,
     fontWeight: '700',
-    color: '#007A3D',
   },
   historyDate: {
     fontSize: 12,
-    color: '#999',
   },
   historyNote: {
     fontSize: 12,
-    color: '#555',
     marginLeft: 8,
     marginBottom: 4,
     lineHeight: 16,
   },
   historyMore: {
     fontSize: 12,
-    color: '#999',
     fontStyle: 'italic',
     textAlign: 'center',
     marginTop: 4,
