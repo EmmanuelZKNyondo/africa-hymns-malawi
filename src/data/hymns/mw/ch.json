@@ -3322,6 +3322,72 @@
         ],
         "chorus": null
       }
+    },
+    {
+      "number": 61,
+      "title": "A! MUTU wakuyera",
+      "writer": "",
+      "rating": 0,
+      "previous_version_number": 38,
+      "tags": ["nyimbo", "Yohane 19:5"],
+      "crossReference": [],
+      "content": {
+        "verses": [
+          {
+            "number": 1, 
+            "lines": [
+              "A! MUTU wakuyera,",
+              "Wolaswa wachisoni;",
+              "Aveka Inu anthu,",
+              "Ndi minga ya udani.",
+              "Ambuye mwafokatu,",
+              "Ndi masauko aja;",
+              "mwatuwa m'maso mwanu,",
+              "Munayerera kale."
+            ]
+          },
+          {
+            "number": 2,
+            "lines": [
+              "Ambuye mwini moyo,",
+              "Kokoma m'nachokera;",
+              "Ndizizwa pomva mawu,",
+              "Umo mwachitiramo.",
+              "Chisoni chanu chija,",
+              "N'cha pamachimo anga;",
+              "Mwasaukira Inu,",
+              "Kupalamula kwanga."
+            ]
+          },
+          {
+            "number": 3,
+            "lines": [
+              "Nditani Bwenzi langa,",
+              "Kulemekeza Inu;",
+              "Chifukwa cha chifundo,",
+              "Ndi imfa yanu ija?",
+              "Mundikhalitse wanu,",
+              "Wokhulupi'ra Inu;",
+              "Musandilore konse,",
+              "Kulekana ndi Inu."
+            ]
+          },
+          {
+            "number": 4,
+            "lines": [
+              "Pakufa inu Mbuye,",
+              "Mukhaletu pafupi;",
+              "Mundithandize ine,",
+              "E, mudzandimasule.",
+              "Ndipenyetsetse Yesu,",
+              "Ambuye Mfumu yanga;",
+              "Ndikafa ndine wanu,",
+              "Ndikhale nanu M'mwamba."
+            ]
+          }
+        ],
+        "chorus": []
+      }
     }
   ]
 }
