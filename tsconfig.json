@@ -32,7 +32,7 @@
   "include": [
     "src/**/*",
     "assets/**/*"
-  ],
+, "scripts"  ],
   "exclude": [
     "node_modules",
     "babel.config.js",
