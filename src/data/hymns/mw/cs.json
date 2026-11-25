@@ -8,25 +8,51 @@
       "title": "Tidzayimba Osana",
       "writer": "--",
       "rating": 0,
-      "tags": ["Chitsitsimutso"],
+      "tags": [
+        "Chitsitsimutso"
+      ],
       "content": {
         "verses": [
           {
             "number": 1,
             "lines": [
-              "Tidzayimba Osana, Aleluya!",
-              "Tidzayimba Osana;",
-              "Tikuzungulira pa mpando wachifumu",
-              "Tidzayimba Osana."
+              {
+                "text": "Tidzayimba Osana, Aleluya!",
+                "align": "left"
+              },
+              {
+                "text": "Tidzayimba Osana;",
+                "align": "left"
+              },
+              {
+                "text": "Tikuzungulira pa mpando wachifumu",
+                "align": "left"
+              },
+              {
+                "text": "Tidzayimba Osana.",
+                "align": "left"
+              }
             ]
           },
           {
             "number": 2,
             "lines": [
-              "Tidzakondwa ndi Angelo, Aleluya!",
-              "Tidzakondwa ndi Angelo;",
-              "Tikuzungulira pa mpando wachifumu",
-              "Tidzakondwa ndi Angelo."
+              {
+                "text": "Tidzakondwa ndi Angelo, Aleluya!",
+                "align": "left"
+              },
+              {
+                "text": "Tidzakondwa ndi Angelo;",
+                "align": "left"
+              },
+              {
+                "text": "Tikuzungulira pa mpando wachifumu",
+                "align": "left"
+              },
+              {
+                "text": "Tidzakondwa ndi Angelo.",
+                "align": "left"
+              }
             ]
           }
         ],
@@ -38,7 +64,9 @@
       "title": "Title",
       "writer": "--",
       "rating": 0,
-      "tags": ["Chitsitsimutso"],
+      "tags": [
+        "Chitsitsimutso"
+      ],
       "content": {
         "verses": [
           {
