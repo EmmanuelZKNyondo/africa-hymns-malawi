@@ -1,7 +1,8 @@
 import React, { useMemo } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import type { Hymn, Verse, Chorus } from '@/utils/dataLoader';
+import { useTheme } from '@/utils/theme';
+import type { Hymn, Verse, Chorus, Line } from '@/utils/dataLoader';
 
 type Props = {
   hymn: Hymn;
@@ -30,6 +31,7 @@ const highlightText = (text: string, query: string, highlightStyle: any) => {
 export const HymnCard = React.memo(({ 
   hymn, fontSize, onPress, isFavourite = false, onToggleFavourite, highlightQuery = '', contextLabel 
 }: Props) => {
+  const colors = useTheme();
   const baseFontSize = fontSize;
   
   const highlightedTitle = useMemo(() => {
@@ -39,34 +41,38 @@ export const HymnCard = React.memo(({
 
   const firstVersePreview = useMemo(() => {
     const firstVerse: Verse | undefined = hymn.content.verses[0];
-    return firstVerse?.lines[0] || '';
+    const firstLine: Line | undefined = firstVerse?.lines[0];
+    return firstLine?.text || '';
   }, [hymn.content.verses]);
 
   const chorusFirstLine = useMemo(() => {
-    const chorus: Chorus | null = hymn.content.chorus;
-    return chorus?.lines[0] || null;
-  }, [hymn.content.chorus]);
+    const mainChorus = hymn.content.choruses?.find(c => c.position === 0 || c.position === 1);
+    const fallbackChorus = hymn.content.chorus; 
+    const lines = mainChorus?.lines || fallbackChorus?.lines || [];
+    const firstLine: Line | string | undefined = lines[0];
+    return typeof firstLine === 'string' ? firstLine : firstLine?.text || null;
+  }, [hymn.content.choruses, hymn.content.chorus]);
 
   return (
     <TouchableOpacity 
-      style={styles.card} 
+      style={[styles.card, { backgroundColor: colors.surface, borderColor: colors.border }]} 
       onPress={onPress}
       activeOpacity={0.7}
     >
       <View style={styles.header}>
-        <Text style={[styles.number, { fontSize: baseFontSize }]}>
+        <Text style={[styles.number, { fontSize: baseFontSize, color: colors.primary }]}>
           {hymn.number}.
         </Text>
         
         <View style={styles.titleContainer}>
           <Text 
-            style={[styles.title, { fontSize: baseFontSize }]} 
+            style={[styles.title, { fontSize: baseFontSize, color: colors.text }]} 
             numberOfLines={2}
           >
             {highlightedTitle}
           </Text>
           {contextLabel && (
-            <Text style={styles.contextLabel}>{contextLabel}</Text>
+            <Text style={[styles.contextLabel, { color: colors.textTertiary }]}>{contextLabel}</Text>
           )}
         </View>
         
@@ -79,7 +85,7 @@ export const HymnCard = React.memo(({
             <Ionicons 
               name={isFavourite ? 'heart' : 'heart-outline'} 
               size={20} 
-              color={isFavourite ? '#eb0e0e' : '#ccc'} 
+              color={isFavourite ? colors.error : colors.textTertiary} 
             />
           </TouchableOpacity>
         )}
@@ -87,7 +93,7 @@ export const HymnCard = React.memo(({
       
       {firstVersePreview ? (
         <Text 
-          style={[styles.versePreview, { fontSize: Math.max(10, baseFontSize - 4) }]} 
+          style={[styles.versePreview, { fontSize: Math.max(10, baseFontSize - 4), color: colors.textSecondary }]} 
           numberOfLines={1}
         >
           "{firstVersePreview}..."
@@ -96,7 +102,7 @@ export const HymnCard = React.memo(({
       
       {chorusFirstLine && (
         <Text 
-          style={[styles.chorusPreview, { fontSize: Math.max(10, baseFontSize - 4) }]} 
+          style={[styles.chorusPreview, { fontSize: Math.max(10, baseFontSize - 4), color: colors.accent }]} 
           numberOfLines={1}
         >
           🎵 "{chorusFirstLine}..."
@@ -110,32 +116,24 @@ HymnCard.displayName = 'HymnCard';
 
 const styles = StyleSheet.create({
   card: {
-    backgroundColor: '#fff',
     padding: 14,
-    borderRadius: 8,
+    borderRadius: 4,
     marginBottom: 10,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 1 },
-    shadowOpacity: 0.05,
-    shadowRadius: 2,
-    elevation: 2,
+    borderWidth: 0.5,
   },
   header: { flexDirection: 'row', alignItems: 'flex-start', marginBottom: 4 },
   number: { 
     fontWeight: '700', 
-    color: '#007A3D', 
     marginRight: 6,
     minWidth: 24,
   },
   titleContainer: { flex: 1 },
   title: { 
     fontWeight: '600', 
-    color: '#1a1a1a',
     lineHeight: 22,
   },
   contextLabel: {
     fontSize: 11,
-    color: '#666',
     marginTop: 2,
     fontStyle: 'italic',
   },
@@ -146,13 +144,9 @@ const styles = StyleSheet.create({
   },
   favButton: { padding: 4 },
   versePreview: { 
-    fontSize: 11, 
-    color: '#555',
     marginBottom: 2,
   },
   chorusPreview: { 
-    fontSize: 11, 
-    color: '#6C63FF', 
     fontStyle: 'italic',
   },
 });

@@ -1,7 +1,7 @@
-// src/components/SearchBar.tsx
-import React, { useState, useRef } from 'react';
-import { View, TextInput, TouchableOpacity, StyleSheet, Text } from 'react-native';
+import React from 'react';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import { useTheme } from '@/utils/theme';
 
 type Props = {
   value: string;
@@ -11,61 +11,37 @@ type Props = {
   resultCount?: number;
 };
 
-export const SearchBar: React.FC<Props> = ({
-  value,
-  onChangeText,
-  onClear,
-  placeholder = 'Search...',
-  resultCount,
+export const SearchBar: React.FC<Props> = ({ 
+  value, 
+  onChangeText, 
+  onClear, 
+  placeholder = 'Search...', 
+  resultCount 
 }) => {
-  const [isFocused, setIsFocused] = useState(false);
-  const inputRef = useRef<TextInput>(null);
-
-  const handleContainerPress = () => {
-    inputRef.current?.focus();
-  };
-
-  const handleClear = () => {
-    onChangeText('');
-    onClear?.();
-  };
+  const colors = useTheme();
 
   return (
-    <TouchableOpacity 
-      style={[styles.container, isFocused && styles.containerFocused]} 
-      onPress={handleContainerPress}
-      activeOpacity={1}
-    >
-      <Ionicons name="search" size={20} color={isFocused ? '#007A3D' : '#999'} style={styles.icon} />
-      
+    <View style={[styles.container, { backgroundColor: colors.surfaceSecondary, borderColor: colors.border }]}>
+      <Ionicons name="search" size={20} color={colors.textTertiary} style={styles.icon} />
       <TextInput
-        ref={inputRef}
-        style={styles.input}
-        placeholder={placeholder}
-        placeholderTextColor="#999"
+        style={[styles.input, { color: colors.text }]}
         value={value}
         onChangeText={onChangeText}
-        onFocus={() => setIsFocused(true)}
-        onBlur={() => setIsFocused(false)}
+        placeholder={placeholder}
+        placeholderTextColor={colors.textTertiary}
         returnKeyType="search"
-        autoCapitalize="none"
-        autoCorrect={false}
       />
-
-      {value.length > 0 && (
-        <TouchableOpacity 
-          onPress={handleClear} 
-          style={styles.clearButton}
-          hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
-        >
-          <Ionicons name="close-circle" size={20} color="#999" />
+      {value.length > 0 && onClear && (
+        <TouchableOpacity onPress={onClear} hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}>
+          <Ionicons name="close-circle" size={20} color={colors.textTertiary} />
         </TouchableOpacity>
       )}
-
-      {resultCount !== undefined && (
-        <Text style={styles.resultCount}>{resultCount}</Text>
+      {resultCount !== undefined && value.length > 0 && (
+        <View style={[styles.badge, { backgroundColor: colors.primary }]}>
+          <Text style={styles.badgeText}>{resultCount}</Text>
+        </View>
       )}
-    </TouchableOpacity>
+    </View>
   );
 };
 
@@ -73,39 +49,28 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#fff',
-    borderRadius: 4,
-    paddingHorizontal: 12,
-    paddingVertical: 8,
-    marginHorizontal: 12,
-    marginBottom: 8,
+    borderRadius: 8,
     borderWidth: 1,
-    borderColor: '#eee',
+    paddingHorizontal: 12,
+    height: 44,
   },
-  containerFocused: {
-    borderColor: '#007A3D',
-    shadowColor: '#007A3D',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
-    elevation: 3,
+  icon: {
+    marginRight: 8,
   },
-  icon: { marginRight: 8 },
   input: {
     flex: 1,
     fontSize: 15,
-    color: '#1a1a1a',
-    paddingVertical: 4,
-    minHeight: 24,
+    height: '100%',
   },
-  clearButton: { padding: 4, marginRight: 4 },
-  resultCount: {
-    fontSize: 12,
-    color: '#666',
-    backgroundColor: '#f1f1f1',
+  badge: {
     paddingHorizontal: 8,
     paddingVertical: 4,
-    borderRadius: 4,
-    marginLeft: 4,
+    borderRadius: 12,
+    marginLeft: 8,
+  },
+  badgeText: {
+    color: '#ffffff',
+    fontSize: 12,
+    fontWeight: '600',
   },
 });

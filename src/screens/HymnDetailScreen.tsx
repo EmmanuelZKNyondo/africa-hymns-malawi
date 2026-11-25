@@ -1,8 +1,5 @@
-import React, { useState, useCallback, useMemo, useEffect } from 'react';
-import { 
-  View, Text, StyleSheet, ScrollView, TouchableOpacity, Share, Clipboard, 
-  Alert, Platform, ActivityIndicator 
-} from 'react-native';
+import React, { useState, useCallback, useMemo } from 'react';
+import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Share, Clipboard, Alert, ActivityIndicator } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
 import { useAppStore } from '@/store/useAppStore';
@@ -10,22 +7,20 @@ import { NavbarHeader } from '@/components/NavbarHeader';
 import { HymnLanguageToggleMenu } from '@/components/HymnLanguageToggleMenu';
 import { HymnActionsMenu } from '@/components/HymnActionsMenu';
 import { loadHymnData } from '@/utils/dataLoader';
+import { useTheme } from '@/utils/theme';
 import { useToast } from '@/contexts/ToastContext';
 import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 import type { HomeStackParamList } from '@/navigation/AppNavigator';
 import type { Hymn, Verse, Chorus, CrossReference, FavouriteEntry } from '@/utils/dataLoader';
-import type { FavouriteEntry as FavouriteEntryType } from '@/utils/storageUtils';
 
 type Props = NativeStackScreenProps<HomeStackParamList, 'HymnDetail'>;
 
 export const HymnDetailScreen: React.FC<Props> = ({ route, navigation }) => {
-  const { 
-    hymn: initialHymn, 
-    countryCode: initialCountry = 'mw', 
-    languageCode: initialLanguage = 'en' 
-  } = route.params;
+  const { hymn: initialHymn, countryCode: initialCountry = 'mw', languageCode: initialLanguage = 'en' } = route.params;
   
-  const { settings, toggleFavourite, isFavourite: isFavouriteStore, favourites } = useAppStore();
+  const { settings, toggleFavourite, updateSettings } = useAppStore();
+  const favourites = useAppStore((state) => state.favourites);
+  const colors = useTheme();
   const { toast } = useToast();
   
   const [currentHymn, setCurrentHymn] = useState<Hymn>(initialHymn);
@@ -33,17 +28,18 @@ export const HymnDetailScreen: React.FC<Props> = ({ route, navigation }) => {
   const [currentLanguage, setCurrentLanguage] = useState<string>(initialLanguage);
   const [loadingCrossRef, setLoadingCrossRef] = useState(false);
   const [copiedVerse, setCopiedVerse] = useState<number | string | null>(null);
-  const [copiedChorus, setCopiedChorus] = useState(false);
+  const [copiedChorus, setCopiedChorus] = useState<string | null>(null);
 
   const fontSize = settings.fontSize;
-  const isFav = favourites.some((f: FavouriteEntryType) => 
+  
+  const isFav = favourites.some((f: FavouriteEntry) => 
     f.hymnNumber === currentHymn.number && 
     f.countryCode === currentCountry && 
     f.languageCode === currentLanguage
   );
 
   const handleToggleFavourite = useCallback(() => {
-    const wasFav = favourites.some((f: FavouriteEntryType) => 
+    const wasFav = favourites.some((f: FavouriteEntry) => 
       f.hymnNumber === currentHymn.number && 
       f.countryCode === currentCountry && 
       f.languageCode === currentLanguage
@@ -59,9 +55,7 @@ export const HymnDetailScreen: React.FC<Props> = ({ route, navigation }) => {
   }, [favourites, currentHymn, currentCountry, currentLanguage, toggleFavourite, toast]);
 
   const handleCrossReferenceSelect = useCallback(async (ref: CrossReference) => {
-    if (ref.countryCode === currentCountry && 
-        ref.languageCode === currentLanguage && 
-        ref.hymnNumber === currentHymn.number) {
+    if (ref.countryCode === currentCountry && ref.languageCode === currentLanguage && ref.hymnNumber === currentHymn.number) {
       return;
     }
     
@@ -71,11 +65,7 @@ export const HymnDetailScreen: React.FC<Props> = ({ route, navigation }) => {
       const matchedHymn = hymnData.hymns.find((h) => h.number === ref.hymnNumber);
       
       if (matchedHymn) {
-        navigation.setParams({
-          hymn: matchedHymn,
-          countryCode: ref.countryCode,
-          languageCode: ref.languageCode,
-        });
+        navigation.setParams({ hymn: matchedHymn, countryCode: ref.countryCode, languageCode: ref.languageCode });
         setCurrentHymn(matchedHymn);
         setCurrentCountry(ref.countryCode);
         setCurrentLanguage(ref.languageCode);
@@ -92,157 +82,194 @@ export const HymnDetailScreen: React.FC<Props> = ({ route, navigation }) => {
 
   const handleShare = useCallback(async () => {
     try {
-      const versePreview = currentHymn.content.verses[0]?.lines.join('\n') || '';
-      const chorusPreview = currentHymn.content.chorus?.lines.join('\n') || '';
+      const versePreview = currentHymn.content.verses[0]?.lines.map(l => l.text).join('\n') || '';
+      const mainChorus = currentHymn.content.choruses?.find(c => c.position === 0 || c.position === 1);
+      const chorusPreview = mainChorus?.lines.map(l => l.text).join('\n') || '';
       const shareText = `🎵 ${currentHymn.number}. ${currentHymn.title}\n\n${versePreview}${chorusPreview ? `\n\n${chorusPreview}` : ''}`;
-      
       await Share.share({ message: shareText, title: `${currentHymn.title} - Africa Hymns` });
     } catch (error) {
       console.error('[HymnDetail] Share failed:', error);
     }
   }, [currentHymn]);
 
-  const handleCopyVerse = useCallback((verseNumber: number | string, lines: string[]) => {
-    Clipboard.setString(lines.join('\n'));
+  const handleCopyVerse = useCallback((verseNumber: number | string, text: string) => {
+    Clipboard.setString(text);
     setCopiedVerse(verseNumber);
     toast.success(`Verse ${verseNumber} copied`);
     setTimeout(() => setCopiedVerse(null), 2000);
   }, [toast]);
 
-  const handleCopyChorus = useCallback(() => {
-    if (currentHymn.content.chorus) {
-      Clipboard.setString(currentHymn.content.chorus.lines.join('\n'));
-      setCopiedChorus(true);
-      toast.success('Chorus copied');
-      setTimeout(() => setCopiedChorus(false), 2000);
-    }
-  }, [currentHymn, toast]);
+  const handleCopyChorus = useCallback((chorusId: string, text: string) => {
+    Clipboard.setString(text);
+    setCopiedChorus(chorusId);
+    toast.success('Chorus copied');
+    setTimeout(() => setCopiedChorus(null), 2000);
+  }, [toast]);
 
   const renderStarRating = useCallback((rating: number, iconSize: number = 16) => {
     const fullStars = Math.floor(rating);
     const hasHalfStar = rating % 1 >= 0.5;
     const stars = [];
-    
     for (let i = 0; i < fullStars; i++) stars.push(<Ionicons key={`full-${i}`} name="star" size={iconSize} color="#FFD54F" />);
     if (hasHalfStar) stars.push(<Ionicons key="half" name="star-half" size={iconSize} color="#FFD54F" />);
-    
     const emptyCount = 5 - fullStars - (hasHalfStar ? 1 : 0);
-    for (let i = 0; i < emptyCount; i++) stars.push(<Ionicons key={`empty-${i}`} name="star-outline" size={iconSize} color="#e0e0e0" />);
-    
+    for (let i = 0; i < emptyCount; i++) stars.push(<Ionicons key={`empty-${i}`} name="star-outline" size={iconSize} color={colors.border} />);
     return stars;
-  }, []);
+  }, [colors.border]);
 
   const handleSettingsRedirect = () => {
     navigation.getParent()?.navigate('Settings');
   };
 
-  const renderVerse = useCallback((verse: Verse) => (
-    <View key={verse.number} style={styles.verseBlock}>
-      <View style={styles.verseHeader}>
-        <TouchableOpacity 
-          onPress={() => handleCopyVerse(verse.number, verse.lines)} 
-          style={styles.copyButton} 
-          hitSlop={{ top: 8, bottom: 8, left: 8, right: 8 }}
-        >
-          <Ionicons 
-            name={copiedVerse === verse.number ? 'checkmark-circle' : 'copy-outline'} 
-            size={19} 
-            color={copiedVerse === verse.number ? '#007A3D' : '#999'} 
-          />
-        </TouchableOpacity>
-      </View>
-      {verse.lines.map((line, idx) => (
-        <Text 
-          key={idx} 
-          style={[
-            styles.verseLine, 
-            { fontSize, lineHeight: fontSize * 1.6 },
-            idx === 0 && styles.verseFirstLine,
-            idx > 0 && styles.verseLineIndent
-          ]} 
-          selectable
-        >
-          {idx === 0 ? (
-            <>
-              <Text style={[{ fontSize, fontWeight: '700' }]}>{verse.number}. </Text>
-              <Text style={[{ fontSize }]}>{line}</Text>
-            </>
-          ) : (
-            line
-          )}
-        </Text>
-      ))}
-    </View>
-  ), [fontSize, copiedVerse, handleCopyVerse]);
+  const handleThemeToggle = useCallback(() => {
+    const newTheme = settings.theme === 'dark' ? 'light' : 'dark';
+    updateSettings({ theme: newTheme });
+  }, [settings.theme, updateSettings]);
 
-  const renderChorus = useCallback((chorus: Chorus) => (
-    <View style={styles.chorusSection}>
-      <View style={styles.chorusHeader}>
-        <Text style={[styles.chorusLabel, { fontSize: fontSize - 2 }]}>""</Text>
-        <TouchableOpacity onPress={handleCopyChorus} style={styles.copyButton} hitSlop={{ top: 8, bottom: 8, left: 8, right: 8 }}>
-          <Ionicons name={copiedChorus ? 'checkmark-circle' : 'copy-outline'} size={18} color={copiedChorus ? '#007A3D' : '#999'} />
-        </TouchableOpacity>
+  const renderVerse = useCallback((verse: Verse) => {
+    const verseText = verse.lines.map(l => l.text).join('\n');
+    return (
+      <View key={verse.number} style={[styles.verseBlock, { backgroundColor: colors.surface }]}>
+        <View style={styles.verseHeader}>
+          <TouchableOpacity 
+            onPress={() => handleCopyVerse(verse.number, verseText)} 
+            style={styles.copyButton} 
+            hitSlop={{ top: 8, bottom: 8, left: 8, right: 8 }}
+          >
+            <Ionicons 
+              name={copiedVerse === verse.number ? 'checkmark-circle' : 'copy-outline'} 
+              size={19} 
+              color={copiedVerse === verse.number ? colors.success : colors.textTertiary} 
+            />
+          </TouchableOpacity>
+        </View>
+        {verse.lines.map((line, idx) => (
+          <Text 
+            key={idx} 
+            style={[
+              styles.verseLine, 
+              { fontSize, lineHeight: fontSize * 1.6, color: colors.text, textAlign: line.align || 'left' },
+              idx === 0 && styles.verseFirstLine,
+              idx > 0 && styles.verseLineIndent
+            ]} 
+            selectable
+          >
+            {idx === 0 ? (
+              <>
+                <Text style={[{ fontSize, fontWeight: '700', color: colors.text }]}>{verse.number}. </Text>
+                <Text style={[{ fontSize, color: colors.text }]}>{line.text}</Text>
+              </>
+            ) : (
+              line.text
+            )}
+          </Text>
+        ))}
       </View>
-      {chorus.lines.map((line, idx) => (
-        <Text key={idx} style={[styles.chorusLine, { fontSize, lineHeight: fontSize * 1.6 }]} selectable>{line}</Text>
-      ))}
-    </View>
-  ), [fontSize, copiedChorus, handleCopyChorus]);
+    );
+  }, [fontSize, copiedVerse, handleCopyVerse, colors]);
+
+  const renderChorus = useCallback((chorus: Chorus) => {
+    const chorusText = chorus.lines.map(l => l.text).join('\n');
+    return (
+      <View style={[styles.chorusSection, { backgroundColor: colors.surfaceSecondary, borderColor: colors.primary }]}>
+        <View style={styles.chorusHeader}>
+          <Text style={[styles.chorusLabel, { fontSize: fontSize - 2, color: colors.accent }]}>{chorus.label}</Text>
+          <TouchableOpacity onPress={() => handleCopyChorus(chorus.id, chorusText)} style={styles.copyButton} hitSlop={{ top: 8, bottom: 8, left: 8, right: 8 }}>
+            <Ionicons name={copiedChorus === chorus.id ? 'checkmark-circle' : 'copy-outline'} size={18} color={copiedChorus === chorus.id ? colors.success : colors.textTertiary} />
+          </TouchableOpacity>
+        </View>
+        {chorus.lines.map((line, idx) => (
+          <Text 
+            key={idx} 
+            style={[styles.chorusLine, { fontSize, lineHeight: fontSize * 1.6, color: colors.text, textAlign: line.align || 'center' }]} 
+            selectable
+          >
+            {line.text}
+          </Text>
+        ))}
+      </View>
+    );
+  }, [fontSize, copiedChorus, handleCopyChorus, colors]);
+
+  const renderContent = useMemo(() => {
+    const elements: React.ReactNode[] = [];
+    const { verses, choruses } = currentHymn.content;
+    
+    const chorusesByPosition: Record<number, Chorus[]> = {};
+    choruses?.forEach(c => {
+      if (!chorusesByPosition[c.position]) chorusesByPosition[c.position] = [];
+      chorusesByPosition[c.position].push(c);
+    });
+
+    if (chorusesByPosition[0]) {
+      chorusesByPosition[0].forEach(c => elements.push(renderChorus(c)));
+    }
+
+    verses.forEach((verse, index) => {
+      elements.push(renderVerse(verse));
+      const nextPosition = index + 1;
+      if (chorusesByPosition[nextPosition]) {
+        chorusesByPosition[nextPosition].forEach(c => elements.push(renderChorus(c)));
+      }
+    });
+
+    const outroChoruses = choruses?.filter(c => c.position === -1 || c.position > verses.length) || [];
+    outroChoruses.forEach(c => elements.push(renderChorus(c)));
+
+    return elements;
+  }, [currentHymn.content, renderVerse, renderChorus]);
 
   const headerTitle = useMemo(() => `${currentHymn.number}. ${currentHymn.title}`, [currentHymn]);
 
   return (
-    <SafeAreaView style={styles.container} edges={['top']}>
-      <NavbarHeader title={headerTitle} subtitle={"--"} showBack={true} onBack={() => navigation.goBack()} rightIcon={undefined} onRightPress={undefined} />
-
-      <View style={styles.headerActions}>
-        <HymnLanguageToggleMenu currentCountry={currentCountry} currentLanguage={currentLanguage} currentHymnNumber={currentHymn.number} crossReferences={currentHymn.crossReference} onSelect={handleCrossReferenceSelect} />
-        <HymnActionsMenu 
-          hymn={currentHymn} 
-          isFavourite={isFav} 
-          onToggleFavourite={handleToggleFavourite} 
-          onShare={handleShare} 
-          onSettings={handleSettingsRedirect} 
-        />
-      </View>
+    <SafeAreaView style={[styles.container, { backgroundColor: colors.background }]} edges={['top']}>
+      <NavbarHeader 
+        title={headerTitle} 
+        subtitle={"--"} 
+        showBack={true} 
+        onBack={() => navigation.goBack()} 
+        showThemeToggle={true}
+        onThemeToggle={handleThemeToggle}
+        rightComponent={
+          <View style={{ flexDirection: 'row', alignItems: 'center', gap: 8 }}>
+            <HymnLanguageToggleMenu currentCountry={currentCountry} currentLanguage={currentLanguage} currentHymnNumber={currentHymn.number} crossReferences={currentHymn.crossReference} onSelect={handleCrossReferenceSelect} />
+            <HymnActionsMenu hymn={currentHymn} isFavourite={isFav} onToggleFavourite={handleToggleFavourite} onShare={handleShare} onSettings={handleSettingsRedirect} />
+          </View>
+        }
+      />
 
       <ScrollView style={styles.scrollView} contentContainerStyle={styles.content} showsVerticalScrollIndicator={false}>
         {loadingCrossRef && (
-          <View style={styles.loadingOverlay}>
-            <ActivityIndicator size="large" color="#007A3D" />
-            <Text style={styles.loadingText}>Loading alternate version...</Text>
+          <View style={[styles.loadingOverlay, { backgroundColor: colors.background + 'E6' }]}>
+            <ActivityIndicator size="large" color={colors.primary} />
+            <Text style={[styles.loadingText, { color: colors.textSecondary }]}>Loading alternate version...</Text>
           </View>
         )}
 
-        <View style={styles.hymnHeader}>
+        <View style={[styles.hymnHeader, { backgroundColor: colors.surface, borderColor: colors.border }]}>
           <TouchableOpacity onPress={handleToggleFavourite} style={styles.hymnFavButtonAbsolute} hitSlop={{ top: 12, bottom: 12, left: 12, right: 12 }} accessibilityLabel={isFav ? 'Remove from favourites' : 'Add to favourites'}>
-            <Ionicons name={isFav ? 'heart' : 'heart-outline'} size={20} color={isFav ? '#eb0e0e' : '#ddd'} />
+            <Ionicons name={isFav ? 'heart' : 'heart-outline'} size={20} color={isFav ? colors.error : colors.textTertiary} />
           </TouchableOpacity>
 
           <View style={styles.hymnCenteredContent}>
-            <Text style={[styles.hymnTitle, { fontSize: fontSize }]} numberOfLines={2}>{currentHymn.title}</Text>
-              {currentHymn.previous_version_number && (
-                <View>
-                  <Text>(Yakale #{currentHymn.previous_version_number})</Text>
-                </View>
-              )}
+            <Text style={[styles.hymnTitle, { fontSize, color: colors.text }]} numberOfLines={2}>{currentHymn.title}</Text>
+            {currentHymn.previous_version_number && (
+              <View>
+                <Text style={{ color: colors.textTertiary }}>(Yakale #{currentHymn.previous_version_number})</Text>
+              </View>
+            )}
             <View style={styles.rating}>
               {renderStarRating(currentHymn.rating, 12)}
-              <Text style={[styles.ratingText, { fontSize: fontSize - 6 }]}>{currentHymn.rating.toFixed(1)}</Text>
+              <Text style={[styles.ratingText, { fontSize: fontSize - 6, color: colors.textTertiary }]}>{currentHymn.rating.toFixed(1)}</Text>
             </View>
           </View>
         </View>
 
         <View style={styles.versesSection}>
-          {currentHymn.content.verses.map((verse: Verse, index: number) => (
-            <React.Fragment key={verse.number}>
-              {renderVerse(verse)}
-              {index === 0 && currentHymn.content.chorus && renderChorus(currentHymn.content.chorus)}
-            </React.Fragment>
-          ))}
+          {renderContent}
         </View>
 
-        <Text style={[styles.footerNote, { fontSize: fontSize - 6 }]}>
+        <Text style={[styles.footerNote, { fontSize: fontSize - 6, color: colors.text, backgroundColor: colors.border }]}>
           Tap verse/chorus to copy • Long-press to select text • Tap ⋮ for options
         </Text>
       </ScrollView>
@@ -251,124 +278,27 @@ export const HymnDetailScreen: React.FC<Props> = ({ route, navigation }) => {
 };
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: '#f8f9fa' },
+  container: { flex: 1 },
   scrollView: { flex: 1 },
   content: { padding: 12 },
-  
-  headerActions: {
-    position: 'absolute',
-    top: 40,
-    right: 12,
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 8,
-    zIndex: 20,
-  },
-  
-  loadingOverlay: {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
-    backgroundColor: 'rgba(255,255,255,0.92)',
-    alignItems: 'center',
-    justifyContent: 'center',
-    zIndex: 10,
-    gap: 12,
-  },
-  loadingText: { fontSize: 14, color: '#666' },
-  
-  hymnHeader: { 
-    padding: 12, 
-    backgroundColor: '#fff', 
-    borderRadius: 8, 
-    marginBottom: 12,
-    borderBottomWidth: 1,
-    borderBottomColor: '#eee',
-    alignItems: 'center',
-    position: 'relative',
-    minHeight: 70,
-  },
-  hymnTitle: { 
-    fontWeight: '700', 
-    color: '#1a1a1a',
-    textAlign: 'center',
-    marginBottom: 6,
-    lineHeight: 20,
-  },
-  hymnFavButtonAbsolute: {
-    position: 'absolute',
-    top: 12,
-    right: 12,
-    padding: 4,
-    zIndex: 10,
-  },
-  hymnCenteredContent: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    paddingHorizontal: 40,
-  },
-  hymnWriter: { color: '#666', fontStyle: 'italic', textAlign: 'center' },
-  
+  loadingOverlay: { position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, alignItems: 'center', justifyContent: 'center', zIndex: 10, gap: 12 },
+  loadingText: { fontSize: 14 },
+  hymnHeader: { padding: 12, borderRadius: 4, marginBottom: 12, borderBottomWidth: 1, alignItems: 'center', position: 'relative', minHeight: 70 },
+  hymnTitle: { fontWeight: '700', textAlign: 'center', marginBottom: 6, lineHeight: 20 },
+  hymnFavButtonAbsolute: { position: 'absolute', top: 12, right: 12, padding: 4, zIndex: 10 },
+  hymnCenteredContent: { alignItems: 'center', justifyContent: 'center', paddingHorizontal: 40 },
   versesSection: { marginBottom: 12 },
-  verseBlock: {
-    backgroundColor: '#fff',
-    padding: 12,
-    borderRadius: 8,
-    marginBottom: 8,
-  },
-  verseHeader: {
-    flexDirection: 'row',
-    justifyContent: 'flex-end',
-    alignItems: 'center',
-    marginBottom: 1,
-  },
+  verseBlock: { padding: 12, borderRadius: 4, marginBottom: 8 },
+  verseHeader: { flexDirection: 'row', justifyContent: 'flex-end', alignItems: 'center', marginBottom: 1 },
   copyButton: { padding: 4 },
   verseFirstLine: { marginTop: 4 },
-  verseLine: { color: '#1a1a1a', textAlign: 'justify', marginBottom: 4, marginLeft: 8 },
+  verseLine: { textAlign: 'justify', marginBottom: 4, marginLeft: 8 },
   verseLineIndent: { paddingLeft: 16 },
-  chorusSection: {
-    backgroundColor: '#d0fade',
-    padding: 12,
-    borderRadius: 8,
-    marginBottom: 8,
-    marginHorizontal: 4,
-    borderRightWidth: 2, 
-    borderRightColor: '#66f390',
-    borderLeftWidth: 2,
-    borderLeftColor: '#66f390'
-  },
-  chorusHeader: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    marginBottom: 4,
-  },
-  chorusLabel: { fontWeight: '600', color: '#8c87e4' },
-  chorusLine: { color: '#1a1a1a', fontStyle: 'italic', textAlign: 'center', marginBottom: 1 },
-  
+  chorusSection: { padding: 12, borderRadius: 4, marginBottom: 8, marginHorizontal: 4, borderRightWidth: 2, borderLeftWidth: 2 },
+  chorusHeader: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: 4 },
+  chorusLabel: { fontWeight: '600' },
+  chorusLine: { fontStyle: 'italic', marginBottom: 1 },
   rating: { flexDirection: 'row', alignItems: 'center', gap: 4 },
-  ratingText: { color: '#999', fontWeight: '500' },
-  
-  metaSection: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    padding: 6,
-    backgroundColor: '#fff',
-    borderRadius: 8,
-    marginBottom: 0,
-  },
-  tags: { flexDirection: 'row', gap: 6, flexWrap: 'wrap' },
-  tag: { backgroundColor: '#e8f5e9', color: '#007A3D', paddingHorizontal: 8, paddingVertical: 3, borderRadius: 10 },
-  
-  footerNote: {
-    color: '#f0f0f0',
-    backgroundColor: '#acacac',
-    textAlign: 'center',
-    paddingVertical: 13,
-    fontStyle: 'italic',
-    marginTop: 12,
-  },
+  ratingText: { fontWeight: '500' },
+  footerNote: { textAlign: 'center', paddingVertical: 13, fontStyle: 'italic', marginTop: 12 },
 });
