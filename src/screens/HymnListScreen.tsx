@@ -1,17 +1,16 @@
 import React, { useEffect, useState, useMemo, useCallback } from 'react';
 import { View, Text, StyleSheet, FlatList, ActivityIndicator } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { Ionicons } from '@expo/vector-icons';
 import { useAppStore } from '@/store/useAppStore';
-import { loadHymnData, type Hymn, searchHymns } from '@/utils/dataLoader';
+import { loadHymnData, type Hymn, searchHymns, type FavouriteEntry } from '@/utils/dataLoader';
 import { HymnCard } from '@/components/HymnCard';
 import { SearchBar } from '@/components/SearchBar';
 import { NavbarHeader } from '@/components/NavbarHeader';
+import { HymnListActionsMenu } from '@/components/HymnListActionsMenu';
+import { useTheme } from '@/utils/theme';
 import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 import type { HomeStackParamList } from '@/navigation/AppNavigator';
-import { Ionicons } from '@expo/vector-icons';
-import { HymnListActionsMenu } from '@/components/HymnListActionsMenu';
-import type { FavouriteEntry } from '@/utils/storageUtils';
-import { useToast } from '@/contexts/ToastContext';
 
 type Props = NativeStackScreenProps<HomeStackParamList, 'HymnList'>;
 
@@ -21,11 +20,9 @@ export const HymnListScreen: React.FC<Props> = ({ route, navigation }) => {
   const [loading, setLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState('');
   
-  const fontSize = useAppStore((state) => state.settings.fontSize);
-  const toggleFavourite = useAppStore((state) => state.toggleFavourite);
+  const { settings, toggleFavourite, updateSettings, addRecentHymn } = useAppStore();
   const favourites = useAppStore((state) => state.favourites);
-  const addRecentHymn = useAppStore((state) => state.addRecentHymn);
-  const { toast } = useToast();
+  const colors = useTheme();
 
   useEffect(() => {
     let isMounted = true;
@@ -70,21 +67,10 @@ export const HymnListScreen: React.FC<Props> = ({ route, navigation }) => {
     }
   }, [countryCode, languageCode]);
 
-  const handleToggleFavourite = useCallback((hymn: Hymn) => {
-    const wasFav = favourites.some((f: FavouriteEntry) => 
-      f.hymnNumber === hymn.number && 
-      f.countryCode === countryCode && 
-      f.languageCode === languageCode
-    );
-    
-    toggleFavourite(hymn.number, countryCode, languageCode);
-    
-    if (!wasFav) {
-      toast.success(`"${hymn.title}" added to favourites`);
-    } else {
-      toast.info(`"${hymn.title}" removed from favourites`, { duration: 2000 });
-    }
-  }, [favourites, countryCode, languageCode, toggleFavourite, toast]);
+  const handleThemeToggle = useCallback(() => {
+    const newTheme = settings.theme === 'dark' ? 'light' : 'dark';
+    updateSettings({ theme: newTheme });
+  }, [settings.theme, updateSettings]);
 
   const renderItem = useCallback(({ item }: { item: Hymn }) => {
     const isFav = favourites.some((f: FavouriteEntry) => 
@@ -96,41 +82,42 @@ export const HymnListScreen: React.FC<Props> = ({ route, navigation }) => {
     return (
       <HymnCard
         hymn={item}
-        fontSize={fontSize}
+        fontSize={settings.fontSize}
         onPress={() => handleHymnPress(item)}
         isFavourite={isFav}
-        onToggleFavourite={() => handleToggleFavourite(item)}
+        onToggleFavourite={() => toggleFavourite(item.number, countryCode, languageCode)}
         highlightQuery={searchQuery}
       />
     );
-  }, [fontSize, handleHymnPress, handleToggleFavourite, countryCode, languageCode, searchQuery, favourites]);
+  }, [settings.fontSize, handleHymnPress, toggleFavourite, countryCode, languageCode, searchQuery, favourites]);
 
   if (loading) {
     return (
-      <SafeAreaView style={styles.container}>
+      <SafeAreaView style={[styles.container, { backgroundColor: colors.background }]} edges={['top']}>
         <View style={styles.loadingContainer}>
-          <ActivityIndicator size="large" color="#007A3D" />
-          <Text style={styles.loadingText}>Loading {languageName} hymns...</Text>
+          <ActivityIndicator size="large" color={colors.primary} />
+          <Text style={[styles.loadingText, { color: colors.textSecondary }]}>Loading {languageName} hymns...</Text>
         </View>
       </SafeAreaView>
     );
   }
 
   return (
-    <SafeAreaView style={styles.container} edges={['top']}>
+    <SafeAreaView style={[styles.container, { backgroundColor: colors.background }]} edges={['top']}>
       <NavbarHeader
         title={`${languageName} Hymns`}
         subtitle={`${filteredHymns.length} of ${hymns.length}`}
         showBack={true}
         onBack={() => navigation.goBack()}
+        showThemeToggle={true}
+        onThemeToggle={handleThemeToggle}
+        rightComponent={
+          <HymnListActionsMenu
+            onRefresh={handleRefresh}
+            onSettings={handleGoToSettings}
+          />
+        }
       />
-
-      <View style={styles.headerActions}>
-        <HymnListActionsMenu
-          onRefresh={handleRefresh}
-          onSettings={handleGoToSettings}
-        />
-      </View>
 
       <View style={styles.searchBarArea}>
         <SearchBar
@@ -155,12 +142,12 @@ export const HymnListScreen: React.FC<Props> = ({ route, navigation }) => {
         maintainVisibleContentPosition={{ minIndexForVisible: 0 }}
         ListEmptyComponent={
           <View style={styles.emptyState}>
-            <Ionicons name="search-outline" size={48} color="#ccc" />
-            <Text style={styles.emptyText}>
+            <Ionicons name="search-outline" size={48} color={colors.textTertiary} />
+            <Text style={[styles.emptyText, { color: colors.textSecondary }]}>
               {searchQuery ? `No results for "${searchQuery}"` : 'No hymns available'}
             </Text>
             {searchQuery && (
-              <Text style={styles.emptySubtext}>Try a different keyword or hymn number</Text>
+              <Text style={[styles.emptySubtext, { color: colors.textTertiary }]}>Try a different keyword or hymn number</Text>
             )}
           </View>
         }
@@ -172,13 +159,12 @@ export const HymnListScreen: React.FC<Props> = ({ route, navigation }) => {
 };
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: '#f8f9fa' },
-  headerActions: { position: 'absolute', top: 40, right: 12, zIndex: 20 },
-  searchBarArea: { marginTop: 4 },
+  container: { flex: 1 },
+  searchBarArea: { marginTop: 4, paddingHorizontal: 12 },
   loadingContainer: { flex: 1, alignItems: 'center', justifyContent: 'center', gap: 12 },
-  loadingText: { fontSize: 14, color: '#666' },
+  loadingText: { fontSize: 14 },
   listContent: { padding: 12 },
   emptyState: { alignItems: 'center', padding: 40, gap: 8 },
-  emptyText: { fontSize: 15, fontWeight: '500', color: '#666', textAlign: 'center' },
-  emptySubtext: { fontSize: 13, color: '#999', textAlign: 'center' },
+  emptyText: { fontSize: 15, fontWeight: '500', textAlign: 'center' },
+  emptySubtext: { fontSize: 13, textAlign: 'center' },
 });

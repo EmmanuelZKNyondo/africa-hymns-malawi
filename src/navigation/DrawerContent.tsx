@@ -5,13 +5,13 @@ import { Ionicons } from '@expo/vector-icons';
 import { useAppStore } from '@/store/useAppStore';
 import { DrawerContentScrollView } from '@react-navigation/drawer';
 import Constants from 'expo-constants';
+import { useTheme } from '@/utils/theme';
 
 const COUNTRIES = [
   { code: 'mw', name: 'Malawi' },
   // { code: 'zm', name: 'Zambia' },
 ];
 
-// ✅ Extract config once
 const appName = Constants.expoConfig?.name || 'Africa Hymns';
 const appVersion = Constants.expoConfig?.version || '1.0.0';
 const author = 'EZPN';
@@ -19,6 +19,7 @@ const author = 'EZPN';
 export const DrawerContent: React.FC<any> = (props) => {
   const { navigation } = props;
   const { settings, updateSettings, getActiveCountryName } = useAppStore();
+  const colors = useTheme();
   
   const countryName = getActiveCountryName();
 
@@ -41,74 +42,85 @@ export const DrawerContent: React.FC<any> = (props) => {
   };
 
   return (
-    <DrawerContentScrollView {...props} contentContainerStyle={styles.container}>
-      {/* Header */}
-      <View style={styles.header}>
+    <DrawerContentScrollView 
+      {...props} 
+      contentContainerStyle={[styles.container, { backgroundColor: colors.surface }]}
+    >
+      <View style={[styles.header, { backgroundColor: colors.primary }]}>
         <Text style={styles.appName}>{appName}</Text>
         <TouchableOpacity style={styles.countryBadge} onPress={toggleCountry}>
-          <Ionicons name="globe-outline" size={14} color="#fff" />
+          <Ionicons name="globe-outline" size={14} color="#ffffff" />
           <Text style={styles.countryText}>{countryName}</Text>
         </TouchableOpacity>
       </View>
 
-      {/* Menu Items */}
       <View style={styles.menu}>
         <MenuItem 
           icon="library-outline" 
           label="Hymns" 
           onPress={() => handleNavigate('Home')} 
           isActive={true} 
+          colors={colors}
         />
         <MenuItem 
           icon="heart-outline" 
           label="Favourite Hymns" 
           onPress={() => handleNavigate('Favorites')} 
+          colors={colors}
         />
         <MenuItem 
           icon="book-outline" 
           label="Prayers" 
           onPress={() => handleNavigate('Prayers')} 
+          colors={colors}
         />
         <MenuItem 
           icon="settings-outline" 
           label="Settings" 
           onPress={() => handleNavigate('Settings')} 
+          colors={colors}
         />
       </View>
 
-      <View style={styles.footer}>
-        <Text style={styles.version}>v{appVersion}</Text>
-        <Text style={styles.copyright}>© {new Date().getFullYear()} {author}</Text>
+      <View style={[styles.footer, { borderTopColor: colors.border }]}>
+        <Text style={[styles.version, { color: colors.textTertiary }]}>v{appVersion}</Text>
+        <Text style={[styles.copyright, { color: colors.textTertiary }]}>© {new Date().getFullYear()} {author}</Text>
       </View>
     </DrawerContentScrollView>
   );
 };
 
-const MenuItem = ({ icon, label, onPress, isActive }: any) => (
+const MenuItem = ({ icon, label, onPress, isActive, colors }: any) => (
   <TouchableOpacity 
-    style={[styles.menuItem, isActive && styles.menuItemActive]} 
+    style={[
+      styles.menuItem, 
+      isActive && { backgroundColor: colors.primaryLight }
+    ]} 
     onPress={onPress}
     activeOpacity={0.7}
   >
     <Ionicons 
       name={icon as any} 
       size={22} 
-      color={isActive ? '#007A3D' : '#555'} 
+      color={isActive ? colors.primary : colors.textSecondary} 
     />
-    <Text style={[styles.menuLabel, isActive && styles.menuLabelActive]}>
+    <Text style={[
+      styles.menuLabel, 
+      { color: isActive ? colors.primary : colors.text },
+      isActive && styles.menuLabelActive
+    ]}>
       {label}
     </Text>
   </TouchableOpacity>
 );
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: '#fff' },
+  container: { flex: 1 },
   header: {
     padding: 20,
-    backgroundColor: '#007A3D',
     paddingBottom: 24,
   },
-  appName: { fontSize: 22, fontWeight: '700', color: '#fff', marginBottom: 8 },
+  appName: { fontSize: 22, fontWeight: '700', color: '#ffffff', marginBottom: 8 },
   countryBadge: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -119,7 +131,7 @@ const styles = StyleSheet.create({
     borderRadius: 4,
     gap: 6,
   },
-  countryText: { color: '#fff', fontSize: 12, fontWeight: '600' },
+  countryText: { color: '#ffffff', fontSize: 12, fontWeight: '600' },
   
   menu: { paddingVertical: 10 },
   menuItem: {
@@ -129,11 +141,10 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     gap: 16,
   },
-  menuItemActive: { backgroundColor: '#f0fdf4' },
-  menuLabel: { fontSize: 16, color: '#333', fontWeight: '500' },
-  menuLabelActive: { color: '#007A3D', fontWeight: '600' },
+  menuLabel: { fontSize: 16, fontWeight: '500' },
+  menuLabelActive: { fontWeight: '600' },
   
-  footer: { marginTop: 'auto', padding: 20, borderTopWidth: 1, borderTopColor: '#eee' },
-  version: { fontSize: 12, color: '#999', textAlign: 'center', marginBottom: 4 },
-  copyright: { fontSize: 11, color: '#bbb', textAlign: 'center' },
+  footer: { marginTop: 'auto', padding: 20, borderTopWidth: 1 },
+  version: { fontSize: 12, textAlign: 'center', marginBottom: 4 },
+  copyright: { fontSize: 11, textAlign: 'center' },
 });

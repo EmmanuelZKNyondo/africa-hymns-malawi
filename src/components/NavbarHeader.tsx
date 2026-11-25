@@ -1,128 +1,89 @@
-// src/components/NavbarHeader.tsx
-import React, { ReactNode } from 'react';
-import { View, Text, TouchableOpacity, StyleSheet, Animated } from 'react-native';
+import React from 'react';
+import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import { useTheme } from '@/utils/theme';
 import { useAppStore } from '@/store/useAppStore';
 
-export type NavbarHeaderProps = {
+type Props = {
   title: string;
-  subtitle?: string | ReactNode;
+  subtitle?: string;
   showBack?: boolean;
   onBack?: () => void;
-  showMenu?: boolean;
-  onMenuPress?: () => void;
+  leftIcon?: keyof typeof Ionicons.glyphMap;
+  onLeftPress?: () => void;
   rightIcon?: keyof typeof Ionicons.glyphMap;
   onRightPress?: () => void;
-  rightLabel?: string;
-  containerStyle?: any;
-  titleStyle?: any;
-  subtitleStyle?: any;
-  
+  showThemeToggle?: boolean;
+  onThemeToggle?: () => void;
   showUpdateIndicator?: boolean;
   onUpdatePress?: () => void;
+  rightComponent?: React.ReactNode;
 };
 
-export const NavbarHeader: React.FC<NavbarHeaderProps> = ({
+export const NavbarHeader: React.FC<Props> = ({
   title,
   subtitle,
-  showBack = false,
+  showBack,
   onBack,
-  showMenu = false,
-  onMenuPress,
+  leftIcon,
+  onLeftPress,
   rightIcon,
   onRightPress,
-  rightLabel,
-  containerStyle,
-  titleStyle,
-  subtitleStyle,
-  showUpdateIndicator = false,
+  showThemeToggle,
+  onThemeToggle,
+  showUpdateIndicator,
   onUpdatePress,
+  rightComponent,
 }) => {
-  const fontSize = useAppStore((state) => state.settings.fontSize);
+  const colors = useTheme();
+  const themeMode = useAppStore((state) => state.settings.theme);
+  const themeIcon = themeMode === 'dark' ? 'sunny-outline' : 'moon-outline';
 
   return (
-    <View style={[styles.container, containerStyle]}>
-      <View style={styles.left}>
-        {showMenu && onMenuPress && (
-          <TouchableOpacity 
-            onPress={onMenuPress} 
-            style={styles.iconButton}
-            hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
-            accessibilityLabel="Open menu"
-          >
-            <Ionicons name="menu" size={26} color="#007A3D" />
+    <View style={[styles.container, { backgroundColor: colors.surface, borderBottomColor: colors.border }]}>
+      <View style={styles.leftSection}>
+        {leftIcon && onLeftPress && (
+          <TouchableOpacity onPress={onLeftPress} style={styles.iconButton} hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}>
+            <Ionicons name={leftIcon} size={24} color={colors.text} />
           </TouchableOpacity>
         )}
-        {showBack && !showMenu && (
-          <TouchableOpacity 
-            onPress={onBack} 
-            style={styles.iconButton}
-            hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
-            accessibilityLabel="Go back"
-          >
-            <Ionicons name="arrow-back" size={24} color="#007A3D" />
+        {showBack && (
+          <TouchableOpacity onPress={onBack} style={styles.iconButton} hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}>
+            <Ionicons name="arrow-back" size={24} color={colors.text} />
           </TouchableOpacity>
         )}
+        <View style={styles.titleContainer}>
+          <Text style={[styles.title, { color: colors.text }]} numberOfLines={1}>
+            {title}
+          </Text>
+          {subtitle && (
+            <Text style={[styles.subtitle, { color: colors.textSecondary }]} numberOfLines={1}>
+              {subtitle}
+            </Text>
+          )}
+        </View>
       </View>
 
-      <View style={styles.center}>
-        <Text 
-          style={[
-            styles.title, 
-            { fontSize: Math.max(16, fontSize - 2) },
-            titleStyle
-          ]}
-          numberOfLines={1}
-        >
-          {title}
-        </Text>
-        {subtitle && (
-          <View style={styles.subtitleContainer}>
-            {typeof subtitle === 'string' ? (
-              <Text 
-                style={[
-                  styles.subtitle, 
-                  { fontSize: Math.max(10, fontSize - 4) },
-                  subtitleStyle
-                ]}
-                numberOfLines={1}
-              >
-                {subtitle}
-              </Text>
-            ) : subtitle}
-          </View>
-        )}
-      </View>
-
-      <View style={styles.right}>
-        {/* Update Indicator */}
+      <View style={styles.rightSection}>
         {showUpdateIndicator && onUpdatePress && (
-          <TouchableOpacity 
-            onPress={onUpdatePress}
-            style={styles.updateBadgeContainer}
-            hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
-            accessibilityLabel="Update Available"
-          >
-            <Ionicons name="information-circle" size={24} color="#FF3B30" />
-            <View style={styles.redDot} />
-          </TouchableOpacity>
-        )}
-
-        {/* Right Icon (Settings, etc.) */}
-        {!showUpdateIndicator && rightIcon && onRightPress && (
-          <TouchableOpacity 
-            onPress={onRightPress}
-            style={styles.iconButton}
-            hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
-          >
-            <Ionicons name={rightIcon} size={24} color="#007A3D" />
-            {rightLabel && <Text style={styles.rightLabel}>{rightLabel}</Text>}
+          <TouchableOpacity onPress={onUpdatePress} style={styles.iconButton} hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}>
+            <Ionicons name="cloud-download-outline" size={22} color={colors.error} />
           </TouchableOpacity>
         )}
         
-        {/* If both update and rightIcon are present, you might want to show both or prioritize. 
-            Currently, update indicator replaces rightIcon if both are true. 
-            To show both, remove the !showUpdateIndicator condition above. */}
+        {showThemeToggle && onThemeToggle && (
+          <TouchableOpacity onPress={onThemeToggle} style={styles.iconButton} hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}>
+            <Ionicons name={themeIcon} size={22} color={colors.text} />
+          </TouchableOpacity>
+        )}
+
+        {rightComponent}
+
+        {rightIcon && onRightPress && (
+          <TouchableOpacity onPress={onRightPress} style={styles.iconButton} hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}>
+            <Ionicons name={rightIcon} size={22} color={colors.text} />
+          </TouchableOpacity>
+        )}
       </View>
     </View>
   );
@@ -135,58 +96,31 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     paddingHorizontal: 16,
     paddingVertical: 12,
-    backgroundColor: '#fff',
     borderBottomWidth: 1,
-    borderBottomColor: '#eee',
-    elevation: 2,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 1 },
-    shadowOpacity: 0.05,
-    shadowRadius: 2,
   },
-  left: { width: 40, alignItems: 'flex-start' },
-  center: { flex: 1, alignItems: 'center', paddingHorizontal: 4 },
-  right: { width: 40, alignItems: 'flex-end' },
-  
-  iconButton: { padding: 4 },
-  
-  title: {
-    fontWeight: '700',
-    color: '#1a1a1a',
-    textAlign: 'center',
-  },
-  subtitleContainer: { marginTop: 2, alignItems: 'center' },
-  subtitle: { color: '#666', textAlign: 'center' },
-  
-  rightLabel: {
-    fontSize: 12,
-    color: '#007A3D',
-    fontWeight: '600',
-    marginLeft: 4,
-  },
-
-  //  Update Badge Styles
-  updateBadgeContainer: {
-    position: 'relative',
-    padding: 4,
+  leftSection: {
+    flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'center',
+    flex: 1,
   },
-  redDot: {
-    position: 'absolute',
-    top: 2,
-    right: 2,
-    width: 8,
-    height: 8,
-    borderRadius: 4,
-    backgroundColor: '#FF3B30',
-    borderWidth: 1,
-    borderColor: '#fff',
-    // Simple pulse effect via shadow
-    shadowColor: '#FF3B30',
-    shadowOffset: { width: 0, height: 0 },
-    shadowOpacity: 0.8,
-    shadowRadius: 4,
-    elevation: 4,
+  titleContainer: {
+    flex: 1,
+    marginLeft: 8,
+  },
+  title: {
+    fontSize: 18,
+    fontWeight: '700',
+  },
+  subtitle: {
+    fontSize: 12,
+    marginTop: 2,
+  },
+  rightSection: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 8,
+  },
+  iconButton: {
+    padding: 4,
   },
 });

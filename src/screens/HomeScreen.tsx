@@ -1,13 +1,13 @@
-// src/screens/HomeScreen.tsx
 import React, { useEffect, useState, useCallback } from 'react';
 import { View, Text, StyleSheet, ScrollView, TouchableOpacity, ActivityIndicator } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
 import { useAppStore } from '@/store/useAppStore';
-import { loadCountryConfig, type HymnLangConfig } from '@/utils/dataLoader'; // ✅ Updated import
+import { loadCountryConfig, type HymnLangConfig } from '@/utils/dataLoader';
 import { NavbarHeader } from '@/components/NavbarHeader';
 import { UpdateModal } from '@/components/UpdateModal';
 import { useUpdateCheck } from '@/hooks/useUpdateCheck';
+import { useTheme } from '@/utils/theme';
 import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import type { HomeStackParamList } from '@/navigation/AppNavigator';
 
@@ -19,11 +19,12 @@ type Props = {
 
 export const HomeScreen: React.FC<Props> = ({ navigation }) => {
   const countryCode = useAppStore((state) => state.settings.country);
+  const { settings, updateSettings } = useAppStore();
+  const colors = useTheme();
   const [countryConfig, setCountryConfig] = useState<any>(null);
   const [loading, setLoading] = useState(true);
   const [showUpdateModal, setShowUpdateModal] = useState(false);
 
-  // ✅ Update Check Hook
   const { 
     hasUpdate, 
     shouldShowToast, 
@@ -48,7 +49,6 @@ export const HomeScreen: React.FC<Props> = ({ navigation }) => {
     loadConfig();
   }, [loadConfig]);
 
-  // Auto-show modal if it's a new update notification
   useEffect(() => {
     if (shouldShowToast) {
       setShowUpdateModal(true);
@@ -64,6 +64,11 @@ export const HomeScreen: React.FC<Props> = ({ navigation }) => {
     });
   };
 
+  const handleThemeToggle = useCallback(() => {
+    const newTheme = settings.theme === 'dark' ? 'light' : 'dark';
+    updateSettings({ theme: newTheme });
+  }, [settings.theme, updateSettings]);
+
   const handleMenuPress = () => {
     const parentNav = navigation.getParent();
     if (parentNav) {
@@ -73,86 +78,83 @@ export const HomeScreen: React.FC<Props> = ({ navigation }) => {
 
   if (loading || !countryConfig) {
     return (
-      <SafeAreaView style={styles.container}>
+      <SafeAreaView style={[styles.container, { backgroundColor: colors.background }]}>
         <View style={styles.loadingContainer}>
-          <ActivityIndicator size="large" color="#007A3D" />
-          <Text style={styles.loadingText}>Loading...</Text>
+          <ActivityIndicator size="large" color={colors.primary} />
+          <Text style={[styles.loadingText, { color: colors.textSecondary }]}>Loading...</Text>
         </View>
       </SafeAreaView>
     );
   }
 
-  // ✅ Calculate total hymns from all languages or pick the first one's metadata
   const firstLang = countryConfig.hymn_langs[0];
   const totalHymns = firstLang?.metadata?.hymnCount || 0;
 
   return (
-    <SafeAreaView style={styles.container} edges={['top']}>
+    <SafeAreaView style={[styles.container, { backgroundColor: colors.background }]} edges={['top']}>
       <NavbarHeader
         title={`${countryConfig.name} Hymns`}
         subtitle={`Offline • ${totalHymns}+ hymns`}
-        showMenu={true}
-        onMenuPress={handleMenuPress}
-        rightIcon="settings-outline"
-        onRightPress={() => navigation.navigate('Settings')}
+        leftIcon="menu"
+        onLeftPress={handleMenuPress}
+        showThemeToggle={true}
+        onThemeToggle={handleThemeToggle}
         showUpdateIndicator={hasUpdate}
         onUpdatePress={() => setShowUpdateModal(true)}
       />
 
       <ScrollView contentContainerStyle={styles.content} showsVerticalScrollIndicator={false}>
         <View style={styles.section}>
-          <Text style={styles.sectionTitle}>Select Language</Text>
+          <Text style={[styles.sectionTitle, { color: colors.text }]}>Select Language</Text>
           <View style={styles.cardGrid}>
-            {/* ✅ Map over hymn_langs instead of languages */}
             {countryConfig.hymn_langs.map((lang: HymnLangConfig) => (
               <TouchableOpacity 
                 key={lang.code} 
-                style={styles.languageCard} 
+                style={[styles.languageCard, { backgroundColor: colors.surface, borderColor: colors.border }]} 
                 activeOpacity={0.7}
                 onPress={() => handleLanguageSelect(lang)}
               >
-                <Ionicons name={lang.icon as any} size={32} color="#007A3D" />
-                <Text style={styles.cardLabel}>{lang.name}</Text>
-                <Text style={styles.cardCount}>{lang.description}</Text>
+                <Ionicons name={lang.icon as any} size={32} color={colors.primary} />
+                <Text style={[styles.cardLabel, { color: colors.text }]}>{lang.name}</Text>
+                <Text style={[styles.cardCount, { color: colors.textSecondary }]}>{lang.description}</Text>
               </TouchableOpacity>
             ))}
           </View>
         </View>
 
         <View style={styles.section}>
-          <Text style={styles.sectionTitle}>Quick Access</Text>
+          <Text style={[styles.sectionTitle, { color: colors.text }]}>Quick Access</Text>
           <View style={styles.actionGrid}>
             <TouchableOpacity 
-              style={styles.actionCard} 
+              style={[styles.actionCard, { backgroundColor: colors.surface, borderColor: colors.border }]} 
               activeOpacity={0.7}
               onPress={() => navigation.navigate('Favorites')}
             >
-              <Ionicons name="heart" size={28} color="#eb0e0e" />
-              <Text style={styles.actionLabel}>Favorite Hymns</Text>
+              <Ionicons name="heart" size={28} color={colors.error} />
+              <Text style={[styles.actionLabel, { color: colors.text }]}>Favorite Hymns</Text>
             </TouchableOpacity>
             
             <TouchableOpacity 
-              style={styles.actionCard} 
+              style={[styles.actionCard, { backgroundColor: colors.surface, borderColor: colors.border }]} 
               activeOpacity={0.7}
               onPress={() => navigation.navigate('Prayers')}
             >
-              <Ionicons name="book-outline" size={28} color="#352bf3" />
-              <Text style={styles.actionLabel}>Prayers</Text>
+              <Ionicons name="book-outline" size={28} color={colors.info} />
+              <Text style={[styles.actionLabel, { color: colors.text }]}>Prayers</Text>
             </TouchableOpacity>
             
             <TouchableOpacity 
-              style={styles.actionCard} 
+              style={[styles.actionCard, { backgroundColor: colors.surface, borderColor: colors.border }]} 
               activeOpacity={0.7}
               onPress={() => navigation.navigate('Settings')}
             >
-              <Ionicons name="settings-outline" size={28} color="#1e2a33" />
-              <Text style={styles.actionLabel}>Settings</Text>
+              <Ionicons name="settings-outline" size={28} color={colors.textSecondary} />
+              <Text style={[styles.actionLabel, { color: colors.text }]}>Settings</Text>
             </TouchableOpacity>
           </View>
         </View>
       </ScrollView>
 
-      {/* ✅ Update Modal */}
       <UpdateModal 
         visible={showUpdateModal} 
         versionInfo={latestVersionInfo}
@@ -167,43 +169,33 @@ export const HomeScreen: React.FC<Props> = ({ navigation }) => {
 };
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: '#f8f9fa' },
+  container: { flex: 1 },
   content: { padding: 16, paddingTop: 8 },
   loadingContainer: { flex: 1, alignItems: 'center', justifyContent: 'center', gap: 12 },
-  loadingText: { fontSize: 14, color: '#666' },
+  loadingText: { fontSize: 14 },
   section: { marginBottom: 24 },
-  sectionTitle: { fontSize: 16, fontWeight: '600', color: '#1a1a1a', marginBottom: 12, paddingHorizontal: 4 },
+  sectionTitle: { fontSize: 16, fontWeight: '600', marginBottom: 12, paddingHorizontal: 4 },
   cardGrid: { flexDirection: 'row', flexWrap: 'wrap', gap: 12 },
   languageCard: {
     width: '48%',
-    backgroundColor: '#fff',
     padding: 16,
-    borderRadius: 4,
+    borderRadius: 8,
     alignItems: 'center',
     justifyContent: 'center',
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 1 },
-    shadowOpacity: 0.03,
-    shadowRadius: 1,
-    elevation: 1,
+    borderWidth: 0.5,
     minHeight: 110,
   },
-  cardLabel: { fontSize: 14, fontWeight: '600', color: '#1a1a1a', marginTop: 10, textAlign: 'center' },
-  cardCount: { fontSize: 11, color: '#666', marginTop: 2, textAlign: 'center' },
+  cardLabel: { fontSize: 14, fontWeight: '600', marginTop: 10, textAlign: 'center' },
+  cardCount: { fontSize: 11, marginTop: 2, textAlign: 'center' },
   actionGrid: { flexDirection: 'row', flexWrap: 'wrap', gap: 12 },
   actionCard: {
     width: '48%',
-    backgroundColor: '#fff',
     padding: 12,
-    borderRadius: 4,
+    borderRadius: 8,
     alignItems: 'center',
     justifyContent: 'center',
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 1 },
-    shadowOpacity: 0.03,
-    shadowRadius: 1,
-    elevation: 1,
+    borderWidth: 0.5,
     minHeight: 90,
   },
-  actionLabel: { fontSize: 13, color: '#333', fontWeight: '500', textAlign: 'center', marginTop: 8 },
+  actionLabel: { fontSize: 13, fontWeight: '500', textAlign: 'center', marginTop: 8 },
 });
