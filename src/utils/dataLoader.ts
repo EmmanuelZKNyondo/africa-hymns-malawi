@@ -4,7 +4,7 @@
 export interface HymnLangConfig {
   code: string;
   name: string;
-  path: string; // e.g., "hymns/mw/en.json" - Used as a key
+  path: string;
   icon: string;
   description: string;
   meta: {
@@ -16,7 +16,7 @@ export interface HymnLangConfig {
 
 export interface PrayerLangConfig {
   id: string;
-  path: string; // Base path e.g., "prayers/apostles-creed/mw"
+  path: string;
   meta: {
     lastUpdated: string;
     version: string;
@@ -33,18 +33,30 @@ export interface CountryConfig {
   prayer_langs: Record<string, PrayerLangConfig>;
 }
 
+export type TextAlign = 'left' | 'center' | 'right' | 'justify';
+
+export interface Line {
+  text: string;
+  align?: TextAlign;
+}
+
 export interface Verse {
   number: number | string;
-  lines: string[];
+  lines: Line[];
 }
 
 export interface Chorus {
-  lines: string[];
+  id: string;
+  label: string;
+  position: number;
+  lines: Line[];
 }
 
 export interface HymnContent {
   verses: Verse[];
-  chorus: Chorus | null;
+  choruses?: Chorus[] | null;
+  // Kept for backward compatibility during transition, can be removed later
+  chorus?: { lines: string[] } | null; 
 }
 
 export interface Hymn {
@@ -71,7 +83,6 @@ export interface CrossReference {
   hymnNumber: number;
 }
 
-
 export interface FavouriteEntry {
   hymnNumber: number;
   countryCode: string;
@@ -79,20 +90,17 @@ export interface FavouriteEntry {
   addedAt?: string;
 }
 
-
 /* ==================== STATIC REGISTRY ==================== */
 const COUNTRY_REGISTRY: Record<string, CountryConfig> = {
   mw: require('../data/countries/mw.json'),
 };
 
-// ✅ STATIC HYMN MAP: Metro requires explicit paths. 
-// We map the "path" string from JSON to the actual required module.
+// ✅ STATIC HYMN MAP: Added tm.json
 const HYMN_PATH_MAP: Record<string, HymnData> = {
   'hymns/mw/en.json': require('../data/hymns/mw/en.json'),
   'hymns/mw/ch.json': require('../data/hymns/mw/ch.json'),
   'hymns/mw/cs.json': require('../data/hymns/mw/cs.json'),
-  // Add new countries/languages here as you add them to JSON
-  // 'hymns/zm/en.json': require('../data/hymns/zm/en.json'),
+  'hymns/mw/tm.json': require('../data/hymns/mw/tm.json'), // ✅ Added
 };
 
 /* ==================== CACHE LAYER ==================== */
@@ -102,7 +110,7 @@ function getCacheKey(type: 'country' | 'hymns', code: string, lang?: string): st
   return lang ? `${type}:${code}:${lang}` : `${type}:${code}`;
 }
 
-function setCache<T>(key: string,  data:T): void {
+function setCache<T>(key: string, data: T): void {
   cache.set(key, data);
 }
 
@@ -138,9 +146,6 @@ export async function loadCountryConfig(countryCode: string): Promise<CountryCon
   return config;
 }
 
-/**
- * Load hymn data using static map lookup
- */
 export async function loadHymnData(countryCode: string, languageCode: string): Promise<HymnData> {
   const cacheKey = getCacheKey('hymns', countryCode, languageCode);
   const cached = getCache<HymnData>(cacheKey);
@@ -153,7 +158,6 @@ export async function loadHymnData(countryCode: string, languageCode: string): P
     throw new Error(`Language "${languageCode}" not found for country "${countryCode}"`);
   }
 
-  // ✅ Lookup in static map instead of dynamic require
   const data = HYMN_PATH_MAP[langConfig.path];
 
   if (!data) {
@@ -183,13 +187,15 @@ export function searchHymns(hymns: Hymn[], query: string): Hymn[] {
     ].join(' ').toLowerCase();
     
     const verseText = hymn.content.verses
-      .flatMap((v) => v.lines)
+      .flatMap((v) => v.lines.map((line: any) => typeof line === 'string' ? line : line.text))
       .join(' ')
       .toLowerCase();
     
-    const chorusText = hymn.content.chorus
-      ? hymn.content.chorus.lines.join(' ').toLowerCase()
-      : '';
+    const chorusLines = hymn.content.choruses 
+      ? hymn.content.choruses.flatMap((c) => c.lines.map((line: any) => typeof line === 'string' ? line : line.text))
+      : (hymn.content.chorus?.lines || []);
+      
+    const chorusText = chorusLines.join(' ').toLowerCase();
     
     return `${baseFields} ${verseText} ${chorusText}`.includes(lowerQuery);
   });
