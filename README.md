@@ -114,10 +114,19 @@
  NOTE: Have JAVA_HOME set and perform this in WSL or linux platform 
  and the produced APK is un-signed APK by default. 
  
- 1. `npx expo prebuild`
+ 1. `npx expo prebuild --clean`
 
  2. `cd android`
 
  3. `./gradlew assembleRelease`
 
  4. Locate your apk in `android/app/build/outputs/apk/release/app-release.apk`
+
+ ## Running app with expo
+ 1. Create an Emulator (this will require installation of Android Studio)
+
+ 2. `npx expo start --clean --lan`
+
+ 3. In your emulator open the expo app and paste the address you see in the terminal you started the expo application. 
+
+ 4. In th terminal switch development-build mode to expo (follow menu in terminal). When prompted to login, choose run annonymously to skip expo login or choose login to provide your remote expo login credentials
