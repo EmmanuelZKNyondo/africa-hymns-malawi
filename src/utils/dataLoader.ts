@@ -57,10 +57,10 @@ export interface Chorus {
 }
 
 export interface HymnContent {
+  intro?: Line[],
   verses: Verse[];
   choruses?: Chorus[] | null;
-  // Kept for backward compatibility during transition, can be removed later
-  chorus?: { lines: string[] } | null; 
+  chorus?: { lines: string[] } | null; // for backward compatibility
 }
 
 export interface Hymn {
