@@ -173,6 +173,7 @@ export const HymnDetailScreen: React.FC<Props> = ({ route, navigation }) => {
     updateSettings({ theme: newTheme });
   }, [settings.theme, updateSettings]);
 
+
   const renderVerse = useCallback((verse: Verse) => {
     const verseText = verse.lines.map(l => l.text).join('\n');
     return (
@@ -245,9 +246,56 @@ export const HymnDetailScreen: React.FC<Props> = ({ route, navigation }) => {
     );
   }, [fontSize, copiedChorus, handleCopyChorus, colors]);
 
+    const renderIntro = useCallback(() => {
+    if (!currentHymn.content.intro || currentHymn.content.intro.length === 0) {
+      return null;
+    }
+
+    const introText = currentHymn.content.intro.map(l => l.text).join('\n');
+
+    return (
+      <View key="hymn-intro" style={[styles.introSection, { backgroundColor: colors.surfaceSecondary, borderColor: colors.border }]}>
+        <TouchableOpacity 
+          onPress={() => {
+            Clipboard.setStringAsync(introText);
+            toast.success('Intro copied');
+          }}
+          style={styles.copyButton} 
+          hitSlop={{ top: 8, bottom: 8, left: 8, right: 8 }}
+        >
+          <Ionicons name="copy-outline" size={18} color={colors.textTertiary} />
+        </TouchableOpacity>
+        {currentHymn.content.intro.map((line, idx) => (
+          <Text 
+            key={`intro-line-${idx}`}
+            style={[
+              styles.introLine, 
+              { 
+                fontSize: fontSize - 1, 
+                lineHeight: fontSize * 1.5, 
+                color: colors.textSecondary, 
+                textAlign: line.align || 'center',
+                fontStyle: line.fontStyle || 'italic',
+                fontWeight: line.fontWeight || 'normal',
+              }
+            ]} 
+            selectable
+          >
+            {line.text}
+          </Text>
+        ))}
+      </View>
+    );
+  }, [currentHymn.content.intro, fontSize, colors, toast]);
+
   const renderContent = useMemo(() => {
     const elements: React.ReactNode[] = [];
-    const { verses, choruses } = currentHymn.content;
+    const { intro, verses, choruses } = currentHymn.content;
+    
+    // Render intro first if it exists
+    if (intro && intro.length > 0) {
+      elements.push(renderIntro());
+    }
     
     const chorusesByPosition: Record<number, Chorus[]> = {};
     choruses?.forEach(c => {
@@ -271,7 +319,7 @@ export const HymnDetailScreen: React.FC<Props> = ({ route, navigation }) => {
     outroChoruses.forEach(c => elements.push(renderChorus(c)));
 
     return elements;
-  }, [currentHymn.content, renderVerse, renderChorus]);
+  }, [currentHymn.content, renderIntro, renderVerse, renderChorus]);
 
   const headerTitle = useMemo(() => `${currentHymn.number}. ${currentHymn.title}`, [currentHymn]);
 
@@ -377,4 +425,14 @@ const styles = StyleSheet.create({
     fontWeight: '600',
   },
   footerNote: { textAlign: 'center', paddingVertical: 13, fontStyle: 'italic', marginTop: 12, borderRadius: 4 },
+    introSection: { 
+    padding: 12, 
+    borderRadius: 4, 
+    marginBottom: 12, 
+    borderWidth: 1, 
+    borderStyle: 'dashed' 
+  },
+  introLine: { 
+    marginBottom: 2 
+  },
 });
