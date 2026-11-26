@@ -2,131 +2,154 @@
 
 *******************************************************************************************************
 ## Developer Pre-Requisites 
- - Node v22
- - expo cli 
+- Node.js v22+
+- Expo CLI
+- Android Studio (for local emulator builds)
 
-## Update version 
-1. app.json update version to new version 
+## Updating App Version & Metadata
+**Do not manually edit `app.json` or `package.json`.**
+1. Open `configs/updateConfigs.json`.
+2. Update the `app.version`, add new entries to the `versions` array (changelog), and update `contributors` if needed.
+3. The `sync:updates-log` script will **automatically** sync these changes to `app.json` and `package.json` when you run `npm start` or during GitHub Actions CI/CD builds.
 
-2. update version with metadata and notes in config/updatesConfig.json to match the new update. 
- 
+## Running the App (Local Development)
+1. Ensure an Android Emulator is running.
+2. Start the development server:
+   ```bash
+   npm start
+   # or
+   npx expo start --clear --lan
+   ```
+3. Open the Expo Go app on your emulator/device and paste the LAN URL shown in the terminal.
 
-## Run app with expo and emulator (windows OS)
-1. Have emulator set onm your windows machine
+## Hymn JSON Format
+Hymns are stored in `src/data/hymns/`. The structure supports optional intros, multiple choruses, and per-line styling.
 
-2. run app in cli: `npx expo start --clear --lan`
-
-## Hymn update
-
-### Hymn JSON format 
-  <code>
-    {
+```json
+{
+  "number": 1,
+  "title": "Song Title",
+  "writer": "Author Name",
+  "rating": 4.5,
+  "previous_version_number": null,
+  "tags": ["worship", "trinity"],
+  "crossReference": [
+    { "countryCode": "mw", "languageCode": "ch", "hymnNumber": 1 }
+  ],
+  "content": {
+    "intro": [
+      { "text": "\"Holy, holy, holy is the Lord of hosts.\"", "align": "center", "fontStyle": "italic", "fontWeight": "300" }
+    ],
+    "verses": [
+      {
         "number": 1,
-        "title": "song title",
-        "writer": "--",
-        "rating": 0,
-        "previous_version_number": null,
-        "tags": ["tag 1", "tage 2", "..."],
-        "crossReference": [
-          {
-            "countryCode": "mw",
-            "languageCode": "ch",
-            "hymnNumber": 1
-          }
-        ],
-        "content": {
-          "verses": [
-            {
-              "number": 1,
-              "lines": [
-                "Line 1",
-                "..."
-              ]
-            },
-            {
-              "number": 2,
-              "lines": [
-                "Line 1",
-                "..."
-              ]
-            },
-            {
-              "number": "last_chorus",
-              "lines": [
-                "Line 1",
-                "..."
-              ]
-            }
-          ],
-          "chorus": {
-            "lines": [
-              "Line one",
-              "Line 2",
-              "..."
-            ]
-          }
-        }
+        "lines": [
+          { "text": "Line 1 text", "align": "left" },
+          { "text": "Line 2 text", "align": "left", "fontWeight": "bold" }
+        ]
       }
-    </code>
+    ],
+    "choruses": [
+      {
+        "id": "main_chorus",
+        "label": "Chorus",
+        "position": 0,
+        "lines": [
+          { "text": "Chorus line 1", "align": "center" }
+        ]
+      }
+    ]
+  }
+}
+```
+*Note: `align` can be `left`, `center`, `right`, or `justify`. `fontStyle` can be `normal` or `italic`. `fontWeight` accepts standard values (`normal`, `bold`, `100`–`900`).*
 
 *******************************************************************************************************
+## Building APK (Expo EAS - Recommended)
+*Requires an Expo account and `EXPO_TOKEN` set in GitHub Secrets for automated CI/CD.*
 
-## Building APK (to online expo)
-1. Update eas.json on the following 
-    `{
-        "cli": {
-          "version": ">= 18.6.0",
-          "appVersionSource": "remote"
-        },
-        "build": {
-          "development": {
-            "developmentClient": false,
-            "distribution": "internal"
-          },
-          "preview": {
-            "distribution": "internal",
-            "android": {
-              "buildType": "apk"
-            }
-          },
-          "production": {
-            "autoIncrement": true,
-            "android": {
-              "buildType": "apk"
-            }
-          }
-        },
-        "submit": {
-          "production": {}
-        }
-      }`
-
-      NOTE: you can change the production > android > buildType to aab or remove it to let production build aab for playstore uploads
-
-2. `eas build --platform android` or `eas build --platform all`
-
-3. `eas build --platform android --profile preview` if you have expo account and logged in on the cli 
-  or `eas build --platform android --profile preview --local`
+1. Ensure `eas.json` is configured (already set to build APKs for `production` and `preview` profiles).
+2. **Via GitHub Actions (CI/CD)**: Push or merge to the `main` branch. The workflow will automatically sync metadata, minify JSON, and trigger an EAS build.
+3. **Via CLI (Manual)**:
+   ```bash
+   # Production APK
+   eas build --platform android --profile production
+   
+   # Preview/Internal APK
+   eas build --platform android --profile preview
+   ```
+*(Note: To build an `.aab` for the Play Store, change `"buildType": "apk"` to `"buildType": "app-bundle"` in `eas.json` under the production profile).*
 
 *******************************************************************************************************
+## Building APK (Local - Unsigned)
+*Requires `JAVA_HOME` set. Best performed in WSL or Linux.*
 
-## Building APK (local)
- NOTE: Have JAVA_HOME set and perform this in WSL or linux platform 
- and the produced APK is un-signed APK by default. 
- 
- 1. `npx expo prebuild --clean`
+1. Prebuild the native code:
+   ```bash
+   npx expo prebuild --clean
+   ```
+2. Navigate to the Android directory and build:
+   ```bash
+   cd android
+   ./gradlew assembleRelease
+   ```
+3. Locate the unsigned APK at: `android/app/build/outputs/apk/release/app-release.apk`
 
- 2. `cd android`
+*******************************************************************************************************
+## CI/CD Pipeline (GitHub Actions)
+*Automated builds are triggered on every push/merge to the `main` branch.*
 
- 3. `./gradlew assembleRelease`
+1. **Prerequisites**:
+   - Generate an Expo Access Token (Release Manager role) from your Expo Dashboard.
+   - Add it to GitHub Repository → Settings → Secrets and variables → Actions as `EXPO_TOKEN`.
+2. **Workflow file**: `.github/workflows/eas-build.yml`
+3. **What happens on each push**:
+   - Node.js 22 is installed.
+   - Dependencies are installed via `npm ci`.
+   - `eas-build-post-install` hook runs automatically:
+     - Syncs metadata from `configs/updateConfigs.json` to `app.json` and `package.json`.
+     - Minifies all JSON files in `src/data/` to reduce APK size.
+   - EAS Production Build is queued (APK format).
+4. **Download**: Expo emails you a download link once the build completes (~8–12 minutes).
 
- 4. Locate your apk in `android/app/build/outputs/apk/release/app-release.apk`
+*******************************************************************************************************
+## Project Structure
+```
+africa-hymns-malawi/
+├── configs/
+│   └── updateConfigs.json        # Single source of truth for version & changelog
+├── scripts/
+│   ├── sync-updates-log.js       # Syncs metadata to app.json & package.json
+│   ├── minify-json.js            # Minifies hymn JSON for production builds
+│   └── 01-migrate-hymn-structure.js  # One-time migration script
+├── src/
+│   ├── components/               # Reusable UI components
+│   ├── screens/                  # Screen components
+│   ├── navigation/               # React Navigation setup
+│   ├── store/                    # Zustand state management
+│   ├── contexts/                 # React Context (Toast, etc.)
+│   ├── hooks/                    # Custom hooks
+│   ├── utils/                    # Helpers (theme, dataLoader, etc.)
+│   ├── data/                     # Hymn & prayer JSON files
+│   └── assets/                   # Images, icons, fonts
+├── app.json                      # Auto-synced from updateConfigs.json
+├── package.json                  # Auto-synced from updateConfigs.json
+├── eas.json                      # EAS Build configuration
+└── .github/workflows/            # CI/CD workflows
+```
 
- ## Running app with expo
- 1. Create an Emulator (this will require installation of Android Studio)
+*******************************************************************************************************
+## Common Commands
+| Command | Description |
+|---------|-------------|
+| `npm start` | Starts Expo dev server (syncs metadata first) |
+| `npm run sync:updates-log` | Manually sync metadata from `updateConfigs.json` |
+| `eas build --profile production` | Build production APK via EAS |
+| `eas build --profile preview` | Build preview APK via EAS |
+| `npx expo prebuild --clean` | Regenerate native `android/` and `ios/` folders |
 
- 2. `npx expo start --clean --lan`
+*******************************************************************************************************
+## Support
+For issues or contributions, please contact the project maintainers listed in the app's About section.
 
- 3. In your emulator open the expo app and paste the address you see in the terminal you started the expo application. 
-
- 4. In th terminal switch development-build mode to expo (follow menu in terminal). When prompted to login, choose run annonymously to skip expo login or choose login to provide your remote expo login credentials
+*******************************************************************************************************
