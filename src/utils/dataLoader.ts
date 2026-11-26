@@ -34,10 +34,14 @@ export interface CountryConfig {
 }
 
 export type TextAlign = 'left' | 'center' | 'right' | 'justify';
+export type FontStyle = 'normal' | 'italic';
+export type FontWeight = | 'normal' | 'bold' | '100' | '200' | '300' | '400' | '500' | '600' | '700' | '800' | '900'
 
 export interface Line {
   text: string;
   align?: TextAlign;
+  fontStyle?: FontStyle;
+  fontWeight?: FontWeight;
 }
 
 export interface Verse {

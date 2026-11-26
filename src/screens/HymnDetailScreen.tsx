@@ -195,7 +195,14 @@ export const HymnDetailScreen: React.FC<Props> = ({ route, navigation }) => {
             key={idx} 
             style={[
               styles.verseLine, 
-              { fontSize, lineHeight: fontSize * 1.6, color: colors.text, textAlign: line.align || 'left' },
+              { 
+                fontSize, 
+                lineHeight: fontSize * 1.5, 
+                color: colors.text, 
+                textAlign: line.align || 'left',
+                fontWeight: line.fontWeight || 'normal',
+                fontStyle: line.fontStyle || 'normal' 
+              },
               idx === 0 && styles.verseFirstLine,
               idx > 0 && styles.verseLineIndent
             ]} 
@@ -203,8 +210,8 @@ export const HymnDetailScreen: React.FC<Props> = ({ route, navigation }) => {
           >
             {idx === 0 ? (
               <>
-                <Text style={[{ fontSize, fontWeight: '700', color: colors.text }]}>{verse.number}. </Text>
-                <Text style={[{ fontSize, color: colors.text }]}>{line.text}</Text>
+                <Text style={[{ fontSize, fontWeight: line.fontWeight || '700', fontStyle: line.fontStyle || 'normal', color: colors.text }]}>{verse.number}. </Text>
+                <Text style={[{ fontSize, fontWeight: line.fontWeight || 'normal', fontStyle: line.fontStyle || 'normal', color: colors.text }]}>{line.text}</Text>
               </>
             ) : (
               line.text
@@ -228,7 +235,7 @@ export const HymnDetailScreen: React.FC<Props> = ({ route, navigation }) => {
         {chorus.lines.map((line, idx) => (
           <Text 
             key={idx} 
-            style={[styles.chorusLine, { fontSize, lineHeight: fontSize * 1.6, color: colors.text, textAlign: line.align || 'center' }]} 
+            style={[styles.chorusLine, { fontSize, lineHeight: fontSize * 1.5, textAlign: line.align || 'center', fontStyle: line.fontStyle || 'italic', fontWeight: line.fontWeight || 'normal', color: colors.text }]} 
             selectable
           >
             {line.text}
