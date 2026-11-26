@@ -1,4 +1,13 @@
 {
+  "app": {
+    "name": "Africa Hymns",
+    "version": "1.2.3",
+    "startYear": 2024
+  },
+  "contributors": [
+    { "name": "EZPN", "title": "Lead Developer" },
+    { "name": "Your Name", "title": "Project Manager" }
+  ],
   "storeLinks": {
     "ios": "https://apps.apple.com/app/id123456789",
     "android": "https://play.google.com/store/apps/details?id=com.africanhymns.mw",
@@ -6,12 +15,23 @@
   },
   "versions": [
     {
-      "version": "1.2.2",
-      "releaseDate": "2026-04-13",
+      "version": "1.2.3",
+      "releaseDate": "2026-11-26",
       "required": false,
       "notes": [
-        "Fixed search bar auto-focus issue",
-        "Added update notifications"
+        "Added dynamic theme support (Light/Dark)",
+        "Improved hymn text formatting with alignment and font weights",
+        "Fixed clipboard warnings and optimized build size",
+        "Added more Chichewa Hymns to the hymn list"
+      ]
+    },
+    {
+      "version": "1.2.2",
+      "releaseDate": "2026-07-12",
+      "required": true,
+      "notes": [
+        "Update support for Malawi Presbyterian Chichewa",
+        "Add hymn numbers: 14, 15, 16, 17, 18, 19, 20"
       ]
     },
     {
@@ -22,16 +42,6 @@
         "Initial release of Africa Hymns",
         "Support for Malawi and Zambia hymns",
         "Offline mode enabled"
-      ]
-    },
-    {
-      "version": "1.2.2",
-      "releaseDate": "2026-07-12",
-      "required": true,
-      "notes": [
-        "Update version notes to 1.2.2",
-        "Update support for only Malawi Presbyterian Chichewa",
-        "Add hymn numbers: 14, 15, 16, 17, 18, 19, 20"
       ]
     }
   ]
