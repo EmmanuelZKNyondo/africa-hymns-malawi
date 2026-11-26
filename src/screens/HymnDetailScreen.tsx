@@ -80,17 +80,63 @@ export const HymnDetailScreen: React.FC<Props> = ({ route, navigation }) => {
     }
   }, [currentCountry, currentLanguage, currentHymn.number, navigation]);
 
+  const getLinesText = (lines: any[]) => 
+    lines.map((l: any) => (typeof l === 'string' ? l : l.text)).join('\n');
+
+  const buildFullHymnText = useCallback(() => {
+    const { verses, choruses, chorus } = currentHymn.content;
+    let fullText = `${currentHymn.number}. ${currentHymn.title}\nBy ${currentHymn.writer}\n\n`;
+    
+    const chorusesByPosition: Record<number, any[]> = {};
+    choruses?.forEach(c => {
+      if (!chorusesByPosition[c.position]) chorusesByPosition[c.position] = [];
+      chorusesByPosition[c.position].push(c);
+    });
+
+    if (chorusesByPosition[0]) {
+      chorusesByPosition[0].forEach(c => {
+        fullText += `[${c.label}]\n${getLinesText(c.lines)}\n\n`;
+      });
+    }
+
+    verses.forEach((v, i) => {
+      fullText += `Verse ${v.number}\n${getLinesText(v.lines)}\n\n`;
+      const nextPos = i + 1;
+      if (chorusesByPosition[nextPos]) {
+        chorusesByPosition[nextPos].forEach(c => {
+          fullText += `[${c.label}]\n${getLinesText(c.lines)}\n\n`;
+        });
+      }
+    });
+
+    const outroChoruses = choruses?.filter(c => c.position === -1 || c.position > verses.length) || [];
+    if (outroChoruses.length > 0) {
+      outroChoruses.forEach(c => {
+        fullText += `[${c.label}]\n${getLinesText(c.lines)}\n\n`;
+      });
+    }
+
+    if (!choruses && chorus) {
+      fullText += `\nChorus:\n${getLinesText(chorus.lines)}\n`;
+    }
+
+    return fullText.trim();
+  }, [currentHymn]);
+
   const handleShare = useCallback(async () => {
     try {
-      const versePreview = currentHymn.content.verses[0]?.lines.map(l => l.text).join('\n') || '';
-      const mainChorus = currentHymn.content.choruses?.find(c => c.position === 0 || c.position === 1);
-      const chorusPreview = mainChorus?.lines.map(l => l.text).join('\n') || '';
-      const shareText = `🎵 ${currentHymn.number}. ${currentHymn.title}\n\n${versePreview}${chorusPreview ? `\n\n${chorusPreview}` : ''}`;
+      const shareText = buildFullHymnText();
       await Share.share({ message: shareText, title: `${currentHymn.title} - Africa Hymns` });
     } catch (error) {
       console.error('[HymnDetail] Share failed:', error);
     }
-  }, [currentHymn]);
+  }, [buildFullHymnText, currentHymn.title]);
+
+  const handleCopyFullHymn = useCallback(() => {
+    const text = buildFullHymnText();
+    Clipboard.setString(text);
+    toast.success('Full hymn copied to clipboard');
+  }, [buildFullHymnText, toast]);
 
   const handleCopyVerse = useCallback((verseNumber: number | string, text: string) => {
     Clipboard.setString(text);
@@ -269,6 +315,14 @@ export const HymnDetailScreen: React.FC<Props> = ({ route, navigation }) => {
           {renderContent}
         </View>
 
+        <TouchableOpacity 
+          style={[styles.copyFullButton, { backgroundColor: colors.primaryLight, borderColor: colors.primary }]} 
+          onPress={handleCopyFullHymn}
+        >
+          <Ionicons name="copy-outline" size={20} color={colors.primary} />
+          <Text style={[styles.copyFullButtonText, { color: colors.primary }]}>Copy Full Hymn</Text>
+        </TouchableOpacity>
+
         <Text style={[styles.footerNote, { fontSize: fontSize - 6, color: colors.text, backgroundColor: colors.border }]}>
           Tap verse/chorus to copy • Long-press to select text • Tap ⋮ for options
         </Text>
@@ -300,5 +354,19 @@ const styles = StyleSheet.create({
   chorusLine: { fontStyle: 'italic', marginBottom: 1 },
   rating: { flexDirection: 'row', alignItems: 'center', gap: 4 },
   ratingText: { fontWeight: '500' },
-  footerNote: { textAlign: 'center', paddingVertical: 13, fontStyle: 'italic', marginTop: 12 },
+  copyFullButton: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: 8,
+    paddingVertical: 14,
+    borderRadius: 4,
+    borderWidth: 1,
+    marginBottom: 12,
+  },
+  copyFullButtonText: {
+    fontSize: 15,
+    fontWeight: '600',
+  },
+  footerNote: { textAlign: 'center', paddingVertical: 13, fontStyle: 'italic', marginTop: 12, borderRadius: 4 },
 });

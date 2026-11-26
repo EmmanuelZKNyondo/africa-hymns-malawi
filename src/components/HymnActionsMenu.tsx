@@ -23,16 +23,47 @@ export const HymnActionsMenu: React.FC<Props> = ({
   const { toast } = useToast();
 
   const handleCopyHymn = () => {
-    const versesText = hymn.content.verses
-      .map((v, i) => `${i + 1}. ${v.lines.join('\n')}`)
-      .join('\n\n');
-    const chorusText = hymn.content.chorus 
-      ? `\n\nChorus:\n${hymn.content.chorus.lines.join('\n')}` 
-      : '';
+    const { verses, choruses, chorus } = hymn.content;
     
-    const fullText = `${hymn.number}. ${hymn.title}\nBy ${hymn.writer}\n\n${versesText}${chorusText}`;
+    const getLinesText = (lines: any[]) => 
+      lines.map((l: any) => (typeof l === 'string' ? l : l.text)).join('\n');
+
+    let fullText = `${hymn.number}. ${hymn.title}\nBy ${hymn.writer}\n\n`;
     
-    Clipboard.setString(fullText);
+    const chorusesByPosition: Record<number, any[]> = {};
+    choruses?.forEach(c => {
+      if (!chorusesByPosition[c.position]) chorusesByPosition[c.position] = [];
+      chorusesByPosition[c.position].push(c);
+    });
+
+    if (chorusesByPosition[0]) {
+      chorusesByPosition[0].forEach(c => {
+        fullText += `[${c.label}]\n${getLinesText(c.lines)}\n\n`;
+      });
+    }
+
+    verses.forEach((v, i) => {
+      fullText += `[Verse ${v.number}]\n${getLinesText(v.lines)}\n\n`;
+      const nextPos = i + 1;
+      if (chorusesByPosition[nextPos]) {
+        chorusesByPosition[nextPos].forEach(c => {
+          fullText += `[${c.label}]\n${getLinesText(c.lines)}\n\n`;
+        });
+      }
+    });
+
+    const outroChoruses = choruses?.filter(c => c.position === -1 || c.position > verses.length) || [];
+    if (outroChoruses.length > 0) {
+      outroChoruses.forEach(c => {
+        fullText += `[${c.label}]\n${getLinesText(c.lines)}\n\n`;
+      });
+    }
+
+    if (!choruses && chorus) {
+      fullText += `\nChorus:\n${getLinesText(chorus.lines)}\n`;
+    }
+
+    Clipboard.setString(fullText.trim());
     toast.success('Hymn copied to clipboard');
     setVisible(false);
   };
