@@ -7509,6 +7509,59 @@
           }
         ]
       }
+    },
+    {
+      "number": 63,
+      "title": "Pokumbukira Mtandawo",
+      "writer": "--",
+      "rating": 0,
+      "previous_version_number": 39,
+      "tags": [
+        "nyimbo",
+        "Agalatiya 6:14"
+      ],
+      "crossReference": [],
+      "content": {
+        "verses": [
+          {
+            "number": 1,
+            "lines": [
+              { "text": "Pokumbukira mtandawo,", "align": "left" }
+              ,{ "text": "Ambuye 'nandiferapo;", "align": "left" }
+              ,{ "text": "Ndiyesa zingochepazo,", "align": "left" }
+              ,{ "text": "Ndinazitama kalero.", "align": "left" }
+            ]
+          },
+          {
+            "number": 2,
+            "lines": [
+              { "text": "M'ndiletse, ndisatame'yi,", "align": "left" }
+              ,{ "text": "Zachabe, koma imfayi;", "align": "left" }
+              ,{ "text": "Zijazo ndinakondazo,", "align": "left" }
+              ,{ "text": "Ndazilekera mwaziwo.", "align": "left" }
+            ]
+          },
+          {
+            "number": 3,
+            "lines": [
+              { "text": "Onani m'mutu, m'manjanso,", "align": "left" }
+              ,{ "text": "Mudzera nsoni m'mwazimo;", "align": "left" }
+              ,{ "text": "A! Panalibe kalero,", "align": "left" }
+              ,{ "text": "Wondivalira mingayo.", "align": "left" }
+            ]
+          },
+          {
+            "number": 4,
+            "lines": [
+              { "text": "Chinkana dziko lonselo,", "align": "left" }
+              ,{ "text": "Lichepa ndithu mtulowo;", "align": "left" }
+              ,{ "text": "Chikondicho chagwirabe,", "align": "left" }
+              ,{ "text": "Mtima'nga, moyo, ndense'ne.", "align": "left" }
+            ]
+          }
+        ],
+        "choruses": []
+      }
     }
   ]
 }
