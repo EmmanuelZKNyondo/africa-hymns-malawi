@@ -1,9 +1,10 @@
 // src/screens/PrayerDetailScreen.tsx
 import React, { useState, useEffect, useCallback } from 'react';
 import { 
-  View, Text, StyleSheet, ScrollView, TouchableOpacity, Clipboard,
+  View, Text, StyleSheet, ScrollView, TouchableOpacity,
   ActivityIndicator
 } from 'react-native';
+import * as Clipboard from 'expo-clipboard';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
 import { useAppStore } from '@/store/useAppStore';
@@ -70,11 +71,11 @@ export const PrayerDetailScreen: React.FC<Props> = ({ route, navigation }) => {
     return () => { isMounted = false; };
   }, [prayerId, countryCode, language]);
 
-  const handleCopy = useCallback(() => {
+  const handleCopy = useCallback(async () => {
     if (!prayerData) return;
     const text = prayerData.content.join('\n');
     if (text) {
-      Clipboard.setString(text);
+      await Clipboard.setStringAsync(text);
       toast.success('Prayer copied to clipboard');
     }
   }, [prayerData, toast]);
