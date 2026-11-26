@@ -165,7 +165,6 @@ export const SettingsScreen: React.FC<Props> = ({ navigation }) => {
         showBack
         onBack={() => navigation.goBack()}
         rightIcon="refresh-outline"
-        rightLabel=""
         onRightPress={handleReset}
         showUpdateIndicator={hasUpdate}
         onUpdatePress={() => setShowUpdateModal(true)}
