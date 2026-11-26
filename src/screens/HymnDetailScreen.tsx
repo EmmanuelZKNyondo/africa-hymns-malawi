@@ -1,6 +1,6 @@
 import React, { useState, useCallback, useMemo } from 'react';
 import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Share, Alert, ActivityIndicator } from 'react-native';
-import  Clipboard from '@react-native-clipboard/clipboard';
+import * as Clipboard from 'expo-clipboard';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
 import { useAppStore } from '@/store/useAppStore';
@@ -133,21 +133,21 @@ export const HymnDetailScreen: React.FC<Props> = ({ route, navigation }) => {
     }
   }, [buildFullHymnText, currentHymn.title]);
 
-  const handleCopyFullHymn = useCallback(() => {
+  const handleCopyFullHymn = useCallback(async () => {
     const text = buildFullHymnText();
-    Clipboard.setString(text);
+    await Clipboard.setStringAsync(text);
     toast.success('Full hymn copied to clipboard');
   }, [buildFullHymnText, toast]);
 
-  const handleCopyVerse = useCallback((verseNumber: number | string, text: string) => {
-    Clipboard.setString(text);
+  const handleCopyVerse = useCallback(async (verseNumber: number | string, text: string) => {
+    await Clipboard.setStringAsync(text);
     setCopiedVerse(verseNumber);
     toast.success(`Verse ${verseNumber} copied`);
     setTimeout(() => setCopiedVerse(null), 2000);
   }, [toast]);
 
-  const handleCopyChorus = useCallback((chorusId: string, text: string) => {
-    Clipboard.setString(text);
+  const handleCopyChorus = useCallback(async (chorusId: string, text: string) => {
+    await Clipboard.setStringAsync(text);
     setCopiedChorus(chorusId);
     toast.success('Chorus copied');
     setTimeout(() => setCopiedChorus(null), 2000);

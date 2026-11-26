@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { View, Text, TouchableOpacity, Modal, StyleSheet, Clipboard } from 'react-native';
+import { View, Text, TouchableOpacity, Modal, StyleSheet } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import * as Clipboard from 'expo-clipboard';
 import type { Hymn } from '@/utils/dataLoader';
 import { useToast } from '@/contexts/ToastContext';
 
@@ -22,7 +23,7 @@ export const HymnActionsMenu: React.FC<Props> = ({
   const [visible, setVisible] = useState(false);
   const { toast } = useToast();
 
-  const handleCopyHymn = () => {
+  const handleCopyHymn = async () => {
     const { verses, choruses, chorus } = hymn.content;
     
     const getLinesText = (lines: any[]) => 
@@ -63,7 +64,7 @@ export const HymnActionsMenu: React.FC<Props> = ({
       fullText += `\nChorus:\n${getLinesText(chorus.lines)}\n`;
     }
 
-    Clipboard.setString(fullText.trim());
+    await Clipboard.setStringAsync(fullText.trim());
     toast.success('Hymn copied to clipboard');
     setVisible(false);
   };
