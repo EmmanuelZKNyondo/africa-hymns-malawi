@@ -3,11 +3,12 @@
   "version": "1.2.3",
   "main": "index.ts",
   "scripts": {
-    "start": "expo start",
-    "android": "expo run:android",
-    "ios": "expo run:ios",
+    "start": "node scripts/sync-updates-log.js && expo start",
+    "android": "node scripts/sync-updates-log.js && expo run:android",
+    "ios": "node scripts/sync-updates-log.js && expo run:ios",
     "web": "expo start --web",
-    "eas-build-post-install": "node scripts/minify-json.js"
+    "sync:updates-log": "node scripts/sync-updates-log.js",
+    "eas-build-post-install": "node scripts/sync-updates-log.js && node scripts/minify-json.js"
   },
   "dependencies": {
     "@expo/cli": "^55.0.24",
