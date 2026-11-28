@@ -1,7 +1,4 @@
 // scripts/minify-json.js
-// Minifies all JSON files in the data/ folder for production builds.
-// This runs on EAS Build servers, NOT during local development.
-
 const fs = require('fs');
 const path = require('path');
 
@@ -13,7 +10,7 @@ function minifyFile(filePath) {
     const parsed = JSON.parse(raw);
     const minified = JSON.stringify(parsed);
     
-  if (minified.length < raw.length) {
+    if (minified.length < raw.length) {
       fs.writeFileSync(filePath, minified, 'utf8');
       console.log(`Minified: ${filePath}`);
     }
